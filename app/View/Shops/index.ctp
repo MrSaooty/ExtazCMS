@@ -78,7 +78,6 @@ $(document).ready(function(){
                                             <h3>
                                                 <?php echo $i['Shop']['name']; ?>
                                             </h3>
-                                            <p><?php echo $i['Shop']['description']; ?></p>
                                         </td>
                                         <?php if($role > 0){ ?>
                                         <td>
@@ -86,6 +85,9 @@ $(document).ready(function(){
                                         </td>
                                         <td>
                                             <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'delete', $i['Shop']['id']]); ?>" class="tooltips btn rounded btn-default btn-u-xs confirm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Supprimer"><font color="red"><i class="fa fa-times"></i></font></a>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="popovers btn rounded btn-default btn-u-xs btn-block" data-container="body" data-toggle="popover" data-placement="bottom" data-content="<?php echo $i['Shop']['description']; ?>" data-original-title="" title="Description"><i class="fa fa-hand-o-up"></i> Description</button>
                                         </td>
                                         <td>
                                             <a href="#" class="btn rounded btn-default btn-u-xs btn-block">
