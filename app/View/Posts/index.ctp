@@ -1,0 +1,209 @@
+<?php $this->assign('title', 'Accueil'); ?>
+<script>
+$(document).ready(function(){
+    $(".confirm").confirm({
+        text: "Voulez vous vraiment supprimer cet article ?",
+        title: "Confirmation",
+        confirmButton: "Oui",
+        cancelButton: "Non"
+    });
+});
+</script>
+<!--=== Content Part ===-->
+<div class="container content">
+    <div class="row magazine-page">
+        <div class="col-md-9">
+            <!-- Begin Content -->
+            <!-- <div class="carousel slide carousel-v1 margin-bottom-40" id="myCarousel-1">
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img alt="" src="http://fr-minecraft.net/upload/wallpapers/images/fr-minecraft_wallpaper_RA1P.jpg">
+                        <div class="carousel-caption">
+                            <p>Facilisis odio, dapibus ac justo acilisis gestinas.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img alt="" src="http://fr-minecraft.net/upload/wallpapers/images/fr-minecraft_wallpaper_RA1P.jpg">
+                        <div class="carousel-caption">
+                            <p>Cras justo odio, dapibus ac facilisis into egestas.</p>
+                        </div>
+                        </div>
+                    <div class="item">
+                        <img alt="" src="http://fr-minecraft.net/upload/wallpapers/images/fr-minecraft_wallpaper_RA1P.jpg">
+                        <div class="carousel-caption">
+                            <p>Justo cras odio apibus ac afilisis lingestas de.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-arrow">
+                    <a data-slide="prev" href="#myCarousel-1" class="left carousel-control">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a data-slide="next" href="#myCarousel-1" class="right carousel-control">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+            </div> -->
+            <?php $a = -1; ?>
+            <?php $b = 5; ?>
+            <?php while($a < $b){ ?>
+            <!-- Post -->
+            <div class="magazine-news">
+                <div class="row">
+                    <?php $a++; ?>
+                    <?php if(!empty($articles[$a]['Post']['id'])){ ?>
+                        <div class="col-md-6">
+                            <div class="magazine-news-img">
+                                <div class="hidden-xs hidden-sm">
+                                    <?php
+                                    if(filter_var($articles[$a]['Post']['img'], FILTER_VALIDATE_URL)){
+                                        echo '<a href="'.$this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $articles[$a]['Post']['slug'], 'id' => $articles[$a]['Post']['id'])).'"><img class="img-responsive" src="'.$articles[$a]['Post']['img'].'" alt=""></a>';
+                                    }
+                                    else{
+                                        echo '<a href="'.$this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $articles[$a]['Post']['slug'], 'id' => $articles[$a]['Post']['id'])).'"><img class="img-responsive" src="'.$this->webroot.'img/posts/'.$articles[$a]['Post']['img'].'" alt=""></a>';
+                                    }
+                                    ?>
+                                    <span class="magazine-badge label-green"><?php echo $articles[$a]['Post']['cat']; ?></span>
+                                </div>                               
+                            </div>
+                            <h3>
+                                <?php
+                                if(mb_strlen($articles[$a]['Post']['title']) > 35){
+                                    echo '<a href="'.$this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $articles[$a]['Post']['slug'], 'id' => $articles[$a]['Post']['id'])).'">'.mb_substr($articles[$a]['Post']['title'], 0, 35).' [...]'.'</a>';
+                                }
+                                else{
+                                    echo '<a href="'.$this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $articles[$a]['Post']['slug'], 'id' => $articles[$a]['Post']['id'])).'">'.$articles[$a]['Post']['title'].'</a>';
+                                }
+                                ?>
+                            </h3>
+                            <div class="by-author">
+                                <span>Par</span> <strong><?php echo $articles[$a]['Post']['author']; ?></strong>
+                                <span>
+                                    le <?php echo $this->Time->format('d/m/Y à H:i', $articles[$a]['Post']['posted']); ?>
+                                    <?php if($this->Session->read('Auth.User.role') > 0){ ?>
+                                        <span class="btn-group">
+                                            <a href="<?php echo $this->Html->webroot.'posts/edit/'.$articles[$a]['Post']['id']; ?>" class="btn btn-default btn-xs">
+                                                <font color="#777777">
+                                                    <i class="fa fa-pencil"></i>
+                                                </font>
+                                            </a> 
+                                            <a href="<?php echo $this->Html->webroot.'posts/delete/'.$articles[$a]['Post']['id']; ?>" class="confirm btn btn-default btn-xs">
+                                                <font color="red">
+                                                    <i class="fa fa-times"></i>
+                                                </font>
+                                            </a>
+                                        </span>
+                                    <?php } ?>
+                                    <a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $articles[$a]['Post']['slug'], 'id' => $articles[$a]['Post']['id'])); ?>" class="btn btn-default btn-xs">
+                                        <i class="fa fa-heart"></i> <?php echo count($articles[$a]['Like']); ?>
+                                    </a>
+                                    <a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $articles[$a]['Post']['slug'], 'id' => $articles[$a]['Post']['id'])); ?>" class="btn btn-default btn-xs">
+                                        <i class="fa fa-paper-plane"></i> Lire la suite
+                                    </a>
+                                </span>
+                            </div>
+                            <p class="text-justify">
+                                <?php
+                                $content = html_entity_decode(strip_tags($articles[$a]['Post']['content']));
+                                if(mb_strlen($content) > 315){
+                                    echo mb_substr($content, 0, 315).' [...]';
+                                }
+                                else{
+                                    echo $content;
+                                }
+                                ?>
+                            </p>
+                        </div>
+                    <?php } ?>
+                    <?php $a++; ?>
+                    <?php if(!empty($articles[$a]['Post']['id'])){ ?>
+                        <div class="col-md-6">
+                            <div class="magazine-news-img">
+                                <div class="hidden-xs hidden-sm">
+                                    <?php
+                                    if(filter_var($articles[$a]['Post']['img'], FILTER_VALIDATE_URL)){
+                                        echo '<a href="'.$this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $articles[$a]['Post']['slug'], 'id' => $articles[$a]['Post']['id'])).'"><img class="img-responsive" src="'.$articles[$a]['Post']['img'].'" alt=""></a>';
+                                    }
+                                    else{
+                                        echo '<a href="'.$this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $articles[$a]['Post']['slug'], 'id' => $articles[$a]['Post']['id'])).'"><img class="img-responsive" src="'.$this->webroot.'img/posts/'.$articles[$a]['Post']['img'].'" alt=""></a>';
+                                    }
+                                    ?>
+                                    <span class="magazine-badge label-green"><?php echo $articles[$a]['Post']['cat']; ?></span>
+                                </div>                               
+                            </div>
+                            <h3>
+                                <?php
+                                if(mb_strlen($articles[$a]['Post']['title']) > 35){
+                                    echo '<a href="'.$this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $articles[$a]['Post']['slug'], 'id' => $articles[$a]['Post']['id'])).'">'.mb_substr($articles[$a]['Post']['title'], 0, 35).' [...]'.'</a>';
+                                }
+                                else{
+                                    echo '<a href="'.$this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $articles[$a]['Post']['slug'], 'id' => $articles[$a]['Post']['id'])).'">'.$articles[$a]['Post']['title'].'</a>';
+                                }
+                                ?>
+                            </h3>
+                            <div class="by-author">
+                                <span>Par</span> <strong><?php echo $articles[$a]['Post']['author']; ?></strong>
+                                <span>
+                                    le <?php echo $this->Time->format('d/m/Y à H:i', $articles[$a]['Post']['posted']); ?> 
+                                    <?php if($this->Session->read('Auth.User.role') > 0){ ?>
+                                        <span class="btn-group">
+                                            <a href="<?php echo $this->Html->webroot.'posts/edit/'.$articles[$a]['Post']['id']; ?>" class="btn btn-default btn-xs">
+                                                <font color="#777777">
+                                                    <i class="fa fa-pencil"></i>
+                                                </font>
+                                            </a> 
+                                            <a href="<?php echo $this->Html->webroot.'posts/delete/'.$articles[$a]['Post']['id']; ?>" class="confirm btn btn-default btn-xs">
+                                                <font color="red">
+                                                    <i class="fa fa-times"></i>
+                                                </font>
+                                            </a>
+                                        </span>
+                                    <?php } ?>
+                                    <a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $articles[$a]['Post']['slug'], 'id' => $articles[$a]['Post']['id'])); ?>" class="btn btn-default btn-xs">
+                                        <i class="fa fa-heart"></i> <?php echo count($articles[$a]['Like']); ?>
+                                    </a>
+                                    <a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $articles[$a]['Post']['slug'], 'id' => $articles[$a]['Post']['id'])); ?>" class="btn btn-default btn-xs">
+                                        <i class="fa fa-paper-plane"></i> Lire la suite
+                                    </a>
+                                </span>
+                            </div>
+                            <p class="text-justify">
+                                <?php
+                                $content = html_entity_decode(strip_tags($articles[$a]['Post']['content']));
+                                if(mb_strlen($content) > 315){
+                                    echo mb_substr($content, 0, 315).' [...]';
+                                }
+                                else{
+                                    echo $content;
+                                }
+                                ?>
+                            </p>
+                        </div>
+                    <div class="margin-bottom-35"><hr class="hr-md"></div>
+                    <?php } ?>
+                </div>
+            </div>
+            <!-- End Post -->
+            <?php } ?>
+
+            <!--Pagination-->
+            <div class="text-center">
+                <ul class="pagination">
+                    <?php
+                    if($nbPost > 6){
+                        echo '<li>'.$this->Paginator->prev(__('«'), array('tag' => 'li'), null, array('tag' => 'li', 'class' => 'disabled', 'disabledTag' => 'a')).'</li>';
+                        echo $this->Paginator->numbers(array('separator' => '', 'currentTag' => 'a', 'currentClass' => 'active', 'tag' => 'li', 'first' => 'Première', 'last' => 'Dernière', 'ellipsis' => ''));
+                        echo '<li>'.$this->Paginator->next(__('»'), array('tag' => 'li'), null, array('tag' => 'li', 'class' => 'disabled', 'disabledTag' => 'a')).'</li>';
+                        echo '<br><br>';
+                    }
+                    ?>
+                </ul>                                                            
+            </div>
+            <!--End Pagination-->
+        </div>
+        <!-- End Content -->
+        <?php echo $this->element('sidebar'); ?>
+    </div>
+</div><!--/container-->     
+<!-- End Content Part -->

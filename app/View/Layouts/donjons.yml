@@ -1,0 +1,132 @@
+######################
+#+                  +#
+#   MENU SETTINGS    #
+#+                  +#
+######################
+
+menu-settings:
+  name: '&4Téléportation'
+  rows: 3
+
+  # The sound played whenever the menu is opened.
+  # List of sounds:
+  # jd.bukkit.org/rb/apidocs/org/bukkit/Sound.html
+  open-sound: CLICK
+
+
+######################
+#+                  +#
+#       ITEMS        #
+#+                  +#
+######################
+
+
+spawn:
+  COMMAND: 'spawn'
+  NAME: '&aSpawn'
+  LORE:
+    - 'Téléportation au spawn'
+  ID: bed
+  POSITION-X: 1
+  POSITION-Y: 1
+
+city:
+  COMMAND: 'op:mv tp city'
+  NAME: '&aVille (10x10)'
+  LORE:
+    - 'Téléportation à la ville (10x10)'
+  ID: 42
+  POSITION-X: 3
+  POSITION-Y: 1
+
+city2:
+  COMMAND: 'op:mv tp city2'
+  NAME: '&aVille (20x20)'
+  LORE:
+    - 'Téléportation à la ville (20x20)'
+  ID: 41
+  POSITION-X: 4
+  POSITION-Y: 1
+
+city3:
+  COMMAND: 'op:mv tp city3'
+  NAME: '&aVille (30x30)'
+  LORE:
+    - 'Téléportation à la ville (30x30)'
+  ID: 133
+  POSITION-X: 5
+  POSITION-Y: 1
+
+city4:
+  COMMAND: 'op:mv tp city4'
+  NAME: '&aVille (40x40)'
+  LORE:
+    - 'Téléportation à la ville (40x40)'
+  ID: 57
+  POSITION-X: 6
+  POSITION-Y: 1
+
+ressource:
+  COMMAND: 'op:mv tp ressource'
+  NAME: '&aRessource PVP: &4OFF'
+  LORE:
+    - 'Recoltez vos ressources !'
+    - 'Prix : &e1000 PO'
+  ID: grass
+  POSITION-X: 8
+  POSITION-Y: 1
+  PRICE: 1000
+
+ressource_hard:
+  COMMAND: 'op:mv tp ressource_hard'
+  NAME: '&aRessource PVP: &aON'
+  LORE:
+    - 'Recoltez vos ressources !'
+    - 'Prix : &eGRATUIT'
+  ID: grass
+  POSITION-X: 9
+  POSITION-Y: 1
+
+nether:
+  COMMAND: 'op:warp nether;tell:&e&l>>&r&e Vous avez perdu 1000 PO vous avez maintenant {money} PO'
+  NAME: '&aNether'
+  LORE:
+    - 'Accéder au nether'
+    - ''
+    - '&ePrix: 1000 PO'
+  ID: 87
+  PRICE: 1000
+  POSITION-X: 1
+  POSITION-Y: 3
+
+end:
+  COMMAND: 'console:mv tp {player} world_the_end;tell:&e&l>>&r&e Vous avez perdu 1000 PO vous avez maintenant {money} PO'
+  NAME: '&aEnd'
+  LORE:
+    - 'Accéder à l''end'
+    - ''
+    - '&ePrix: 1000 PO'
+  ID: 121
+  PRICE: 1000
+  POSITION-X: 2
+  POSITION-Y: 3
+
+casino:
+  COMMAND: 'op:warp casino;tell:&e&l>>&r&e Vous avez perdu 50 PO vous avez maintenant {money} PO'
+  NAME: '&aCasino'
+  LORE:
+    - 'Accéder au casino'
+    - ''
+    - '&ePrix: 50 PO'
+  ID: 371
+  PRICE: 50
+  POSITION-X: 4
+  POSITION-Y: 3
+
+return-to-main:
+  COMMAND: 'open:main-menu.yml'
+  NAME: '&6[arrow_left] Retour au menu'
+  ID: nether_star
+  KEEP-OPEN: true
+  POSITION-X: 9
+  POSITION-Y: 3
