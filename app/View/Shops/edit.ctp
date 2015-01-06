@@ -64,7 +64,7 @@
                             <i class="icon-append fa fa-question-circle"></i>
                             <input name="data[Shop][command]" value="<?php echo $data['Shop']['command']; ?>" class="form-control" type="text" id="ShopCommand">
                             <b class="tooltip tooltip-bottom-right">
-                                La commande sans le slash (/) initial. Vous pouvez utiliser {{player}} pour désigner un joueur
+                                Commande(s) sans le slash (/) initial. Utilisez {{player}} pour désigner un joueur et {{new}} pour ajouter une nouvelle commande
                             </b>
                         </label>
                     </section>

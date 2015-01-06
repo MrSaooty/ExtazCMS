@@ -29,6 +29,7 @@
                    <p class="lead">
                         <?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$username.'', ['alt' => 'Player head', 'style' => 'margin-top:-4px;']); ?> 
                         <?php echo $username; ?>
+                        <br>
                    </p>
                    <hr>
                    <?php if($use_store == 1 && $happy_hour == 1){ ?>
@@ -61,10 +62,22 @@
                                 Gérer les tickets du support (<?php echo $nbTicketsAdmin; ?>)
                             </a>
                         <?php } ?>
-                   </p>
-                   <hr>
-                   <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'account']); ?>" class="btn-u btn-brd-hover rounded btn-u btn-u-xs" type="submit"><i class="fa fa-user"></i> Mon profil</a>
-                   <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'logout']); ?>" class="btn-u btn-brd-hover rounded btn-u-dark btn-u-xs" type="submit"><i class="fa fa-sign-out"></i> Déconnexion</a>
+                        <br>
+                        <?php if($use_store == 1){ ?>
+                        <font color="#555"><i class="fa fa-chevron-circle-right"></i></font> 
+                        <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'account']); ?>">
+                            Accéder à mon profil
+                        </a>
+                        <?php } ?>
+                    </p>
+                    <hr>
+                    <?php if($use_store == 1){ ?>
+                        <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'reload']); ?>" class="tooltips btn-u btn-brd-hover rounded btn-u-orange btn-u-xs" data-original-title="Acheter des <?php echo $site_money; ?>" data-toggle="tooltip" data-placement="bottom" type="submit"><i class="fa fa-shopping-cart"></i> Recharger</a>
+                        <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'logout']); ?>" class="btn-u btn-brd-hover rounded btn-u-dark btn-u-xs pull-right" type="submit"><i class="fa fa-sign-out"></i> Déconnexion</a>
+                    <?php } else { ?>
+                        <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'account']); ?>" class="btn-u btn-brd-hover rounded btn-u btn-u-xs" type="submit"><i class="fa fa-user"></i> Mon profil</a>
+                        <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'logout']); ?>" class="btn-u btn-brd-hover rounded btn-u-dark btn-u-xs pull-right" type="submit"><i class="fa fa-sign-out"></i> Déconnexion</a>
+                    <?php } ?>
                 </div>
             <?php } ?>
         </div>

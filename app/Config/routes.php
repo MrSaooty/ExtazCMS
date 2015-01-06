@@ -32,6 +32,7 @@
 	Router::connect('/reglement', ['controller' => 'pages', 'action' => 'rules']);
 	Router::connect('/recharger', ['controller' => 'shops', 'action' => 'reload']);
 	Router::connect('/boutique', ['controller' => 'shops', 'action' => 'index']);
+	// Router::connect('/boutique/:page', ['controller' => 'shops', 'action' => 'index'], ['pass' => ['page'], 'page' => '[0-9]+']);
 	Router::connect('/starpass', ['controller' => 'shops', 'action' => 'starpass']);
 	Router::connect('/contact', ['controller' => 'pages', 'action' => 'contact']);
 	Router::connect('/stats', ['controller' => 'pages', 'action' => 'stats']);

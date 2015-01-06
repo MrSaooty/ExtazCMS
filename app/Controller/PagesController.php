@@ -370,9 +370,9 @@ class PagesController extends AppController {
 							$this->Session->setFlash('Tous les champs sont obligatoires', 'error');
 						}
 					}
-				}
-				else{
-					$this->Session->setFlash('Erreur 1001', 'error');
+					else{
+						$this->Session->setFlash('Erreur 1001', 'error');
+					}
 				}
 			}
 		}
