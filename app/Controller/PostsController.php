@@ -52,7 +52,7 @@ class PostsController extends AppController{
 		}
 	}
 
-	public function add(){
+	public function admin_add(){
 		// Si c'est un utilisateur spécial
 		if($this->Auth->user('role') > 0){
 			// Si le formulaire à été posté
@@ -95,7 +95,7 @@ class PostsController extends AppController{
 		}
 	}	
 
-	public function edit($id = null){
+	public function admin_edit($id = null){
 		$this->set('data', $this->Post->findById($id));
 		// Si c'est un utilisateur spécial
 		if($this->Auth->user('role') > 0){
@@ -159,11 +159,23 @@ class PostsController extends AppController{
 		}
 	}
 
-	public function drafts(){
+	public function admin_drafts(){
 		// Si c'est un utilisateur spécial
 		if($this->Auth->user('role') > 0){
 			// On va chercher les brouillons
 			$this->set('drafts', $this->Post->find('all', array('conditions' => array('Post.visible' => 1, 'Post.draft' => 1), 'order' => array('Post.created' => 'DESC'))));
+		}
+		// Si c'est un utilisateur
+		else{
+			throw new NotFoundException();
+		}
+	}
+
+	public function admin_list(){
+		// Si c'est un utilisateur spécial
+		if($this->Auth->user('role') > 0){
+			// On va chercher les brouillons
+			$this->set('data', $this->Post->find('all', array('conditions' => array('Post.visible' => 1), 'order' => array('Post.created' => 'DESC'))));
 		}
 		// Si c'est un utilisateur
 		else{
@@ -234,30 +246,7 @@ class PostsController extends AppController{
 		}
 	}
 
-	public function corrected($id = null){
-		// Si l'article existe
-		if($this->Post->findById($id)){
-			// Si c'est un administrateur ou Mansot
-			if($this->Auth->user('role') > 0){
-				// On passe l'article en corrigé
-				$this->Post->id = $id;
-				$this->Post->saveField('corrected', 1);
-				$this->Session->setFlash('L\'article est maintenant considéré comme corrigé !', 'success');
-				return $this->redirect($this->referer());
-			}
-			// Si ce n'est pas le cas...
-			else{
-				return $this->redirect($this->referer());
-			}
-		}
-		// Si l'article n'existe pas
-		else{
-			$this->Session->setFlash('Une erreur est survenue', 'error');
-			return $this->redirect($this->referer());
-		}
-	}
-
-	public function publish(){
+	public function admin_publish(){
 		if($this->Auth->user('role') > 0){
 			// On va agir sur l'id passé via l'url
 			$this->Post->id = $this->request->params['named']['id'];
@@ -281,7 +270,7 @@ class PostsController extends AppController{
 					$this->Post->saveField('posted', date("Y-m-d H:i:s"));
 				}
 				$this->Session->setFlash('Article publié !', 'success');
-				return $this->redirect(['controller' => 'posts', 'action' => 'index']);
+				return $this->redirect(['controller' => 'pages', 'action' => 'stats', 'admin' => true]);
 			}
 		}
 		else{

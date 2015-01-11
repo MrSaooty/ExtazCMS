@@ -50,6 +50,9 @@ class AppController extends Controller {
   ];
 
   public function beforeFilter(){
+  	if((isset($this->params['prefix']) && ($this->params['prefix'] == 'admin'))){
+		$this->layout = 'admin';
+	}
 	// Variable qui regroupe toutes les infos depuis la bdd 
 	$this->set('informations', $this->Informations->find('first'));
 	// On déclare JSONAPI

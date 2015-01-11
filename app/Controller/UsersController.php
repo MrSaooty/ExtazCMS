@@ -9,7 +9,7 @@ class UsersController extends AppController{
 
 	public function beforeFilter(){
 	    parent::beforeFilter();
-	    $this->Auth->allow('add', 'logout');
+        $this->Auth->allow();
 	}
 
     public function index(){
@@ -207,7 +207,7 @@ class UsersController extends AppController{
         }
     }
 
-    public function edit($id = null){
+    public function admin_edit($id = null){
         if($this->Auth->user('role') > 0){
             $this->User->id = $id;
             if($this->User->exists()){
@@ -240,9 +240,9 @@ class UsersController extends AppController{
         }
     }
 
-    public function all(){
+    public function admin_all(){
         if($this->Auth->user('role') > 0){
-            $this->set('data', $this->User->find('all'));
+            $this->set('data', $this->User->find('all', ['order' => ['User.tokens' => 'DESC']]));
         }
         else{
             throw new NotFoundException();

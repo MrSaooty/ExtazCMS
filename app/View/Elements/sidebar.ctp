@@ -58,7 +58,7 @@
                         <?php if($role == 1){ ?>
                             <br>
                             <font color="#555"><i class="fa fa-chevron-circle-right"></i></font> 
-                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'manage_tickets']); ?>">
+                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'manage_tickets', 'admin' => true]); ?>">
                                 Gérer les tickets du support (<?php echo $nbTicketsAdmin; ?>)
                             </a>
                         <?php } ?>

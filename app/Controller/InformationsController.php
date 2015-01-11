@@ -1,7 +1,7 @@
 <?php
 class InformationsController extends AppController{
 
-	public function index(){
+	public function admin_index(){
 		if($this->Auth->user('role') > 0){
 			$this->set('data', $this->Informations->find('first', ['conditions' => ['Informations.id' => 1]]));
 		}
@@ -10,7 +10,7 @@ class InformationsController extends AppController{
 		}
 	}
 
-	public function updateInformations(){
+	public function admin_updateInformations(){
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('post')){
 				$this->Informations->id = 1;
@@ -25,7 +25,7 @@ class InformationsController extends AppController{
 		}
 	}
 
-	public function testJsonapi(){
+	public function admin_testJsonapi(){
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('ajax')){
 				sleep(2);
@@ -45,7 +45,7 @@ class InformationsController extends AppController{
 		}
 	}
 
-	public function updateOptions(){
+	public function admin_updateOptions(){
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('post')){
 				$this->Informations->id = 1;
@@ -54,6 +54,12 @@ class InformationsController extends AppController{
 				}
 				else{
 					$this->Informations->saveField('use_store', 0);
+				}
+				if(isset($this->request->data['use_donation_ladder'])){
+					$this->Informations->saveField('use_donation_ladder', 1);
+				}
+				else{
+					$this->Informations->saveField('use_donation_ladder', 0);
 				}
 				if(isset($this->request->data['use_paypal'])){
 					$this->Informations->saveField('use_paypal', 1);

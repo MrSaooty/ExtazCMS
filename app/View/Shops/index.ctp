@@ -82,7 +82,7 @@ $(document).ready(function(){
                                         </td>
                                         <?php if($role > 0){ ?>
                                         <td>
-                                            <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'edit', $i['Shop']['id']]); ?>" class="tooltips btn rounded btn-default btn-u-xs" data-toggle="tooltip" data-placement="top" title="" data-original-title="Modifier"><i class="fa fa-wrench"></i></a>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'edit', $i['Shop']['id'], 'admin' => true]); ?>" class="tooltips btn rounded btn-default btn-u-xs" data-toggle="tooltip" data-placement="top" title="" data-original-title="Modifier"><i class="fa fa-wrench"></i></a>
                                         </td>
                                         <td>
                                             <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'delete', $i['Shop']['id']]); ?>" class="tooltips btn rounded btn-default btn-u-xs confirm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Supprimer"><font color="red"><i class="fa fa-times"></i></font></a>

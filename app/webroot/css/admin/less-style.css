@@ -1,0 +1,493 @@
+/********************/
+/* Custom LESS File */
+/********************/
+/* Color declaration */
+/* Basic */
+/* Labels */
+/* Progress Bar */
+.progress {
+  height: 8px !important;
+}
+/***********/
+/* General */
+/***********/
+body {
+  color: #666666;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #777777;
+}
+a {
+  color: #777777;
+}
+a:hover,
+a:focus {
+  color: #555555;
+}
+/**********************/
+/* Text color classes */
+/**********************/
+.white {
+  color: #ffffff;
+}
+.grey {
+  color: #eeeeee;
+}
+.black {
+  color: #666666;
+}
+.red {
+  color: #f75353;
+}
+.green {
+  color: #51d466;
+}
+.lblue {
+  color: #32c8de;
+}
+.blue {
+  color: #609cec;
+}
+.orange {
+  color: #f78153;
+}
+.yellow {
+  color: #fcd419;
+}
+.purple {
+  color: #cb79e6;
+}
+.rose {
+  color: #ff61e7;
+}
+.brown {
+  color: #d08166;
+}
+/****************************/
+/* Background color classes */
+/****************************/
+.br-white {
+  background-color: #ffffff;
+}
+.br-grey {
+  background-color: #eeeeee;
+}
+.br-black {
+  background-color: #666666;
+}
+.br-red {
+  background-color: #f75353;
+}
+.br-green {
+  background-color: #51d466;
+}
+.br-lblue {
+  background-color: #32c8de;
+}
+.br-blue {
+  background-color: #609cec;
+}
+.br-orange {
+  background-color: #f78153;
+}
+.br-yellow {
+  background-color: #fcd419;
+}
+.br-purple {
+  background-color: #cb79e6;
+}
+.br-rose {
+  background-color: #ff61e7;
+}
+.br-brown {
+  background-color: #d08166;
+}
+/************************/
+/* Button color classes */
+/************************/
+.btn.btn-default {
+  background: #f9f9f9;
+  color: #666666 !important;
+  border: 1px solid #aaaaaa;
+}
+.btn.btn-default:hover {
+  background: #eeeeee;
+}
+.btn.btn-black {
+  color: #ffffff;
+  background: #666666;
+}
+.btn.btn-black:hover {
+  background: #111111;
+}
+.btn.btn-danger {
+  background: #f75353;
+}
+.btn.btn-danger:hover {
+  background: #ed4747;
+}
+.btn.btn-success {
+  background: #51d466;
+}
+.btn.btn-success:hover {
+  background: #42c557;
+}
+.btn.btn-info {
+  background: #32c8de;
+}
+.btn.btn-info:hover {
+  background: #2bbdd2;
+}
+.btn.btn-primary {
+  background: #609cec;
+}
+.btn.btn-primary:hover {
+  background: #528fe2;
+}
+.btn.btn-warning {
+  background: #f78153;
+}
+.btn.btn-warning:hover {
+  background: #eb6c3a;
+}
+.btn.btn-yellow {
+  background: #fcd419;
+  color: #ffffff;
+  border: 1px solid #e9c51b;
+}
+.btn.btn-yellow:hover {
+  background: #e9c51b;
+}
+.btn.btn-purple {
+  background: #cb79e6;
+  color: #ffffff;
+  border: 1px solid #b75bd6;
+}
+.btn.btn-purple:hover {
+  background: #b75bd6;
+}
+.btn.btn-rose {
+  background: #ff61e7;
+  color: #ffffff;
+  border: 1px solid #f245d8;
+}
+.btn.btn-rose:hover {
+  background: #f245d8;
+}
+.btn.btn-brown {
+  background: #d08166;
+  color: #ffffff;
+  border: 1px solid #bf6748;
+}
+.btn.btn-brown:hover {
+  background: #bf6748;
+}
+/*********/
+/* Label */
+/*********/
+.label {
+  padding: 6px 9px;
+  font-size: 12px;
+  font-weight: normal;
+}
+.label.label-default {
+  color: #aaaaaa;
+  background: #eeeeee;
+}
+.label.label-black {
+  background: #666666;
+}
+.label.label-danger {
+  background: #f75353;
+}
+.label.label-success {
+  background: #51d466;
+}
+.label.label-info {
+  background: #32c8de;
+}
+.label.label-primary {
+  background: #609cec;
+}
+.label.label-warning {
+  background: #f78153;
+}
+.label.label-yellow {
+  background: #fcd419;
+}
+.label.label-purple {
+  background: #cb79e6;
+}
+.label.label-rose {
+  background: #ff61e7;
+}
+.label.label-brown {
+  background: #d08166;
+}
+/*********/
+/* Badge */
+/*********/
+.badge.badge-default {
+  color: #aaaaaa;
+  background: #eeeeee;
+}
+.badge.badge-primary {
+  background: #609cec;
+}
+.badge.badge-success {
+  background: #51d466;
+}
+.badge.badge-info {
+  background: #32c8de;
+}
+.badge.badge-warning {
+  background: #f78153;
+}
+.badge.badge-danger {
+  background: #f75353;
+}
+.badge.badge-black {
+  background: #666666;
+}
+.badge.badge-brown {
+  background: #d08166;
+}
+.badge.badge-orange {
+  background: #f78153;
+}
+.badge.badge-purple {
+  background: #cb79e6;
+}
+/****************/
+/* Progress bar */
+/****************/
+.progress-bar-danger {
+  background: #f75353;
+}
+.progress-bar-success {
+  background: #51d466;
+}
+.progress-bar-info {
+  background: #32c8de;
+}
+.progress-bar-primary {
+  background: #609cec;
+}
+.progress-bar-warning {
+  background: #f78153;
+}
+/****************/
+/* Switches */
+/* Multi color */
+/****************/
+.sw-green .onoffswitch-inner:before {
+  background-color: #51d466;
+}
+.sw-red .onoffswitch-inner:before {
+  background-color: #f75353;
+}
+.sw-lblue .onoffswitch-inner:before {
+  background-color: #32c8de;
+}
+.sw-orange .onoffswitch-inner:before {
+  background-color: #f78153;
+}
+.sw-blue .onoffswitch-inner:before {
+  background-color: #609cec;
+}
+/**********************/
+/* Slider UI Elements */
+/**********************/
+.slider-red .ui-widget-header {
+  background: #f75353 !important;
+  border-color: #f75353 !important;
+}
+.slider-blue .ui-widget-header {
+  background: #609cec !important;
+  border-color: #609cec !important;
+}
+.slider-green .ui-widget-header {
+  background: #51d466 !important;
+  border-color: #51d466 !important;
+}
+.slider-yellow .ui-widget-header {
+  background: #fcd419 !important;
+  border-color: #fcd419 !important;
+}
+.slider-orange .ui-widget-header {
+  background: #f78153 !important;
+  border-color: #f78153 !important;
+}
+.slider-violet .ui-widget-header {
+  background: #cb79e6 !important;
+  border-color: #cb79e6 !important;
+}
+/*************/
+/* Nav Tabs  */
+/*************/
+.nav-tabs li a:hover {
+  background: #f75353;
+  color: #ffffff;
+  border-color: #f75353;
+}
+.nav-tabs li.active a {
+  background-color: #f75353;
+  border-color: #f75353;
+  color: #ffffff;
+}
+.nav-tabs li.active a:hover {
+  background-color: #f75353;
+  border-color: #f75353;
+  color: #ffffff;
+}
+/*************/
+/* Nav Pills */
+/*************/
+.nav-pills li a {
+  background: #f9f9f9;
+  border: 1px solid #eeeeee;
+  color: #ffffff;
+}
+.nav-pills li a:hover {
+  background: #f75353;
+  color: #ffffff;
+  border-color: #f75353;
+}
+.nav-pills li.active a {
+  background-color: #f75353;
+  border-color: #f75353;
+  color: #ffffff;
+}
+.nav-pills li.active a:hover {
+  background-color: #ed4747;
+}
+/**************/
+/* Pagination */
+/**************/
+.pagination li a {
+  color: #777777;
+}
+.pagination li a:hover {
+  background-color: #f75353;
+  border-color: #f75353;
+  color: #ffffff;
+}
+.pagination li.active a {
+  background-color: #f75353;
+  border-color: #f75353;
+}
+.pagination li.active a:hover {
+  background-color: #f75353;
+  border-color: #f75353;
+}
+.pagination li.active a:focus {
+  background-color: #f75353;
+  border-color: #f75353;
+}
+.pagination li.active span {
+  background-color: #f75353;
+  border-color: #f75353;
+}
+.pagination li.active span:hover {
+  background-color: #f75353;
+  border-color: #f75353;
+}
+.pagination li.active span:focus {
+  background-color: #f75353;
+  border-color: #f75353;
+}
+/*********/
+/* Pager */
+/*********/
+.pager li a {
+  background-color: #f75353;
+  color: #ffffff;
+  border: 1px solid #ed4747;
+}
+.pager li a:hover {
+  background: #ed4747;
+}
+/*******************/
+/* Form Validation */
+/*******************/
+form input[type="text"].error,
+form input[type="password"].error,
+form input[type="email"].error {
+  border: 1px solid #f75353 !important;
+}
+form select.error,
+form textarea.error {
+  border: 1px solid #f75353 !important;
+}
+form label.error {
+  color: #f75353;
+}
+/***************/
+/* Form Wizard */
+/***************/
+.wizard .steps .current a {
+  background: #666666;
+}
+.wizard .steps .current a:hover {
+  background: #666666;
+}
+.wizard .steps .current a:active {
+  background: #666666;
+}
+.wizard .steps .done a {
+  background: #f75353;
+  color: #ffffff;
+}
+.wizard .steps .done a:hover {
+  background: #f75353;
+}
+.wizard .steps .done a:active {
+  background: #f75353;
+}
+.wizard .steps .disabled a {
+  background: #eeeeee;
+}
+.wizard .steps .disabled a:hover {
+  background: #eeeeee;
+}
+.wizard .steps .disabled a:active {
+  background: #eeeeee;
+}
+.wizard .actions a {
+  background: #f75353;
+}
+.wizard .actions a:hover {
+  background: #f75353;
+}
+.wizard .actions a:active {
+  background: #f75353;
+}
+.wizard .actions .disabled a {
+  background: #eeeeee;
+}
+.wizard .actions .disabled a:hover {
+  background: #eeeeee;
+}
+.wizard .actions .disabled a:active {
+  background: #eeeeee;
+}
+/***************/
+/* Mail inbox */
+/***************/
+.page-inbox .table tr.m-unread {
+  background: #fffae2;
+}
+.page-inbox .table tr.m-read {
+  background: #f9f9f9;
+}
+/***************/
+/* Sidebar */
+/***************/
+.sidebar {
+  background: #333;
+}

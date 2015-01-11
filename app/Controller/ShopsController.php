@@ -30,11 +30,11 @@ Class ShopsController extends AppController{
 		}
 		else{
 			$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
-			return $this->redirect(['controller' => 'users', 'action' => 'login']);
+			return $this->redirect(['controller' => 'users', 'action' => 'login', 'admin' => false]);
 		}
 	}
 
-	public function add(){
+	public function admin_add(){
 		if($this->Auth->user('role') > 0){
 			$this->set('list_item', $this->Shop->find('all', ['fields' => ['name', 'id']]));
 			if($this->request->is('post')){
@@ -53,7 +53,7 @@ Class ShopsController extends AppController{
 					}
 					$this->Shop->saveField('required_name', $required_name);
 					$this->Session->setFlash('Article ajouté à la boutique !', 'success');
-					return $this->redirect(['controller' => 'shops', 'action' => 'index']);
+					return $this->redirect(['controller' => 'shops', 'action' => 'list', 'admin' => true]);
 				}
 				else{
 					$this->Session->setFlash('Une erreur est survenue !', 'error');
@@ -65,7 +65,16 @@ Class ShopsController extends AppController{
 		}
 	}
 
-	public function edit($id){
+	public function admin_list(){
+		if($this->Auth->user('role') > 0){
+			$this->set('data', $this->Shop->find('all', array('order' => array('Shop.created' => 'DESC'))));
+		}
+		else{
+			throw new NotFoundException();
+		}
+	}
+
+	public function admin_edit($id){
 		if($this->Auth->user('role') > 0){
 			$this->set('data', $this->Shop->find('first', ['conditions' => ['Shop.id' => $id]]));
 			$this->set('list_item', $this->Shop->find('all', ['conditions' => ['Shop.id !=' => $id], 'fields' => ['name', 'id']]));
@@ -85,7 +94,7 @@ Class ShopsController extends AppController{
 					}
 					$this->Shop->saveField('required_name', $required_name);
 					$this->Session->setFlash('Article modifié !', 'success');
-					return $this->redirect(['controller' => 'shops', 'action' => 'index']);
+					return $this->redirect($this->referer());
 				}
 				else{
 					$this->Session->setFlash('Une erreur est survenue !', 'error');
@@ -101,7 +110,7 @@ Class ShopsController extends AppController{
 		if($this->Auth->user('role') > 0){
 			$this->Shop->delete($id);
 			$this->Session->setFlash('Article supprimé !', 'success');
-			return $this->redirect(['controller' => 'shops', 'action' => 'index']);
+			return $this->redirect($this->referer());
 		}
 		else{
 			throw new NotFoundException();
@@ -114,7 +123,7 @@ Class ShopsController extends AppController{
 		}
 		else{
 			$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
-			return $this->redirect(['controller' => 'users', 'action' => 'login']);
+			return $this->redirect(['controller' => 'users', 'action' => 'login', 'admin' => false]);
 		}
 	}
 
@@ -410,7 +419,7 @@ Class ShopsController extends AppController{
 		}
 		else{
 			$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
-			return $this->redirect(['controller' => 'users', 'action' => 'login']);
+			return $this->redirect(['controller' => 'users', 'action' => 'login', 'admin' => false]);
 		}
 	}
 }
