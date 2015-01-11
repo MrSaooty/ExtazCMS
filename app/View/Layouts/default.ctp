@@ -4,8 +4,6 @@
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
 <head>
     <title><?php echo $this->fetch('title'); ?></title>
-
-    <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ExtazCMS">
@@ -124,55 +122,8 @@
                             </li>
                             <?php } ?>
                             <?php if($role > 0){ ?>
-                            <li class="dropdown">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                                    Administration
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><?php echo $this->Html->link('Modifier les informations', ['controller' => 'informations', 'action' => 'index']); ?></li>
-                                    <li><?php echo $this->Html->link('Afficher les statistiques', ['controller' => 'pages', 'action' => 'stats']); ?></li>
-                                    <?php if($use_store == 1){ ?>
-                                    <li class="dropdown-submenu">
-                                        <a href="javascript:void(0);">Boutique</a>
-                                        <ul class="dropdown-menu">
-                                            <li><?php echo $this->Html->link('Ajouter un article', ['controller' => 'shops', 'action' => 'add']); ?></li>                                
-                                            <li><?php echo $this->Html->link('Modifier un article', ['controller' => 'shops', 'action' => 'index']); ?></li>                                
-                                        </ul>
-                                    </li>
-                                    <?php } ?>
-                                    <li class="dropdown-submenu">
-                                        <a href="javascript:void(0);">Actualités</a>
-                                        <ul class="dropdown-menu">
-                                            <li><?php echo $this->Html->link('Rédiger un article', ['controller' => 'posts', 'action' => 'add']); ?></li>                                
-                                            <li><?php echo $this->Html->link('Voir les brouillons', ['controller' => 'posts', 'action' => 'drafts']); ?></li>                                
-                                        </ul>                              
-                                    </li>
-                                    <li class="dropdown-submenu">
-                                        <a href="javascript:void(0);">Utilisateurs</a>
-                                        <ul class="dropdown-menu">
-                                            <li><?php echo $this->Html->link('Liste des utilisateurs', ['controller' => 'users', 'action' => 'all']); ?></li>                                
-                                        </ul>                              
-                                    </li>
-                                    <?php if($use_store == 1){ ?>
-                                    <li class="dropdown-submenu">
-                                        <a href="javascript:void(0);">Historiques</a>
-                                        <ul class="dropdown-menu">
-                                            <li><?php echo $this->Html->link('Historique de la boutique', ['controller' => 'pages', 'action' => 'shop_history']); ?></li>                                
-                                            <li><?php echo $this->Html->link('Historique Starpass', ['controller' => 'pages', 'action' => 'starpass_history']); ?></li>
-                                            <?php if($use_paypal == 1){ ?>                                
-                                            	<li><?php echo $this->Html->link('Historique PayPal', ['controller' => 'pages', 'action' => 'paypal_history']); ?></li>
-                                            <?php } ?>                                
-                                        </ul>                              
-                                    </li>
-                                    <?php } ?>
-                                    <li class="dropdown-submenu">
-                                        <a href="javascript:void(0);">Autres...</a>
-                                        <ul class="dropdown-menu">
-                                            <li><?php echo $this->Html->link('Ajouter un membre à l\'équipe', ['controller' => 'pages', 'action' => 'add_member']); ?></li>                                
-                                            <li><?php echo $this->Html->link('Gérer les tickets du support ('.$nbTicketsAdmin.')', ['controller' => 'pages', 'action' => 'manage_tickets']); ?></li>                                
-                                        </ul>                              
-                                    </li>
-                                </ul>
+                            <li class="none">
+                                <?php echo $this->Html->link('Administration', ['controller' => 'pages', 'action' => 'stats', 'admin' => true]); ?>
                             </li>
                             <?php } ?>
                         </ul>

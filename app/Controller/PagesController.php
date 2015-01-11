@@ -47,7 +47,12 @@ class PagesController extends AppController {
  *	or MissingViewException in debug mode.
  */
 
-	public function stats(){
+	public function beforeFilter(){
+	    parent::beforeFilter();
+        $this->Auth->allow();
+	}
+
+	public function admin_stats(){
 		if($this->Auth->user('role') > 0){
 			$today = date('Y-m-j').' 00:00:00';
 			$hier = date('Y-m-j', strtotime('-1 day')).' 00:00:00';
@@ -90,7 +95,7 @@ class PagesController extends AppController {
 		}
 		else{
 			$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
-			return $this->redirect(['controller' => 'users', 'action' => 'login']);
+			return $this->redirect(['controller' => 'users', 'action' => 'login', 'admin' => false]);
 		}
 	}
 
@@ -115,7 +120,7 @@ class PagesController extends AppController {
 		}
 		else{
 			$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
-			return $this->redirect(['controller' => 'users', 'action' => 'login']);
+			return $this->redirect(['controller' => 'users', 'action' => 'login', 'admin' => false]);
 		}
 	}
 
@@ -126,7 +131,7 @@ class PagesController extends AppController {
 		}
 		else{
 			$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
-			return $this->redirect(['controller' => 'users', 'action' => 'login']);
+			return $this->redirect(['controller' => 'users', 'action' => 'login', 'admin' => false]);
 		}
 	}
 
@@ -258,7 +263,7 @@ class PagesController extends AppController {
 		}
 	}
 
-	public function manage_tickets(){
+	public function admin_manage_tickets(){
 		if($this->Auth->user('role') > 0){
 			$this->set('data', $this->Support->find('all', ['conditions' => ['Support.resolved' => 0], 'order' => ['Support.created DESC']]));
 		}
@@ -278,7 +283,7 @@ class PagesController extends AppController {
 		}
 	}
 
-	public function shop_history(){
+	public function admin_shop_history(){
 		if($this->Auth->user('role') > 0){
 			$this->set('data', $this->shopHistory->find('all', ['order' => ['shopHistory.created DESC']]));
 		}
@@ -287,7 +292,7 @@ class PagesController extends AppController {
 		}
 	}
 
-	public function starpass_history(){
+	public function admin_starpass_history(){
 		if($this->Auth->user('role') > 0){
 			$this->set('data', $this->starpassHistory->find('all', ['order' => ['starpassHistory.created DESC']]));
 		}
@@ -296,7 +301,7 @@ class PagesController extends AppController {
 		}
 	}
 
-	public function paypal_history(){
+	public function admin_paypal_history(){
 		if($this->Auth->user('role') > 0){
 			$this->set('data', $this->paypalHistory->find('all', ['order' => ['paypalHistory.created DESC']]));
 		}
@@ -305,7 +310,7 @@ class PagesController extends AppController {
 		}
 	}
 
-	public function add_member(){
+	public function admin_add_member(){
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('post')){
 				$this->Team->saveField('username', $this->request->data['Pages']['username']);
@@ -313,6 +318,7 @@ class PagesController extends AppController {
 				$this->Team->saveField('facebook_url', $this->request->data['Pages']['facebook_url']);
 				$this->Team->saveField('twitter_url', $this->request->data['Pages']['twitter_url']);
 				$this->Session->setFlash('Membre ajouté à l\'équipe !', 'success');
+				return $this->redirect(['controller' => 'pages', 'action' => 'list_member', 'admin' => true]);
 			}
 		}
 		else{
@@ -320,22 +326,53 @@ class PagesController extends AppController {
 		}
 	}
 
-	public function delete_member($id = null){
+	public function admin_list_member(){
+		if($this->Auth->user('role') > 0){
+			$this->set('data', $this->Team->find('all', array('order' => array('Team.rank' => 'ASC'))));
+		}
+		else{
+			throw new NotFoundException();
+		}
+	}
+
+	public function admin_delete_member($id = null){
 		if($this->Auth->user('role') > 0){
 			if($this->Team->findById($id)){
 				$this->Team->delete($id);
 				$this->Session->setFlash('Membre retiré de l\'équipe !', 'success');
-				return $this->redirect(['controller' => 'pages', 'action' => 'team']);
+				return $this->redirect(['controller' => 'pages', 'action' => 'list_member', 'admin' => true]);
 			}
 			else{
 				$this->Session->setFlash('Ce membre n\'existe pas !', 'error');
-				return $this->redirect(['controller' => 'pages', 'action' => 'team']);
+				return $this->redirect(['controller' => 'pages', 'action' => 'list_member', 'admin' => true]);
 			}
 		}
 		else{
 			throw new NotFoundException();
 		}
 	}
+
+	public function admin_edit_member($id = null){
+        if($this->Auth->user('role') > 0){
+            $this->Team->id = $id;
+            if($this->Team->exists()){
+                $this->set('data', $this->Team->find('first', ['conditions' => ['Team.id' => $id]]));
+                if($this->request->is('post')){
+                    $this->Team->id = $id;
+                    $this->Team->saveField('username', $this->request->data['Pages']['username']);
+					$this->Team->saveField('rank', $this->request->data['Pages']['rank']);
+					$this->Team->saveField('facebook_url', $this->request->data['Pages']['facebook_url']);
+					$this->Team->saveField('twitter_url', $this->request->data['Pages']['twitter_url']);
+                    $this->Session->setFlash('Membre modifié !', 'success');
+                    return $this->redirect($this->referer());
+                }
+            }
+            else{
+                $this->Session->setFlash('Cet membre n\'existe pas !', 'error');
+                return $this->redirect($this->referer());
+            }
+        }
+    }
 
 	public function team(){
 		$this->set('data', $this->Team->find('all', ['order' => ['Team.rank ASC']]));
@@ -370,15 +407,15 @@ class PagesController extends AppController {
 							$this->Session->setFlash('Tous les champs sont obligatoires', 'error');
 						}
 					}
-				}
-				else{
-					$this->Session->setFlash('Erreur 1001', 'error');
+					else{
+						$this->Session->setFlash('Erreur 1001', 'error');
+					}
 				}
 			}
 		}
 		else{
 			$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
-			return $this->redirect(['controller' => 'users', 'action' => 'login']);
+			return $this->redirect(['controller' => 'users', 'action' => 'login', 'admin' => false]);
 		}
 	}
 

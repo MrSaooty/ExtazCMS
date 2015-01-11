@@ -28,7 +28,7 @@ $(document).ready(function(){
                         <div class="caption">
                             <center>
                                 <?php if($role > 0){ ?>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'delete_member', 'id' => $d['Team']['id']]); ?>" class="btn rounded btn-default btn-u-xs confirm">
+                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'delete_member', 'id' => $d['Team']['id'], 'admin' => true]); ?>" class="btn rounded btn-default btn-u-xs confirm">
                                         <font color="red">
                                             <i class="fa fa-times"> Supprimer</i>
                                         </font>
