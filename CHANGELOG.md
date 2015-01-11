@@ -1,6 +1,12 @@
 Changelog
 =========
 
+v1.2
+----
+
+ - Amélioration du panel d'administration
+ - Corrections de bug
+
 v1.1
 ----
 
