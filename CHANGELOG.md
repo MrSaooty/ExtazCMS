@@ -5,6 +5,7 @@ v1.2
 ----
 
  - Amélioration du panel d'administration
+ 
 
  v1.1
 ----
