@@ -1,6 +1,7 @@
 ExtazCMS
 ========
  - Topic bukkit.fr : [cliquez ici](http://www.bukkit.fr/index.php/topic/15381-107-extazcms-un-v%C3%A9ritable-site-pour-votre-serveur-minecraft/)
+ - Changelog : [cliquez ici](https://github.com/MrSaooty/ExtazCMS/blob/master/CHANGELOG.md)
 
 Installation du CMS
 -------------------
@@ -22,7 +23,4 @@ Starpass
  - Url du document: http://votre-site.fr/starpass
  - Url de la page d'erreur: http://votre-site.fr/recharger
 
-----------
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/MrSaooty/extazcms/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 

@@ -5,9 +5,9 @@ v1.2
 ----
 
  - Amélioration du panel d'administration
- 
+ - Corrections de bug
 
- v1.1
+v1.1
 ----
 
  - Retour de Starpass, retrait d'Oxopass faille de sécurité corrigée merci à [MTC](http://www.bukkit.fr/index.php/user/8641-mtc/)
