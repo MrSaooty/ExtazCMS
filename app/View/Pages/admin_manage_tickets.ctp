@@ -38,18 +38,12 @@ $(document).ready(function(){
 </script>
 <div class="main-content">
     <div class="container">
-                        
         <div class="page-content">
-        
-            <!-- Heading -->
             <div class="single-head">
-                <!-- Heading -->
                 <h3 class="pull-left"><i class="fa fa-table lblue"></i>Liste des tickets ouverts</h3>
                 <div class="clearfix"></div>
             </div>
-            <!-- Table Page -->
             <div class="page-tables">
-                <!-- Table -->
                 <div class="table-responsive">
                     <table class="table table-bordered" cellpadding="0" cellspacing="0" border="0" id="data-table" width="100%">
                         <thead>
@@ -116,7 +110,7 @@ $(document).ready(function(){
                                 <td>
                                     <center>
                                         <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'view_ticket', 'id' => $d['Support']['id'], 'admin' => false]); ?>" class="label label-black" type="submit"><i class="fa fa-list"></i></a>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'close_ticket', 'id' => $d['Support']['id']]); ?>" class="label label-success confirm ui-tooltip" data-original-title="Clôturer" data-toggle="tooltip" data-placement="right" type="submit"><i class="fa fa-lock"></i></a>
+                                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'close_ticket', 'id' => $d['Support']['id'], 'admin' => false]); ?>" class="label label-success confirm ui-tooltip" data-original-title="Clôturer" data-toggle="tooltip" data-placement="right" type="submit"><i class="fa fa-lock"></i></a>
                                     </center>
                                 </td>
                             </tr>
@@ -128,6 +122,5 @@ $(document).ready(function(){
                 </div>
             </div>
         </div>
-        
     </div>
 </div>

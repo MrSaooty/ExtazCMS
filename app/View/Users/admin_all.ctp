@@ -32,15 +32,14 @@ $(document).ready(function(){
 <div class="main-content">
     <div class="container">
         <div class="page-content">
-            <!-- Heading -->
             <div class="single-head">
-                <!-- Heading -->
                 <h3 class="pull-left"><i class="fa fa-table lblue"></i>Liste des utilisateurs</h3>
+                <div class="breads pull-right">
+                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'user_chart', 'admin' => true]); ?>" class="label label-black" target="_blank"><i class="fa fa-pie-chart"></i> Graphique</a>
+                </div>
                 <div class="clearfix"></div>
             </div>
-            <!-- Table Page -->
             <div class="page-tables">
-                <!-- Table -->
                 <div class="table-responsive">
                     <table class="table table-bordered" cellpadding="0" cellspacing="0" border="0" id="data-table" width="100%">
                         <thead>

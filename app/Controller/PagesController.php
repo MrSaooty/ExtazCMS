@@ -38,6 +38,8 @@ class PagesController extends AppController {
  * @var array
  */
 	public $uses = ['Informations', 'shopHistory', 'starpassHistory', 'paypalHistory', 'Team', 'Support', 'supportComments'];
+	public $components = ['Highcharts.Highcharts'];
+    public $Highcharts = null;
 
 /**
  * Displays a view
@@ -94,8 +96,7 @@ class PagesController extends AppController {
 			$this->set('reponsesHier', $this->supportComments->find('count', ['conditions' => ['supportComments.created >' => $hier, 'supportComments.created <' => $today]]));
 		}
 		else{
-			$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
-			return $this->redirect(['controller' => 'users', 'action' => 'login', 'admin' => false]);
+			throw new NotFoundException();
 		}
 	}
 
@@ -421,6 +422,382 @@ class PagesController extends AppController {
 
 	public function rules(){
 		
+	}
+
+	public function admin_shop_chart(){
+		if($this->Auth->user('role') > 0){
+			$chartName = 'shop_chart';
+	        $mychart = $this->Highcharts->create($chartName, 'line');
+
+	        $today = 'Ajd';
+			$todayMoinsUn = date('j/m', strtotime('-1 day'));
+			$todayMoinsDeux = date('j/m', strtotime('-2 day'));
+			$todayMoinsTrois = date('j/m', strtotime('-3 day'));
+			$todayMoinsQuatre = date('j/m', strtotime('-4 day'));
+			$todayMoinsCinq = date('j/m', strtotime('-5 day'));
+			$todayMoinsSix = date('j/m', strtotime('-6 day'));
+			$todayMoinsSept = date('j/m', strtotime('-7 day'));
+			$todayMoinsHuit = date('j/m', strtotime('-8 day'));
+			$todayMoinsNeuf = date('j/m', strtotime('-9 day'));
+			$todayMoinsDix = date('j/m', strtotime('-10 day'));
+
+			$countToday = date('Y-m-j').' 00:00:00';
+			$countTodayMoinsUn = date('Y-m-j', strtotime('-1 day')).' 00:00:00';
+			$countTodayMoinsDeux = date('Y-m-j', strtotime('-2 day')).' 00:00:00';
+			$countTodayMoinsTrois = date('Y-m-j', strtotime('-3 day')).' 00:00:00';
+			$countTodayMoinsQuatre = date('Y-m-j', strtotime('-4 day')).' 00:00:00';
+			$countTodayMoinsCinq = date('Y-m-j', strtotime('-5 day')).' 00:00:00';
+			$countTodayMoinsSix = date('Y-m-j', strtotime('-6 day')).' 00:00:00';
+			$countTodayMoinsSept = date('Y-m-j', strtotime('-7 day')).' 00:00:00';
+			$countTodayMoinsHuit = date('Y-m-j', strtotime('-8 day')).' 00:00:00';
+			$countTodayMoinsNeuf = date('Y-m-j', strtotime('-9 day')).' 00:00:00';
+			$countTodayMoinsDix = date('Y-m-j', strtotime('-10 day')).' 00:00:00';
+
+			$achatsToday =$this->shopHistory->find('count', ['conditions' => ['shopHistory.created >' => $countToday]]);
+			$achatsTodayMoinsUn = $this->shopHistory->find('count', ['conditions' => ['shopHistory.created >' => $countTodayMoinsUn, 'shopHistory.created <' => $countToday]]);
+			$achatsTodayMoinsDeux = $this->shopHistory->find('count', ['conditions' => ['shopHistory.created >' => $countTodayMoinsDeux, 'shopHistory.created <' => $countTodayMoinsUn]]);
+			$achatsTodayMoinsTrois = $this->shopHistory->find('count', ['conditions' => ['shopHistory.created >' => $countTodayMoinsTrois, 'shopHistory.created <' => $countTodayMoinsDeux]]);
+			$achatsTodayMoinsQuatre = $this->shopHistory->find('count', ['conditions' => ['shopHistory.created >' => $countTodayMoinsQuatre, 'shopHistory.created <' => $countTodayMoinsTrois]]);
+			$achatsTodayMoinsCinq = $this->shopHistory->find('count', ['conditions' => ['shopHistory.created >' => $countTodayMoinsCinq, 'shopHistory.created <' => $countTodayMoinsQuatre]]);
+			$achatsTodayMoinsSix = $this->shopHistory->find('count', ['conditions' => ['shopHistory.created >' => $countTodayMoinsSix, 'shopHistory.created <' => $countTodayMoinsCinq]]);
+			$achatsTodayMoinsSept = $this->shopHistory->find('count', ['conditions' => ['shopHistory.created >' => $countTodayMoinsSept, 'shopHistory.created <' => $countTodayMoinsSix]]);
+			$achatsTodayMoinsHuit = $this->shopHistory->find('count', ['conditions' => ['shopHistory.created >' => $countTodayMoinsHuit, 'shopHistory.created <' => $countTodayMoinsSept]]);
+			$achatsTodayMoinsNeuf = $this->shopHistory->find('count', ['conditions' => ['shopHistory.created >' => $countTodayMoinsNeuf, 'shopHistory.created <' => $countTodayMoinsHuit]]);
+			$achatsTodayMoinsDix = $this->shopHistory->find('count', ['conditions' => ['shopHistory.created >' => $countTodayMoinsDix, 'shopHistory.created <' => $countTodayMoinsNeuf]]);
+
+			$chartData = [$achatsTodayMoinsDix, $achatsTodayMoinsNeuf, $achatsTodayMoinsHuit, $achatsTodayMoinsSept, $achatsTodayMoinsSix, $achatsTodayMoinsCinq, $achatsTodayMoinsQuatre, $achatsTodayMoinsTrois, $achatsTodayMoinsDeux, $achatsTodayMoinsUn, $achatsToday];
+
+	        $this->Highcharts->setChartParams($chartName, array(
+	            'renderTo' => 'shop_chart',
+	            'chartWidth' => 1000,
+	            'chartHeight' => 600,
+	            'chartMarginTop' => 60,
+	            'chartMarginLeft' => 90,
+	            'chartMarginRight' => 30,
+	            'chartMarginBottom' => 110,
+	            'chartSpacingRight' => 10,
+	            'chartSpacingBottom' => 15,
+	            'chartSpacingLeft' => 0,
+	            'chartAlignTicks' => FALSE,
+	            'chartBackgroundColorLinearGradient' => array(255, 255, 255, 255),
+	            'chartBackgroundColorStops' => array(array(0, 'rgb(255, 255, 255)'), array(1, 'rgb(255, 255, 255)')),
+	            'title' => 'Graphique des achats boutiques',
+	            'titleAlign' => 'center',
+	            'titleFloating' => TRUE,
+	            'titleStyleFont' => '18px Metrophobic, Arial, sans-serif',
+	            'titleStyleColor' => '#606060',
+	            'titleX' => 20,
+	            'titleY' => 20,
+	            'legendEnabled' => TRUE,
+	            'legendLayout' => 'horizontal',
+	            'legendAlign' => 'center',
+	            'legendVerticalAlign ' => 'bottom',
+	            'legendItemStyle' => array('color' => '#222'),
+	            'legendBackgroundColorLinearGradient' => array(0, 0, 0, 25),
+	            'legendBackgroundColorStops' => array(array(0, '#FFFFFF'), array(1, '#FFFFFF')),
+	            'tooltipEnabled' => FALSE,
+	            'xAxisLabelsEnabled' => TRUE,
+	            'xAxisLabelsAlign' => 'right',
+	            'xAxisLabelsStep' => 1,
+	            'xAxislabelsX' => 5,
+	            'xAxisLabelsY' => 20,
+	            'xAxisCategories' => array($todayMoinsDix, $todayMoinsNeuf, $todayMoinsHuit, $todayMoinsSept, $todayMoinsSix, $todayMoinsCinq, $todayMoinsQuatre, $todayMoinsTrois, $todayMoinsDeux, $todayMoinsUn, $today),
+	            'yAxisTitleText' => FALSE,
+	            'enableAutoStep' => FALSE,
+	            'creditsEnabled' => FALSE
+	            )
+	        );
+
+	        $series = $this->Highcharts->addChartSeries();
+	        $series->addName('Achats boutique')->addData($chartData);
+	        $mychart->addSeries($series);
+	        $this->set(compact('chartName'));
+	    }
+		else{
+			throw new NotFoundException();
+		}
+	}
+
+	public function admin_user_chart(){
+		if($this->Auth->user('role') > 0){
+			$chartName = 'user_chart';
+	        $mychart = $this->Highcharts->create($chartName, 'line');
+
+	        $today = 'Ajd';
+			$todayMoinsUn = date('j/m', strtotime('-1 day'));
+			$todayMoinsDeux = date('j/m', strtotime('-2 day'));
+			$todayMoinsTrois = date('j/m', strtotime('-3 day'));
+			$todayMoinsQuatre = date('j/m', strtotime('-4 day'));
+			$todayMoinsCinq = date('j/m', strtotime('-5 day'));
+			$todayMoinsSix = date('j/m', strtotime('-6 day'));
+			$todayMoinsSept = date('j/m', strtotime('-7 day'));
+			$todayMoinsHuit = date('j/m', strtotime('-8 day'));
+			$todayMoinsNeuf = date('j/m', strtotime('-9 day'));
+			$todayMoinsDix = date('j/m', strtotime('-10 day'));
+
+			$countToday = date('Y-m-j').' 00:00:00';
+			$countTodayMoinsUn = date('Y-m-j', strtotime('-1 day')).' 00:00:00';
+			$countTodayMoinsDeux = date('Y-m-j', strtotime('-2 day')).' 00:00:00';
+			$countTodayMoinsTrois = date('Y-m-j', strtotime('-3 day')).' 00:00:00';
+			$countTodayMoinsQuatre = date('Y-m-j', strtotime('-4 day')).' 00:00:00';
+			$countTodayMoinsCinq = date('Y-m-j', strtotime('-5 day')).' 00:00:00';
+			$countTodayMoinsSix = date('Y-m-j', strtotime('-6 day')).' 00:00:00';
+			$countTodayMoinsSept = date('Y-m-j', strtotime('-7 day')).' 00:00:00';
+			$countTodayMoinsHuit = date('Y-m-j', strtotime('-8 day')).' 00:00:00';
+			$countTodayMoinsNeuf = date('Y-m-j', strtotime('-9 day')).' 00:00:00';
+			$countTodayMoinsDix = date('Y-m-j', strtotime('-10 day')).' 00:00:00';
+
+			$achatsToday =$this->User->find('count', ['conditions' => ['User.created >' => $countToday]]);
+			$achatsTodayMoinsUn = $this->User->find('count', ['conditions' => ['User.created >' => $countTodayMoinsUn, 'User.created <' => $countToday]]);
+			$achatsTodayMoinsDeux = $this->User->find('count', ['conditions' => ['User.created >' => $countTodayMoinsDeux, 'User.created <' => $countTodayMoinsUn]]);
+			$achatsTodayMoinsTrois = $this->User->find('count', ['conditions' => ['User.created >' => $countTodayMoinsTrois, 'User.created <' => $countTodayMoinsDeux]]);
+			$achatsTodayMoinsQuatre = $this->User->find('count', ['conditions' => ['User.created >' => $countTodayMoinsQuatre, 'User.created <' => $countTodayMoinsTrois]]);
+			$achatsTodayMoinsCinq = $this->User->find('count', ['conditions' => ['User.created >' => $countTodayMoinsCinq, 'User.created <' => $countTodayMoinsQuatre]]);
+			$achatsTodayMoinsSix = $this->User->find('count', ['conditions' => ['User.created >' => $countTodayMoinsSix, 'User.created <' => $countTodayMoinsCinq]]);
+			$achatsTodayMoinsSept = $this->User->find('count', ['conditions' => ['User.created >' => $countTodayMoinsSept, 'User.created <' => $countTodayMoinsSix]]);
+			$achatsTodayMoinsHuit = $this->User->find('count', ['conditions' => ['User.created >' => $countTodayMoinsHuit, 'User.created <' => $countTodayMoinsSept]]);
+			$achatsTodayMoinsNeuf = $this->User->find('count', ['conditions' => ['User.created >' => $countTodayMoinsNeuf, 'User.created <' => $countTodayMoinsHuit]]);
+			$achatsTodayMoinsDix = $this->User->find('count', ['conditions' => ['User.created >' => $countTodayMoinsDix, 'User.created <' => $countTodayMoinsNeuf]]);
+
+			$chartData = [$achatsTodayMoinsDix, $achatsTodayMoinsNeuf, $achatsTodayMoinsHuit, $achatsTodayMoinsSept, $achatsTodayMoinsSix, $achatsTodayMoinsCinq, $achatsTodayMoinsQuatre, $achatsTodayMoinsTrois, $achatsTodayMoinsDeux, $achatsTodayMoinsUn, $achatsToday];
+
+	        $this->Highcharts->setChartParams($chartName, array(
+	            'renderTo' => 'user_chart',
+	            'chartWidth' => 1000,
+	            'chartHeight' => 600,
+	            'chartMarginTop' => 60,
+	            'chartMarginLeft' => 90,
+	            'chartMarginRight' => 30,
+	            'chartMarginBottom' => 110,
+	            'chartSpacingRight' => 10,
+	            'chartSpacingBottom' => 15,
+	            'chartSpacingLeft' => 0,
+	            'chartAlignTicks' => FALSE,
+	            'chartBackgroundColorLinearGradient' => array(255, 255, 255, 255),
+	            'chartBackgroundColorStops' => array(array(0, 'rgb(255, 255, 255)'), array(1, 'rgb(255, 255, 255)')),
+	            'title' => 'Graphique des utilisateurs inscrits',
+	            'titleAlign' => 'center',
+	            'titleFloating' => TRUE,
+	            'titleStyleFont' => '18px Metrophobic, Arial, sans-serif',
+	            'titleStyleColor' => '#606060',
+	            'titleX' => 20,
+	            'titleY' => 20,
+	            'legendEnabled' => TRUE,
+	            'legendLayout' => 'horizontal',
+	            'legendAlign' => 'center',
+	            'legendVerticalAlign ' => 'bottom',
+	            'legendItemStyle' => array('color' => '#222'),
+	            'legendBackgroundColorLinearGradient' => array(0, 0, 0, 25),
+	            'legendBackgroundColorStops' => array(array(0, '#FFFFFF'), array(1, '#FFFFFF')),
+	            'tooltipEnabled' => FALSE,
+	            'xAxisLabelsEnabled' => TRUE,
+	            'xAxisLabelsAlign' => 'right',
+	            'xAxisLabelsStep' => 1,
+	            'xAxislabelsX' => 5,
+	            'xAxisLabelsY' => 20,
+	            'xAxisCategories' => array($todayMoinsDix, $todayMoinsNeuf, $todayMoinsHuit, $todayMoinsSept, $todayMoinsSix, $todayMoinsCinq, $todayMoinsQuatre, $todayMoinsTrois, $todayMoinsDeux, $todayMoinsUn, $today),
+	            'yAxisTitleText' => FALSE,
+	            'enableAutoStep' => FALSE,
+	            'creditsEnabled' => FALSE
+	            )
+	        );
+
+	        $series = $this->Highcharts->addChartSeries();
+	        $series->addName('Utilisateurs inscrits')->addData($chartData);
+	        $mychart->addSeries($series);
+	        $this->set(compact('chartName'));
+	    }
+		else{
+			throw new NotFoundException();
+		}
+	}
+
+	public function admin_paypal_chart(){
+		if($this->Auth->user('role') > 0){
+			$chartName = 'paypal_chart';
+	        $mychart = $this->Highcharts->create($chartName, 'line');
+
+	        $today = 'Ajd';
+			$todayMoinsUn = date('j/m', strtotime('-1 day'));
+			$todayMoinsDeux = date('j/m', strtotime('-2 day'));
+			$todayMoinsTrois = date('j/m', strtotime('-3 day'));
+			$todayMoinsQuatre = date('j/m', strtotime('-4 day'));
+			$todayMoinsCinq = date('j/m', strtotime('-5 day'));
+			$todayMoinsSix = date('j/m', strtotime('-6 day'));
+			$todayMoinsSept = date('j/m', strtotime('-7 day'));
+			$todayMoinsHuit = date('j/m', strtotime('-8 day'));
+			$todayMoinsNeuf = date('j/m', strtotime('-9 day'));
+			$todayMoinsDix = date('j/m', strtotime('-10 day'));
+
+			$countToday = date('Y-m-j').' 00:00:00';
+			$countTodayMoinsUn = date('Y-m-j', strtotime('-1 day')).' 00:00:00';
+			$countTodayMoinsDeux = date('Y-m-j', strtotime('-2 day')).' 00:00:00';
+			$countTodayMoinsTrois = date('Y-m-j', strtotime('-3 day')).' 00:00:00';
+			$countTodayMoinsQuatre = date('Y-m-j', strtotime('-4 day')).' 00:00:00';
+			$countTodayMoinsCinq = date('Y-m-j', strtotime('-5 day')).' 00:00:00';
+			$countTodayMoinsSix = date('Y-m-j', strtotime('-6 day')).' 00:00:00';
+			$countTodayMoinsSept = date('Y-m-j', strtotime('-7 day')).' 00:00:00';
+			$countTodayMoinsHuit = date('Y-m-j', strtotime('-8 day')).' 00:00:00';
+			$countTodayMoinsNeuf = date('Y-m-j', strtotime('-9 day')).' 00:00:00';
+			$countTodayMoinsDix = date('Y-m-j', strtotime('-10 day')).' 00:00:00';
+
+			$achatsToday =$this->paypalHistory->find('count', ['conditions' => ['paypalHistory.created >' => $countToday]]);
+			$achatsTodayMoinsUn = $this->paypalHistory->find('count', ['conditions' => ['paypalHistory.created >' => $countTodayMoinsUn, 'paypalHistory.created <' => $countToday]]);
+			$achatsTodayMoinsDeux = $this->paypalHistory->find('count', ['conditions' => ['paypalHistory.created >' => $countTodayMoinsDeux, 'paypalHistory.created <' => $countTodayMoinsUn]]);
+			$achatsTodayMoinsTrois = $this->paypalHistory->find('count', ['conditions' => ['paypalHistory.created >' => $countTodayMoinsTrois, 'paypalHistory.created <' => $countTodayMoinsDeux]]);
+			$achatsTodayMoinsQuatre = $this->paypalHistory->find('count', ['conditions' => ['paypalHistory.created >' => $countTodayMoinsQuatre, 'paypalHistory.created <' => $countTodayMoinsTrois]]);
+			$achatsTodayMoinsCinq = $this->paypalHistory->find('count', ['conditions' => ['paypalHistory.created >' => $countTodayMoinsCinq, 'paypalHistory.created <' => $countTodayMoinsQuatre]]);
+			$achatsTodayMoinsSix = $this->paypalHistory->find('count', ['conditions' => ['paypalHistory.created >' => $countTodayMoinsSix, 'paypalHistory.created <' => $countTodayMoinsCinq]]);
+			$achatsTodayMoinsSept = $this->paypalHistory->find('count', ['conditions' => ['paypalHistory.created >' => $countTodayMoinsSept, 'paypalHistory.created <' => $countTodayMoinsSix]]);
+			$achatsTodayMoinsHuit = $this->paypalHistory->find('count', ['conditions' => ['paypalHistory.created >' => $countTodayMoinsHuit, 'paypalHistory.created <' => $countTodayMoinsSept]]);
+			$achatsTodayMoinsNeuf = $this->paypalHistory->find('count', ['conditions' => ['paypalHistory.created >' => $countTodayMoinsNeuf, 'paypalHistory.created <' => $countTodayMoinsHuit]]);
+			$achatsTodayMoinsDix = $this->paypalHistory->find('count', ['conditions' => ['paypalHistory.created >' => $countTodayMoinsDix, 'paypalHistory.created <' => $countTodayMoinsNeuf]]);
+
+			$chartData = [$achatsTodayMoinsDix, $achatsTodayMoinsNeuf, $achatsTodayMoinsHuit, $achatsTodayMoinsSept, $achatsTodayMoinsSix, $achatsTodayMoinsCinq, $achatsTodayMoinsQuatre, $achatsTodayMoinsTrois, $achatsTodayMoinsDeux, $achatsTodayMoinsUn, $achatsToday];
+
+	        $this->Highcharts->setChartParams($chartName, array(
+	            'renderTo' => 'paypal_chart',
+	            'chartWidth' => 1000,
+	            'chartHeight' => 600,
+	            'chartMarginTop' => 60,
+	            'chartMarginLeft' => 90,
+	            'chartMarginRight' => 30,
+	            'chartMarginBottom' => 110,
+	            'chartSpacingRight' => 10,
+	            'chartSpacingBottom' => 15,
+	            'chartSpacingLeft' => 0,
+	            'chartAlignTicks' => FALSE,
+	            'chartBackgroundColorLinearGradient' => array(255, 255, 255, 255),
+	            'chartBackgroundColorStops' => array(array(0, 'rgb(255, 255, 255)'), array(1, 'rgb(255, 255, 255)')),
+	            'title' => 'Graphique des achats PayPal',
+	            'titleAlign' => 'center',
+	            'titleFloating' => TRUE,
+	            'titleStyleFont' => '18px Metrophobic, Arial, sans-serif',
+	            'titleStyleColor' => '#606060',
+	            'titleX' => 20,
+	            'titleY' => 20,
+	            'legendEnabled' => TRUE,
+	            'legendLayout' => 'horizontal',
+	            'legendAlign' => 'center',
+	            'legendVerticalAlign ' => 'bottom',
+	            'legendItemStyle' => array('color' => '#222'),
+	            'legendBackgroundColorLinearGradient' => array(0, 0, 0, 25),
+	            'legendBackgroundColorStops' => array(array(0, 'rgb(217, 217, 217)'), array(1, 'rgb(255, 255, 255)')),
+	            'tooltipEnabled' => FALSE,
+	            'xAxisLabelsEnabled' => TRUE,
+	            'xAxisLabelsAlign' => 'right',
+	            'xAxisLabelsStep' => 1,
+	            'xAxislabelsX' => 5,
+	            'xAxisLabelsY' => 20,
+	            'xAxisCategories' => array($todayMoinsDix, $todayMoinsNeuf, $todayMoinsHuit, $todayMoinsSept, $todayMoinsSix, $todayMoinsCinq, $todayMoinsQuatre, $todayMoinsTrois, $todayMoinsDeux, $todayMoinsUn, $today),
+	            'yAxisTitleText' => FALSE,
+	            'enableAutoStep' => FALSE,
+	            'creditsEnabled' => FALSE
+	            )
+	        );
+
+	        $series = $this->Highcharts->addChartSeries();
+	        $series->addName('Achats Paypal')->addData($chartData);
+	        $mychart->addSeries($series);
+	        $this->set(compact('chartName'));
+	    }
+		else{
+			throw new NotFoundException();
+		}
+	}
+
+	public function admin_starpass_chart(){
+		if($this->Auth->user('role') > 0){
+			$chartName = 'starpass_chart';
+	        $mychart = $this->Highcharts->create($chartName, 'line');
+
+	        $today = 'Ajd';
+			$todayMoinsUn = date('j/m', strtotime('-1 day'));
+			$todayMoinsDeux = date('j/m', strtotime('-2 day'));
+			$todayMoinsTrois = date('j/m', strtotime('-3 day'));
+			$todayMoinsQuatre = date('j/m', strtotime('-4 day'));
+			$todayMoinsCinq = date('j/m', strtotime('-5 day'));
+			$todayMoinsSix = date('j/m', strtotime('-6 day'));
+			$todayMoinsSept = date('j/m', strtotime('-7 day'));
+			$todayMoinsHuit = date('j/m', strtotime('-8 day'));
+			$todayMoinsNeuf = date('j/m', strtotime('-9 day'));
+			$todayMoinsDix = date('j/m', strtotime('-10 day'));
+
+			$countToday = date('Y-m-j').' 00:00:00';
+			$countTodayMoinsUn = date('Y-m-j', strtotime('-1 day')).' 00:00:00';
+			$countTodayMoinsDeux = date('Y-m-j', strtotime('-2 day')).' 00:00:00';
+			$countTodayMoinsTrois = date('Y-m-j', strtotime('-3 day')).' 00:00:00';
+			$countTodayMoinsQuatre = date('Y-m-j', strtotime('-4 day')).' 00:00:00';
+			$countTodayMoinsCinq = date('Y-m-j', strtotime('-5 day')).' 00:00:00';
+			$countTodayMoinsSix = date('Y-m-j', strtotime('-6 day')).' 00:00:00';
+			$countTodayMoinsSept = date('Y-m-j', strtotime('-7 day')).' 00:00:00';
+			$countTodayMoinsHuit = date('Y-m-j', strtotime('-8 day')).' 00:00:00';
+			$countTodayMoinsNeuf = date('Y-m-j', strtotime('-9 day')).' 00:00:00';
+			$countTodayMoinsDix = date('Y-m-j', strtotime('-10 day')).' 00:00:00';
+
+			$achatsToday =$this->starpassHistory->find('count', ['conditions' => ['starpassHistory.created >' => $countToday]]);
+			$achatsTodayMoinsUn = $this->starpassHistory->find('count', ['conditions' => ['starpassHistory.created >' => $countTodayMoinsUn, 'starpassHistory.created <' => $countToday]]);
+			$achatsTodayMoinsDeux = $this->starpassHistory->find('count', ['conditions' => ['starpassHistory.created >' => $countTodayMoinsDeux, 'starpassHistory.created <' => $countTodayMoinsUn]]);
+			$achatsTodayMoinsTrois = $this->starpassHistory->find('count', ['conditions' => ['starpassHistory.created >' => $countTodayMoinsTrois, 'starpassHistory.created <' => $countTodayMoinsDeux]]);
+			$achatsTodayMoinsQuatre = $this->starpassHistory->find('count', ['conditions' => ['starpassHistory.created >' => $countTodayMoinsQuatre, 'starpassHistory.created <' => $countTodayMoinsTrois]]);
+			$achatsTodayMoinsCinq = $this->starpassHistory->find('count', ['conditions' => ['starpassHistory.created >' => $countTodayMoinsCinq, 'starpassHistory.created <' => $countTodayMoinsQuatre]]);
+			$achatsTodayMoinsSix = $this->starpassHistory->find('count', ['conditions' => ['starpassHistory.created >' => $countTodayMoinsSix, 'starpassHistory.created <' => $countTodayMoinsCinq]]);
+			$achatsTodayMoinsSept = $this->starpassHistory->find('count', ['conditions' => ['starpassHistory.created >' => $countTodayMoinsSept, 'starpassHistory.created <' => $countTodayMoinsSix]]);
+			$achatsTodayMoinsHuit = $this->starpassHistory->find('count', ['conditions' => ['starpassHistory.created >' => $countTodayMoinsHuit, 'starpassHistory.created <' => $countTodayMoinsSept]]);
+			$achatsTodayMoinsNeuf = $this->starpassHistory->find('count', ['conditions' => ['starpassHistory.created >' => $countTodayMoinsNeuf, 'starpassHistory.created <' => $countTodayMoinsHuit]]);
+			$achatsTodayMoinsDix = $this->starpassHistory->find('count', ['conditions' => ['starpassHistory.created >' => $countTodayMoinsDix, 'starpassHistory.created <' => $countTodayMoinsNeuf]]);
+
+			$chartData = [$achatsTodayMoinsDix, $achatsTodayMoinsNeuf, $achatsTodayMoinsHuit, $achatsTodayMoinsSept, $achatsTodayMoinsSix, $achatsTodayMoinsCinq, $achatsTodayMoinsQuatre, $achatsTodayMoinsTrois, $achatsTodayMoinsDeux, $achatsTodayMoinsUn, $achatsToday];
+
+	        $this->Highcharts->setChartParams($chartName, array(
+	            'renderTo' => 'starpass_chart',
+	            'chartWidth' => 1000,
+	            'chartHeight' => 600,
+	            'chartMarginTop' => 60,
+	            'chartMarginLeft' => 90,
+	            'chartMarginRight' => 30,
+	            'chartMarginBottom' => 110,
+	            'chartSpacingRight' => 10,
+	            'chartSpacingBottom' => 15,
+	            'chartSpacingLeft' => 0,
+	            'chartAlignTicks' => FALSE,
+	            'chartBackgroundColorLinearGradient' => array(255, 255, 255, 255),
+	            'chartBackgroundColorStops' => array(array(0, 'rgb(255, 255, 255)'), array(1, 'rgb(255, 255, 255)')),
+	            'title' => 'Graphique des achats Starpass',
+	            'titleAlign' => 'center',
+	            'titleFloating' => TRUE,
+	            'titleStyleFont' => '18px Metrophobic, Arial, sans-serif',
+	            'titleStyleColor' => '#606060',
+	            'titleX' => 20,
+	            'titleY' => 20,
+	            'legendEnabled' => TRUE,
+	            'legendLayout' => 'horizontal',
+	            'legendAlign' => 'center',
+	            'legendVerticalAlign ' => 'bottom',
+	            'legendItemStyle' => array('color' => '#222'),
+	            'legendBackgroundColorLinearGradient' => array(0, 0, 0, 25),
+	            'legendBackgroundColorStops' => array(array(0, 'rgb(217, 217, 217)'), array(1, 'rgb(255, 255, 255)')),
+	            'tooltipEnabled' => FALSE,
+	            'xAxisLabelsEnabled' => TRUE,
+	            'xAxisLabelsAlign' => 'right',
+	            'xAxisLabelsStep' => 1,
+	            'xAxislabelsX' => 5,
+	            'xAxisLabelsY' => 20,
+	            'xAxisCategories' => array($todayMoinsDix, $todayMoinsNeuf, $todayMoinsHuit, $todayMoinsSept, $todayMoinsSix, $todayMoinsCinq, $todayMoinsQuatre, $todayMoinsTrois, $todayMoinsDeux, $todayMoinsUn, $today),
+	            'yAxisTitleText' => FALSE,
+	            'enableAutoStep' => FALSE,
+	            'creditsEnabled' => FALSE
+	            )
+	        );
+
+	        $series = $this->Highcharts->addChartSeries();
+	        $series->addName('Achats Starpass')->addData($chartData);
+	        $mychart->addSeries($series);
+	        $this->set(compact('chartName'));
+	    }
+		else{
+			throw new NotFoundException();
+		}
 	}
 
 	public function display(){

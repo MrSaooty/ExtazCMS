@@ -18,7 +18,7 @@ $(document).ready(function(){
         $('#chargement').show();
         $('#like').hide();
         var id = '<?php echo $this->params['pass'][1]; ?>';
-        $.post('<?php echo $this->webroot.'posts/like'; ?>', {id: id}, function(){
+        $.post('<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'like']); ?>', {id: id}, function(){
             $('#chargement').hide();
             $('#dislike').fadeIn();
             nbLikes++;
@@ -30,7 +30,7 @@ $(document).ready(function(){
         $('#chargement').show();
         $('#dislike').hide();
         var id = '<?php echo $this->params['pass'][1]; ?>';
-        $.post('<?php echo $this->webroot.'posts/like'; ?>', {id: id}, function(){
+        $.post('<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'like']); ?>', {id: id}, function(){
             $('#chargement').hide();
             $('#like').fadeIn();
             nbLikes--;

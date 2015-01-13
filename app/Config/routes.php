@@ -55,6 +55,10 @@
 	Router::connect('/admin/starpass_history', ['controller' => 'pages', 'action' => 'starpass_history', 'admin' => true]);
 	Router::connect('/admin/paypal_history', ['controller' => 'pages', 'action' => 'paypal_history', 'admin' => true]);
 	Router::connect('/admin/informations', ['controller' => 'informations', 'action' => 'index', 'admin' => true]);
+	Router::connect('/admin/starpass_chart', ['controller' => 'pages', 'action' => 'starpass_chart', 'admin' => true]);
+	Router::connect('/admin/paypal_chart', ['controller' => 'pages', 'action' => 'paypal_chart', 'admin' => true]);
+	Router::connect('/admin/user_chart', ['controller' => 'pages', 'action' => 'user_chart', 'admin' => true]);
+	Router::connect('/admin/shop_chart', ['controller' => 'pages', 'action' => 'shop_chart', 'admin' => true]);
 	Router::connect('/:slug-:id', ['controller' => 'posts', 'action' => 'read'], ['pass' => ['slug', 'id'], 'slug' => '[a-z0-9\-]+', 'id' => '[0-9]+']);
 
 	/* Paypal IPN plugin */

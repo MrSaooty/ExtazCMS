@@ -34,6 +34,9 @@ $(document).ready(function(){
         <div class="page-content">
             <div class="single-head">
                 <h3 class="pull-left"><i class="fa fa-table lblue"></i>Historique d'achats de la boutique</h3>
+                <div class="breads pull-right">
+                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'shop_chart', 'admin' => true]); ?>" class="label label-black" target="_blank"><i class="fa fa-pie-chart"></i> Graphique</a>
+                </div>
                 <div class="clearfix"></div>
             </div>
             <div class="page-tables">
