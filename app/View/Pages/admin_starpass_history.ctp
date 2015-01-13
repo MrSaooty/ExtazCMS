@@ -38,6 +38,9 @@ $(document).ready(function(){
             <div class="single-head">
                 <!-- Heading -->
                 <h3 class="pull-left"><i class="fa fa-table lblue"></i>Historique d'achats Starpass</h3>
+                <div class="breads pull-right">
+                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'starpass_chart', 'admin' => true]); ?>" class="label label-black" target="_blank"><i class="fa fa-pie-chart"></i> Graphique</a>
+                </div>
                 <div class="clearfix"></div>
             </div>
             <!-- Table Page -->
