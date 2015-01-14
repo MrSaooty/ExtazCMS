@@ -140,7 +140,7 @@
             <div class="copyright">
                 <div class="container">
                     <p class="text-center">
-                        Propulsé par<a href="http://www.bukkit.fr/index.php/topic/15381-extazcms/" target="_blank">ExtazCMS 1.2</a>code par<a href="http://twitter.com/MrSaooty" target="_blank">@MrSaooty</a>
+                        Propulsé par<a href="http://www.bukkit.fr/index.php/topic/15381-extazcms/" target="_blank">ExtazCMS 1.3</a>code par<a href="http://twitter.com/MrSaooty" target="_blank">@MrSaooty</a>
                     </p>
                 </div> 
             </div><!--/copyright--> 
