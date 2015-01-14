@@ -37,7 +37,7 @@ class PagesController extends AppController {
  *
  * @var array
  */
-	public $uses = ['Informations', 'shopHistory', 'starpassHistory', 'paypalHistory', 'Team', 'Support', 'supportComments'];
+	public $uses = ['Informations', 'shopHistory', 'starpassHistory', 'paypalHistory', 'Team', 'Support', 'supportComments', 'donationLadder'];
 	public $components = ['Highcharts.Highcharts'];
     public $Highcharts = null;
 
@@ -52,6 +52,53 @@ class PagesController extends AppController {
 	public function beforeFilter(){
 	    parent::beforeFilter();
         $this->Auth->allow();
+	}
+
+	public function admin_edit_donator($id = null){
+        if($this->Auth->user('role') > 0){
+            $this->donationLadder->id = $id;
+            if($this->donationLadder->exists()){
+                $this->set('data', $this->donationLadder->find('first', ['conditions' => ['donationLadder.id' => $id]]));
+                if($this->request->is('post')){
+                    $this->donationLadder->id = $id;
+                    $this->donationLadder->saveField('tokens', $this->request->data['Pages']['tokens_ladder']);
+                    $this->donationLadder->saveField('updated', '2000-01-01 00:00:00');
+                    $this->Session->setFlash('Modification réussie !', 'success');
+                    return $this->redirect($this->referer());
+                }
+            }
+            else{
+                $this->Session->setFlash('Cet membre n\'existe pas !', 'error');
+                return $this->redirect($this->referer());
+            }
+        }
+    }
+
+	public function admin_delete_donator($id = null){
+		if($this->Auth->user('role') > 0){
+			$this->donationLadder->id = $id;
+			if($this->donationLadder->exists()){
+				$this->donationLadder->delete($id);
+				$this->Session->setFlash('Ce donateur a été retiré du classement !', 'success');
+				return $this->redirect(['controller' => 'pages', 'action' => 'list_donators', 'admin' => true]);
+			}
+			else{
+				$this->Session->setFlash('Ce dontateur n\'existe pas !', 'error');
+				return $this->redirect(['controller' => 'pages', 'action' => 'list_donators', 'admin' => true]);
+			}
+		}
+		else{
+			throw new NotFoundException();			
+		}
+	}
+
+	public function admin_list_donator(){
+		if($this->Auth->user('role') > 0){
+			$this->set('data', $this->donationLadder->find('all', ['order' => ['donationLadder.tokens' => 'DESC']]));
+		}
+		else{
+			throw new NotFoundException();			
+		}
 	}
 
 	public function admin_stats(){
@@ -424,10 +471,177 @@ class PagesController extends AppController {
 		
 	}
 
+	public function admin_donator_chart(){
+		if($this->Auth->user('role') > 0){
+			$informations = $this->Informations->find('first');
+			$site_money = ucfirst($informations['Informations']['site_money']);
+			$donatorsTokens = $this->donationLadder->find('all', ['limit' => 5, 'order' => ['donationLadder.tokens' => 'DESC']]);
+			$donatorsUsername = $this->donationLadder->find('list', ['fields' => ['donationLadder.id'], 'limit' => 5]);
+			$countDonators = $this->donationLadder->find('count');
+			$chartName = 'donator_chart';
+	        $mychart = $this->Highcharts->create($chartName, 'column');
+
+	        if($countDonators > 5){
+	        	$dt[0] = $donatorsTokens[0]['donationLadder']['tokens'];
+		        $dt[1] = $donatorsTokens[1]['donationLadder']['tokens'];
+		        $dt[2] = $donatorsTokens[2]['donationLadder']['tokens'];
+		        $dt[3] = $donatorsTokens[3]['donationLadder']['tokens'];
+		        $dt[4] = $donatorsTokens[4]['donationLadder']['tokens'];
+		        settype($dt[0], 'int');
+				settype($dt[1], 'int');
+				settype($dt[2], 'int');
+				settype($dt[3], 'int');
+				settype($dt[4], 'int');
+	        }
+	        else{
+		        switch($countDonators){
+		        	case 1:
+		        		$dt[0] = $donatorsTokens[0]['donationLadder']['tokens'];
+		        		settype($dt[0], 'int');
+		        		break;
+
+		        	case 2:
+		        		$dt[0] = $donatorsTokens[0]['donationLadder']['tokens'];
+		        		$dt[1] = $donatorsTokens[1]['donationLadder']['tokens'];
+		        		settype($dt[0], 'int');
+						settype($dt[1], 'int');
+		        		break;
+
+		        	case 3:
+		        		$dt[0] = $donatorsTokens[0]['donationLadder']['tokens'];
+				        $dt[1] = $donatorsTokens[1]['donationLadder']['tokens'];
+				        $dt[2] = $donatorsTokens[2]['donationLadder']['tokens'];
+				        settype($dt[0], 'int');
+						settype($dt[1], 'int');
+						settype($dt[2], 'int');
+		        		break;
+
+		        	case 4:
+		        		$dt[0] = $donatorsTokens[0]['donationLadder']['tokens'];
+				        $dt[1] = $donatorsTokens[1]['donationLadder']['tokens'];
+				        $dt[2] = $donatorsTokens[2]['donationLadder']['tokens'];
+				        $dt[3] = $donatorsTokens[3]['donationLadder']['tokens'];
+				        settype($dt[0], 'int');
+						settype($dt[1], 'int');
+						settype($dt[2], 'int');
+						settype($dt[3], 'int');
+		        		break;
+
+		        	case 5:
+		        		$dt[0] = $donatorsTokens[0]['donationLadder']['tokens'];
+				        $dt[1] = $donatorsTokens[1]['donationLadder']['tokens'];
+				        $dt[2] = $donatorsTokens[2]['donationLadder']['tokens'];
+				        $dt[3] = $donatorsTokens[3]['donationLadder']['tokens'];
+				        $dt[4] = $donatorsTokens[4]['donationLadder']['tokens'];
+				        settype($dt[0], 'int');
+						settype($dt[1], 'int');
+						settype($dt[2], 'int');
+						settype($dt[3], 'int');
+						settype($dt[4], 'int');
+		        		break;
+		        }
+		    }
+
+		    if($countDonators > 5){
+	        	$du[0] = $donatorsTokens[0]['User']['username'];
+		        $du[1] = $donatorsTokens[1]['User']['username'];
+		        $du[2] = $donatorsTokens[2]['User']['username'];
+		        $du[3] = $donatorsTokens[3]['User']['username'];
+		        $du[4] = $donatorsTokens[4]['User']['username'];
+	        }
+	        else{
+		        switch($countDonators){
+		        	case 1:
+		        		$du[0] = $donatorsTokens[0]['User']['username'];
+		        		break;
+
+		        	case 2:
+		        		$du[0] = $donatorsTokens[0]['User']['username'];
+		        		$du[1] = $donatorsTokens[1]['User']['username'];
+
+		        	case 3:
+		        		$du[0] = $donatorsTokens[0]['User']['username'];
+				        $du[1] = $donatorsTokens[1]['User']['username'];
+				        $du[2] = $donatorsTokens[2]['User']['username'];
+		        		break;
+
+		        	case 4:
+		        		$du[0] = $donatorsTokens[0]['User']['username'];
+				        $du[1] = $donatorsTokens[1]['User']['username'];
+				        $du[2] = $donatorsTokens[2]['User']['username'];
+				        $du[3] = $donatorsTokens[3]['User']['username'];
+		        		break;
+
+		        	case 5:
+		        		$du[0] = $donatorsTokens[0]['User']['username'];
+				        $du[1] = $donatorsTokens[1]['User']['username'];
+				        $du[2] = $donatorsTokens[2]['User']['username'];
+				        $du[3] = $donatorsTokens[3]['User']['username'];
+				        $du[4] = $donatorsTokens[4]['User']['username'];
+		        		break;
+		        }
+		    }
+
+			$chartData = $dt;
+
+	        $this->Highcharts->setChartParams($chartName, array(
+	            'renderTo' => 'donator_chart',
+	            'chartWidth' => 1000,
+	            'chartHeight' => 600,
+	            'chartMarginTop' => 60,
+	            'chartMarginLeft' => 90,
+	            'chartMarginRight' => 30,
+	            'chartMarginBottom' => 110,
+	            'chartSpacingRight' => 10,
+	            'chartSpacingBottom' => 15,
+	            'chartSpacingLeft' => 0,
+	            'chartAlignTicks' => FALSE,
+	            'chartBackgroundColorLinearGradient' => array(255, 255, 255, 255),
+	            'chartBackgroundColorStops' => array(array(0, 'rgb(255, 255, 255)'), array(1, 'rgb(255, 255, 255)')),
+	            'title' => 'Graphique des meilleurs donateurs',
+	            'titleAlign' => 'center',
+	            'titleFloating' => TRUE,
+	            'titleStyleFont' => '18px Metrophobic, Arial, sans-serif',
+	            'titleStyleColor' => '#606060',
+	            'titleX' => 20,
+	            'titleY' => 20,
+	            'legendEnabled' => TRUE,
+	            'legendLayout' => 'horizontal',
+	            'legendAlign' => 'center',
+	            'legendVerticalAlign ' => 'bottom',
+	            'legendItemStyle' => array('color' => '#222'),
+	            'legendBackgroundColorLinearGradient' => array(0, 0, 0, 25),
+	            'legendBackgroundColorStops' => array(array(0, '#FFFFFF'), array(1, '#FFFFFF')),
+	            'tooltipEnabled' => FALSE,
+	            'xAxisLabelsEnabled' => TRUE,
+	            'xAxisLabelsAlign' => 'right',
+	            'xAxisLabelsStep' => 1,
+	            'xAxislabelsX' => 5,
+	            'xAxisLabelsY' => 20,
+	            'xAxisCategories' => $du,
+	            'yAxisTitleText' => FALSE,
+	            'enableAutoStep' => FALSE,
+	            'creditsEnabled' => FALSE
+	            )
+	        );
+
+	        $series = $this->Highcharts->addChartSeries();
+
+	        $series->addName($site_money.' achetés')->addData($chartData);
+
+	        $mychart->addSeries($series);
+	        
+	        $this->set(compact('chartName'));
+	    }
+	    else{
+	    	throw new NotFoundException();
+	    }
+	}
+
 	public function admin_shop_chart(){
 		if($this->Auth->user('role') > 0){
 			$chartName = 'shop_chart';
-	        $mychart = $this->Highcharts->create($chartName, 'line');
+	        $mychart = $this->Highcharts->create($chartName, 'areaspline');
 
 	        $today = 'Ajd';
 			$todayMoinsUn = date('j/m', strtotime('-1 day'));
@@ -453,7 +667,7 @@ class PagesController extends AppController {
 			$countTodayMoinsNeuf = date('Y-m-j', strtotime('-9 day')).' 00:00:00';
 			$countTodayMoinsDix = date('Y-m-j', strtotime('-10 day')).' 00:00:00';
 
-			$achatsToday =$this->shopHistory->find('count', ['conditions' => ['shopHistory.created >' => $countToday]]);
+			$achatsToday = $this->shopHistory->find('count', ['conditions' => ['shopHistory.created >' => $countToday]]);
 			$achatsTodayMoinsUn = $this->shopHistory->find('count', ['conditions' => ['shopHistory.created >' => $countTodayMoinsUn, 'shopHistory.created <' => $countToday]]);
 			$achatsTodayMoinsDeux = $this->shopHistory->find('count', ['conditions' => ['shopHistory.created >' => $countTodayMoinsDeux, 'shopHistory.created <' => $countTodayMoinsUn]]);
 			$achatsTodayMoinsTrois = $this->shopHistory->find('count', ['conditions' => ['shopHistory.created >' => $countTodayMoinsTrois, 'shopHistory.created <' => $countTodayMoinsDeux]]);
@@ -521,7 +735,7 @@ class PagesController extends AppController {
 	public function admin_user_chart(){
 		if($this->Auth->user('role') > 0){
 			$chartName = 'user_chart';
-	        $mychart = $this->Highcharts->create($chartName, 'line');
+	        $mychart = $this->Highcharts->create($chartName, 'areaspline');
 
 	        $today = 'Ajd';
 			$todayMoinsUn = date('j/m', strtotime('-1 day'));
@@ -547,7 +761,7 @@ class PagesController extends AppController {
 			$countTodayMoinsNeuf = date('Y-m-j', strtotime('-9 day')).' 00:00:00';
 			$countTodayMoinsDix = date('Y-m-j', strtotime('-10 day')).' 00:00:00';
 
-			$achatsToday =$this->User->find('count', ['conditions' => ['User.created >' => $countToday]]);
+			$achatsToday = $this->User->find('count', ['conditions' => ['User.created >' => $countToday]]);
 			$achatsTodayMoinsUn = $this->User->find('count', ['conditions' => ['User.created >' => $countTodayMoinsUn, 'User.created <' => $countToday]]);
 			$achatsTodayMoinsDeux = $this->User->find('count', ['conditions' => ['User.created >' => $countTodayMoinsDeux, 'User.created <' => $countTodayMoinsUn]]);
 			$achatsTodayMoinsTrois = $this->User->find('count', ['conditions' => ['User.created >' => $countTodayMoinsTrois, 'User.created <' => $countTodayMoinsDeux]]);
@@ -615,7 +829,7 @@ class PagesController extends AppController {
 	public function admin_paypal_chart(){
 		if($this->Auth->user('role') > 0){
 			$chartName = 'paypal_chart';
-	        $mychart = $this->Highcharts->create($chartName, 'line');
+	        $mychart = $this->Highcharts->create($chartName, 'areaspline');
 
 	        $today = 'Ajd';
 			$todayMoinsUn = date('j/m', strtotime('-1 day'));
@@ -641,7 +855,7 @@ class PagesController extends AppController {
 			$countTodayMoinsNeuf = date('Y-m-j', strtotime('-9 day')).' 00:00:00';
 			$countTodayMoinsDix = date('Y-m-j', strtotime('-10 day')).' 00:00:00';
 
-			$achatsToday =$this->paypalHistory->find('count', ['conditions' => ['paypalHistory.created >' => $countToday]]);
+			$achatsToday = $this->paypalHistory->find('count', ['conditions' => ['paypalHistory.created >' => $countToday]]);
 			$achatsTodayMoinsUn = $this->paypalHistory->find('count', ['conditions' => ['paypalHistory.created >' => $countTodayMoinsUn, 'paypalHistory.created <' => $countToday]]);
 			$achatsTodayMoinsDeux = $this->paypalHistory->find('count', ['conditions' => ['paypalHistory.created >' => $countTodayMoinsDeux, 'paypalHistory.created <' => $countTodayMoinsUn]]);
 			$achatsTodayMoinsTrois = $this->paypalHistory->find('count', ['conditions' => ['paypalHistory.created >' => $countTodayMoinsTrois, 'paypalHistory.created <' => $countTodayMoinsDeux]]);
@@ -709,7 +923,7 @@ class PagesController extends AppController {
 	public function admin_starpass_chart(){
 		if($this->Auth->user('role') > 0){
 			$chartName = 'starpass_chart';
-	        $mychart = $this->Highcharts->create($chartName, 'line');
+	        $mychart = $this->Highcharts->create($chartName, 'areaspline');
 
 	        $today = 'Ajd';
 			$todayMoinsUn = date('j/m', strtotime('-1 day'));
@@ -735,7 +949,7 @@ class PagesController extends AppController {
 			$countTodayMoinsNeuf = date('Y-m-j', strtotime('-9 day')).' 00:00:00';
 			$countTodayMoinsDix = date('Y-m-j', strtotime('-10 day')).' 00:00:00';
 
-			$achatsToday =$this->starpassHistory->find('count', ['conditions' => ['starpassHistory.created >' => $countToday]]);
+			$achatsToday = $this->starpassHistory->find('count', ['conditions' => ['starpassHistory.created >' => $countToday]]);
 			$achatsTodayMoinsUn = $this->starpassHistory->find('count', ['conditions' => ['starpassHistory.created >' => $countTodayMoinsUn, 'starpassHistory.created <' => $countToday]]);
 			$achatsTodayMoinsDeux = $this->starpassHistory->find('count', ['conditions' => ['starpassHistory.created >' => $countTodayMoinsDeux, 'starpassHistory.created <' => $countTodayMoinsUn]]);
 			$achatsTodayMoinsTrois = $this->starpassHistory->find('count', ['conditions' => ['starpassHistory.created >' => $countTodayMoinsTrois, 'starpassHistory.created <' => $countTodayMoinsDeux]]);
