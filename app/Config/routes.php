@@ -59,6 +59,8 @@
 	Router::connect('/admin/paypal_chart', ['controller' => 'pages', 'action' => 'paypal_chart', 'admin' => true]);
 	Router::connect('/admin/user_chart', ['controller' => 'pages', 'action' => 'user_chart', 'admin' => true]);
 	Router::connect('/admin/shop_chart', ['controller' => 'pages', 'action' => 'shop_chart', 'admin' => true]);
+	Router::connect('/admin/donator_chart', ['controller' => 'pages', 'action' => 'donator_chart', 'admin' => true]);
+	Router::connect('/admin/list_donator', ['controller' => 'pages', 'action' => 'list_donator', 'admin' => true]);
 	Router::connect('/:slug-:id', ['controller' => 'posts', 'action' => 'read'], ['pass' => ['slug', 'id'], 'slug' => '[a-z0-9\-]+', 'id' => '[0-9]+']);
 
 	/* Paypal IPN plugin */

@@ -36,7 +36,7 @@
                                     <a href="<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'index', 'admin' => true]); ?>"><i class="fa fa-list"></i> Informations</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'all', 'admin' => true]); ?>"><i class="fa fa-users"></i> Utilisateurs</a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'all', 'admin' => true]); ?>"><i class="fa fa-user"></i> Utilisateurs</a>
                                 </li>
                                 <li>
                                     <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'stats', 'admin' => true]); ?>"><i class="fa fa-area-chart"></i> Statistiques</a>
@@ -44,61 +44,72 @@
                                 <li>
                                     <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'manage_tickets', 'admin' => true]); ?>"><i class="fa fa-support"></i> Support <span class="badge badge-danger pull-right"><?php echo $nbTicketsAdmin; ?></span></a>
                                 </li>
-                            </ul>
-                        </div>
-                        <?php if($use_store == 1){ ?>
-                        <div class="side-nav-block">
-                            <h4>Boutique</h4>
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'add', 'admin' => true]); ?>"><i class="fa fa-plus"></i> Ajouter</a>
+                                <?php if($use_store == 1){ ?>
+                                <li class="has_submenu">
+                                    <a href="#"><i class="fa fa-shopping-cart"></i> Boutique <span class="nav-caret fa fa-caret-down"></span></a>
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'add', 'admin' => true]); ?>"><i class="fa fa-plus"></i> Ajouter</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'list', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste</a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'list', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <?php } ?>
-                        <div class="side-nav-block">
-                            <h4>Actualités</h4>
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'add', 'admin' => true]); ?>"><i class="fa fa-plus"></i> Ajouter</a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'list', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste</a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'drafts', 'admin' => true]); ?>"><i class="fa fa-file"></i> Brouillons</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <?php if($use_store == 1){ ?>
-                        <div class="side-nav-block">
-                            <h4>Historiques</h4>
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'shop_history', 'admin' => true]); ?>"><i class="fa fa-history"></i> Boutique</a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'starpass_history', 'admin' => true]); ?>"><i class="fa fa-history"></i> Starpass</a>
-                                </li>
-                                <?php if($use_paypal == 1){ ?>
-                                <li>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'paypal_history', 'admin' => true]); ?>"><i class="fa fa-history"></i> PayPal</a>
+                                <li class="has_submenu">
+                                    <a href="#"><i class="fa fa-heart"></i> Donateurs <span class="nav-caret fa fa-caret-down"></span></a>
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'donator_chart', 'admin' => true]); ?>"><i class="fa fa-pie-chart"></i> Graphique</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_donator', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste</a>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <?php } ?>
-                            </ul>
-                        </div>
-                        <?php } ?>
-                        <div class="side-nav-block">
-                            <h4>Equipe</h4>
-                            <ul class="list-unstyled">
-                                <li>
+                                <li class="has_submenu">
+                                    <a href="#"><i class="fa fa-newspaper-o"></i> Actualités <span class="nav-caret fa fa-caret-down"></span></a>
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'add', 'admin' => true]); ?>"><i class="fa fa-plus"></i> Ajouter</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'list', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'drafts', 'admin' => true]); ?>"><i class="fa fa-file"></i> Brouillons</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <?php if($use_store == 1){ ?>
+                                <li class="has_submenu">
+                                    <a href="#"><i class="fa fa-history"></i> Historiques <span class="nav-caret fa fa-caret-down"></span></a>
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'shop_history', 'admin' => true]); ?>"><i class="fa fa-history"></i> Boutique</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'starpass_history', 'admin' => true]); ?>"><i class="fa fa-history"></i> Starpass</a>
+                                        </li>
+                                        <?php if($use_paypal == 1){ ?>
+                                        <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'paypal_history', 'admin' => true]); ?>"><i class="fa fa-history"></i> PayPal</a>
+                                        </li>
+                                        <?php } ?>
+                                    </ul>
+                                </li>
+                                <?php } ?>
+                                <li class="has_submenu">
+                                    <a href="#"><i class="fa fa-users"></i> Equipe <span class="nav-caret fa fa-caret-down"></span></a>
+                                    <ul class="list-unstyled">
+                                        <li>
                                     <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'add_member', 'admin' => true]); ?>"><i class="fa fa-plus"></i> Ajouter</a>
                                 </li>
                                 <li>
                                     <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_member', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste</a>
+                                </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>
