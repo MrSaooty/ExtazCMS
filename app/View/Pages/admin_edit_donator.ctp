@@ -39,7 +39,7 @@ $(document).ready(function(){
                             <?php echo $this->Form->input('tokens_ladder', array('type' => 'number', 'value' => $data['donationLadder']['tokens'], 'class' => 'form-control', 'label' => 'Tokens (total)')); ?>
                             </section>
                         </div>
-                        <?php echo $this->Form->input('updated', array('type' => 'hidden')); ?>
+                        <?php echo $this->Form->input('updated', array('type' => 'hidden', 'value' => $data['donationLadder']['updated'])); ?>
                         <hr>
                         <button class="btn btn-black pull-right" type="submit"><i class="fa fa-check"></i> Confirmer la modification</button>
                         <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'delete_donator', $data['donationLadder']['id']]); ?>" class="btn btn-danger confirm"><i class="fa fa-trash-o"></i> Retirer cet utilisateur du classement</a>
