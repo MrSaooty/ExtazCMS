@@ -128,12 +128,46 @@
                 <div class="main-head">
                     <div class="container">
                         <div class="row">
+                            <div class="col-md-9">
+                                <div class="head-search">
+                                    <?php echo $this->Form->create('Pages', ['action' => 'send_command']); ?>
+                                        <div class="input-group">
+                                          <?php echo $this->Form->input('command', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Envoyer une commande au serveur', 'style' => 'width:300px;', 'required' => 'required', 'label' => false]); ?>
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default" type="submit"><i class="fa fa-chevron-right"></i></button>
+                                          </span>
+                                        </div>
+                                    <?php echo $this->Form->end(); ?>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="head-user dropdown pull-right">
+                                    <a href="#" data-toggle="dropdown" id="profile">
+                                        <img src="http://cravatar.eu/helmavatar/<?php echo $username; ?>" alt="" class="img-responsive img-rounded">
+                                        <?php echo $username; ?>
+                                        <i class="fa fa-caret-down"></i> 
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="profile">
+                                        <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'logout', 'admin' => false]); ?>"><i class="fa fa-sign-out"></i> Déconnexion</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>  
+                    </div>
+                    
+                </div>
+                <!-- <div class="main-head">
+                    <div class="container">
+                        <div class="row">
                             <div class="col-md-3 col-sm-4 col-xs-6">
                                 <h2><i class="fa fa-user lblue"></i> Vous êtes connecté en tant que <u><?php echo $username; ?></u></h2>
                             </div>
                         </div>  
                     </div>
-                </div>
+                </div> -->
                 <?php echo $this->Session->flash(); ?>
                 <?php echo $this->fetch('content'); ?>
             </div>

@@ -54,6 +54,25 @@ class PagesController extends AppController {
         $this->Auth->allow();
 	}
 
+	public function admin_send_command(){
+		if($this->Auth->user('role') > 0){
+			$informations = $this->Informations->find('first');
+    		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
+			$command = str_replace('/', '', $this->request->data['Pages']['command']);
+			if(!empty($command) && $this->request->is('post') && $api->call('server.run_command', [$command])){
+				$this->Session->setFlash('Commande envoyé au serveur !', 'success');
+				return $this->redirect($this->referer());
+			}
+			else{
+				$this->Session->setFlash('Un problème est survenu !', 'error');
+				return $this->redirect($this->referer());
+			}
+		}
+		else{
+			throw new NotFoundException();
+		}
+	}
+
 	public function admin_edit_donator($id = null){
         if($this->Auth->user('role') > 0){
             $this->donationLadder->id = $id;
@@ -62,7 +81,7 @@ class PagesController extends AppController {
                 if($this->request->is('post')){
                     $this->donationLadder->id = $id;
                     $this->donationLadder->saveField('tokens', $this->request->data['Pages']['tokens_ladder']);
-                    $this->donationLadder->saveField('updated', '2000-01-01 00:00:00');
+                    $this->donationLadder->saveField('updated', $this->request->data['Pages']['updated']);
                     $this->Session->setFlash('Modification réussie !', 'success');
                     return $this->redirect($this->referer());
                 }
@@ -539,6 +558,10 @@ class PagesController extends AppController {
 						settype($dt[3], 'int');
 						settype($dt[4], 'int');
 		        		break;
+
+		        	default:
+		        		$dt[0] = 0;
+		        		break;
 		        }
 		    }
 
@@ -579,9 +602,13 @@ class PagesController extends AppController {
 				        $du[3] = $donatorsTokens[3]['User']['username'];
 				        $du[4] = $donatorsTokens[4]['User']['username'];
 		        		break;
+
+		        	default:
+		        		$du[0] = '';
+		        		break;
 		        }
 		    }
-
+		    
 			$chartData = $dt;
 
 	        $this->Highcharts->setChartParams($chartName, array(
