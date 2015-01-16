@@ -44,6 +44,14 @@
                                 <li>
                                     <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'manage_tickets', 'admin' => true]); ?>"><i class="fa fa-support"></i> Support <span class="badge badge-danger pull-right"><?php echo $nbTicketsAdmin; ?></span></a>
                                 </li>
+                                <li class="has_submenu">
+                                    <a href="#"><i class="fa fa-cloud"></i> Serveur <span class="nav-caret fa fa-caret-down"></span></a>
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'memory_chart', 'admin' => true]); ?>"><i class="fa fa-pie-chart"></i> Utilisation RAM</a>
+                                        </li>
+                                    </ul>
+                                </li>
                                 <?php if($use_store == 1){ ?>
                                 <li class="has_submenu">
                                     <a href="#"><i class="fa fa-shopping-cart"></i> Boutique <span class="nav-caret fa fa-caret-down"></span></a>
@@ -130,14 +138,25 @@
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="head-search">
-                                    <?php echo $this->Form->create('Pages', ['action' => 'send_command']); ?>
-                                        <div class="input-group">
-                                          <?php echo $this->Form->input('command', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Envoyer une commande au serveur', 'style' => 'width:300px;', 'required' => 'required', 'label' => false]); ?>
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default" type="submit"><i class="fa fa-chevron-right"></i></button>
-                                          </span>
-                                        </div>
-                                    <?php echo $this->Form->end(); ?>
+                                    <?php if($api->call('server.bukkit.version') == true){ ?>
+                                        <?php echo $this->Form->create('Pages', ['action' => 'send_command']); ?>
+                                            <div class="input-group">
+                                                <?php echo $this->Form->input('command', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Envoyer une commande au serveur', 'style' => 'width:300px;', 'required' => 'required', 'label' => false]); ?>
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="submit"><i class="fa fa-chevron-right"></i></button>
+                                                </span>
+                                            </div>
+                                        <?php echo $this->Form->end(); ?>
+                                    <?php } else { ?>
+                                        <form>
+                                            <div class="input-group">
+                                                <?php echo $this->Form->input('command', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Envoyer une commande au serveur', 'style' => 'width:300px;', 'disabled' => 'disabled', 'label' => false]); ?>
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="submit"><i class="fa fa-chevron-right"></i></button>
+                                                </span>
+                                            </div>
+                                        </form>
+                                    <?php } ?>
                                 </div>
                             </div>
                             <div class="col-md-3">

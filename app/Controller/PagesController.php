@@ -490,6 +490,63 @@ class PagesController extends AppController {
 		
 	}
 
+	public function admin_memory_chart(){
+		if($this->Auth->user('role') > 0){
+			$informations = $this->Informations->find('first');
+    		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
+			$totalMemory = round($api->call('server.performance.memory.total')['0']['success']);
+			$usedMemory = round($api->call('server.performance.memory.used')['0']['success']);
+			$pieData = array(
+	            array('Mémoire disponible', $totalMemory),
+	            array('Mémoire utilisé', $usedMemory)
+	        );
+	        $chartName = 'memory_chart';
+	        $pieChart = $this->Highcharts->create($chartName, 'pie');
+	        $this->Highcharts->setChartParams($chartName, array(
+	            'renderTo' => 'memory_chart',
+	            'chartWidth' => 650,
+	            'chartHeight' => 600,
+	            'chartMarginTop' => 60,
+	            'chartMarginLeft' => 90,
+	            'chartMarginRight' => 30,
+	            'chartMarginBottom' => 0,
+	            'chartSpacingRight' => 10,
+	            'chartSpacingBottom' => 15,
+	            'chartSpacingLeft' => 0,
+	            'chartAlignTicks' => FALSE,
+	            'chartBackgroundColorLinearGradient' => array(255, 255, 255, 255),
+	            'chartBackgroundColorStops' => array(array(0, 'rgb(255, 255, 255)'), array(1, 'rgb(255, 255, 255)')),
+	            'title' => 'Utilisation de la mémoire vive du serveur (en MB)',
+	            'titleAlign' => 'center',
+	            'titleFloating' => TRUE,
+	            'titleStyleFont' => '18px Metrophobic, Arial, sans-serif',
+	            'titleStyleColor' => '#606060',
+	            'titleX' => 20,
+	            'titleY' => 20,
+	            'legendEnabled' => TRUE,
+	            'legendLayout' => 'horizontal',
+	            'legendAlign' => 'center',
+	            'legendVerticalAlign ' => 'bottom',
+	            'legendItemStyle' => array('color' => '#222'),
+	            'legendBackgroundColorLinearGradient' => array(0, 0, 0, 25),
+	            'legendBackgroundColorStops' => array(array(0, '#FFFFFF'), array(1, '#FFFFFF')),
+	            'tooltipEnabled' => TRUE,
+	            'tooltipBackgroundColorLinearGradient' => array(0, 0, 0, 50),
+	            'tooltipBackgroundColorStops' => array(array(0, 'rgb(217, 217, 217)'), array(1, 'rgb(255, 255, 255)')),
+	            'creditsEnabled' => FALSE
+	            )
+	        );
+	        $series = $this->Highcharts->addChartSeries();
+	        $series->addName('En megabytes')->addData($pieData);
+	        $pieChart->addSeries($series);
+	        
+	        $this->set(compact('chartName'));
+		}
+	    else{
+	    	throw new NotFoundException();
+	    }
+	}
+
 	public function admin_donator_chart(){
 		if($this->Auth->user('role') > 0){
 			$informations = $this->Informations->find('first');
