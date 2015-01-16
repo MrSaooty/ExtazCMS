@@ -48,6 +48,9 @@
                                     <a href="#"><i class="fa fa-cloud"></i> Serveur <span class="nav-caret fa fa-caret-down"></span></a>
                                     <ul class="list-unstyled">
                                         <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'players', 'action' => 'index', 'admin' => true]); ?>"><i class="fa fa-users"></i> Joueurs</a>
+                                        </li>
+                                        <li>
                                             <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'memory_chart', 'admin' => true]); ?>"><i class="fa fa-pie-chart"></i> Utilisation RAM</a>
                                         </li>
                                     </ul>
