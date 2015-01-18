@@ -51,7 +51,7 @@ $count = count($players);
             </div>
             <div class="page-tables">
                 <div class="table-responsive">
-                    <table class="table table-bordered" cellpadding="0" cellspacing="0" border="0" id="data-table" width="100%">
+                    <table class="table table-bordered table-hover" cellpadding="0" cellspacing="0" border="0" id="data-table" width="100%">
                         <thead>
                             <tr>
                                 <th><b>Pseudo</b></th>

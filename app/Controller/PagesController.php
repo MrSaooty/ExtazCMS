@@ -54,18 +54,71 @@ class PagesController extends AppController {
         $this->Auth->allow();
 	}
 
+	public function admin_chat(){
+		if($this->Auth->user('role') > 0){
+			if($this->request->is('ajax')){
+				$informations = $this->Informations->find('first');
+	    		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
+				$messages = $api->call('streams.chat.latest', [20])[0]['success'];
+				$result = '
+				<input id="update" type="checkbox" checked="checked" class="update"></input>
+				<label for="update">Mise à jour automatique ?</label><br>
+				Dernière mise à jour '.date('H:i:s').'<hr>
+				['.date('H:i:s', $messages[0]['time']).'] <b>'.$messages[0]['player'].' :</b> '.$messages[0]['message'].'<br>
+				['.date('H:i:s', $messages[1]['time']).'] <b>'.$messages[1]['player'].' :</b> '.$messages[1]['message'].'<br>
+				['.date('H:i:s', $messages[2]['time']).'] <b>'.$messages[2]['player'].' :</b> '.$messages[2]['message'].'<br>
+				['.date('H:i:s', $messages[3]['time']).'] <b>'.$messages[3]['player'].' :</b> '.$messages[3]['message'].'<br>
+				['.date('H:i:s', $messages[4]['time']).'] <b>'.$messages[4]['player'].' :</b> '.$messages[4]['message'].'<br>
+				['.date('H:i:s', $messages[5]['time']).'] <b>'.$messages[5]['player'].' :</b> '.$messages[5]['message'].'<br>
+				['.date('H:i:s', $messages[6]['time']).'] <b>'.$messages[6]['player'].' :</b> '.$messages[6]['message'].'<br>
+				['.date('H:i:s', $messages[7]['time']).'] <b>'.$messages[7]['player'].' :</b> '.$messages[7]['message'].'<br>
+				['.date('H:i:s', $messages[8]['time']).'] <b>'.$messages[8]['player'].' :</b> '.$messages[8]['message'].'<br>
+				['.date('H:i:s', $messages[9]['time']).'] <b>'.$messages[9]['player'].' :</b> '.$messages[9]['message'].'<br>
+				['.date('H:i:s', $messages[10]['time']).'] <b>'.$messages[10]['player'].' :</b> '.$messages[10]['message'].'<br>
+				['.date('H:i:s', $messages[11]['time']).'] <b>'.$messages[11]['player'].' :</b> '.$messages[11]['message'].'<br>
+				['.date('H:i:s', $messages[12]['time']).'] <b>'.$messages[12]['player'].' :</b> '.$messages[12]['message'].'<br>
+				['.date('H:i:s', $messages[13]['time']).'] <b>'.$messages[13]['player'].' :</b> '.$messages[13]['message'].'<br>
+				['.date('H:i:s', $messages[14]['time']).'] <b>'.$messages[14]['player'].' :</b> '.$messages[14]['message'].'<br>
+				['.date('H:i:s', $messages[15]['time']).'] <b>'.$messages[15]['player'].' :</b> '.$messages[15]['message'].'<br>
+				['.date('H:i:s', $messages[16]['time']).'] <b>'.$messages[16]['player'].' :</b> '.$messages[16]['message'].'<br>
+				['.date('H:i:s', $messages[17]['time']).'] <b>'.$messages[17]['player'].' :</b> '.$messages[17]['message'].'<br>
+				['.date('H:i:s', $messages[18]['time']).'] <b>'.$messages[18]['player'].' :</b> '.$messages[18]['message'].'<br>
+				['.date('H:i:s', $messages[19]['time']).'] <b>'.$messages[19]['player'].' :</b> '.$messages[19]['message'].'<br>';
+				echo json_encode($result);
+				exit();
+			}
+		}
+		else{
+			throw new NotFoundException();
+		}
+	}
+
+	public function admin_send_message(){
+		if($this->Auth->user('role') > 0){
+			if($this->request->is('ajax')){
+				$informations = $this->Informations->find('first');
+	    		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
+				$message = str_replace('/', '', $this->request->data['message']);
+				if(!empty($message) && $api->call('server.run_command', ['say ['.$this->Auth->user('username').'] '.$message])){
+				// if(!empty($message) && $this->request->is('post') && $api->call('chat.with_name', [$message, $this->Auth->user('username')])){
+					exit();
+				}
+			}
+		}
+		else{
+			throw new NotFoundException();
+		}
+	}
+
 	public function admin_send_command(){
 		if($this->Auth->user('role') > 0){
-			$informations = $this->Informations->find('first');
-    		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
-			$command = str_replace('/', '', $this->request->data['Pages']['command']);
-			if(!empty($command) && $this->request->is('post') && $api->call('server.run_command', [$command])){
-				$this->Session->setFlash('Commande envoyé au serveur !', 'success');
-				return $this->redirect($this->referer());
-			}
-			else{
-				$this->Session->setFlash('Un problème est survenu !', 'error');
-				return $this->redirect($this->referer());
+			if($this->request->is('ajax')){
+				$informations = $this->Informations->find('first');
+	    		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
+				$command = str_replace('/', '', $this->request->data['command']);
+				if(!empty($command) && $api->call('server.run_command', [$command])){
+					exit();
+				}
 			}
 		}
 		else{
