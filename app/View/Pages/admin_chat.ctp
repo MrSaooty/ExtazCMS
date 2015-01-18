@@ -1,6 +1,11 @@
 <?php $this->assign('title', 'Chat du serveur'); ?>
 <script type="text/javascript">
 $(document).ready(function(){
+	$(document).on('click', '.player', function(){
+    	var message = $('#message').val();
+    	$('#message').val('@' + this.id + ' ' + message).focus();
+    });
+
     setInterval(function(){
     	if($('.update').is(":checked")){
 	    	var url = '<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'chat')); ?>';
@@ -41,17 +46,27 @@ $(document).ready(function(){
 				<?php
 				$messages = $api->call('streams.chat.latest', [20])[0]['success'];
 				foreach($messages as $m){
-					echo '['.date('H:i:s', $m['time']).'] <b> '.$m['player'].' :</b> '.$m['message'].'<br>';
+					echo '['.date('H:i:s', $m['time']).'] <b class="player" id="'.$m['player'].'" style="cursor: pointer"> '.$m['player'].' :</b> '.$m['message'].'<br>';
 				}
 				?>
 			</div>
 			<hr>
-			<div class="head-search">
+			<div class="head-search hidden-xs hidden-sm">
 				<form>
 	                <div class="input-group">
 	                    <?php echo $this->Form->input('message', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Envoyer un message', 'style' => 'width:600px;', 'required' => 'required', 'label' => false]); ?>
 	                    <span class="input-group-btn">
 	                        <button class="btn btn-default send-message" type="submit"><i class="fa fa-chevron-right"></i></button>
+	                    </span>
+	                </div>
+	            </form>
+            </div>
+            <div class="visible-xs visible-sm">
+				<form>
+	                <div class="input-group">
+	                    <?php echo $this->Form->input('message', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Indisponible sur mobile', 'disabled' => 'disabled', 'label' => false]); ?>
+	                    <span class="input-group-btn">
+	                        <button class="btn btn-default send-message" disabled="disabled" type="submit"><i class="fa fa-chevron-right"></i></button>
 	                    </span>
 	                </div>
 	            </form>

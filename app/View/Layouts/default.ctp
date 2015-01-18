@@ -72,7 +72,7 @@
                             <span class="sr-only">Toggle navigation</span>
                             <span class="fa fa-bars"></span>
                         </button>
-                        <a class="navbar-brand" href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'index']); ?>" style="margin-top:15px;">
+                        <a class="navbar-brand" href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'index', 'admin' => false]); ?>" style="margin-top:15px;">
                            <img src="<?php echo $logo_url; ?>" height="25" width="25" style="margin-top: -4px;" alt=""> <?php echo $name_server; ?>
                         </a>
                     </div>

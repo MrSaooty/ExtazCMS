@@ -59,31 +59,31 @@ class PagesController extends AppController {
 			if($this->request->is('ajax')){
 				$informations = $this->Informations->find('first');
 	    		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
-				$messages = $api->call('streams.chat.latest', [20])[0]['success'];
+				$m = $api->call('streams.chat.latest', [20])[0]['success'];
 				$result = '
 				<input id="update" type="checkbox" checked="checked" class="update"></input>
 				<label for="update">Mise à jour automatique ?</label><br>
-				Dernière mise à jour '.date('H:i:s').'<hr>
-				['.date('H:i:s', $messages[0]['time']).'] <b>'.$messages[0]['player'].' :</b> '.$messages[0]['message'].'<br>
-				['.date('H:i:s', $messages[1]['time']).'] <b>'.$messages[1]['player'].' :</b> '.$messages[1]['message'].'<br>
-				['.date('H:i:s', $messages[2]['time']).'] <b>'.$messages[2]['player'].' :</b> '.$messages[2]['message'].'<br>
-				['.date('H:i:s', $messages[3]['time']).'] <b>'.$messages[3]['player'].' :</b> '.$messages[3]['message'].'<br>
-				['.date('H:i:s', $messages[4]['time']).'] <b>'.$messages[4]['player'].' :</b> '.$messages[4]['message'].'<br>
-				['.date('H:i:s', $messages[5]['time']).'] <b>'.$messages[5]['player'].' :</b> '.$messages[5]['message'].'<br>
-				['.date('H:i:s', $messages[6]['time']).'] <b>'.$messages[6]['player'].' :</b> '.$messages[6]['message'].'<br>
-				['.date('H:i:s', $messages[7]['time']).'] <b>'.$messages[7]['player'].' :</b> '.$messages[7]['message'].'<br>
-				['.date('H:i:s', $messages[8]['time']).'] <b>'.$messages[8]['player'].' :</b> '.$messages[8]['message'].'<br>
-				['.date('H:i:s', $messages[9]['time']).'] <b>'.$messages[9]['player'].' :</b> '.$messages[9]['message'].'<br>
-				['.date('H:i:s', $messages[10]['time']).'] <b>'.$messages[10]['player'].' :</b> '.$messages[10]['message'].'<br>
-				['.date('H:i:s', $messages[11]['time']).'] <b>'.$messages[11]['player'].' :</b> '.$messages[11]['message'].'<br>
-				['.date('H:i:s', $messages[12]['time']).'] <b>'.$messages[12]['player'].' :</b> '.$messages[12]['message'].'<br>
-				['.date('H:i:s', $messages[13]['time']).'] <b>'.$messages[13]['player'].' :</b> '.$messages[13]['message'].'<br>
-				['.date('H:i:s', $messages[14]['time']).'] <b>'.$messages[14]['player'].' :</b> '.$messages[14]['message'].'<br>
-				['.date('H:i:s', $messages[15]['time']).'] <b>'.$messages[15]['player'].' :</b> '.$messages[15]['message'].'<br>
-				['.date('H:i:s', $messages[16]['time']).'] <b>'.$messages[16]['player'].' :</b> '.$messages[16]['message'].'<br>
-				['.date('H:i:s', $messages[17]['time']).'] <b>'.$messages[17]['player'].' :</b> '.$messages[17]['message'].'<br>
-				['.date('H:i:s', $messages[18]['time']).'] <b>'.$messages[18]['player'].' :</b> '.$messages[18]['message'].'<br>
-				['.date('H:i:s', $messages[19]['time']).'] <b>'.$messages[19]['player'].' :</b> '.$messages[19]['message'].'<br>';
+				<i class="fa fa-clock-o"></i> Dernière mise à jour '.date('H:i:s').'<hr>
+				['.date('H:i:s', $m[0]['time']).'] <b class="player" id="'.$m[0]['player'].'" style="cursor: pointer"> '.$m[0]['player'].' :</b> '.$m[0]['message'].'<br>
+				['.date('H:i:s', $m[1]['time']).'] <b class="player" id="'.$m[1]['player'].'" style="cursor: pointer"> '.$m[1]['player'].' :</b> '.$m[1]['message'].'<br>
+				['.date('H:i:s', $m[2]['time']).'] <b class="player" id="'.$m[2]['player'].'" style="cursor: pointer"> '.$m[2]['player'].' :</b> '.$m[2]['message'].'<br>
+				['.date('H:i:s', $m[3]['time']).'] <b class="player" id="'.$m[3]['player'].'" style="cursor: pointer"> '.$m[3]['player'].' :</b> '.$m[3]['message'].'<br>
+				['.date('H:i:s', $m[4]['time']).'] <b class="player" id="'.$m[4]['player'].'" style="cursor: pointer"> '.$m[4]['player'].' :</b> '.$m[4]['message'].'<br>
+				['.date('H:i:s', $m[5]['time']).'] <b class="player" id="'.$m[5]['player'].'" style="cursor: pointer"> '.$m[5]['player'].' :</b> '.$m[5]['message'].'<br>
+				['.date('H:i:s', $m[6]['time']).'] <b class="player" id="'.$m[6]['player'].'" style="cursor: pointer"> '.$m[6]['player'].' :</b> '.$m[6]['message'].'<br>
+				['.date('H:i:s', $m[7]['time']).'] <b class="player" id="'.$m[7]['player'].'" style="cursor: pointer"> '.$m[7]['player'].' :</b> '.$m[7]['message'].'<br>
+				['.date('H:i:s', $m[8]['time']).'] <b class="player" id="'.$m[8]['player'].'" style="cursor: pointer"> '.$m[8]['player'].' :</b> '.$m[8]['message'].'<br>
+				['.date('H:i:s', $m[9]['time']).'] <b class="player" id="'.$m[9]['player'].'" style="cursor: pointer"> '.$m[9]['player'].' :</b> '.$m[9]['message'].'<br>
+				['.date('H:i:s', $m[10]['time']).'] <b class="player" id="'.$m[10]['player'].'" style="cursor: pointer"> '.$m[10]['player'].' :</b> '.$m[10]['message'].'<br>
+				['.date('H:i:s', $m[11]['time']).'] <b class="player" id="'.$m[11]['player'].'" style="cursor: pointer"> '.$m[11]['player'].' :</b> '.$m[11]['message'].'<br>
+				['.date('H:i:s', $m[12]['time']).'] <b class="player" id="'.$m[12]['player'].'" style="cursor: pointer"> '.$m[12]['player'].' :</b> '.$m[12]['message'].'<br>
+				['.date('H:i:s', $m[13]['time']).'] <b class="player" id="'.$m[13]['player'].'" style="cursor: pointer"> '.$m[13]['player'].' :</b> '.$m[13]['message'].'<br>
+				['.date('H:i:s', $m[14]['time']).'] <b class="player" id="'.$m[14]['player'].'" style="cursor: pointer"> '.$m[14]['player'].' :</b> '.$m[14]['message'].'<br>
+				['.date('H:i:s', $m[15]['time']).'] <b class="player" id="'.$m[15]['player'].'" style="cursor: pointer"> '.$m[15]['player'].' :</b> '.$m[15]['message'].'<br>
+				['.date('H:i:s', $m[16]['time']).'] <b class="player" id="'.$m[16]['player'].'" style="cursor: pointer"> '.$m[16]['player'].' :</b> '.$m[16]['message'].'<br>
+				['.date('H:i:s', $m[17]['time']).'] <b class="player" id="'.$m[17]['player'].'" style="cursor: pointer"> '.$m[17]['player'].' :</b> '.$m[17]['message'].'<br>
+				['.date('H:i:s', $m[18]['time']).'] <b class="player" id="'.$m[18]['player'].'" style="cursor: pointer"> '.$m[18]['player'].' :</b> '.$m[18]['message'].'<br>
+				['.date('H:i:s', $m[19]['time']).'] <b class="player" id="'.$m[19]['player'].'" style="cursor: pointer"> '.$m[19]['player'].' :</b> '.$m[19]['message'].'<br>';
 				echo json_encode($result);
 				exit();
 			}
