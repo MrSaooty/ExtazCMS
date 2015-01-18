@@ -10,20 +10,20 @@
 			  <?php if($use_store == 1){ ?>
 				  <div class="col-md-3 col-sm-3">
 					<div class="well br-red">
-					  <h2><?php echo $achatsAujourdhui; ?> <small><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'shop_chart', 'admin' => true]); ?>" target="_blank">(Graphique)</a></small></h2>
+					  <h2><?php echo $achatsAujourdhui; ?> <small><a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'shop', 'admin' => true]); ?>" target="_blank">(Graphique)</a></small></h2>
 					  <p>Nombre d'achats dans la boutique aujourd'hui</p>
 					</div>
 				  </div>
 				  <div class="col-md-3 col-sm-3">
 					<div class="well br-lblue">
-					  <h2><?php echo $starpassAujourdhui; ?> <small><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'starpass_chart', 'admin' => true]); ?>" target="_blank">(Graphique)</a></small></h2>
+					  <h2><?php echo $starpassAujourdhui; ?> <small><a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'starpass', 'admin' => true]); ?>" target="_blank">(Graphique)</a></small></h2>
 					  <p>Nombre de code Starpass validés aujourd'hui</p>                        
 					</div>
 				  </div>
 				  <?php if($use_paypal == 1){ ?>
 					  <div class="col-md-3 col-sm-3">
 						<div class="well br-green">
-						  <h2><?php echo $paypalAujourdhui; ?> <small><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'paypal_chart', 'admin' => true]); ?>" target="_blank">(Graphique)</a></small></h2>
+						  <h2><?php echo $paypalAujourdhui; ?> <small><a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'paypal', 'admin' => true]); ?>" target="_blank">(Graphique)</a></small></h2>
 						  <p>Nombre d'achats via PayPal aujourd'hui</p>
 						</div>
 					  </div>
@@ -57,7 +57,7 @@
 			  <?php } ?>
 			  <div class="col-md-3 col-sm-3">
 				<div class="well br-purple">
-				  <h2><?php echo $utilisateursAujourdhui; ?> <small><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'user_chart', 'admin' => true]); ?>" target="_blank">(Graphique)</a></small></h2>
+				  <h2><?php echo $utilisateursAujourdhui; ?> <small><a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'user', 'admin' => true]); ?>" target="_blank">(Graphique)</a></small></h2>
 				  <p>Nombre d'utlisateur inscrits aujourd'hui</p>
 				</div>
 			  </div>

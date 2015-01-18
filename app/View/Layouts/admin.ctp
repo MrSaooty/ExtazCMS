@@ -68,7 +68,7 @@
                                     <a href="#"><i class="fa fa-cloud"></i> Serveur <span class="nav-caret fa fa-caret-down"></span></a>
                                     <ul class="list-unstyled">
                                         <li>
-                                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'memory_chart', 'admin' => true]); ?>"><i class="fa fa-pie-chart"></i> Consommation</a>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'memory', 'admin' => true]); ?>"><i class="fa fa-pie-chart"></i> Consommation</a>
                                         </li>
                                         <li>
                                             <a href="<?php echo $this->Html->url(['controller' => 'players', 'action' => 'index', 'admin' => true]); ?>"><i class="fa fa-users"></i> Joueurs</a>
@@ -91,7 +91,7 @@
                                     <a href="#"><i class="fa fa-heart"></i> Donateurs <span class="nav-caret fa fa-caret-down"></span></a>
                                     <ul class="list-unstyled">
                                         <li>
-                                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'donator_chart', 'admin' => true]); ?>"><i class="fa fa-pie-chart"></i> Graphique</a>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'donator', 'admin' => true]); ?>"><i class="fa fa-pie-chart"></i> Graphique</a>
                                         </li>
                                         <li>
                                             <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_donator', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste</a>

@@ -35,7 +35,7 @@ $(document).ready(function(){
             <div class="single-head">
                 <h3 class="pull-left"><i class="fa fa-table lblue"></i>Liste des utilisateurs</h3>
                 <div class="breads pull-right">
-                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'user_chart', 'admin' => true]); ?>" class="label label-black" target="_blank"><i class="fa fa-pie-chart"></i> Graphique</a>
+                    <a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'user', 'admin' => true]); ?>" class="label label-black" target="_blank"><i class="fa fa-pie-chart"></i> Graphique</a>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -74,7 +74,6 @@ $(document).ready(function(){
                         </tbody>
                     </table>
                     <div class="clearfix"></div>
-                </div>
                 </div>
             </div>
         </div>
