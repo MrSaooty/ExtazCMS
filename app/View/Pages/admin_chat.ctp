@@ -1,4 +1,11 @@
 <?php $this->assign('title', 'Chat du serveur'); ?>
+<link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
+<style>
+	.chat-messages {
+		font-size: 17px;
+		font-family: 'Play', sans-serif;
+	}
+</style>
 <script type="text/javascript">
 $(document).ready(function(){
 	$(document).on('click', '.player', function(){
@@ -43,12 +50,14 @@ $(document).ready(function(){
 				<label for="update">Mise à jour automatique ?</label><br>
 				<i class="fa fa-clock-o"></i> <?php echo 'Dernière mise à jour '.date('H:i:s'); ?>
 				<hr>
-				<?php
-				$messages = $api->call('streams.chat.latest', [20])[0]['success'];
-				foreach($messages as $m){
-					echo '['.date('H:i:s', $m['time']).'] <b class="player" id="'.$m['player'].'" style="cursor: pointer"> '.$m['player'].' :</b> '.$m['message'].'<br>';
-				}
-				?>
+				<div class="chat-messages">
+					<?php
+					$messages = $api->call('streams.chat.latest', [20])[0]['success'];
+					foreach($messages as $m){
+						echo '<small>['.date('H:i:s', $m['time']).']</small> <b class="player" id="'.$m['player'].'" style="cursor: pointer"> '.$m['player'].' :</b> '.$m['message'].'<br>';
+					}
+					?>
+				</div>
 			</div>
 			<hr>
 			<div class="head-search hidden-xs hidden-sm">
