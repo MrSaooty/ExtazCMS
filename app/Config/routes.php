@@ -63,6 +63,7 @@
 	Router::connect('/admin/memory_chart', ['controller' => 'pages', 'action' => 'memory_chart', 'admin' => true]);
 	Router::connect('/admin/list_donator', ['controller' => 'pages', 'action' => 'list_donator', 'admin' => true]);
 	Router::connect('/admin/players', ['controller' => 'players', 'action' => 'index', 'admin' => true]);
+	Router::connect('/admin/chat', ['controller' => 'pages', 'action' => 'chat', 'admin' => true]);
 	Router::connect('/:slug-:id', ['controller' => 'posts', 'action' => 'read'], ['pass' => ['slug', 'id'], 'slug' => '[a-z0-9\-]+', 'id' => '[0-9]+']);
 
 	/* Paypal IPN plugin */

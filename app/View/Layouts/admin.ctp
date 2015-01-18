@@ -17,13 +17,33 @@
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
         <script src="http://code.highcharts.com/highcharts.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+            $('.send-command').on('click', function(){
+                event.preventDefault();
+                var command = $('#command').val();
+                var url = '<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'send_command')); ?>';
+                $.post(url, {command: command}, function(data){
+                    $('#command').val('');
+                    $.bootstrapGrowl("<i class='fa fa-check'></i> Commande envoyée au serveur !", {
+                      ele: 'body',
+                      type: 'success',
+                      offset: {from: 'top', amount: 20},
+                      align: 'center',
+                      width: 'integer',
+                      delay: 4000,
+                      allow_dismiss: false,
+                      stackup_spacing: 10
+                    });
+                });
+            });
+        });
+        </script>
     </head>
     <body>
         <div class="outer">
-            <!-- Sidebar starts -->
             <div class="sidebar">
                 <div class="sidey">
-                    <!-- Logo -->
                     <div class="logo">
                         <h1><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'stats', 'admin' => true]); ?>"><i class="fa fa-desktop br-red"></i> Panel<span><?php echo $name_server; ?></span></a></h1>
                     </div>
@@ -48,10 +68,10 @@
                                     <a href="#"><i class="fa fa-cloud"></i> Serveur <span class="nav-caret fa fa-caret-down"></span></a>
                                     <ul class="list-unstyled">
                                         <li>
-                                            <a href="<?php echo $this->Html->url(['controller' => 'players', 'action' => 'index', 'admin' => true]); ?>"><i class="fa fa-users"></i> Joueurs</a>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'memory_chart', 'admin' => true]); ?>"><i class="fa fa-pie-chart"></i> Consommation</a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'memory_chart', 'admin' => true]); ?>"><i class="fa fa-pie-chart"></i> Utilisation RAM</a>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'players', 'action' => 'index', 'admin' => true]); ?>"><i class="fa fa-users"></i> Joueurs</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -115,12 +135,15 @@
                                     <a href="#"><i class="fa fa-users"></i> Equipe <span class="nav-caret fa fa-caret-down"></span></a>
                                     <ul class="list-unstyled">
                                         <li>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'add_member', 'admin' => true]); ?>"><i class="fa fa-plus"></i> Ajouter</a>
-                                </li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'add_member', 'admin' => true]); ?>"><i class="fa fa-plus"></i> Ajouter</a>
+                                    </li>
                                 <li>
                                     <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_member', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste</a>
                                 </li>
                                     </ul>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'chat', 'admin' => true]); ?>"><i class="fa fa-comments"></i>Chat</a>
                                 </li>
                             </ul>
                         </div>
@@ -140,16 +163,16 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-9">
-                                <div class="head-search">
+                                <div class="head-search hidden-xs hidden-sm">
                                     <?php if($api->call('server.bukkit.version') == true){ ?>
-                                        <?php echo $this->Form->create('Pages', ['action' => 'send_command']); ?>
+                                        <form>
                                             <div class="input-group">
                                                 <?php echo $this->Form->input('command', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Envoyer une commande au serveur', 'style' => 'width:300px;', 'required' => 'required', 'label' => false]); ?>
                                                 <span class="input-group-btn">
-                                                    <button class="btn btn-default" type="submit"><i class="fa fa-chevron-right"></i></button>
+                                                    <button class="btn btn-default send-command" type="submit"><i class="fa fa-chevron-right"></i></button>
                                                 </span>
                                             </div>
-                                        <?php echo $this->Form->end(); ?>
+                                        </form>
                                     <?php } else { ?>
                                         <form>
                                             <div class="input-group">
@@ -160,6 +183,17 @@
                                             </div>
                                         </form>
                                     <?php } ?>
+                                </div>
+                                <div class="visible-xs visible-sm">
+                                    <form>
+                                        <div class="input-group">
+                                            <?php echo $this->Form->input('command', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Indisponible sur mobile', 'disabled' => 'disabled', 'label' => false]); ?>
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default send-command" disabled="disabled" type="submit"><i class="fa fa-chevron-right"></i></button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                    <br>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -179,17 +213,7 @@
                             </div>
                         </div>  
                     </div>
-                    
                 </div>
-                <!-- <div class="main-head">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-3 col-sm-4 col-xs-6">
-                                <h2><i class="fa fa-user lblue"></i> Vous êtes connecté en tant que <u><?php echo $username; ?></u></h2>
-                            </div>
-                        </div>  
-                    </div>
-                </div> -->
                 <?php echo $this->Session->flash(); ?>
                 <?php echo $this->fetch('content'); ?>
             </div>
