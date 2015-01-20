@@ -53,7 +53,7 @@
                             <h4>Menu</h4>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'index', 'admin' => true]); ?>"><i class="fa fa-list"></i> Informations</a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'index', 'admin' => true]); ?>"><i class="fa fa-wrench"></i> Configuration</a>
                                 </li>
                                 <li>
                                     <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'all', 'admin' => true]); ?>"><i class="fa fa-user"></i> Utilisateurs</a>

@@ -102,8 +102,8 @@ class PagesController extends AppController {
 				$informations = $this->Informations->find('first');
 	    		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
 				$message = str_replace('/', '', $this->request->data['message']);
-				if(!empty($message) && $api->call('server.run_command', ['say ['.$this->Auth->user('username').'] '.$message])){
-				// if(!empty($message) && $this->request->is('post') && $api->call('chat.with_name', [$message, $this->Auth->user('username')])){
+				// if(!empty($message) && $api->call('server.run_command', ['say ['.$this->Auth->user('username').'] '.$message])){
+				if(!empty($message) && $this->request->is('post') && $api->call('chat.with_name', [$message, $this->Auth->user('username')])){
 					exit();
 				}
 			}

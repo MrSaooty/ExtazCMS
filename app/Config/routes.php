@@ -55,12 +55,6 @@
 	Router::connect('/admin/starpass_history', ['controller' => 'pages', 'action' => 'starpass_history', 'admin' => true]);
 	Router::connect('/admin/paypal_history', ['controller' => 'pages', 'action' => 'paypal_history', 'admin' => true]);
 	Router::connect('/admin/informations', ['controller' => 'informations', 'action' => 'index', 'admin' => true]);
-	Router::connect('/admin/starpass_chart', ['controller' => 'pages', 'action' => 'starpass_chart', 'admin' => true]);
-	Router::connect('/admin/paypal_chart', ['controller' => 'pages', 'action' => 'paypal_chart', 'admin' => true]);
-	Router::connect('/admin/user_chart', ['controller' => 'pages', 'action' => 'user_chart', 'admin' => true]);
-	Router::connect('/admin/shop_chart', ['controller' => 'pages', 'action' => 'shop_chart', 'admin' => true]);
-	Router::connect('/admin/donator_chart', ['controller' => 'pages', 'action' => 'donator_chart', 'admin' => true]);
-	Router::connect('/admin/memory_chart', ['controller' => 'pages', 'action' => 'memory_chart', 'admin' => true]);
 	Router::connect('/admin/list_donator', ['controller' => 'pages', 'action' => 'list_donator', 'admin' => true]);
 	Router::connect('/admin/players', ['controller' => 'players', 'action' => 'index', 'admin' => true]);
 	Router::connect('/admin/chat', ['controller' => 'pages', 'action' => 'chat', 'admin' => true]);

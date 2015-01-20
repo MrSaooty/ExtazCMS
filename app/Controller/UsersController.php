@@ -184,7 +184,7 @@ class UsersController extends AppController{
         }
     }
 
-    public function delete($id = null){
+    public function admin_delete($id = null){
         if($this->Auth->user('role') > 0){
             $this->User->id = $id;
             if($this->User->exists()){

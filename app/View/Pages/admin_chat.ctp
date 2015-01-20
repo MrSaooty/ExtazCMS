@@ -28,6 +28,10 @@ $(document).ready(function(){
         var url = '<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'send_message')); ?>';
         $.post(url, {message: message}, function(data){
         	$('#message').val('');
+        	var url = '<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'chat')); ?>';
+	        $.get(url, function(data){
+				$('.chat').html(data);
+			}, 'json');
         	$.bootstrapGrowl("<i class='fa fa-check'></i> Message envoyé !", {
 			  ele: 'body',
 			  type: 'success',

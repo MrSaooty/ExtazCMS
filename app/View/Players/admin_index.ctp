@@ -104,6 +104,7 @@ $count = count($players);
 	                                	<a href="<?php echo $this->Html->url(['controller' => 'players', 'action' => 'clear', $p['name']]); ?>" class="label label-black"><i class="fa fa-trash"></i> Clear</a>
                                         <a href="<?php echo $this->Html->url(['controller' => 'players', 'action' => 'ban', $p['name']]); ?>" class="label label-danger"><i class="fa fa-ban"></i> Ban</a>
                                         <a href="<?php echo $this->Html->url(['controller' => 'players', 'action' => 'banip', $p['name']]); ?>" class="label label-danger"><i class="fa fa-globe"></i> Ban IP</a>
+                                        <a href="<?php echo $this->Html->url(['controller' => 'players', 'action' => 'whois', $p['name']]); ?>" class="label label-success"><i class="fa fa-info-circle"></i> Whois ?</a>
 	                                </td>
 	                            </tr>
 								<?php
