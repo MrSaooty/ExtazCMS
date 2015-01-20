@@ -1,6 +1,11 @@
-<?php echo $this->assign('title', 'Erreur'); ?>
+<?php
+echo $this->assign('title', 'Erreur');
+if((isset($this->params['prefix']) && ($this->params['prefix'] == 'admin'))){
+    $this->layout = 'default';
+}
+?>
 <!--=== Content Part ===-->
-<div class="container content">		
+<div class="container content">     
     <!--Error Block-->
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -13,5 +18,5 @@
         </div>
     </div>
     <!--End Error Block-->
-</div>	
+</div>  
 <!--=== End Content Part ===-->

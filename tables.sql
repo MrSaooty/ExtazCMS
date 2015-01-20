@@ -258,7 +258,7 @@ DROP TABLE IF EXISTS `extaz_shop`;
 CREATE TABLE `extaz_shop` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text,
-  `description` varchar(255) DEFAULT NULL,
+  `description` text,
   `cat` text,
   `img` text,
   `required` text,

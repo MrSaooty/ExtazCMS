@@ -37,7 +37,9 @@ class PagesController extends AppController {
  *
  * @var array
  */
-	public $uses = ['Informations', 'shopHistory', 'starpassHistory', 'paypalHistory', 'Team', 'Support', 'supportComments'];
+	public $uses = ['Informations', 'shopHistory', 'starpassHistory', 'paypalHistory', 'Team', 'Support', 'supportComments', 'donationLadder'];
+	public $components = ['Highcharts.Highcharts'];
+    public $Highcharts = null;
 
 /**
  * Displays a view
@@ -47,7 +49,134 @@ class PagesController extends AppController {
  *	or MissingViewException in debug mode.
  */
 
-	public function stats(){
+	public function beforeFilter(){
+	    parent::beforeFilter();
+        $this->Auth->allow();
+	}
+
+	public function admin_chat(){
+		if($this->Auth->user('role') > 0){
+			if($this->request->is('ajax')){
+				$informations = $this->Informations->find('first');
+	    		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
+				$m = $api->call('streams.chat.latest', [20])[0]['success'];
+				$result = '
+				<input id="update" type="checkbox" checked="checked" class="update"></input>
+				<label for="update">Mise à jour automatique ?</label><br>
+				<i class="fa fa-clock-o"></i> Dernière mise à jour '.date('H:i:s').'
+				<hr>
+				<div class="chat-messages">
+				<small>['.date('H:i:s', $m[0]['time']).']</small> <b class="player" id="'.$m[0]['player'].'" style="cursor: pointer"> '.$m[0]['player'].' :</b> '.$m[0]['message'].'<br>
+				<small>['.date('H:i:s', $m[1]['time']).']</small> <b class="player" id="'.$m[1]['player'].'" style="cursor: pointer"> '.$m[1]['player'].' :</b> '.$m[1]['message'].'<br>
+				<small>['.date('H:i:s', $m[2]['time']).']</small> <b class="player" id="'.$m[2]['player'].'" style="cursor: pointer"> '.$m[2]['player'].' :</b> '.$m[2]['message'].'<br>
+				<small>['.date('H:i:s', $m[3]['time']).']</small> <b class="player" id="'.$m[3]['player'].'" style="cursor: pointer"> '.$m[3]['player'].' :</b> '.$m[3]['message'].'<br>
+				<small>['.date('H:i:s', $m[4]['time']).']</small> <b class="player" id="'.$m[4]['player'].'" style="cursor: pointer"> '.$m[4]['player'].' :</b> '.$m[4]['message'].'<br>
+				<small>['.date('H:i:s', $m[5]['time']).']</small> <b class="player" id="'.$m[5]['player'].'" style="cursor: pointer"> '.$m[5]['player'].' :</b> '.$m[5]['message'].'<br>
+				<small>['.date('H:i:s', $m[6]['time']).']</small> <b class="player" id="'.$m[6]['player'].'" style="cursor: pointer"> '.$m[6]['player'].' :</b> '.$m[6]['message'].'<br>
+				<small>['.date('H:i:s', $m[7]['time']).']</small> <b class="player" id="'.$m[7]['player'].'" style="cursor: pointer"> '.$m[7]['player'].' :</b> '.$m[7]['message'].'<br>
+				<small>['.date('H:i:s', $m[8]['time']).']</small> <b class="player" id="'.$m[8]['player'].'" style="cursor: pointer"> '.$m[8]['player'].' :</b> '.$m[8]['message'].'<br>
+				<small>['.date('H:i:s', $m[9]['time']).']</small> <b class="player" id="'.$m[9]['player'].'" style="cursor: pointer"> '.$m[9]['player'].' :</b> '.$m[9]['message'].'<br>
+				<small>['.date('H:i:s', $m[10]['time']).']</small> <b class="player" id="'.$m[10]['player'].'" style="cursor: pointer"> '.$m[10]['player'].' :</b> '.$m[10]['message'].'<br>
+				<small>['.date('H:i:s', $m[11]['time']).']</small> <b class="player" id="'.$m[11]['player'].'" style="cursor: pointer"> '.$m[11]['player'].' :</b> '.$m[11]['message'].'<br>
+				<small>['.date('H:i:s', $m[12]['time']).']</small> <b class="player" id="'.$m[12]['player'].'" style="cursor: pointer"> '.$m[12]['player'].' :</b> '.$m[12]['message'].'<br>
+				<small>['.date('H:i:s', $m[13]['time']).']</small> <b class="player" id="'.$m[13]['player'].'" style="cursor: pointer"> '.$m[13]['player'].' :</b> '.$m[13]['message'].'<br>
+				<small>['.date('H:i:s', $m[14]['time']).']</small> <b class="player" id="'.$m[14]['player'].'" style="cursor: pointer"> '.$m[14]['player'].' :</b> '.$m[14]['message'].'<br>
+				<small>['.date('H:i:s', $m[15]['time']).']</small> <b class="player" id="'.$m[15]['player'].'" style="cursor: pointer"> '.$m[15]['player'].' :</b> '.$m[15]['message'].'<br>
+				<small>['.date('H:i:s', $m[16]['time']).']</small> <b class="player" id="'.$m[16]['player'].'" style="cursor: pointer"> '.$m[16]['player'].' :</b> '.$m[16]['message'].'<br>
+				<small>['.date('H:i:s', $m[17]['time']).']</small> <b class="player" id="'.$m[17]['player'].'" style="cursor: pointer"> '.$m[17]['player'].' :</b> '.$m[17]['message'].'<br>
+				<small>['.date('H:i:s', $m[18]['time']).']</small> <b class="player" id="'.$m[18]['player'].'" style="cursor: pointer"> '.$m[18]['player'].' :</b> '.$m[18]['message'].'<br>
+				<small>['.date('H:i:s', $m[19]['time']).']</small> <b class="player" id="'.$m[19]['player'].'" style="cursor: pointer"> '.$m[19]['player'].' :</b> '.$m[19]['message'].'<br>
+				</div>';
+				echo json_encode($result);
+				exit();
+			}
+		}
+		else{
+			throw new NotFoundException();
+		}
+	}
+
+	public function admin_send_message(){
+		if($this->Auth->user('role') > 0){
+			if($this->request->is('ajax')){
+				$informations = $this->Informations->find('first');
+	    		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
+				$message = str_replace('/', '', $this->request->data['message']);
+				// if(!empty($message) && $api->call('server.run_command', ['say ['.$this->Auth->user('username').'] '.$message])){
+				if(!empty($message) && $this->request->is('post') && $api->call('chat.with_name', [$message, $this->Auth->user('username')])){
+					exit();
+				}
+			}
+		}
+		else{
+			throw new NotFoundException();
+		}
+	}
+
+	public function admin_send_command(){
+		if($this->Auth->user('role') > 0){
+			if($this->request->is('ajax')){
+				$informations = $this->Informations->find('first');
+	    		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
+				$command = str_replace('/', '', $this->request->data['command']);
+				if(!empty($command) && $api->call('server.run_command', [$command])){
+					exit();
+				}
+			}
+		}
+		else{
+			throw new NotFoundException();
+		}
+	}
+
+	public function admin_edit_donator($id = null){
+        if($this->Auth->user('role') > 0){
+            $this->donationLadder->id = $id;
+            if($this->donationLadder->exists()){
+                $this->set('data', $this->donationLadder->find('first', ['conditions' => ['donationLadder.id' => $id]]));
+                if($this->request->is('post')){
+                    $this->donationLadder->id = $id;
+                    $this->donationLadder->saveField('tokens', $this->request->data['Pages']['tokens_ladder']);
+                    $this->donationLadder->saveField('updated', $this->request->data['Pages']['updated']);
+                    $this->Session->setFlash('Modification réussie !', 'success');
+                    return $this->redirect($this->referer());
+                }
+            }
+            else{
+                $this->Session->setFlash('Cet membre n\'existe pas !', 'error');
+                return $this->redirect($this->referer());
+            }
+        }
+    }
+
+	public function admin_delete_donator($id = null){
+		if($this->Auth->user('role') > 0){
+			$this->donationLadder->id = $id;
+			if($this->donationLadder->exists()){
+				$this->donationLadder->delete($id);
+				$this->Session->setFlash('Ce donateur a été retiré du classement !', 'success');
+				return $this->redirect(['controller' => 'pages', 'action' => 'list_donators', 'admin' => true]);
+			}
+			else{
+				$this->Session->setFlash('Ce dontateur n\'existe pas !', 'error');
+				return $this->redirect(['controller' => 'pages', 'action' => 'list_donators', 'admin' => true]);
+			}
+		}
+		else{
+			throw new NotFoundException();			
+		}
+	}
+
+	public function admin_list_donator(){
+		if($this->Auth->user('role') > 0){
+			$this->set('data', $this->donationLadder->find('all', ['order' => ['donationLadder.tokens' => 'DESC']]));
+		}
+		else{
+			throw new NotFoundException();			
+		}
+	}
+
+	public function admin_stats(){
 		if($this->Auth->user('role') > 0){
 			$today = date('Y-m-j').' 00:00:00';
 			$hier = date('Y-m-j', strtotime('-1 day')).' 00:00:00';
@@ -89,8 +218,7 @@ class PagesController extends AppController {
 			$this->set('reponsesHier', $this->supportComments->find('count', ['conditions' => ['supportComments.created >' => $hier, 'supportComments.created <' => $today]]));
 		}
 		else{
-			$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
-			return $this->redirect(['controller' => 'users', 'action' => 'login']);
+			throw new NotFoundException();
 		}
 	}
 
@@ -115,7 +243,7 @@ class PagesController extends AppController {
 		}
 		else{
 			$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
-			return $this->redirect(['controller' => 'users', 'action' => 'login']);
+			return $this->redirect(['controller' => 'users', 'action' => 'login', 'admin' => false]);
 		}
 	}
 
@@ -126,7 +254,7 @@ class PagesController extends AppController {
 		}
 		else{
 			$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
-			return $this->redirect(['controller' => 'users', 'action' => 'login']);
+			return $this->redirect(['controller' => 'users', 'action' => 'login', 'admin' => false]);
 		}
 	}
 
@@ -258,7 +386,7 @@ class PagesController extends AppController {
 		}
 	}
 
-	public function manage_tickets(){
+	public function admin_manage_tickets(){
 		if($this->Auth->user('role') > 0){
 			$this->set('data', $this->Support->find('all', ['conditions' => ['Support.resolved' => 0], 'order' => ['Support.created DESC']]));
 		}
@@ -278,7 +406,7 @@ class PagesController extends AppController {
 		}
 	}
 
-	public function shop_history(){
+	public function admin_shop_history(){
 		if($this->Auth->user('role') > 0){
 			$this->set('data', $this->shopHistory->find('all', ['order' => ['shopHistory.created DESC']]));
 		}
@@ -287,7 +415,7 @@ class PagesController extends AppController {
 		}
 	}
 
-	public function starpass_history(){
+	public function admin_starpass_history(){
 		if($this->Auth->user('role') > 0){
 			$this->set('data', $this->starpassHistory->find('all', ['order' => ['starpassHistory.created DESC']]));
 		}
@@ -296,7 +424,7 @@ class PagesController extends AppController {
 		}
 	}
 
-	public function paypal_history(){
+	public function admin_paypal_history(){
 		if($this->Auth->user('role') > 0){
 			$this->set('data', $this->paypalHistory->find('all', ['order' => ['paypalHistory.created DESC']]));
 		}
@@ -305,7 +433,7 @@ class PagesController extends AppController {
 		}
 	}
 
-	public function add_member(){
+	public function admin_add_member(){
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('post')){
 				$this->Team->saveField('username', $this->request->data['Pages']['username']);
@@ -313,6 +441,7 @@ class PagesController extends AppController {
 				$this->Team->saveField('facebook_url', $this->request->data['Pages']['facebook_url']);
 				$this->Team->saveField('twitter_url', $this->request->data['Pages']['twitter_url']);
 				$this->Session->setFlash('Membre ajouté à l\'équipe !', 'success');
+				return $this->redirect(['controller' => 'pages', 'action' => 'list_member', 'admin' => true]);
 			}
 		}
 		else{
@@ -320,22 +449,53 @@ class PagesController extends AppController {
 		}
 	}
 
-	public function delete_member($id = null){
+	public function admin_list_member(){
+		if($this->Auth->user('role') > 0){
+			$this->set('data', $this->Team->find('all', array('order' => array('Team.rank' => 'ASC'))));
+		}
+		else{
+			throw new NotFoundException();
+		}
+	}
+
+	public function admin_delete_member($id = null){
 		if($this->Auth->user('role') > 0){
 			if($this->Team->findById($id)){
 				$this->Team->delete($id);
 				$this->Session->setFlash('Membre retiré de l\'équipe !', 'success');
-				return $this->redirect(['controller' => 'pages', 'action' => 'team']);
+				return $this->redirect(['controller' => 'pages', 'action' => 'list_member', 'admin' => true]);
 			}
 			else{
 				$this->Session->setFlash('Ce membre n\'existe pas !', 'error');
-				return $this->redirect(['controller' => 'pages', 'action' => 'team']);
+				return $this->redirect(['controller' => 'pages', 'action' => 'list_member', 'admin' => true]);
 			}
 		}
 		else{
 			throw new NotFoundException();
 		}
 	}
+
+	public function admin_edit_member($id = null){
+        if($this->Auth->user('role') > 0){
+            $this->Team->id = $id;
+            if($this->Team->exists()){
+                $this->set('data', $this->Team->find('first', ['conditions' => ['Team.id' => $id]]));
+                if($this->request->is('post')){
+                    $this->Team->id = $id;
+                    $this->Team->saveField('username', $this->request->data['Pages']['username']);
+					$this->Team->saveField('rank', $this->request->data['Pages']['rank']);
+					$this->Team->saveField('facebook_url', $this->request->data['Pages']['facebook_url']);
+					$this->Team->saveField('twitter_url', $this->request->data['Pages']['twitter_url']);
+                    $this->Session->setFlash('Membre modifié !', 'success');
+                    return $this->redirect($this->referer());
+                }
+            }
+            else{
+                $this->Session->setFlash('Cet membre n\'existe pas !', 'error');
+                return $this->redirect($this->referer());
+            }
+        }
+    }
 
 	public function team(){
 		$this->set('data', $this->Team->find('all', ['order' => ['Team.rank ASC']]));
@@ -370,49 +530,19 @@ class PagesController extends AppController {
 							$this->Session->setFlash('Tous les champs sont obligatoires', 'error');
 						}
 					}
-				}
-				else{
-					$this->Session->setFlash('Erreur 1001', 'error');
+					else{
+						$this->Session->setFlash('Erreur 1001', 'error');
+					}
 				}
 			}
 		}
 		else{
 			$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
-			return $this->redirect(['controller' => 'users', 'action' => 'login']);
+			return $this->redirect(['controller' => 'users', 'action' => 'login', 'admin' => false]);
 		}
 	}
 
 	public function rules(){
 		
-	}
-
-	public function display(){
-		$path = func_get_args();
-
-		$count = count($path);
-		if (!$count) {
-			return $this->redirect('/');
-		}
-		$page = $subpage = $title_for_layout = null;
-
-		if (!empty($path[0])) {
-			$page = $path[0];
-		}
-		if (!empty($path[1])) {
-			$subpage = $path[1];
-		}
-		if (!empty($path[$count - 1])) {
-			$title_for_layout = Inflector::humanize($path[$count - 1]);
-		}
-		$this->set(compact('page', 'subpage', 'title_for_layout'));
-
-		try {
-			$this->render(implode('/', $path));
-		} catch (MissingViewException $e) {
-			if (Configure::read('debug')) {
-				throw $e;
-			}
-			throw new NotFoundException();
-		}
 	}
 }

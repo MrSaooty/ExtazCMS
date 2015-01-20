@@ -1,4 +1,7 @@
-<?php $this->assign('title', 'Mes informations'); ?>
+<?php
+$this->assign('title', 'Mes informations');
+$player = $api->call('players.name', [$username]);
+?>
 <!--=== Content Part ===-->
 <div class="container content">     
     <div class="row">
@@ -17,6 +20,11 @@
                         <?php echo $this->Form->input('username', array('type' => 'text', 'value' => $data['User']['username'], 'class' => 'form-control', 'label' => 'Pseudo', 'disabled')); ?>
                     </section>
                 </fieldset>
+                <!-- <fieldset>
+                    <section>
+                        <?php echo $this->Form->input('group', array('type' => 'text', 'value' => $api->call('worlds.world.players.player.chat.groups.primary', ['world', $username])[0]['success'], 'class' => 'form-control', 'label' => 'Groupe', 'disabled')); ?>
+                    </section>
+                </fieldset> -->
                 <fieldset>
                     <section>
                         <?php echo $this->Form->input('email', array('type' => 'text', 'value' => $data['User']['email'], 'class' => 'form-control', 'label' => 'Email', 'disabled')); ?>
