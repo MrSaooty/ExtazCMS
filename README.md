@@ -7,16 +7,13 @@ Installation du CMS
 -------------------
  1. Téléchargez l'archive puis décompressez là
  2. Placez son contenu à la racine de votre FTP ou dans votre dossier www
-<<<<<<< HEAD
  3. Exécutez le fichier `tables.sql` dans votre base de données
  4. Rendez vous dans `app/Config/core.php` et modifier les lignes 225 et 230
-=======
  3. Exécutez le fichier tables.sql dans votre base de données
  4. Rendez vous dans app/Config/core.php et modifier les lignes 225 et 230
->>>>>>> f79753d131454a7fd3a480b0b926ab1558616e62
  5. La ligne 225 doit être composée de chiffres ou de lettres et être extrêmement longue
  6. La ligne 230 ne doit contenir que des chiffres et également très longue.  Après avoir modifié ces lignes n'y touchez plus jamais. Elles servent entre autre au cryptage des mots de passe. Si vous les modifiez à nouveau plus personne ne pourra se connecter à l'espace membre
- 7. Modifier le fichier `app/Config/database.php` avec les informations de connexion à votre base de données (hôte, utilisateur, mot de passe).
+ 7. Modifier le fichier `app/Config/database.php` avec les informations de connexion à votre base de données (hôte, utilisateur, mot de passe)
  8. Le CMS fonctionne correctement rendez vous sur celui-ci et inscrivez-vous. Le premier compte créé est automatiquement administrateur. Rendez vous maintenant dans administration puis modifier les informations
 
 **CAPTCHA**
