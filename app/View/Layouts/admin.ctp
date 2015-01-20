@@ -163,7 +163,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-9">
-                                <div class="head-search hidden-xs hidden-sm">
+                                <div class="head-search hidden-xs">
                                     <?php if($api->call('server.bukkit.version') == true){ ?>
                                         <form>
                                             <div class="input-group">
@@ -184,7 +184,7 @@
                                         </form>
                                     <?php } ?>
                                 </div>
-                                <div class="visible-xs visible-sm">
+                                <div class="visible-xs">
                                     <form>
                                         <div class="input-group">
                                             <?php echo $this->Form->input('command', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Indisponible sur mobile', 'disabled' => 'disabled', 'label' => false]); ?>

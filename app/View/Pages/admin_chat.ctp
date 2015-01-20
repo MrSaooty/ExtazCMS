@@ -64,7 +64,7 @@ $(document).ready(function(){
 				</div>
 			</div>
 			<hr>
-			<div class="head-search hidden-xs hidden-sm">
+			<div class="head-search hidden-xs">
 				<form>
 	                <div class="input-group">
 	                    <?php echo $this->Form->input('message', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Envoyer un message', 'style' => 'width:600px;', 'required' => 'required', 'label' => false]); ?>
@@ -74,7 +74,7 @@ $(document).ready(function(){
 	                </div>
 	            </form>
             </div>
-            <div class="visible-xs visible-sm">
+            <div class="visible-xs">
 				<form>
 	                <div class="input-group">
 	                    <?php echo $this->Form->input('message', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Indisponible sur mobile', 'disabled' => 'disabled', 'label' => false]); ?>
