@@ -106,23 +106,10 @@ $(document).ready(function(){
                     <div class="row">
                         <div class="col-md-4">
                             <div class="btn-group">
-                                <a class="btn btn-default btn-xs" href="<?php echo $this->Html->webroot.'posts/edit/'.$post['Post']['id']; ?>">
+                                <a class="btn btn-default btn-xs" href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'edit', $post['Post']['id'], 'admin' => true]); ?>">
                                     <font color="#777777"><i class="fa fa-pencil"></i> Editer</font>
                                 </a>
-                                <?php
-                                if($this->Session->read('Auth.User.username') == 'Bestt_Alex' OR $this->Session->read('Auth.User.username') == 'Mansot'):
-                                    if($post['Post']['draft'] == 1):
-                                        if($post['Post']['corrected'] == 0):
-                                        ?>
-                                        <a class="btn btn-default btn-xs" href="<?php echo $this->Html->webroot.'posts/corrected/'.$post['Post']['id']; ?>">
-                                            <font color="green"><i class="fa fa-check"></i> Corrigé</font>
-                                        </a>
-                                        <?php
-                                        endif;
-                                    endif;
-                                endif;
-                                ?>
-                                <a class="confirm btn btn-default btn-xs" href="<?php echo $this->Html->webroot.'posts/delete/'.$post['Post']['id']; ?>">
+                                <a class="confirm btn btn-default btn-xs" href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'delete', $post['Post']['id'], 'admin' => true]); ?>">
                                     <font color="red"><i class="fa fa-times"></i> Supprimer</font>
                                 </a>
                             </div>

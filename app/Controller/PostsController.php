@@ -126,7 +126,7 @@ class PostsController extends AppController{
 							$slug = strtolower($this->request->data['Post']['slug']);
 							$this->Post->saveField('slug', $slug);
 							$this->Session->setFlash('Article modifié !', 'success');
-							return $this->redirect(['controller' => 'posts', 'action' => 'index']);
+							return $this->redirect(['controller' => 'posts', 'action' => 'index', 'admin' => false]);
 						}
 						// Si l'image a été changée
 						else{
@@ -138,7 +138,7 @@ class PostsController extends AppController{
 							$this->Post->saveField('progress', $this->request->data['Post']['progress']);
 							$this->Post->saveField('content', $this->request->data['Post']['content']);
 							$this->Session->setFlash('Article modifié !', 'success');
-							return $this->redirect(['controller' => 'posts', 'action' => 'index']);
+							return $this->redirect(['controller' => 'posts', 'action' => 'index', 'admin' => false]);
 						}
 					}
 					// Si les rdv ne sont pas respectées
@@ -150,7 +150,7 @@ class PostsController extends AppController{
 			// Si l'article n'existe pas
 			else{
 				$this->Session->setFlash('Cet article n\'existe pas, impossible de le modifier', 'error');
-				return $this->redirect(array('controller' => 'posts', 'action' => 'index'));
+				return $this->redirect(array('controller' => 'posts', 'action' => 'index', 'admin' => false));
 			}
 		}
 		// Si c'est un utilisateur
@@ -183,7 +183,7 @@ class PostsController extends AppController{
 		}
 	}
 
-	public function delete($id = null){
+	public function admin_delete($id = null){
 		// Si c'est un utilisateur spécial
 		if($this->Auth->user('role') > 0){
 			// Si l'article existe
@@ -193,7 +193,7 @@ class PostsController extends AppController{
 				// On rend l'article invisible
 				$this->Post->saveField('visible', 0);
 				$this->Session->setFlash('Article supprimé !', 'success');
-				return $this->redirect($this->referer());
+				return $this->redirect(['controller' => 'posts', 'action' => 'index', 'admin' => false]);
 			}
 			// Si l'article n'existe pas
 			else{
