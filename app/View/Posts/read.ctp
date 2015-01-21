@@ -137,24 +137,22 @@ $(document).ready(function(){
                 <hr>
                 <h2><a href="">Derniers articles</a></h2>
                 <div class="row">
-                    <?php $nb = -1; ?>
-                    <?php while($nb < 2): ?>
+                    <?php for($i = 0; $i < 3; $i++){ ?>
                         <div class="col-md-4">
                             <div class="magazine-news-img">
                                 <?php
-                                $nb++;
-                                echo '<a href="'.$this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $lastPosts[$nb]['Post']['slug'], 'id' => $lastPosts[$nb]['Post']['id'])).'">';
-                                if(filter_var($lastPosts[$nb]['Post']['img'], FILTER_VALIDATE_URL)):
-                                    echo $this->Html->image($lastPosts[$nb]['Post']['img'], array('alt' => '', 'height' => '130', 'width' => '260'));
+                                echo '<a href="'.$this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $lastPosts[$i]['Post']['slug'], 'id' => $lastPosts[$i]['Post']['id'])).'">';
+                                if(filter_var($lastPosts[$i]['Post']['img'], FILTER_VALIDATE_URL)):
+                                    echo $this->Html->image($lastPosts[$i]['Post']['img'], array('alt' => '', 'height' => '130', 'width' => '260'));
                                 else:
-                                    echo $this->Html->image('posts/'.$lastPosts[$nb]['Post']['img'], array('alt' => '', 'height' => '130', 'width' => '260'));
+                                    echo $this->Html->image('posts/'.$lastPosts[$i]['Post']['img'], array('alt' => '', 'height' => '130', 'width' => '260'));
                                 endif;
                                 echo '</a><br>';
-                                echo '<a href="'.$this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $lastPosts[$nb]['Post']['slug'], 'id' => $lastPosts[$nb]['Post']['id'])).'">'.$lastPosts[$nb]['Post']['title'].'</a>';
+                                echo '<a href="'.$this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $lastPosts[$i]['Post']['slug'], 'id' => $lastPosts[$i]['Post']['id'])).'">'.$lastPosts[$i]['Post']['title'].'</a>';
                                 ?>
                             </div>
                         </div>
-                    <?php endwhile; ?>
+                    <?php } ?>
                 </div>
             </div>
             <hr>
