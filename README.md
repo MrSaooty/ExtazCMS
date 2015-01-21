@@ -2,7 +2,6 @@ ExtazCMS
 ========
  - Topic bukkit.fr : [cliquez ici](http://www.bukkit.fr/index.php/topic/15381-107-extazcms-un-v%C3%A9ritable-site-pour-votre-serveur-minecraft/)
  - Changelog : [cliquez ici](https://github.com/MrSaooty/ExtazCMS/blob/master/CHANGELOG.md)
- - Le CMS requiert `JSONAPI v5.6.0` minimum
 
 Installation du CMS
 -------------------
@@ -18,6 +17,10 @@ Installation du CMS
 **CAPTCHA**
 
 Le captcha fournit par [Are You A Humain](http://areyouahuman.com/) nécessite néanmoins une clef de sécurité personnelle, par défaut deux clefs sont fournies avec le CMS mais celles-ci sont disponibles publiquement. Pour la sécurité de votre CMS, créez un compte sur le site de Are You A Human ([ici](http://portal.areyouahuman.com/signup/basic)) puis ajoutez un site et récupérez vos deux clefs de sécurité et modifiez les dans `app/Lib/AYAH/ayah_config.php`.
+
+**JSONAPI**
+
+Le CMS requiert [JSONAPI v5.6.0](https://github.com/alecgorge/jsonapi/releases/) minimum
 
 Starpass
 --------
