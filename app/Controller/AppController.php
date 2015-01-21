@@ -113,7 +113,6 @@ class AppController extends Controller {
 	  $this->set('nbDonator', $this->donationLadder->find('count'));
 	}
 
-
 	$this->Cookie->httpOnly = true;
 	if(!$this->Auth->loggedIn() && $this->Cookie->read('rememberMe')){
 	  $cookie = $this->Cookie->read('rememberMe');

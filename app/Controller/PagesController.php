@@ -38,8 +38,6 @@ class PagesController extends AppController {
  * @var array
  */
 	public $uses = ['Informations', 'shopHistory', 'starpassHistory', 'paypalHistory', 'Team', 'Support', 'supportComments', 'donationLadder'];
-	public $components = ['Highcharts.Highcharts'];
-    public $Highcharts = null;
 
 /**
  * Displays a view
