@@ -45,7 +45,11 @@
             <div class="sidebar">
                 <div class="sidey">
                     <div class="logo">
-                        <h1><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'stats', 'admin' => true]); ?>"><i class="fa fa-desktop br-red"></i> Panel<span><?php echo $name_server; ?></span></a></h1>
+                        <h1>
+                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'stats', 'admin' => true]); ?>">
+                                <i class="fa fa-desktop br-red"></i> Panel<span><?php echo $name_server; ?></span>
+                            </a>
+                        </h1>
                     </div>
                     <div class="sidebar-dropdown"><a href="#" class="br-red"><i class="fa fa-bars"></i></a></div>
                     <div class="side-nav">
@@ -64,6 +68,7 @@
                                 <li>
                                     <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'manage_tickets', 'admin' => true]); ?>"><i class="fa fa-support"></i> Support <span class="badge badge-danger pull-right"><?php echo $nbTicketsAdmin; ?></span></a>
                                 </li>
+                                <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
                                 <li class="has_submenu">
                                     <a href="#"><i class="fa fa-cloud"></i> Serveur <span class="nav-caret fa fa-caret-down"></span></a>
                                     <ul class="list-unstyled">
@@ -75,6 +80,7 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <?php } ?>
                                 <?php if($use_store == 1){ ?>
                                 <li class="has_submenu">
                                     <a href="#"><i class="fa fa-shopping-cart"></i> Boutique <span class="nav-caret fa fa-caret-down"></span></a>
@@ -136,22 +142,26 @@
                                     <ul class="list-unstyled">
                                         <li>
                                             <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'add_member', 'admin' => true]); ?>"><i class="fa fa-plus"></i> Ajouter</a>
-                                    </li>
-                                <li>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_member', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste</a>
-                                </li>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_member', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste</a>
+                                        </li>
                                     </ul>
                                 </li>
+                                <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
                                 <li>
                                     <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'chat', 'admin' => true]); ?>"><i class="fa fa-comments"></i>Chat</a>
                                 </li>
+                                <?php } ?>
                             </ul>
                         </div>
                         <div class="side-nav-block">
                             <h4>Autre</h4>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'index', 'admin' => false]); ?>"><i class="fa fa-desktop"></i> Retour au site</a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'index', 'admin' => false]); ?>">
+                                        <i class="fa fa-desktop"></i> Retour au site
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -163,8 +173,8 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-9">
-                                <div class="head-search hidden-xs">
-                                    <?php if($api->call('server.bukkit.version') == true){ ?>
+                                    <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
+                                    <div class="head-search hidden-xs">
                                         <form>
                                             <div class="input-group">
                                                 <?php echo $this->Form->input('command', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Envoyer une commande au serveur', 'style' => 'width:300px;', 'required' => 'required', 'label' => false]); ?>
@@ -173,17 +183,10 @@
                                                 </span>
                                             </div>
                                         </form>
+                                    </div>
                                     <?php } else { ?>
-                                        <form>
-                                            <div class="input-group">
-                                                <?php echo $this->Form->input('command', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Envoyer une commande au serveur', 'style' => 'width:300px;', 'disabled' => 'disabled', 'label' => false]); ?>
-                                                <span class="input-group-btn">
-                                                    <button class="btn btn-default" type="submit"><i class="fa fa-chevron-right"></i></button>
-                                                </span>
-                                            </div>
-                                        </form>
+                                        <div class="text-danger"><strong><i class="fa fa-plug"></i></strong> Impossible d'établir la connexion au serveur, vérifiez les réglages de JSONAPI.</div>
                                     <?php } ?>
-                                </div>
                                 <div class="visible-xs">
                                     <form>
                                         <div class="input-group">

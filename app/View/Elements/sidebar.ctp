@@ -88,7 +88,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="tag-box tag-box-v4">
-                <?php if($api->call('server.bukkit.version') == true){ ?>
+                <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
                 <i class="fa fa-signal"></i> État du serveur : <small><span class="text-highlights text-highlights-green">En ligne</span></small><br>
                 <i class="fa fa-user"></i> Joueurs connectés : <?php echo $api->call('players.online.count')[0]['success']; ?>/<?php echo $api->call('players.online.limit')[0]['success']; ?><br>
                 <?php $version = file_get_contents('http://api.serveurs-minecraft.com/api.php?Version_Query&ip='.$server_ip.'&port='.$server_port.''); ?>

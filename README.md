@@ -2,6 +2,7 @@ ExtazCMS
 ========
  - Topic bukkit.fr : [cliquez ici](http://www.bukkit.fr/index.php/topic/15381-107-extazcms-un-v%C3%A9ritable-site-pour-votre-serveur-minecraft/)
  - Changelog : [cliquez ici](https://github.com/MrSaooty/ExtazCMS/blob/master/CHANGELOG.md)
+ - Le CMS requiert `JSONAPI v5.6.0` minimum
 
 Installation du CMS
 -------------------

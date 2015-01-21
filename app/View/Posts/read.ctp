@@ -37,8 +37,6 @@ $(document).ready(function(){
             $('#like').html('<i class="fa fa-heart"></i> J\'aime (' + nbLikes + ')');
         });
     });
-
-    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 });
 </script>
 <!--=== Content Part ===-->
@@ -155,9 +153,6 @@ $(document).ready(function(){
                     <?php } ?>
                 </div>
             </div>
-            <hr>
-            <div id="disqus_thread"></div>
-            <noscript>Please enable JavaScript to view the comments</noscript>
         </div>
         <!--End Post-->
         <?php echo $this->element('sidebar'); ?>

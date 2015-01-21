@@ -61,6 +61,7 @@ $count = count($players);
                                 <th><b>Santé</b></th>
                                 <th><b>Première connexion</b></th>
                                 <th><b>Dernière connexion</b></th>
+                                <th><b>Adresse IP</b></th>
                                 <th><b>Actions</b></th>
                             </tr>
                         </thead>
@@ -98,7 +99,14 @@ $count = count($players);
 	                                	?>
 	                                </td>
 	                                <td><?php echo date('d-m-Y à H:i', $p['firstPlayed']); ?></td>
-	                                <td><?php echo date('d-m-Y à H:i', $p['lastPlayed']); ?></td>
+                                    <td><?php echo date('d-m-Y à H:i', $p['lastPlayed']); ?></td>
+                                    <td>
+                                        <?php
+                                        $ip = str_replace('/', '', $p['ip']);
+                                        $ip = explode(':', $ip);
+                                        echo $ip[0];
+                                        ?>
+                                    </td>
 	                                <td>
 	                                	<a href="<?php echo $this->Html->url(['controller' => 'players', 'action' => 'kick', $p['name']]); ?>" class="label label-black"><i class="fa fa-bolt"></i> Kick</a>
 	                                	<a href="<?php echo $this->Html->url(['controller' => 'players', 'action' => 'clear', $p['name']]); ?>" class="label label-black"><i class="fa fa-trash"></i> Clear</a>
