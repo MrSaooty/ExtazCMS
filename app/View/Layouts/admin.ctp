@@ -163,6 +163,11 @@
                                         <i class="fa fa-desktop"></i> Retour au site
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="http://www.bukkit.fr/index.php/topic/15381-extazcms-un-v%C3%A9ritable-site-pour-votre-serveur-minecraft/" target="_blank">
+                                        <i class="fa fa-file-text"></i> Besoin d'aide ?
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -185,7 +190,9 @@
                                         </form>
                                     </div>
                                     <?php } else { ?>
-                                        <div class="text-danger"><strong><i class="fa fa-plug"></i></strong> Impossible d'établir la connexion au serveur, vérifiez les réglages de JSONAPI.</div>
+                                        <div class="text-danger">
+                                            <strong><i class="fa fa-plug"></i></strong> Impossible d'établir la connexion au serveur, vérifiez les réglages de JSONAPI.
+                                        </div>
                                     <?php } ?>
                                 <div class="visible-xs">
                                     <form>

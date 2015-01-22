@@ -93,26 +93,32 @@ $(document).ready(function(){
                                             </a>
                                         </td>
                                         <?php } ?>
-                                        <?php if($use_economy == 1 && $use_server_money == 1){ ?>
-	                                        <?php if($i['Shop']['price_money_server'] == -1){ ?>
-	                                        <td>
-	                                            <center>
-	                                                <a href="#" class="btn-u rounded btn-u btn-u-xs btn-block"><font color="white"><i class="fa fa-info-circle"></i> Indisponible</a></font></a>
-	                                            </center>
-	                                        </td>
-	                                        <?php } else { ?>
-	                                        <td>
-	                                            <center>
-	                                                <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'server']); ?>" class="btn-u rounded btn-u btn-u-xs btn-block" type="submit"><font color="white"><i class="fa fa-shopping-cart"></i> <?php echo number_format($i['Shop']['price_money_server'], 0, ' ', ' ').' '.$money_server; ?></a></font></a>
-	                                            </center>
-	                                        </td>
-	                                        <?php } ?>
+                                        <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
+                                            <?php if($use_economy == 1 && $use_server_money == 1){ ?>
+    	                                        <?php if($i['Shop']['price_money_server'] == -1){ ?>
+    	                                        <td>
+    	                                            <center>
+    	                                                <a href="#" class="btn-u rounded btn-u btn-u-xs btn-block"><font color="white"><i class="fa fa-info-circle"></i> Indisponible</a></font></a>
+    	                                            </center>
+    	                                        </td>
+    	                                        <?php } else { ?>
+    	                                        <td>
+    	                                            <center>
+    	                                                <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'server']); ?>" class="btn-u rounded btn-u btn-u-xs btn-block" type="submit"><font color="white"><i class="fa fa-shopping-cart"></i> <?php echo number_format($i['Shop']['price_money_server'], 0, ' ', ' ').' '.$money_server; ?></a></font></a>
+    	                                            </center>
+    	                                        </td>
+    	                                        <?php } ?>
+                                            <?php } ?>
+                                            <td>
+                                                <center>
+                                                    <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'site']); ?>" class="btn-u rounded btn-u-dark btn-u-xs btn-block" type="submit"><font color="white"><i class="fa fa-shopping-cart"></i> <?php echo number_format($i['Shop']['price_money_site'], 0, ' ', ' ').' '.$site_money; ?></a></font></a>
+                                                </center>
+                                            </td>
+                                        <?php } else { ?>
+                                            <td>
+                                                <a href="#" class="tooltips btn rounded btn-default btn-u-xs" data-toggle="tooltip" data-placement="top" title="" data-original-title="Contactez un administrateur"><font color="red"><i class="fa fa-times"></i> Erreur !</font></a>
+                                            </td>
                                         <?php } ?>
-                                        <td>
-                                            <center>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'site']); ?>" class="btn-u rounded btn-u-dark btn-u-xs btn-block" type="submit"><font color="white"><i class="fa fa-shopping-cart"></i> <?php echo number_format($i['Shop']['price_money_site'], 0, ' ', ' ').' '.$site_money; ?></a></font></a>
-                                            </center>
-                                        </td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
