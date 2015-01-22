@@ -64,26 +64,26 @@ class PagesController extends AppController {
 				<i class="fa fa-clock-o"></i> Dernière mise à jour '.date('H:i:s').'
 				<hr>
 				<div class="chat-messages">
-				<small>['.date('H:i:s', $m[0]['time']).']</small> <b class="player" id="'.$m[0]['player'].'" style="cursor: pointer"> '.$m[0]['player'].' :</b> '.$m[0]['message'].'<br>
-				<small>['.date('H:i:s', $m[1]['time']).']</small> <b class="player" id="'.$m[1]['player'].'" style="cursor: pointer"> '.$m[1]['player'].' :</b> '.$m[1]['message'].'<br>
-				<small>['.date('H:i:s', $m[2]['time']).']</small> <b class="player" id="'.$m[2]['player'].'" style="cursor: pointer"> '.$m[2]['player'].' :</b> '.$m[2]['message'].'<br>
-				<small>['.date('H:i:s', $m[3]['time']).']</small> <b class="player" id="'.$m[3]['player'].'" style="cursor: pointer"> '.$m[3]['player'].' :</b> '.$m[3]['message'].'<br>
-				<small>['.date('H:i:s', $m[4]['time']).']</small> <b class="player" id="'.$m[4]['player'].'" style="cursor: pointer"> '.$m[4]['player'].' :</b> '.$m[4]['message'].'<br>
-				<small>['.date('H:i:s', $m[5]['time']).']</small> <b class="player" id="'.$m[5]['player'].'" style="cursor: pointer"> '.$m[5]['player'].' :</b> '.$m[5]['message'].'<br>
-				<small>['.date('H:i:s', $m[6]['time']).']</small> <b class="player" id="'.$m[6]['player'].'" style="cursor: pointer"> '.$m[6]['player'].' :</b> '.$m[6]['message'].'<br>
-				<small>['.date('H:i:s', $m[7]['time']).']</small> <b class="player" id="'.$m[7]['player'].'" style="cursor: pointer"> '.$m[7]['player'].' :</b> '.$m[7]['message'].'<br>
-				<small>['.date('H:i:s', $m[8]['time']).']</small> <b class="player" id="'.$m[8]['player'].'" style="cursor: pointer"> '.$m[8]['player'].' :</b> '.$m[8]['message'].'<br>
-				<small>['.date('H:i:s', $m[9]['time']).']</small> <b class="player" id="'.$m[9]['player'].'" style="cursor: pointer"> '.$m[9]['player'].' :</b> '.$m[9]['message'].'<br>
-				<small>['.date('H:i:s', $m[10]['time']).']</small> <b class="player" id="'.$m[10]['player'].'" style="cursor: pointer"> '.$m[10]['player'].' :</b> '.$m[10]['message'].'<br>
-				<small>['.date('H:i:s', $m[11]['time']).']</small> <b class="player" id="'.$m[11]['player'].'" style="cursor: pointer"> '.$m[11]['player'].' :</b> '.$m[11]['message'].'<br>
-				<small>['.date('H:i:s', $m[12]['time']).']</small> <b class="player" id="'.$m[12]['player'].'" style="cursor: pointer"> '.$m[12]['player'].' :</b> '.$m[12]['message'].'<br>
-				<small>['.date('H:i:s', $m[13]['time']).']</small> <b class="player" id="'.$m[13]['player'].'" style="cursor: pointer"> '.$m[13]['player'].' :</b> '.$m[13]['message'].'<br>
-				<small>['.date('H:i:s', $m[14]['time']).']</small> <b class="player" id="'.$m[14]['player'].'" style="cursor: pointer"> '.$m[14]['player'].' :</b> '.$m[14]['message'].'<br>
-				<small>['.date('H:i:s', $m[15]['time']).']</small> <b class="player" id="'.$m[15]['player'].'" style="cursor: pointer"> '.$m[15]['player'].' :</b> '.$m[15]['message'].'<br>
-				<small>['.date('H:i:s', $m[16]['time']).']</small> <b class="player" id="'.$m[16]['player'].'" style="cursor: pointer"> '.$m[16]['player'].' :</b> '.$m[16]['message'].'<br>
-				<small>['.date('H:i:s', $m[17]['time']).']</small> <b class="player" id="'.$m[17]['player'].'" style="cursor: pointer"> '.$m[17]['player'].' :</b> '.$m[17]['message'].'<br>
-				<small>['.date('H:i:s', $m[18]['time']).']</small> <b class="player" id="'.$m[18]['player'].'" style="cursor: pointer"> '.$m[18]['player'].' :</b> '.$m[18]['message'].'<br>
-				<small>['.date('H:i:s', $m[19]['time']).']</small> <b class="player" id="'.$m[19]['player'].'" style="cursor: pointer"> '.$m[19]['player'].' :</b> '.$m[19]['message'].'<br>
+				<small>['.date('H:i:s', $m[0]['time']).']</small> <b class="player" id="'.$m[0]['player'].'"> '.$m[0]['player'].'</b> '.$m[0]['message'].'<br>
+				<small>['.date('H:i:s', $m[1]['time']).']</small> <b class="player" id="'.$m[1]['player'].'"> '.$m[1]['player'].'</b> '.$m[1]['message'].'<br>
+				<small>['.date('H:i:s', $m[2]['time']).']</small> <b class="player" id="'.$m[2]['player'].'"> '.$m[2]['player'].'</b> '.$m[2]['message'].'<br>
+				<small>['.date('H:i:s', $m[3]['time']).']</small> <b class="player" id="'.$m[3]['player'].'"> '.$m[3]['player'].'</b> '.$m[3]['message'].'<br>
+				<small>['.date('H:i:s', $m[4]['time']).']</small> <b class="player" id="'.$m[4]['player'].'"> '.$m[4]['player'].'</b> '.$m[4]['message'].'<br>
+				<small>['.date('H:i:s', $m[5]['time']).']</small> <b class="player" id="'.$m[5]['player'].'"> '.$m[5]['player'].'</b> '.$m[5]['message'].'<br>
+				<small>['.date('H:i:s', $m[6]['time']).']</small> <b class="player" id="'.$m[6]['player'].'"> '.$m[6]['player'].'</b> '.$m[6]['message'].'<br>
+				<small>['.date('H:i:s', $m[7]['time']).']</small> <b class="player" id="'.$m[7]['player'].'"> '.$m[7]['player'].'</b> '.$m[7]['message'].'<br>
+				<small>['.date('H:i:s', $m[8]['time']).']</small> <b class="player" id="'.$m[8]['player'].'"> '.$m[8]['player'].'</b> '.$m[8]['message'].'<br>
+				<small>['.date('H:i:s', $m[9]['time']).']</small> <b class="player" id="'.$m[9]['player'].'"> '.$m[9]['player'].'</b> '.$m[9]['message'].'<br>
+				<small>['.date('H:i:s', $m[10]['time']).']</small> <b class="player" id="'.$m[10]['player'].'"> '.$m[10]['player'].'</b> '.$m[10]['message'].'<br>
+				<small>['.date('H:i:s', $m[11]['time']).']</small> <b class="player" id="'.$m[11]['player'].'"> '.$m[11]['player'].'</b> '.$m[11]['message'].'<br>
+				<small>['.date('H:i:s', $m[12]['time']).']</small> <b class="player" id="'.$m[12]['player'].'"> '.$m[12]['player'].'</b> '.$m[12]['message'].'<br>
+				<small>['.date('H:i:s', $m[13]['time']).']</small> <b class="player" id="'.$m[13]['player'].'"> '.$m[13]['player'].'</b> '.$m[13]['message'].'<br>
+				<small>['.date('H:i:s', $m[14]['time']).']</small> <b class="player" id="'.$m[14]['player'].'"> '.$m[14]['player'].'</b> '.$m[14]['message'].'<br>
+				<small>['.date('H:i:s', $m[15]['time']).']</small> <b class="player" id="'.$m[15]['player'].'"> '.$m[15]['player'].'</b> '.$m[15]['message'].'<br>
+				<small>['.date('H:i:s', $m[16]['time']).']</small> <b class="player" id="'.$m[16]['player'].'"> '.$m[16]['player'].'</b> '.$m[16]['message'].'<br>
+				<small>['.date('H:i:s', $m[17]['time']).']</small> <b class="player" id="'.$m[17]['player'].'"> '.$m[17]['player'].'</b> '.$m[17]['message'].'<br>
+				<small>['.date('H:i:s', $m[18]['time']).']</small> <b class="player" id="'.$m[18]['player'].'"> '.$m[18]['player'].'</b> '.$m[18]['message'].'<br>
+				<small>['.date('H:i:s', $m[19]['time']).']</small> <b class="player" id="'.$m[19]['player'].'"> '.$m[19]['player'].'</b> '.$m[19]['message'].'<br>
 				</div>';
 				echo json_encode($result);
 				exit();
@@ -100,8 +100,8 @@ class PagesController extends AppController {
 				$informations = $this->Informations->find('first');
 	    		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
 				$message = str_replace('/', '', $this->request->data['message']);
-				// if(!empty($message) && $api->call('server.run_command', ['say ['.$this->Auth->user('username').'] '.$message])){
-				if(!empty($message) && $this->request->is('post') && $api->call('chat.with_name', [$message, $this->Auth->user('username')])){
+				//if(!empty($message) && $api->call('chat.with_name', [$message, $this->Auth->user('username')])){
+				if(!empty($message) && $api->call('chat.broadcast', ['['.$this->Auth->user('username').'] '.$message])){
 					exit();
 				}
 			}
