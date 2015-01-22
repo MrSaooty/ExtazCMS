@@ -1,6 +1,23 @@
 Changelog
 =========
 
+v1.3
+----
+
+ - Vous pouvez désormais visualiser l'ensemble des joueurs connectés sur le serveur avec tout un tas d'informations (pseudo, gamemode, niveau, monde, santé, première et dernière connexion et l'IP). Vous pouvez aussi depuis cette page, kicker, bannir, bannir IP et clear l'inventaire du joueur.
+ - Ajout d'un graphique pour visualiser l’utilisation de la mémoire vive du serveur
+ - Ajout d'un graphique pour visualiser les achats boutiques
+ - Ajout d'un graphique pour visualiser les achats Starpass
+ - Ajout d'un graphique pour visualiser les achats PayPal
+ - Ajout d'un graphique pour visualiser les inscriptions
+ - Ajout de la fonction whois, pour obtenir des informations sur un joueur en particulier.
+ - Vous pouvez envoyer une commande au serveur directement depuis l'administration 
+ - Possibilité de voir le chat en jeu et d'y envoyer des messages directement depuis l'administration
+ - Ajout de la gestion des donateurs (liste, graphique, édition, suppression)
+ - Ajout de la gestion des membres de l'équipe, il y avait déjà la liste il y a maintenant l’édition et la suppression
+ - Corrections de bugs
+ - Modifications mineurs
+
 v1.2
 ----
 
