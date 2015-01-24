@@ -19,6 +19,7 @@ class PostsController extends AppController{
 		$this->set('articles', $q);
 		// Nombre d'article visible & non draft
 		$this->set('nbPost', $this->Post->find('count', array('conditions' => array('Post.visible' => 1, 'Post.draft' => 0))));
+		$this->set('slider', $this->Post->find('all', ['conditions' => ['Post.visible' => 1, 'Post.draft' => 0], 'order' => ['Post.posted' => 'DESC'], 'limit' => 3]));
 	}
 
 	public function read($slug, $id){

@@ -1,0 +1,1 @@
+ALTER TABLE `extaz_informations` ADD `use_slider` INT(11) NULL DEFAULT NULL AFTER `use_donation_ladder`;

@@ -49,6 +49,12 @@ class InformationsController extends AppController{
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('post')){
 				$this->Informations->id = 1;
+				if(isset($this->request->data['use_slider'])){
+					$this->Informations->saveField('use_slider', 1);
+				}
+				else{
+					$this->Informations->saveField('use_slider', 0);
+				}
 				if(isset($this->request->data['use_store'])){
 					$this->Informations->saveField('use_store', 1);
 				}

@@ -125,6 +125,12 @@ $(document).ready(function(){
                         <div class="tab-pane fade" id="tab-4">
                             <?php echo $this->Form->create('Informations', ['action' => 'updateOptions']); ?>
                                 <div class="form-group">
+                                    Activer le slider ?
+                                    <div class="sw-red pull-right">
+                                        <div class="onoffswitch"><input name="use_slider" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_slider == 1) echo 'checked="checked"'; ?> id="onoffswitch1"><label for="onoffswitch1" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     Afficher la page équipe ?
                                     <div class="sw-red pull-right">
                                         <div class="onoffswitch"><input name="use_team" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_team == 1) echo 'checked="checked"'; ?> id="onoffswitch1"><label for="onoffswitch1" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>

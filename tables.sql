@@ -66,6 +66,7 @@ CREATE TABLE `extaz_informations` (
   `use_contact` int(11) DEFAULT NULL,
   `use_rules` int(11) DEFAULT NULL,
   `use_donation_ladder` int(11) DEFAULT NULL,
+  `use_slider` int(11) DEFAULT NULL,
   `happy_hour` int(11) DEFAULT NULL,
   `happy_hour_bonus` int(11) DEFAULT NULL,
   `rules` longtext,
@@ -75,7 +76,7 @@ CREATE TABLE `extaz_informations` (
 -- ----------------------------
 -- Records of extaz_informations
 -- ----------------------------
-INSERT INTO `extaz_informations` VALUES ('1', 'Nom du serveur', '127.0.0.1', '12345', 'PO', '127.0.0.1', '0', '', '', '', 'tokens', '0', '0', '25', '3', '30', '', '', 'http://www.rw-designer.com/icon-image/5547-48x48x32.png', 'http://facebook.com/', 'http://twitter.com/', '1', '1', '1', '1', '1', '1', '1', '1', '0', '20', '');
+INSERT INTO `extaz_informations` VALUES ('1', 'Nom du serveur', '127.0.0.1', '12345', 'PO', '127.0.0.1', '0', '', '', '', 'tokens', '0', '0', '25', '3', '30', '', '', 'http://www.rw-designer.com/icon-image/5547-48x48x32.png', 'http://facebook.com/', 'http://twitter.com/', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '20', '');
 
 -- ----------------------------
 -- Table structure for extaz_instant_payment_notifications

@@ -14,26 +14,31 @@ $(document).ready(function(){
     <div class="row magazine-page">
         <div class="col-md-9">
             <!-- Begin Content -->
-            <!-- <div class="carousel slide carousel-v1 margin-bottom-40" id="myCarousel-1">
+            <?php if($use_slider == 1){ ?>
+            <div class="carousel slide carousel-v1 margin-bottom-40" id="myCarousel-1">
                 <div class="carousel-inner">
-                    <div class="item active">
-                        <img alt="" src="http://fr-minecraft.net/upload/wallpapers/images/fr-minecraft_wallpaper_RA1P.jpg">
-                        <div class="carousel-caption">
-                            <p>Facilisis odio, dapibus ac justo acilisis gestinas.</p>
+                    <?php for ($i=0; $i < 3; $i++){ ?>
+                        <?php if($i == 0){ ?>
+                        <div class="item active">
+                        <?php } else { ?>
+                        <div class="item">
+                        <?php } ?>
+                            <img class="img-slider" src="<?php echo $slider[$i]['Post']['img']; ?>">
+                            <div class="carousel-caption">
+                                <p>
+                                    <?php
+                                    $content = '<h3><font color="white">'.$slider[$i]['Post']['title'].'</font></h3>'.html_entity_decode(strip_tags($slider[$i]['Post']['content']));
+                                    if(mb_strlen($content) > 400){
+                                        echo mb_substr($content, 0, 400).' [...]';
+                                    }
+                                    else{
+                                        echo $content;
+                                    }
+                                    ?>
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="item">
-                        <img alt="" src="http://fr-minecraft.net/upload/wallpapers/images/fr-minecraft_wallpaper_RA1P.jpg">
-                        <div class="carousel-caption">
-                            <p>Cras justo odio, dapibus ac facilisis into egestas.</p>
-                        </div>
-                        </div>
-                    <div class="item">
-                        <img alt="" src="http://fr-minecraft.net/upload/wallpapers/images/fr-minecraft_wallpaper_RA1P.jpg">
-                        <div class="carousel-caption">
-                            <p>Justo cras odio apibus ac afilisis lingestas de.</p>
-                        </div>
-                    </div>
+                    <?php } ?>
                 </div>
                 
                 <div class="carousel-arrow">
@@ -44,7 +49,8 @@ $(document).ready(function(){
                         <i class="fa fa-angle-right"></i>
                     </a>
                 </div>
-            </div> -->
+            </div>
+            <?php } ?>
             <?php $a = -1; ?>
             <?php $b = 5; ?>
             <?php while($a < $b){ ?>
