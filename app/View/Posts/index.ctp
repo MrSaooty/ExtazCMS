@@ -29,10 +29,10 @@ $(document).ready(function(){
                                     <?php
                                     $content = '<h3><font color="white">'.$slider[$i]['Post']['title'].'</font></h3>'.html_entity_decode(strip_tags($slider[$i]['Post']['content']));
                                     if(mb_strlen($content) > 400){
-                                        echo mb_substr($content, 0, 400).' [...]';
+                                        echo mb_substr($content, 0, 400).'... <a href="'.$this->Html->url(['controller' => 'posts', 'action' => 'read', 'slug' => $slider[$i]['Post']['slug'], 'id' => $slider[$i]['Post']['id']]).'">Lire la suite</a>';
                                     }
                                     else{
-                                        echo $content;
+                                        echo $content.' <a href="'.$this->Html->url(['controller' => 'posts', 'action' => 'read', 'slug' => $slider[$i]['Post']['slug'], 'id' => $slider[$i]['Post']['id']]).'">Lire la suite</a>';;
                                     }
                                     ?>
                                 </p>

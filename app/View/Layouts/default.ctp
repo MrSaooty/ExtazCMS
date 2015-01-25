@@ -39,7 +39,7 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>	
-<body cz-shortcut-listen="true" class="boxed-layout container">
+<body cz-shortcut-listen="true" class="boxed-layout container" background="<?php echo $this->webroot.'/img/bg/'.$background.'.jpg'; ?>">
     <div class="wrapper">
         <!--Header-->    
         <div class="header header-v4">

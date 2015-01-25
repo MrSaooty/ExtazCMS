@@ -59,8 +59,9 @@ $(document).ready(function(){
                         <li class="active" id="tab1"><a href="#tab-1" data-toggle="tab">Général</a></li>
                         <li class="" id="tab2"><a href="#tab-2" data-toggle="tab">JSONAPI</a></li>
                         <li class="" id="tab3"><a href="#tab-3" data-toggle="tab">Starpass/PayPal</a></li>
-                        <li class="" id="tab4"><a href="#tab-4" data-toggle="tab">Options</a></li>
-                        <li class="" id="tab5"><a href="#tab-5" data-toggle="tab">Réglement</a></li>
+                        <li class="" id="tab4"><a href="#tab-4" data-toggle="tab">Thème</a></li>
+                        <li class="" id="tab4"><a href="#tab-5" data-toggle="tab">Options</a></li>
+                        <li class="" id="tab5"><a href="#tab-6" data-toggle="tab">Réglement</a></li>
                     </ul>       
                     <div class="tab-content">
                         <div class="tab-pane fade active in" id="tab-1">
@@ -123,6 +124,48 @@ $(document).ready(function(){
                             <?php echo $this->Form->end(); ?>
                         </div>
                         <div class="tab-pane fade" id="tab-4">
+                            <div class="alert alert-info">
+                                <strong><i class="fa fa-info-circle"></i></strong> Cliquez sur le <strong>background</strong> que vous souhaitez utiliser
+                            </div>
+                            <div class="page-gallery">
+                                <div id="gallery">    
+                                    <!-- Element -->
+                                    <div class="element">
+                                        <a href="<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'updateBackground', 1]); ?>" class="prettyphoto">
+                                            <?php echo $this->Html->image('bg/1.jpg', ['width' => 200, 'height' => 110]); ?>
+                                        </a>
+                                        <div class="gall-caption">
+                                            <ul class="list-unstyled">
+                                                <li><strong>Nom du fichier :</strong> 1.jpg</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- Element -->
+                                    <div class="element">
+                                        <a href="<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'updateBackground', 2]); ?>" class="prettyphoto">
+                                            <?php echo $this->Html->image('bg/2.jpg', ['width' => 200, 'height' => 110]); ?>
+                                        </a>
+                                        <div class="gall-caption">
+                                            <ul class="list-unstyled">
+                                                <li><strong>Nom du fichier :</strong> 2.jpg</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- Element -->
+                                    <div class="element">
+                                        <a href="<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'updateBackground', 3]); ?>" class="prettyphoto">
+                                            <?php echo $this->Html->image('bg/3.jpg', ['width' => 200, 'height' => 110]); ?>
+                                        </a>
+                                        <div class="gall-caption">
+                                            <ul class="list-unstyled">
+                                                <li><strong>Nom du fichier :</strong> 3.jpg</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab-5">
                             <?php echo $this->Form->create('Informations', ['action' => 'updateOptions']); ?>
                                 <div class="form-group">
                                     Activer le slider ?
@@ -188,7 +231,7 @@ $(document).ready(function(){
                                 <button class="btn btn-black pull-right" type="submit">Confirmer les modifications</button><br>
                             <?php echo $this->Form->end(); ?>
                         </div>
-                        <div class="tab-pane fade" id="tab-5">
+                        <div class="tab-pane fade" id="tab-6">
                             <?php echo $this->Form->create('Informations', ['action' => 'updateInformations']); ?>
                                 <?php $informations = [
                                 'rules' => 'Editer le réglement'

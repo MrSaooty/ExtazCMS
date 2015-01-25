@@ -91,6 +91,7 @@ class AppController extends Controller {
 	$this->set('happy_hour', $informations['Informations']['happy_hour']);
 	$this->set('happy_hour_bonus', $informations['Informations']['happy_hour_bonus']);
 	$this->set('rules', $informations['Informations']['rules']);
+	$this->set('background', $informations['Informations']['background']);
 	// Le reste
 	$this->set('connected', $this->Auth->user());
 	$this->set('username', $this->Auth->user('username'));
