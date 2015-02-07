@@ -52,6 +52,77 @@ class PagesController extends AppController {
         $this->Auth->allow();
 	}
 
+	public function admin_installUpdate(){
+
+		/***********************************/
+		/**     Module de mise à jour     **/
+		/** automatique en developpement  **/
+		/***********************************/
+
+		// if($this->Auth->user('role') > 0){
+		// 	// Mise à jour MYSQL
+		// 	$mysql = file_get_contents('http://extaz-mc.fr/extazcms/maj.sql');
+		// 	$db = ConnectionManager::getDataSource('default');
+
+		// 	//Requête : sélectionne l'ensemble des colonnes de la table extraz_informations
+		// 	$r = $db->rawQuery('SELECT * FROM extaz_informations LIMIT 0');
+
+		// 	//Récupère l'ensemble des noms de colonnes dans un array/tableau :
+		// 	//  "columnCount"   -> Permet de retourner le nombre de colonnes
+		// 	//  "getColumnMeta" -> Permet de retourner les métadonnées d'une colonne
+		// 	for($i = 0; $i < $r->columnCount(); $i++){
+		// 	    $col = $r->getColumnMeta($i);
+		// 	    $columns[] = $col['name'];
+		// 	}
+			
+		// 	//Test si la colonne "use_slider" existe dans notre tableau comportant l'ensemble des colonnes de la table "extraz_informations"
+		// 	if(in_array('use_slider', $columns)){
+		// 		$test = 'La colonne use_slider existe deja dans la table extaz_informations';
+		// 	}
+		// 	else{
+		// 		$test = 'Aucun resultat';
+		// 	}
+		// 	debug($test);
+		// 	exit();
+			
+		// 	// Mise à jour des fichiers
+		// 	$file = 'http://extaz-mc.fr/extazcms/maj.zip';
+		// 	$newfile = 'tmp_file.zip';
+		// 	if(!copy($file, $newfile)){
+		// 	    $this->Session->setFlash('Un problème est survenu !', 'error');
+		// 		$this->redirect(['controller' => 'pages', 'action' => 'update', 'admin' => true]);
+		// 	}
+		// 	$path = pathinfo(realpath($newfile), PATHINFO_DIRNAME);
+		// 	$zip = new ZipArchive;
+		// 	$res = $zip->open($newfile);
+		// 	if($res === TRUE){
+		// 		$zip->extractTo('../');
+		// 		$zip->close();
+		// 		unlink($newfile);
+		// 		$this->Session->setFlash('Mise à jour effectué avec succès !', 'success');
+		// 		$this->redirect(['controller' => 'pages', 'action' => 'update', 'admin' => true]);
+		// 	}
+		// 	else{
+		// 		$this->Session->setFlash('Un problème est survenu !', 'error');
+		// 		$this->redirect(['controller' => 'pages', 'action' => 'update', 'admin' => true]);
+		// 	}
+		// }
+		// else{
+		// 	throw new NotFoundException();
+		// }
+		$this->Session->setFlash('Module non disponible actuellement, veuillez procéder à une mise à jour manuelle.', 'warning');
+		$this->redirect(['controller' => 'pages', 'action' => 'update', 'admin' => true]);
+	}
+
+	public function admin_update(){
+		if($this->Auth->user('role') > 0){
+			
+		}
+		else{
+			throw new NotFoundException();
+		}
+	}
+
 	public function admin_chat(){
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('ajax')){

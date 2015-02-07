@@ -32,17 +32,6 @@ $(document).ready(function(){
             });
         }
     });
-    
-    $('#publish').on('click', function(){
-        var id = '<?php echo $this->params['pass'][0]; ?>';
-        var title = $('#PostTitle').val();
-        var slug = $('#PostSlug').val();
-        var progress = $('#PostProgress').val();
-        var cat = $('#PostCat').val();
-        var content = CKEDITOR.instances['PostContent'].getData();
-        var url = '<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'edit', $this->params['pass'][0])); ?>';
-        $.post(url, {id: id, title: title, slug: slug, progress: progress, cat: cat, content: content}, function(data){});
-    });
 
     setInterval(function(){
         if($('#auto_save').is(":checked")){
@@ -149,19 +138,6 @@ $(document).ready(function(){
                         </div>
                         <div class="btn-group pull-right">
                             <button class="btn btn-default pull-right" type="submit">Éditer cet article</button>
-                            <?php if($this->Session->read('Auth.User.role') == 1){ ?>
-                                <?php if($data['Post']['draft'] == 0){ ?>
-                                    <a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'publish', 'id' => $data['Post']['id'], 'draft' => 0)); ?>" id="publish" class="btn btn-black pull-right">Déplacer vers les brouillons</a>
-                                <?php } else { ?>
-                                    <a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'publish', 'id' => $data['Post']['id'], 'draft' => 1)); ?>" id="publish" class="btn btn-black pull-right">Publier l'article</a>
-                                <?php }; ?>
-                            <?php } else { ?>
-                                <?php if($data['Post']['draft'] == 0){ ?>
-                                    <a href="#" id="publish" class="btn btn-black pull-right">Déplacer vers les brouillons</a>
-                                <?php } else { ?>
-                                    <a href="#" id="publish" class="btn btn-black pull-right">Publier l'article</a>
-                                <?php }; ?>
-                            <?php } ?>
                         </div>
                         <br>
                     <?php echo $this->Form->end(); ?>

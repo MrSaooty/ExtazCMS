@@ -115,6 +115,12 @@ class AppController extends Controller {
 	  $this->set('nbDonator', $this->donationLadder->find('count'));
 	}
 
+	// ExtazCMS
+	$version = '1.2';
+	$lastVersion = file_get_contents('http://www.extaz-mc.fr/extazcms/version.txt');
+	$this->set('version', $version);
+	$this->set('lastVersion', $lastVersion);
+
 	$this->Cookie->httpOnly = true;
 	if(!$this->Auth->loggedIn() && $this->Cookie->read('rememberMe')){
 	  $cookie = $this->Cookie->read('rememberMe');
@@ -127,11 +133,7 @@ class AppController extends Controller {
 	Configure::write('Config.language', 'fra');
 	$this->Auth->allow();
 	$this->set('authUser', $this->Auth->user());
-	$this->Auth->authError = '<div class="servive-block servive-block-default">
-							  <h2 class="heading-md">Erreur !</h2>
-							  <p>Vous ne pouvez pas accéder à cette page, connectez vous et réessayez</p>
-							  </div>';
-  }
+    }
 
 	function afterPaypalNotification($txnId){
 		$informations = $this->Informations->find('first');

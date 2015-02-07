@@ -21,7 +21,7 @@ $(document).ready(function(){
                     <div class="cbp_tmlabel">
                         <h2>
                             <?php if($role > 0){ ?>
-                                <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'edit', $data['User']['id']]); ?>">
+                                <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'edit', $data['User']['id'], 'admin' => true]); ?>">
                                     Ticket de <?php echo $data['Support']['username']; ?>
                                 </a>
                             <?php } else { ?>

@@ -194,7 +194,7 @@ class PostsController extends AppController{
 				// On rend l'article invisible
 				$this->Post->saveField('visible', 0);
 				$this->Session->setFlash('Article supprimé !', 'success');
-				return $this->redirect(['controller' => 'posts', 'action' => 'index', 'admin' => false]);
+				return $this->redirect(['controller' => 'posts', 'action' => 'list', 'admin' => true]);
 			}
 			// Si l'article n'existe pas
 			else{
@@ -247,31 +247,31 @@ class PostsController extends AppController{
 		}
 	}
 
-	public function admin_publish(){
+	public function admin_publish($id, $draft){
 		if($this->Auth->user('role') > 0){
 			// On va agir sur l'id passé via l'url
-			$this->Post->id = $this->request->params['named']['id'];
-			$draft = $this->request->params['named']['draft'];
+			$this->Post->id = $id;
+			// $draft = $this->request->params['named']['draft'];
 			// Si cet article n'est pas un brouillon
 			if($draft == 0){
 				// On passe l'article en brouillon
 				$this->Post->saveField('draft', 1);
 				$this->Session->setFlash('Article deplacé vers les brouillons !', 'success');
-				$this->redirect(array('controller' => 'posts', 'action' => 'drafts'));
+				$this->redirect(array('controller' => 'posts', 'action' => 'drafts', 'admin' => true));
 			}
 			// Si cet article est un brouillon
 			else{
 				// On publie l'article
 				$this->Post->saveField('draft', 0);
 				// On recupère les données de cet article
-				$data = $this->Post->find('first', array('conditions' => array('Post.id' => $this->request->params['named']['id'])));
+				$data = $this->Post->find('first', array('conditions' => array('Post.id' => $id)));
 				// Si cet article n'a jamais été publié
 				if($data['Post']['posted'] == '0000-00-00 00:00:00'){
 					// On update la date de publication
 					$this->Post->saveField('posted', date("Y-m-d H:i:s"));
 				}
 				$this->Session->setFlash('Article publié !', 'success');
-				return $this->redirect(['controller' => 'pages', 'action' => 'stats', 'admin' => true]);
+				return $this->redirect(['controller' => 'posts', 'action' => 'list', 'admin' => true]);
 			}
 		}
 		else{

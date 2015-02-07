@@ -65,9 +65,10 @@ $(document).ready(function(){
                                 <td><?php echo $d['Post']['cat']; ?></td>
                                 <td><?php echo $this->Time->format('d-m-Y à H:i', $d['Post']['created']); ?></td>
                                 <td>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'read', 'slug' => $d['Post']['slug'], 'id' => $d['Post']['id'], 'admin' => false]); ?>" class="label label-black">Voir</a>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'edit', $d['Post']['id'], 'admin' => true]); ?>" class="label label-success">Editer</a>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'delete', $d['Post']['id'], 'admin' => true]); ?>" class="label label-danger confirm">Supprimer</a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'edit', $d['Post']['id'], 'admin' => true]); ?>" class="label label-success"><i class="fa fa-pencil"></i> Editer</a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'delete', $d['Post']['id'], 'admin' => true]); ?>" class="label label-danger confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'publish', $d['Post']['id'], 0, 'admin' => true]); ?>" class="label label-black"><i class="fa fa-file"></i> Brouillon</a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'read', 'slug' => $d['Post']['slug'], 'id' => $d['Post']['id'], 'admin' => false]); ?>" class="label label-black"><i class="fa fa-eye"></i> Voir</a>
                                 </td>
                             </tr>
                             <?php } ?>

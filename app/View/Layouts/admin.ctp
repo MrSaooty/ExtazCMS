@@ -168,6 +168,19 @@
                                         <i class="fa fa-file-text"></i> Besoin d'aide ?
                                     </a>
                                 </li>
+                                <?php if($version == $lastVersion){ ?>
+                                <li>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'update', 'admin' => true]); ?>">
+                                        <p class="green"><i class="fa fa-check-circle"></i> Mise à jour</p>
+                                    </a>
+                                </li>
+                                <?php } else { ?>
+                                <li>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'update', 'admin' => true]); ?>">
+                                        <p class="red"><i class="fa fa-exclamation-triangle"></i> Mise à jour</p>
+                                    </a>
+                                </li>
+                                <?php } ?>
                             </ul>
                         </div>
                     </div>
