@@ -16,6 +16,8 @@
 		                	Vous utilisez actuellement la version <?php echo $version; ?><br>
 		                    Une nouvelle version du CMS est disponible : <?php echo $lastVersion; ?>
 		                    <hr>
+							<i class="fa fa-github"></i> <a href="https://github.com/MrSaooty/ExtazCMS/releases" target="_blank">https://github.com/MrSaooty/ExtazCMS/releases</a>
+							<hr>
 		                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'installUpdate', 'admin' => true]) ?>" class="btn btn-default"><i class="fa fa-cogs"></i> Installer la mise à jour</a>
 		                <?php } ?>
 		            </div>

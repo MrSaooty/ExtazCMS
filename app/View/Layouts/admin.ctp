@@ -150,7 +150,7 @@
                                 </li>
                                 <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
                                 <li>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'chat', 'admin' => true]); ?>"><i class="fa fa-comments"></i>Chat</a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'chat_messages', 'admin' => true]); ?>"><i class="fa fa-comments"></i>Chat</a>
                                 </li>
                                 <?php } ?>
                             </ul>

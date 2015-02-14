@@ -71,13 +71,15 @@ CREATE TABLE `extaz_informations` (
   `happy_hour_bonus` int(11) DEFAULT NULL,
   `rules` longtext,
   `background` int(11) DEFAULT NULL,
+  `chat_prefix` text,
+  `chat_nb_messages` int(11) DEFAULT NULL
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of extaz_informations
 -- ----------------------------
-INSERT INTO `extaz_informations` VALUES ('1', 'Nom du serveur', '127.0.0.1', '12345', 'PO', '127.0.0.1', '0', '', '', '', 'tokens', '0', '0', '25', '3', '30', '', '', 'http://www.rw-designer.com/icon-image/5547-48x48x32.png', 'http://facebook.com/', 'http://twitter.com/', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '20', '', '3');
+INSERT INTO `extaz_informations` VALUES ('1', 'Nom du serveur', '127.0.0.1', '12345', 'PO', '127.0.0.1', '0', '', '', '', 'tokens', '0', '0', '25', '3', '30', '', '', 'http://www.rw-designer.com/icon-image/5547-48x48x32.png', 'http://facebook.com/', 'http://twitter.com/', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '20', '', '3', 'Web', '20');
 
 -- ----------------------------
 -- Table structure for extaz_instant_payment_notifications

@@ -57,7 +57,7 @@
 	Router::connect('/admin/informations', ['controller' => 'informations', 'action' => 'index', 'admin' => true]);
 	Router::connect('/admin/list_donator', ['controller' => 'pages', 'action' => 'list_donator', 'admin' => true]);
 	Router::connect('/admin/players', ['controller' => 'players', 'action' => 'index', 'admin' => true]);
-	Router::connect('/admin/chat', ['controller' => 'pages', 'action' => 'chat', 'admin' => true]);
+	Router::connect('/admin/chat', ['controller' => 'pages', 'action' => 'chat_messages', 'admin' => true]);
 	Router::connect('/admin/update', ['controller' => 'pages', 'action' => 'update', 'admin' => true]);
 	Router::connect('/admin/install/update', ['controller' => 'pages', 'action' => 'installUpdate', 'admin' => true]);
 	Router::connect('/:slug-:id', ['controller' => 'posts', 'action' => 'read'], ['pass' => ['slug', 'id'], 'slug' => '[a-z0-9\-]+', 'id' => '[0-9]+']);

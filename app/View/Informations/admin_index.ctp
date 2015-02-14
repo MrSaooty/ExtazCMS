@@ -74,6 +74,8 @@ $(document).ready(function(){
                                 'site_money' => 'Nom de la monnaie du site (Si vous utilisez la boutique)',
                                 'contact_email' => 'Votre email pour la page contact',
                                 'logo_url' => 'URL de votre logo',
+                                'chat_prefix' => 'Prefix pouur le chat',
+                                'chat_nb_messages' => 'Nombres de messages à afficher dans le chat',
                                 'facebook_url' => 'URL de votre page Facebook (Facultatif)',
                                 'twitter_url' => 'URL de votre compte Twitter (Facultatif)'
                                 ]; ?>

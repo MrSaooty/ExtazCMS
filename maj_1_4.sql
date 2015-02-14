@@ -1,0 +1,1 @@
+ALTER TABLE `extaz_informations` ADD `chat_prefix` TEXT NULL DEFAULT NULL , ADD `chat_nb_messages` INT NULL DEFAULT NULL ;

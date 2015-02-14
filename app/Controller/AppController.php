@@ -92,6 +92,8 @@ class AppController extends Controller {
 	$this->set('happy_hour_bonus', $informations['Informations']['happy_hour_bonus']);
 	$this->set('rules', $informations['Informations']['rules']);
 	$this->set('background', $informations['Informations']['background']);
+	$this->set('chat_prefix', $informations['Informations']['chat_prefix']);
+	$this->set('chat_nb_messages', $informations['Informations']['chat_nb_messages']);
 	// Le reste
 	$this->set('connected', $this->Auth->user());
 	$this->set('username', $this->Auth->user('username'));
@@ -116,7 +118,7 @@ class AppController extends Controller {
 	}
 
 	// ExtazCMS
-	$version = '1.3';
+	$version = '1.4';
 	$lastVersion = file_get_contents('http://www.extaz-mc.fr/extazcms/version.txt');
 	$this->set('version', $version);
 	$this->set('lastVersion', $lastVersion);
