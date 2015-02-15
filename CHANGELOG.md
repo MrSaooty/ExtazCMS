@@ -10,13 +10,13 @@ v1.4
  - Possiblité de changer de background depuis l'administration
  - Améliorations d'interface
  - Corrections de bugs
- - Modifications mineurs
+ - Modifications mineures
  - {CSS} Modification de style.css
  - {CSS} Modification de custom.css
  - {SQL} Ajout d'un champs use_slider (int, default: 1) dans la table extaz_informations
  - {SQL} Ajout d'un champs background (int, default: 3) dans la table extaz_informations
- - {SQL} Ajout d'un champs chat_prefix (text, default: '') dans la table extaz_informations
  - {SQL} Ajout d'un champs chat_nb_messages (int, default: 20) dans la table extaz_informations
+ - {SQL} Ajout d'un champs chat_prefix (text, default: '') dans la table extaz_informations
 
  v1.3
 ----
