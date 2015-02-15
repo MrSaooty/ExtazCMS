@@ -126,7 +126,9 @@ class PagesController extends AppController {
 	public function admin_chat_update(){
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('ajax')){
-				$data = '<i class="fa fa-clock-o"></i> Dernière mise à jour '.date('H:i:s').'';
+				$informations = $this->Informations->find('first');
+    			$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
+				$data = '<i class="fa fa-clock-o"></i> Dernière mise à jour à '.date('H:i:s').', il y a '.$api->call('players.online.count')[0]['success'].' joueur(s) connecté(s).';
 				echo json_encode($data);
 				exit();
 			}

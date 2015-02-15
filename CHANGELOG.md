@@ -1,7 +1,24 @@
 Changelog
 =========
 
-v1.3
+v1.4
+----
+
+ - Vous pouvez maintenant choisir un prefix pour le chat lié au serveur
+ - Vous pouvez maintenant choisir le nombre de messages à afficher dans le chat
+ - Ajout d'un slider désactivable depuis l'administration
+ - Possiblité de changer de background depuis l'administration
+ - Améliorations d'interface
+ - Corrections de bugs
+ - Modifications mineurs
+ - {CSS} Modification de style.css
+ - {CSS} Modification de custom.css
+ - {SQL} Ajout d'un champs use_slider (int, default: 1) dans la table extaz_informations
+ - {SQL} Ajout d'un champs background (int, default: 3) dans la table extaz_informations
+ - {SQL} Ajout d'un champs chat_prefix (text, default: '') dans la table extaz_informations
+ - {SQL} Ajout d'un champs chat_nb_messages (int, default: 20) dans la table extaz_informations
+
+ v1.3
 ----
 
  - Vous pouvez désormais visualiser l'ensemble des joueurs connectés sur le serveur avec tout un tas d'informations (pseudo, gamemode, niveau, monde, santé, première et dernière connexion et l'IP). Vous pouvez aussi depuis cette page, kicker, bannir, bannir IP et clear l'inventaire du joueur.
@@ -41,7 +58,7 @@ v1.0.6
 ------
 
  - Correction d'une faille de sécurité
- - {SQL} Ajout d'un champs starpass_key dans la table extaz_informations
+ - {SQL} Ajout d'un champs starpass_key (int, default: '') dans la table extaz_informations
 
 v1.0.5
 ------
@@ -53,7 +70,7 @@ v1.0.5
  - Améliorations d'interface
  - Corrections de bugs
  - Optimisation du code
- - {SQL} Ajout d'un champs user_id dans la table extaz_support
+ - {SQL} Ajout d'un champs user_id (int) dans la table extaz_support
 
 v1.0.4
 ------
@@ -67,10 +84,9 @@ v1.0.4
  - Ajout d'un système de happy hour paramétrable
  - Améliorations d'interface
  - Corrections de bugs
- - {SQL} Ajout d'un champ allow_email dans la table extaz_users
- - {SQL} Ajout d'un champ happy_hour dans la table extaz_informations
- - {SQL} Ajout d'un champ happy_hour_bonus dans la table
-   extaz_informations
+ - {SQL} Ajout d'un champ allow_email (int, default: 1) dans la table extaz_users
+ - {SQL} Ajout d'un champ happy_hour (int, default: 0) dans la table extaz_informations
+ - {SQL} Ajout d'un champ happy_hour_bonus (int, default: 20) dans la table extaz_informations
 
 v1.0.3
 ------
@@ -82,8 +98,7 @@ v1.0.3
  - Améliorations d'interface
  - Corrections de bugs
  - {SQL} Ajout d'une table extaz_donation_ladder
- - {SQL} Ajout d'un champ use_donation_ladder dans la extaz_table
-   informations
+ - {SQL} Ajout d'un champ use_donation_ladder (int, default: 1) dans la table extaz_informations
 
 v1.0.2
 ------

@@ -61,7 +61,7 @@ $(document).ready(function(){
 					<input id="update" type="checkbox" checked="checked" class="update"></input>
 					<label for="update">Mise à jour automatique ?</label><br>
 						<div class="chat-update">
-							<i class="fa fa-clock-o"></i> <?php echo 'Dernière mise à jour '.date('H:i:s'); ?>
+							<i class="fa fa-clock-o"></i> <?php echo 'Dernière mise à jour à '.date('H:i:s').', il y a '.$api->call('players.online.count')[0]['success'].' joueur(s) connecté(s)'; ?>
 						</div>
 					<hr>
 					<div class="chat-messages">

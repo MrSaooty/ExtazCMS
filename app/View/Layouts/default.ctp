@@ -92,6 +92,7 @@
                             <li class="none">
                                 <?php echo $this->Html->link('Boutique', ['controller' => 'shops', 'action' => 'index']); ?>
                             </li>
+                            <?php } ?>
                             <li class="dropdown">
                                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                                     Support
@@ -105,7 +106,6 @@
                                     </li>
                                 </ul>
                             </li>
-                            <?php } ?>
                             <?php if($use_rules == 1){ ?>
                             <li class="none">
                                 <?php echo $this->Html->link('Règlement', ['controller' => 'pages', 'action' => 'rules']); ?>
