@@ -1,7 +1,7 @@
 Changelog
 =========
 
-v1.4
+v1.4 (prochainement disponible)
 ----
 
  - Vous pouvez maintenant choisir un prefix pour le chat lié au serveur
@@ -18,7 +18,7 @@ v1.4
  - {SQL} Ajout d'un champs chat_prefix (text, default: '') dans la table extaz_informations
  - {SQL} Ajout d'un champs chat_nb_messages (int, default: 20) dans la table extaz_informations
 
-v1.3
+v1.3 (23/01/2015)
 ----
 
  - Vous pouvez désormais visualiser l'ensemble des joueurs connectés sur le serveur avec tout un tas d'informations (pseudo, gamemode, niveau, monde, santé, première et dernière connexion et l'IP). Vous pouvez aussi depuis cette page, kicker, bannir, bannir IP et clear l'inventaire du joueur.
@@ -35,32 +35,32 @@ v1.3
  - Corrections de bugs
  - Modifications mineurs
 
-v1.2
+v1.2 (11/01/2015)
 ----
 
  - Amélioration du panel d'administration
  - Corrections de bug
 
-v1.1
+v1.1 (04/01/2015)
 ----
 
  - Retour de Starpass, retrait d'Oxopass faille de sécurité corrigée merci à [MTC](http://www.bukkit.fr/index.php/user/8641-mtc/)
  - Améliorations d'interface
  - {SQL} Retour à la 1.0.5 au niveau de la base de données
 
-v1.0.7
+v1.0.7 (inconnue)
 ------
 
  - Starpass est remplacé par Oxopass pour des raisons de sécurité
  - {SQL} La table extaz_starpass_history rename en extaz_oxopass_history
 
-v1.0.6
+v1.0.6 (inconnue)
 ------
 
  - Correction d'une faille de sécurité
  - {SQL} Ajout d'un champs starpass_key (int, default: '') dans la table extaz_informations
 
-v1.0.5
+v1.0.5 (inconnue)
 ------
 
  - Ajout d'un background (image)
@@ -72,7 +72,7 @@ v1.0.5
  - Optimisation du code
  - {SQL} Ajout d'un champs user_id (int) dans la table extaz_support
 
-v1.0.4
+v1.0.4 (inconnue)
 ------
 
  - Vous pouvez désormais éxecuter plusieurs commandes après l'achat d'un
@@ -88,7 +88,7 @@ v1.0.4
  - {SQL} Ajout d'un champ happy_hour (int, default: 0) dans la table extaz_informations
  - {SQL} Ajout d'un champ happy_hour_bonus (int, default: 20) dans la table extaz_informations
 
-v1.0.3
+v1.0.3 (inconnue)
 ------
 
  - Possibilité de désactiver l'achat via la monnaie du serveur pour un
@@ -100,17 +100,17 @@ v1.0.3
  - {SQL} Ajout d'une table extaz_donation_ladder
  - {SQL} Ajout d'un champ use_donation_ladder (int, default: 1) dans la table extaz_informations
 
-v1.0.2
+v1.0.2 (inconnue)
 ------
 
  - Corrections de divers bugs
 
-v1.0.1
+v1.0.1 (inconnue)
 ------
 
  - Modification du footer
 
-v1.0
+v1.0 (inconnue)
 ----
 
  - Création du projet
