@@ -18,8 +18,7 @@ v1.4
  - {SQL} Ajout d'un champs chat_prefix (text, default: '') dans la table extaz_informations
  - {SQL} Ajout d'un champs chat_nb_messages (int, default: 20) dans la table extaz_informations
 
-
- v1.3
+v1.3
 ----
 
  - Vous pouvez désormais visualiser l'ensemble des joueurs connectés sur le serveur avec tout un tas d'informations (pseudo, gamemode, niveau, monde, santé, première et dernière connexion et l'IP). Vous pouvez aussi depuis cette page, kicker, bannir, bannir IP et clear l'inventaire du joueur.
