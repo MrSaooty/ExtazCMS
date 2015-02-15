@@ -18,6 +18,7 @@ v1.4
  - {SQL} Ajout d'un champs chat_prefix (text, default: '') dans la table extaz_informations
  - {SQL} Ajout d'un champs chat_nb_messages (int, default: 20) dans la table extaz_informations
 
+
  v1.3
 ----
 
