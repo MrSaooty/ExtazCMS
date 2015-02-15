@@ -53,7 +53,6 @@ class PagesController extends AppController {
 	}
 
 	public function admin_installUpdate(){
-
 		/***********************************/
 		/**     Module de mise à jour     **/
 		/** automatique en developpement  **/
@@ -128,7 +127,7 @@ class PagesController extends AppController {
 			if($this->request->is('ajax')){
 				$informations = $this->Informations->find('first');
     			$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
-				$data = '<i class="fa fa-clock-o"></i> Dernière mise à jour à '.date('H:i:s').', il y a '.$api->call('players.online.count')[0]['success'].' joueur(s) connecté(s).';
+				$data = '<i class="fa fa-clock-o"></i> Dernière mise à jour à '.date('H:i:s').', il y a '.$api->call('players.online.count')[0]['success'].' joueur(s) connecté(s)';
 				echo json_encode($data);
 				exit();
 			}

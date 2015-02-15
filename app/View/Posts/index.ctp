@@ -87,7 +87,7 @@ $(document).ready(function(){
                                 <span>Par</span> <strong><?php echo $articles[$a]['Post']['author']; ?></strong>
                                 <span>
                                     le <?php echo $this->Time->format('d/m/Y à H:i', $articles[$a]['Post']['posted']); ?>
-                                    <?php if($this->Session->read('Auth.User.role') > 0){ ?>
+                                    <?php if($role > 0){ ?>
                                         <span class="btn-group">
                                             <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'edit', $articles[$a]['Post']['id'], 'admin' => true]); ?>" class="btn btn-default btn-xs">
                                                 <font color="#777777">
@@ -152,14 +152,14 @@ $(document).ready(function(){
                                 <span>Par</span> <strong><?php echo $articles[$a]['Post']['author']; ?></strong>
                                 <span>
                                     le <?php echo $this->Time->format('d/m/Y à H:i', $articles[$a]['Post']['posted']); ?> 
-                                    <?php if($this->Session->read('Auth.User.role') > 0){ ?>
+                                    <?php if($role > 0){ ?>
                                         <span class="btn-group">
-                                            <a href="<?php echo $this->Html->webroot.'posts/edit/'.$articles[$a]['Post']['id']; ?>" class="btn btn-default btn-xs">
+                                            <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'edit', $articles[$a]['Post']['id'], 'admin' => true]); ?>" class="btn btn-default btn-xs">
                                                 <font color="#777777">
                                                     <i class="fa fa-pencil"></i>
                                                 </font>
                                             </a> 
-                                            <a href="<?php echo $this->Html->webroot.'posts/delete/'.$articles[$a]['Post']['id']; ?>" class="confirm btn btn-default btn-xs">
+                                            <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'delete', $articles[$a]['Post']['id'], 'admin' => true]); ?>" class="confirm btn btn-default btn-xs">
                                                 <font color="red">
                                                     <i class="fa fa-times"></i>
                                                 </font>

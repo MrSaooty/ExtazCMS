@@ -88,16 +88,16 @@ $(document).ready(function(){
                                     <?php
                                     switch($d['Support']['priority']){
                                         case '1':
-                                            echo '<button class="btn btn-success btn-xs btn-block">Basse</button>';
+                                            echo '<span class="label label-success btn-xs btn-block">Basse</span>';
                                             break;
                                         case '2':
-                                            echo '<button class="btn btn-info btn-xs btn-block">Moyenne</button>';
+                                            echo '<span class="label label-info btn-xs btn-block">Moyenne</span>';
                                             break;
                                         case '3':
-                                            echo '<button class="btn btn-warning btn-xs btn-block">Haute</button>';
+                                            echo '<span class="label label-warning btn-xs btn-block">Haute</span>';
                                             break;
                                         case '4':
-                                        echo '<button class="btn btn-danger btn-xs btn-block">Très haute</button>';
+                                        echo '<span class="label label-danger btn-xs btn-block">Très haute</span>';
                                             break;
                                     }
                                     ?>

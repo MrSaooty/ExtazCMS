@@ -136,7 +136,6 @@ class PostsController extends AppController{
 							$this->Post->saveField('title', $this->request->data['Post']['title']);
 							$this->Post->saveField('cat', $this->request->data['Post']['cat']);
 							$this->Post->saveField('slug', $slug);
-							$this->Post->saveField('progress', $this->request->data['Post']['progress']);
 							$this->Post->saveField('content', $this->request->data['Post']['content']);
 							$this->Session->setFlash('Article modifié !', 'success');
 							return $this->redirect(['controller' => 'posts', 'action' => 'index', 'admin' => false]);
