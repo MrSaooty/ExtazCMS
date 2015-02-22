@@ -72,7 +72,7 @@ CREATE TABLE `extaz_informations` (
   `rules` longtext,
   `background` int(11) DEFAULT NULL,
   `chat_prefix` text,
-  `chat_nb_messages` int(11) DEFAULT NULL
+  `chat_nb_messages` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

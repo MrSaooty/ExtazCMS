@@ -23,7 +23,14 @@ $(document).ready(function(){
                         <?php } else { ?>
                         <div class="item">
                         <?php } ?>
-                            <img class="img-slider" src="<?php echo $slider[$i]['Post']['img']; ?>">
+                            <?php
+                            if(filter_var($slider[$i]['Post']['img'], FILTER_VALIDATE_URL)){
+                                echo '<img class="img-slider" src="'.$slider[$i]['Post']['img'].'">';
+                            }
+                            else{
+                                echo '<img class="img-slider" src="'.$this->webroot.'img/posts/'.$slider[$i]['Post']['img'].'">';
+                            }
+                            ?>
                             <div class="carousel-caption">
                                 <p>
                                     <?php

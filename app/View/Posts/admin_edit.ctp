@@ -38,11 +38,10 @@ $(document).ready(function(){
             var id = '<?php echo $this->params['pass'][0]; ?>';
             var title = $('#PostTitle').val();
             var slug = $('#PostSlug').val();
-            var progress = $('#PostProgress').val();
             var cat = $('#PostCat').val();
             var content = CKEDITOR.instances['PostContent'].getData();
             var url = '<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'edit', $this->params['pass'][0])); ?>';
-            $.post(url, {id: id, title: title, slug: slug, progress: progress, cat: cat, content: content}, function(data){
+            $.post(url, {id: id, title: title, slug: slug, cat: cat, content: content}, function(data){
                 $.bootstrapGrowl("<i class='fa fa-circle-o-notch fa-spin'></i> Sauvegarde automatique en cours", {
                   ele: 'body', 
                   type: 'info', 
@@ -91,42 +90,34 @@ $(document).ready(function(){
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-11">
-                                    <font color="#A94442"><small><?php echo $this->Form->error('slug'); ?></small></font>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-comment"></i></span>
-                                        <?php echo $this->Form->input('slug', array('type' => 'text', 'value' => $data['Post']['slug'], 'class' => 'form-control', 'label' => false)); ?>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <?php
-                                    if($data['Post']['author'] == $this->Session->read('Auth.User.username') OR $this->Session->read('Auth.User.role') > 1){
-                                        echo $this->Form->input('progress', array('type' => 'number', 'value' => $data['Post']['progress'], 'class' => 'form-control', 'label' => false, 'min' => 0, 'max' => 100, 'step' => 5));
-                                    }
-                                    else{
-                                        echo $this->Form->input('progress', array('type' => 'number', 'value' => $data['Post']['progress'], 'class' => 'form-control', 'label' => false, 'min' => 0, 'max' => 100, 'step' => 5, 'disabled'));
-                                    }
-                                    ?>
-                                </div>
-                            </div>  
-                        </div>
-                        <div class="form-group">
-                            <font color="#A94442"><small><?php echo $this->Form->error('img_file'); ?></small></font>
-                            <input type="file" name="data[Post][img_file]" id="PostImgFile" onchange="this.parentNode.nextSibling.value = this.value">
+                            <font color="#A94442"><small><?php echo $this->Form->error('slug'); ?></small></font>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-comment"></i></span>
+                                <?php echo $this->Form->input('slug', array('type' => 'text', 'value' => $data['Post']['slug'], 'class' => 'form-control', 'label' => false)); ?>
+                            </div>
                         </div>
                         <div class="form-group">
                             <font color="#A94442"><small><?php echo $this->Form->error('img'); ?></small></font>
-                            <div class="input-group margin-bottom-20">
-                                <span class="input-group-addon"><i class="fa fa-link"></i></span>
-                                <?php 
-                                if(filter_var($data['Post']['img'], FILTER_VALIDATE_URL)){
-                                    echo $this->Form->input('img', array('type' => 'text', 'placeholder' => $data['Post']['img'], 'class' => 'form-control', 'label' => false)).'<a href="'.$data['Post']['img'].'" target="_blank" class="input-group-addon"><i class="fa fa-arrow-circle-right"></i></a>';
-                                }
-                                else{
-                                    echo $this->Form->input('img', array('type' => 'text', 'placeholder' => FULL_BASE_URL.'/img/posts/'.$data['Post']['img'], 'class' => 'form-control', 'label' => false)).'<a href="'.FULL_BASE_URL.'/img/posts/'.$data['Post']['img'].'" target="_blank" class="input-group-addon"><i class="fa fa-arrow-circle-right"></i></a>';
-                                }
-                                ?>
+                            <font color="#A94442"><small><?php echo $this->Form->error('img_file'); ?></small></font>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-group margin-bottom-20">
+                                        <span class="input-group-addon"><i class="fa fa-link"></i></span>
+                                        <?php 
+                                        if(filter_var($data['Post']['img'], FILTER_VALIDATE_URL)){
+                                            echo $this->Form->input('img', array('type' => 'text', 'value' => $data['Post']['img'], 'class' => 'form-control', 'label' => false)).'<a href="'.$data['Post']['img'].'" target="_blank" class="input-group-addon"><i class="fa fa-external-link-square"></i></a>';
+                                        }
+                                        else{
+                                            echo $this->Form->input('img', array('type' => 'text', 'value' => FULL_BASE_URL.'/img/posts/'.$data['Post']['img'], 'class' => 'form-control', 'label' => false)).'<a href="'.FULL_BASE_URL.'/img/posts/'.$data['Post']['img'].'" target="_blank" class="input-group-addon"><i class="fa fa-external-link-square"></i></a>';
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="pull-right">
+                                        <input type="file" name="data[Post][img_file]" id="PostImgFile" onchange="this.parentNode.nextSibling.value = this.value">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">

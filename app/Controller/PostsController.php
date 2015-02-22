@@ -109,7 +109,6 @@ class PostsController extends AppController{
 					$slug = strtolower($this->request->data['slug']);
 					$this->Post->saveField('title', $this->request->data['title']);
 					$this->Post->saveField('slug', $slug);
-					$this->Post->saveField('progress', $this->request->data['progress']);
 					$this->Post->saveField('cat', $this->request->data['cat']);
 					$this->Post->saveField('content', $this->request->data['content']);
 					exit();
