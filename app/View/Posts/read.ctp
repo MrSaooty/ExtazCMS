@@ -1,10 +1,6 @@
 <?php $this->assign('title', $post['Post']['title']); ?>
 <script>
 $(document).ready(function(){
-    $(window).load(function(){
-        $('#twitter_share').fadeIn('slow');
-    });
-
     $(".confirm").confirm({
         text: "Voulez vous vraiment supprimer cet article ?",
         title: "Confirmation",
@@ -64,13 +60,11 @@ $(document).ready(function(){
                             <ul class="list-unstyled list-inline blog-info">
                                 <li><i class="fa fa-user"></i> Posté par <?php echo $post['Post']['author']; ?></li>
                                 <li>
-                                    <?php
-                                    if($post['Post']['draft'] == 1):
-                                    ?>
-                                    <i class="fa fa-calendar"></i> <?php echo $this->Time->timeAgoInWords($post['Post']['created']); ?>
-                                    <?php else: ?>
+                                    <?php if($post['Post']['draft'] == 1){ ?>
+                                    <i class="fa fa-calendar"></i> Non publié
+                                    <?php } else { ?>
                                     <i class="fa fa-calendar"></i> <?php echo $this->Time->timeAgoInWords($post['Post']['posted']); ?>
-                                    <?php endif; ?>
+                                    <?php } ?>
                                 </li>
                                 <li><i class="fa fa-tags"></i> <?php echo $post['Post']['cat']; ?></li>
                             </ul>                    
@@ -78,28 +72,28 @@ $(document).ready(function(){
                     </div>
                     <div class="col-md-4">
                         <div class="btn-group pull-right">
-                            <?php if($liked): ?>
+                            <?php if($liked){ ?>
                                 <button class="btn btn-default btn-xs rounded-3x" id="dislike">
                                     <font color="red"><i class="fa fa-heart"></i></font> J'aime (<?php echo $nbLikes; ?>)
                                 </button>
                                 <button class="btn btn-default btn-xs rounded-3x" id="like" style="display:none;">
                                     <i class="fa fa-heart"></i> J'aime (<?php echo $nbLikes; ?>)
                                 </button>
-                            <?php else: ?>
+                            <?php } else { ?>
                                 <button class="btn btn-default btn-xs rounded-3x" id="dislike" style="display:none;">
                                     <font color="red"><i class="fa fa-heart"></i></font> J'aime (<?php echo $nbLikes; ?>)
                                 </button>
                                 <button class="btn btn-default btn-xs rounded-3x" id="like">
                                     <i class="fa fa-heart"></i> J'aime (<?php echo $nbLikes; ?>)
                                 </button>
-                            <?php endif; ?>        
+                            <?php } ?>        
                             <button class="btn btn-default btn-xs rounded-3x" id="chargement" style="display:none;">
                                 <?php echo $this->Html->image('like_loader.gif', array('alt' => 'chargement')); ?>
                             </button>
                         </div>
                     </div>
                 </div>
-                <?php if($this->Session->read('Auth.User.role') > 0): ?>
+                <?php if($this->Session->read('Auth.User.role') > 0){ ?>
                     <hr>
                     <div class="row">
                         <div class="col-md-4">
@@ -115,19 +109,14 @@ $(document).ready(function(){
                         <div class="col-md-8">
                             <div class="btn-group pull-right">
                                 <?php
-                                if($post['Post']['draft'] == 1):
+                                if($post['Post']['draft'] == 1){
                                     echo '<a class="btn btn-danger btn-xs" href=""><i class="fa fa-lock"></i> Cet article est enregistré en tant que brouillon</a>';
-                                    if($post['Post']['corrected'] == 0):
-                                        echo '<a class="btn btn-warning btn-xs" href=""><i class="fa fa-exclamation-triangle"></i> Cet article n\'a pas été corrigé</a>';
-                                    else:
-                                        echo '<a class="btn btn-success btn-xs" href=""><i class="fa fa-check"></i> Cet article a été corrigé</a>';
-                                    endif;
-                                endif;
+                                }
                                 ?>
                             </div>
                         </div>
                     </div>
-                <?php endif; ?>
+                <?php } ?>
                 <hr>
                 <?php echo $post['Post']['content']; ?>
             </div>
