@@ -125,20 +125,23 @@ $(document).ready(function(){
                 <h2><a href="">Derniers articles</a></h2>
                 <div class="row">
                     <?php for($i = 0; $i < 3; $i++){ ?>
-                        <div class="col-md-4">
-                            <div class="magazine-news-img">
-                                <?php
-                                echo '<a href="'.$this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $lastPosts[$i]['Post']['slug'], 'id' => $lastPosts[$i]['Post']['id'])).'">';
-                                if(filter_var($lastPosts[$i]['Post']['img'], FILTER_VALIDATE_URL)):
-                                    echo $this->Html->image($lastPosts[$i]['Post']['img'], array('alt' => '', 'height' => '130', 'width' => '260'));
-                                else:
-                                    echo $this->Html->image('posts/'.$lastPosts[$i]['Post']['img'], array('alt' => '', 'height' => '130', 'width' => '260'));
-                                endif;
-                                echo '</a><br>';
-                                echo '<a href="'.$this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $lastPosts[$i]['Post']['slug'], 'id' => $lastPosts[$i]['Post']['id'])).'">'.$lastPosts[$i]['Post']['title'].'</a>';
-                                ?>
+                        <?php if(isset($lastPosts[$i])){ ?>
+                            <div class="col-md-4">
+                                <div class="magazine-news-img">
+                                    <?php
+                                    echo '<a href="'.$this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $lastPosts[$i]['Post']['slug'], 'id' => $lastPosts[$i]['Post']['id'])).'">';
+                                    if(filter_var($lastPosts[$i]['Post']['img'], FILTER_VALIDATE_URL)){
+                                        echo $this->Html->image($lastPosts[$i]['Post']['img'], array('alt' => '', 'height' => '130', 'width' => '260'));
+                                    }
+                                    else{
+                                        echo $this->Html->image('posts/'.$lastPosts[$i]['Post']['img'], array('alt' => '', 'height' => '130', 'width' => '260'));
+                                    }
+                                    echo '</a><br>';
+                                    echo '<a href="'.$this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $lastPosts[$i]['Post']['slug'], 'id' => $lastPosts[$i]['Post']['id'])).'">'.$lastPosts[$i]['Post']['title'].'</a>';
+                                    ?>
+                                </div>
                             </div>
-                        </div>
+                        <?php } ?>
                     <?php } ?>
                 </div>
             </div>
