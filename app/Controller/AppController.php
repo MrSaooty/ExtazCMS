@@ -118,7 +118,7 @@ class AppController extends Controller {
 	}
 
 	// ExtazCMS
-	$version = '1.4';
+	$version = '1.5';
 	$lastVersion = file_get_contents('http://www.extaz-mc.fr/extazcms/version.txt');
 	$this->set('version', $version);
 	$this->set('lastVersion', $lastVersion);

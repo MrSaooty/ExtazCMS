@@ -140,7 +140,7 @@
             <div class="copyright">
                 <div class="container">
                     <p class="text-center">
-                        Propulsé par<a href="http://cms.extaz-mc.fr/" target="_blank">ExtazCMS 1.4</a>code par<a href="http://twitter.com/MrSaooty" target="_blank">@MrSaooty</a>
+                        Propulsé par<a href="http://cms.extaz-mc.fr/" target="_blank">ExtazCMS 1.5</a>code par<a href="http://twitter.com/MrSaooty" target="_blank">@MrSaooty</a>
                     </p>
                 </div> 
             </div><!--/copyright--> 
