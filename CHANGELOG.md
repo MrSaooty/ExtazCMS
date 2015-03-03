@@ -1,7 +1,7 @@
 Changelog
 =========
 
-v1.4 (prochainement disponible)
+v1.4 (03/03/2015)
 ----
 
  - Vous pouvez maintenant choisir un prefix pour le chat lié au serveur
