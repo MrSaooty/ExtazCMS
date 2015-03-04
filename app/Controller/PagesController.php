@@ -552,7 +552,8 @@ class PagesController extends AppController {
 	public function admin_add_member(){
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('post')){
-				$this->Team->saveField('username', $this->request->data['Pages']['username']);
+				$username = trim($this->request->data['Pages']['username']);
+				$this->Team->saveField('username', $username);
 				$this->Team->saveField('rank', $this->request->data['Pages']['rank']);
 				$this->Team->saveField('facebook_url', $this->request->data['Pages']['facebook_url']);
 				$this->Team->saveField('twitter_url', $this->request->data['Pages']['twitter_url']);

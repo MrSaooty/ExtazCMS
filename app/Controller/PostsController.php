@@ -18,7 +18,7 @@ class PostsController extends AppController{
 		$q = $this->paginate('Post');
 		$this->set('articles', $q);
 		// Nombre d'article visible & non draft
-		$this->set('nbPost', $this->Post->find('count', array('conditions' => array('Post.visible' => 1, 'Post.draft' => 0))));
+		$this->set('nb_posts', $this->Post->find('count', array('conditions' => array('Post.visible' => 1, 'Post.draft' => 0))));
 		$this->set('slider', $this->Post->find('all', ['conditions' => ['Post.visible' => 1, 'Post.draft' => 0], 'order' => ['Post.posted' => 'DESC'], 'limit' => 3]));
 	}
 
@@ -206,24 +206,29 @@ class PostsController extends AppController{
 	}
 
 	public function like(){
-		$id = $this->request->data['id'];
-		// Si l'utlisateur n'a pas déjà aimé cet article
-		if($this->Like->find('count', array('conditions' => array('Like.id_article' => $id, 'Like.ip' => $_SERVER['REMOTE_ADDR']))) == 0){
-			// On ajoute son like
-			$this->Like->Create;
-			$this->Like->saveField('id_article', $id);
-			$this->Like->saveField('ip', $_SERVER['REMOTE_ADDR']);
-			if($this->Auth->user()){
-				$this->Like->saveField('username', $this->Auth->user('username'));
+		if($this->request->is('ajax')){
+			$id = $this->request->data['id'];
+			// Si l'utlisateur n'a pas déjà aimé cet article
+			if($this->Like->find('count', array('conditions' => array('Like.id_article' => $id, 'Like.ip' => $_SERVER['REMOTE_ADDR']))) == 0){
+				// On ajoute son like
+				$this->Like->Create;
+				$this->Like->saveField('id_article', $id);
+				$this->Like->saveField('ip', $_SERVER['REMOTE_ADDR']);
+				if($this->Auth->user()){
+					$this->Like->saveField('username', $this->Auth->user('username'));
+				}
+				else{
+					$this->Like->saveField('username', 'Undefined');
+				}
 			}
-			else{
-				$this->Like->saveField('username', 'Undefined');
+			// Si l'utlisateur a déjà aimé cet article
+			elseif($this->Like->find('count', array('conditions' => array('Like.id_article' => $id, 'Like.ip' => $_SERVER['REMOTE_ADDR']))) == 1){
+				// On supprime son like
+				$this->Like->deleteAll(array('Like.id_article' => $id, 'Like.ip' => $_SERVER['REMOTE_ADDR']), false);
 			}
 		}
-		// Si l'utlisateur a déjà aimé cet article
-		elseif($this->Like->find('count', array('conditions' => array('Like.id_article' => $id, 'Like.ip' => $_SERVER['REMOTE_ADDR']))) == 1){
-			// On supprime son like
-			$this->Like->deleteAll(array('Like.id_article' => $id, 'Like.ip' => $_SERVER['REMOTE_ADDR']), false);
+		else{
+			return $this->redirect($this->referer());
 		}
 	}
 

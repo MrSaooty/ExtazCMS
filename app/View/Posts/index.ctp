@@ -14,7 +14,7 @@ $(document).ready(function(){
     <div class="row magazine-page">
         <div class="col-md-9">
             <!-- Begin Content -->
-            <?php if($use_slider == 1){ ?>
+            <?php if($use_slider == 1 && $nb_posts >= 3){ ?>
             <div class="carousel slide carousel-v1 margin-bottom-40" id="myCarousel-1">
                 <div class="carousel-inner">
                     <?php for ($i=0; $i < 3; $i++){ ?>
@@ -204,7 +204,7 @@ $(document).ready(function(){
             <div class="text-center">
                 <ul class="pagination">
                     <?php
-                    if($nbPost > 6){
+                    if($nb_posts > 6){
                         echo '<li>'.$this->Paginator->prev(__('«'), array('tag' => 'li'), null, array('tag' => 'li', 'class' => 'disabled', 'disabledTag' => 'a')).'</li>';
                         echo $this->Paginator->numbers(array('separator' => '', 'currentTag' => 'a', 'currentClass' => 'active', 'tag' => 'li', 'first' => 'Première', 'last' => 'Dernière', 'ellipsis' => ''));
                         echo '<li>'.$this->Paginator->next(__('»'), array('tag' => 'li'), null, array('tag' => 'li', 'class' => 'disabled', 'disabledTag' => 'a')).'</li>';
