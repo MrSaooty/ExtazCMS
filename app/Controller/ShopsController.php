@@ -13,24 +13,18 @@ Class ShopsController extends AppController{
 		));
 
 	public function index(){
-		if($this->Auth->user()){
-			$informations = $this->Informations->find('first');
-			$use_store = $informations['Informations']['use_store'];
-			// Si la boutique est activée
-			if($use_store == 1){
-				// Pagination
-				$q = $this->paginate('Shop');
-				$this->set('items', $q);
-				$this->set('nbItems', $this->Shop->find('count'));
-			}
-			// Si la boutique est désactivée
-			else{
-				throw new NotFoundException();
-			}
+		$informations = $this->Informations->find('first');
+		$use_store = $informations['Informations']['use_store'];
+		// Si la boutique est activée
+		if($use_store == 1){
+			// Pagination
+			$q = $this->paginate('Shop');
+			$this->set('items', $q);
+			$this->set('nbItems', $this->Shop->find('count'));
 		}
+		// Si la boutique est désactivée
 		else{
-			$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
-			return $this->redirect(['controller' => 'users', 'action' => 'login', 'admin' => false]);
+			throw new NotFoundException();
 		}
 	}
 
