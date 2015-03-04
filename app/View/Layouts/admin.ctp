@@ -148,6 +148,19 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <?php if($use_store == 1){ ?>
+                                <li class="has_submenu">
+                                    <a href="#"><i class="fa fa-gift"></i> Codes <span class="nav-caret fa fa-caret-down"></span></a>
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'codes', 'action' => 'generate', 'admin' => true]); ?>"><i class="fa fa-plus"></i> Générer</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'codes', 'action' => 'list', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <?php } ?>
                                 <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
                                 <li>
                                     <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'chat_messages', 'admin' => true]); ?>"><i class="fa fa-comments"></i>Chat</a>
@@ -168,7 +181,7 @@
                                         <i class="fa fa-file-text"></i> Besoin d'aide ?
                                     </a>
                                 </li>
-                                <?php if($version == $lastVersion){ ?>
+                                <?php if($version >= $lastVersion){ ?>
                                 <li>
                                     <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'update', 'admin' => true]); ?>">
                                         <p class="green"><i class="fa fa-check-circle"></i> Mise à jour</p>

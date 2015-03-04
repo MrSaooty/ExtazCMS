@@ -8,8 +8,8 @@
 		                <h3 class="pull-left"><i class="fa fa-database lblue"></i>Mise à jour du CMS</h3>
 		                <div class="clearfix"></div>
 		            </div>
-		            	<?php if($version == $lastVersion){ ?>
-		                    Vous utilisez la dernière version disponible du CMS <?php echo '('.$version.')'; ?>
+		            	<?php if($version >= $lastVersion){ ?>
+		                    Vous utilisez la dernière version disponible du CMS <?php echo '('.$lastVersion.')'; ?>
 		                    <hr>
 		                    <button class="btn btn-default" disabled="disabled"><i class="fa fa-cogs"></i> Installer la mise à jour</button>
 		                <?php } else { ?>

@@ -16,6 +16,20 @@ Date: 2015-01-02 21:17:35
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
+-- Table structure for extaz_codes
+-- ----------------------------
+CREATE TABLE IF NOT EXISTS `extaz_codes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `author` text NOT NULL,
+  `ip` text NOT NULL,
+  `code` text NOT NULL,
+  `value` int(11) NOT NULL,
+  `used` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- ----------------------------
 -- Table structure for extaz_donation_ladder
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_donation_ladder`;
