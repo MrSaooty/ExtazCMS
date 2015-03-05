@@ -54,7 +54,7 @@ $(document).ready(function(){
                                 <th><b>Adresse IP</b></th>
                                 <th><b>Code</b></th>
                                 <th><b>Valeur</b></th>
-                                <th><b>Utilisé</b></th>
+                                <th><b>Utilisé ?</b></th>
                                 <th><b>Date de création</b></th>
                                 <th><b>Action</b></th>
                             </tr>
@@ -79,7 +79,7 @@ $(document).ready(function(){
                                         echo 'Non';
                                     }
                                     else{
-                                        echo 'Oui';
+                                        echo 'Oui par '.$d['Code']['by'];
                                     }
                                     ?>
                                 </td>

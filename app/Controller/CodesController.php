@@ -40,6 +40,7 @@ Class CodesController extends AppController{
 			$this->Code->saveField('code', $code);
 			$this->Code->saveField('value', $value);
 			$this->Code->saveField('used', 0);
+			$this->Code->saveField('by', '');
 			// On redirige
 			$this->Session->setFlash('Votre code a bien été créé !', 'success');
 			return $this->redirect(['controller' => 'codes', 'action' => 'list', 'admin' => true]);
@@ -67,43 +68,50 @@ Class CodesController extends AppController{
 	}
 
 	public function consume(){
-		$informations = $this->Informations->find('first');
-		$site_money = $informations['Informations']['site_money'];
-		if($this->request->is('post')){
-			$code = $this->request->data['Codes']['code'];
-			// Si ce code existe
-			if($this->Code->findByCode($code)){
-				$infos = $this->Code->findByCode($code);
-				$id = $infos['Code']['id'];
-				$used = $infos['Code']['used'];
-				$value = $infos['Code']['value'];
-				// S'il n'est pas déjà utilisé
-				if($used == 0){
-					// On utilise le code
-					$this->Code->id = $id;
-					$this->Code->saveField('used', 1);
-					// On va chercher les infos de l'utilisateur
-					$user = $this->User->find('first', ['conditions' => ['User.id' => $this->Auth->user('id')]]);
-					// On récupère son nombre de tokens actuels
-					$user_tokens = $user['User']['tokens'];
-					// On définit son nouveau nombre de tokens
-					$new_user_tokens = $user_tokens + $value;
-					// On le sauvegarde
-					$this->User->id = $this->Auth->user('id');
-					$this->User->saveField('tokens', $new_user_tokens);
-					// Et on redirige
-					$this->Session->setFlash('Votre avez été crédité de '.$value.' '.$site_money.' !', 'success');
-					return $this->redirect(['controller' => 'shops', 'action' => 'reload', 'admin' => false]);
+		if($this->Auth->user()){
+			$informations = $this->Informations->find('first');
+			$site_money = $informations['Informations']['site_money'];
+			if($this->request->is('post')){
+				$code = $this->request->data['Codes']['code'];
+				// Si ce code existe
+				if($this->Code->findByCode($code)){
+					$infos = $this->Code->findByCode($code);
+					$id = $infos['Code']['id'];
+					$used = $infos['Code']['used'];
+					$value = $infos['Code']['value'];
+					// S'il n'est pas déjà utilisé
+					if($used == 0){
+						// On utilise le code
+						$this->Code->id = $id;
+						$this->Code->saveField('used', 1);
+						$this->Code->saveField('by', $this->Auth->user('username'));
+						// On va chercher les infos de l'utilisateur
+						$user = $this->User->find('first', ['conditions' => ['User.id' => $this->Auth->user('id')]]);
+						// On récupère son nombre de tokens actuels
+						$user_tokens = $user['User']['tokens'];
+						// On définit son nouveau nombre de tokens
+						$new_user_tokens = $user_tokens + $value;
+						// On le sauvegarde
+						$this->User->id = $this->Auth->user('id');
+						$this->User->saveField('tokens', $new_user_tokens);
+						// Et on redirige
+						$this->Session->setFlash('Votre avez été crédité de '.$value.' '.$site_money.' !', 'success');
+						return $this->redirect(['controller' => 'shops', 'action' => 'reload', 'admin' => false]);
+					}
+					else{
+						$this->Session->setFlash('Ce code a déjà été utilisé !', 'error');
+						return $this->redirect(['controller' => 'shops', 'action' => 'reload', 'admin' => false]);
+					}
 				}
 				else{
-					$this->Session->setFlash('Ce code a déjà été utilisé !', 'error');
+					$this->Session->setFlash('Code erroné', 'error');
 					return $this->redirect(['controller' => 'shops', 'action' => 'reload', 'admin' => false]);
 				}
 			}
-			else{
-				$this->Session->setFlash('Code erroné', 'error');
-				return $this->redirect(['controller' => 'shops', 'action' => 'reload', 'admin' => false]);
-			}
+		}
+		else{
+			$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
+			return $this->redirect(['controller' => 'users', 'action' => 'login', 'admin' => false]);
 		}
 	}
 }

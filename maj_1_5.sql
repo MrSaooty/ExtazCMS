@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS `extaz_codes` (
   `code` text NOT NULL,
   `value` int(11) NOT NULL,
   `used` int(11) NOT NULL,
+  `by` text NOT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
