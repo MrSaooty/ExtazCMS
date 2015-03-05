@@ -4,6 +4,7 @@ Changelog
 v1.5 (en développement)
 ----
 
+* Vous pouvez maintenant générer des codes cadeaux et accéder à la liste des codes déjà générés. Les codes cadeaux octroient un nombre de token préfini par l'administrateur et s'utilisent sur la page de rechargement
 * Corrections de bugs
 * {SQL} Ajout d'une table extaz_codes
 
