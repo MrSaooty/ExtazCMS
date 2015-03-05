@@ -7,3 +7,4 @@ Un véritable site pour votre serveur Minecraft
 * [Guide de mise à jour](https://github.com/MrSaooty/ExtazCMS/wiki/Mise-%C3%A0-jour)
 * [Guide Starpass](https://github.com/MrSaooty/ExtazCMS/wiki/Starpass)
 * [Changelog](https://github.com/MrSaooty/ExtazCMS/blob/master/CHANGELOG.md)
+* [Donateurs](https://github.com/MrSaooty/ExtazCMS/blob/master/DONATORS.md)
