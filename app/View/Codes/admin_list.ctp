@@ -1,9 +1,9 @@
-<?php $this->assign('title', 'Tous les utilisateurs'); ?>
+<?php $this->assign('title', 'Codes cadeaux'); ?>
 <script type="text/javascript">
 $(document).ready(function(){
     $(window).load(function(){
         $(".confirm").confirm({
-            text: "Voulez vous vraiment supprimer cette ligne ?",
+            text: "Voulez vous vraiment supprimer ce code ?",
             title: "Confirmation",
             confirmButton: "Oui",
             cancelButton: "Non"
@@ -61,7 +61,14 @@ $(document).ready(function(){
                         </thead>
                         <tbody>
                             <?php foreach($data as $d){ ?>
-                            <tr>
+                            <?php
+                            if($d['Code']['used'] == 0){
+                                echo '<tr class="success">';
+                            }
+                            else{
+                                echo '<tr>';
+                            }
+                            ?>
                                 <td><?php echo $d['Code']['author']; ?></td>
                                 <td><?php echo $d['Code']['ip']; ?></td>
                                 <td><input class="form-control input-sm" type="text" onclick="this.select();" value="<?php echo $d['Code']['code']; ?>"></td>
@@ -77,9 +84,14 @@ $(document).ready(function(){
                                     ?>
                                 </td>
                                 <td><?php echo $this->Time->format('d/m/Y à H:i', $d['Code']['created']); ?></td>
-                                <td>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'codes', 'action' => 'delete', $d['Code']['id']]); ?>" class="label label-danger confirm">Supprimer</a>
-                                </td>
+                                <?php
+                                if($d['Code']['used'] == 0){
+                                    echo '<td><a href="'.$this->Html->url(['controller' => 'codes', 'action' => 'delete', $d['Code']['id']]).'" class="btn btn-danger btn-sm confirm"><i class="fa fa-trash-o"></i> Supprimer</a></td>';
+                                }
+                                else{
+                                    echo '<td><button href="#" disabled="disabled" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Supprimer</button></td>';
+                                }
+                                ?>
                             </tr>
                             <?php } ?>
                         </tbody>

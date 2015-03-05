@@ -56,7 +56,14 @@ Class CodesController extends AppController{
 	}
 
 	public function admin_delete($id){
-
+		if($this->Auth->user('role') > 0){
+			$this->Code->delete($id);
+			$this->Session->setFlash('Ce code a été supprimé', 'success');
+			return $this->redirect(['controller' => 'codes', 'action' => 'list', 'admin' => true]);
+		}
+		else{
+			throw new NotFoundException();			
+		}
 	}
 
 	public function consume(){
