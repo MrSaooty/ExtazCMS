@@ -56,6 +56,18 @@
 	                	</section>
 	                </fieldset>
 	            <?php echo $this->Form->end(); ?>
+	            <div class="row">
+	            	<div class="col-md-8 col-md-offset-2">
+	            		<?php echo $this->Form->create('Codes', ['action' => 'consume', 'inputDefaults' => ['error' => false]]); ?>
+		                    <div class="input-group">
+		                    	<?php echo $this->Form->input('code', array('type' => 'text', 'placeholder' => 'J\'ai un code cadeau !', 'class' => 'form-control', 'label' => false, 'required' => 'required')); ?>
+			                    <span class="input-group-btn">
+	                                <button class="btn btn-default send-command" type="submit"><i class="fa fa-chevron-right"></i></button>
+	                            </span>
+                            </div>
+		            	<?php echo $this->Form->end(); ?>
+	            	</div>
+	            </div>
         	</center>
         </div>
         <?php echo $this->element('sidebar'); ?>

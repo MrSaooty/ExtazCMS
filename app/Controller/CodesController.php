@@ -1,6 +1,8 @@
 <?php
 Class CodesController extends AppController{
 
+	public $uses = ['Code', 'User', 'Informations'];
+
 	public function index(){
 		if($this->Auth->user('role' > 0)){
 			return $this->redirect(['controller' => 'codes', 'action' => 'create', 'admin' => true]);
@@ -57,7 +59,44 @@ Class CodesController extends AppController{
 
 	}
 
-	// public function use(){
-		
-	// }
+	public function consume(){
+		$informations = $this->Informations->find('first');
+		$site_money = $informations['Informations']['site_money'];
+		if($this->request->is('post')){
+			$code = $this->request->data['Codes']['code'];
+			// Si ce code existe
+			if($this->Code->findByCode($code)){
+				$infos = $this->Code->findByCode($code);
+				$id = $infos['Code']['id'];
+				$used = $infos['Code']['used'];
+				$value = $infos['Code']['value'];
+				// S'il n'est pas déjà utilisé
+				if($used == 0){
+					// On utilise le code
+					$this->Code->id = $id;
+					$this->Code->saveField('used', 1);
+					// On va chercher les infos de l'utilisateur
+					$user = $this->User->find('first', ['conditions' => ['User.id' => $this->Auth->user('id')]]);
+					// On récupère son nombre de tokens actuels
+					$user_tokens = $user['User']['tokens'];
+					// On définit son nouveau nombre de tokens
+					$new_user_tokens = $user_tokens + $value;
+					// On le sauvegarde
+					$this->User->id = $this->Auth->user('id');
+					$this->User->saveField('tokens', $new_user_tokens);
+					// Et on redirige
+					$this->Session->setFlash('Votre avez été crédité de '.$value.' '.$site_money.' !', 'success');
+					return $this->redirect(['controller' => 'shops', 'action' => 'reload', 'admin' => false]);
+				}
+				else{
+					$this->Session->setFlash('Ce code a déjà été utilisé !', 'error');
+					return $this->redirect(['controller' => 'shops', 'action' => 'reload', 'admin' => false]);
+				}
+			}
+			else{
+				$this->Session->setFlash('Code erroné', 'error');
+				return $this->redirect(['controller' => 'shops', 'action' => 'reload', 'admin' => false]);
+			}
+		}
+	}
 }
