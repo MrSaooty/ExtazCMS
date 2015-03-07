@@ -16,6 +16,19 @@ Date: 2015-01-02 21:17:35
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
+-- Table structure for extaz_comments
+-- ----------------------------
+CREATE TABLE IF NOT EXISTS `extaz_comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) NOT NULL,
+  `author` text NOT NULL,
+  `ip` text NOT NULL,
+  `comment` text NOT NULL,
+  `created` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+-- ----------------------------
 -- Table structure for extaz_codes
 -- ----------------------------
 CREATE TABLE IF NOT EXISTS `extaz_codes` (
