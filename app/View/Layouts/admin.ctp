@@ -119,6 +119,14 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <li class="has_submenu">
+                                    <a href="#"><i class="fa fa-comments-o"></i> Commentaires <span class="nav-caret fa fa-caret-down"></span></a>
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'list', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste</a>
+                                        </li>
+                                    </ul>
+                                </li>
                                 <?php if($use_store == 1){ ?>
                                 <li class="has_submenu">
                                     <a href="#"><i class="fa fa-history"></i> Historiques <span class="nav-caret fa fa-caret-down"></span></a>

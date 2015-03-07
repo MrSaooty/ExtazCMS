@@ -95,21 +95,17 @@ $(document).ready(function(){
                                 <span>
                                     le <?php echo $this->Time->format('d/m/Y à H:i', $articles[$a]['Post']['posted']); ?>
                                     <?php if($role > 0){ ?>
-                                        <span class="btn-group">
-                                            <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'edit', $articles[$a]['Post']['id'], 'admin' => true]); ?>" class="btn btn-default btn-xs">
-                                                <font color="#777777">
-                                                    <i class="fa fa-pencil"></i>
-                                                </font>
-                                            </a> 
-                                            <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'delete', $articles[$a]['Post']['id'], 'admin' => true]); ?>" class="confirm btn btn-default btn-xs">
-                                                <font color="red">
-                                                    <i class="fa fa-times"></i>
-                                                </font>
-                                            </a>
-                                        </span>
+                                        <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'delete', $articles[$a]['Post']['id'], 'admin' => true]); ?>" class="confirm btn btn-default btn-xs">
+                                            <font color="red">
+                                                <i class="fa fa-times"></i>
+                                            </font>
+                                        </a>
                                     <?php } ?>
                                     <a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $articles[$a]['Post']['slug'], 'id' => $articles[$a]['Post']['id'])); ?>" class="btn btn-default btn-xs">
                                         <i class="fa fa-heart"></i> <?php echo count($articles[$a]['Like']); ?>
+                                    </a>
+                                    <a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $articles[$a]['Post']['slug'], 'id' => $articles[$a]['Post']['id'])); ?>" class="btn btn-default btn-xs">
+                                        <i class="fa fa-comments"></i> <?php echo count($articles[$a]['Comment']); ?>
                                     </a>
                                     <a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $articles[$a]['Post']['slug'], 'id' => $articles[$a]['Post']['id'])); ?>" class="btn btn-default btn-xs">
                                         <i class="fa fa-paper-plane"></i> Lire la suite
@@ -158,23 +154,19 @@ $(document).ready(function(){
                             <div class="by-author">
                                 <span>Par</span> <strong><?php echo $articles[$a]['Post']['author']; ?></strong>
                                 <span>
-                                    le <?php echo $this->Time->format('d/m/Y à H:i', $articles[$a]['Post']['posted']); ?> 
+                                    le <?php echo $this->Time->format('d/m/Y à H:i', $articles[$a]['Post']['posted']); ?>
                                     <?php if($role > 0){ ?>
-                                        <span class="btn-group">
-                                            <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'edit', $articles[$a]['Post']['id'], 'admin' => true]); ?>" class="btn btn-default btn-xs">
-                                                <font color="#777777">
-                                                    <i class="fa fa-pencil"></i>
-                                                </font>
-                                            </a> 
-                                            <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'delete', $articles[$a]['Post']['id'], 'admin' => true]); ?>" class="confirm btn btn-default btn-xs">
-                                                <font color="red">
-                                                    <i class="fa fa-times"></i>
-                                                </font>
-                                            </a>
-                                        </span>
+                                        <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'delete', $articles[$a]['Post']['id'], 'admin' => true]); ?>" class="confirm btn btn-default btn-xs">
+                                            <font color="red">
+                                                <i class="fa fa-times"></i>
+                                            </font>
+                                        </a>
                                     <?php } ?>
                                     <a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $articles[$a]['Post']['slug'], 'id' => $articles[$a]['Post']['id'])); ?>" class="btn btn-default btn-xs">
                                         <i class="fa fa-heart"></i> <?php echo count($articles[$a]['Like']); ?>
+                                    </a>
+                                    <a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $articles[$a]['Post']['slug'], 'id' => $articles[$a]['Post']['id'])); ?>" class="btn btn-default btn-xs">
+                                        <i class="fa fa-comments"></i> <?php echo count($articles[$a]['Comment']); ?>
                                     </a>
                                     <a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $articles[$a]['Post']['slug'], 'id' => $articles[$a]['Post']['id'])); ?>" class="btn btn-default btn-xs">
                                         <i class="fa fa-paper-plane"></i> Lire la suite

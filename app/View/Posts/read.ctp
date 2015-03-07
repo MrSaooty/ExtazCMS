@@ -8,6 +8,13 @@ $(document).ready(function(){
         cancelButton: "Non"
     });
 
+    $(".confirm-comment").confirm({
+        text: "Voulez vous vraiment supprimer ce commentaire ?",
+        title: "Confirmation",
+        confirmButton: "Oui",
+        cancelButton: "Non"
+    });
+
     var nbLikes = <?php echo $nbLikes; ?>;
 
     $('#like').on('click', function(){
@@ -93,7 +100,7 @@ $(document).ready(function(){
                         </div>
                     </div>
                 </div>
-                <?php if($this->Session->read('Auth.User.role') > 0){ ?>
+                <?php if($role > 0){ ?>
                     <hr>
                     <div class="row">
                         <div class="col-md-4">
@@ -125,19 +132,18 @@ $(document).ready(function(){
                 <h2><a href="">Derniers articles</a></h2>
                 <div class="row">
                     <?php for($i = 0; $i < 3; $i++){ ?>
-                        <?php if(isset($lastPosts[$i])){ ?>
+                        <?php if(isset($lasts_posts[$i])){ ?>
                             <div class="col-md-4">
                                 <div class="magazine-news-img">
                                     <?php
-                                    echo '<a href="'.$this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $lastPosts[$i]['Post']['slug'], 'id' => $lastPosts[$i]['Post']['id'])).'">';
-                                    if(filter_var($lastPosts[$i]['Post']['img'], FILTER_VALIDATE_URL)){
-                                        echo $this->Html->image($lastPosts[$i]['Post']['img'], array('alt' => '', 'height' => '130', 'width' => '260'));
+                                    echo '<a href="'.$this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $lasts_posts[$i]['Post']['slug'], 'id' => $lasts_posts[$i]['Post']['id'])).'">';
+                                    if(filter_var($lasts_posts[$i]['Post']['img'], FILTER_VALIDATE_URL)){
+                                        echo $this->Html->image($lasts_posts[$i]['Post']['img'], array('height' => '130', 'width' => '260', 'title' => $lasts_posts[$i]['Post']['title']));
                                     }
                                     else{
-                                        echo $this->Html->image('posts/'.$lastPosts[$i]['Post']['img'], array('alt' => '', 'height' => '130', 'width' => '260'));
+                                        echo $this->Html->image('posts/'.$lasts_posts[$i]['Post']['img'], array('height' => '130', 'width' => '260', 'title' => $lasts_posts[$i]['Post']['title']));
                                     }
                                     echo '</a><br>';
-                                    echo '<a href="'.$this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $lastPosts[$i]['Post']['slug'], 'id' => $lastPosts[$i]['Post']['id'])).'">'.$lastPosts[$i]['Post']['title'].'</a>';
                                     ?>
                                 </div>
                             </div>
@@ -145,6 +151,58 @@ $(document).ready(function(){
                     <?php } ?>
                 </div>
             </div>
+            <?php if($connected){ ?>
+                <br>
+                <?php echo $this->Form->create('Comments', ['action' => 'write', 'class' => 'sky-form', 'inputDefaults' => ['error' => false]]); ?>
+                    <div class="reg-header">  
+                        <header>Commentaires (<?php echo count($post['Comment']); ?>)</header>
+                    </div>
+                    <fieldset>
+                        <section>
+                            <?php echo $this->Form->input('post_id', array('type' => 'hidden', 'value' => $this->params['id'], 'label' => false)); ?>
+                            <?php echo $this->Form->textarea('comment', array('type' => 'text', 'placeholder' => 'Partagez votre avis', 'class' => 'form-control', 'rows' => '5', 'cols' => '5', 'label' => false)); ?>
+                        </section>
+                    </fieldset>
+                    <footer>
+                        <button class="btn-u pull-right" type="submit">Envoyer</button>      
+                    </footer>
+                <?php echo $this->Form->end(); ?>
+                <br>
+            <?php } else { ?>
+                <hr>
+                <div class="tag-box tag-box-v4 margin-bottom-40">
+                    <h3><i class="fa fa-lock"></i> Vous devez être connecté pour poster un commentaire</h3>
+                </div>
+            <?php } ?>
+                <div class="row">
+                    <?php foreach($post['Comment'] as $comment){ ?>
+                        <div class="col-sm-1">
+                            <div class="thumbnail">
+                                <?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$comment['author'].'', ['alt' => 'Player head', 'class' => 'img-responsive']); ?>
+                            </div>
+                        </div>
+                        <div class="col-sm-11">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <strong><?php echo $comment['author']; ?></strong> <span class="text-muted"><?php echo $this->Time->timeAgoInWords($comment['created']); ?></span>
+                                    <?php if($role > 0){ ?>
+                                        <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'delete', $comment['id'], 'admin' => false]); ?>" class="confirm-comment btn btn-default btn-xs pull-right">
+                                            <font color="red">
+                                                <i class="fa fa-times"></i>
+                                            </font>
+                                        </a>
+                                        <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'edit', $comment['id'], 'admin' => true]); ?>" class="btn btn-default btn-xs pull-right">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    <?php } ?>
+                                </div>
+                                <div class="panel-body">
+                                    <?php echo htmlentities($comment['comment']); ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
         </div>
         <!--End Post-->
         <?php echo $this->element('sidebar'); ?>

@@ -1,9 +1,9 @@
-<?php $this->assign('title', 'Tous les articles'); ?>
+<?php $this->assign('title', 'Commentaires'); ?>
 <script>
 $(document).ready(function(){
     $(window).load(function(){
         $(".confirm").confirm({
-            text: "Voulez vous vraiment supprimer cet article ?",
+            text: "Voulez vous vraiment supprimer ce commentaire ?",
             title: "Confirmation",
             confirmButton: "Oui",
             cancelButton: "Non"
@@ -42,7 +42,7 @@ $(document).ready(function(){
     <div class="container">
         <div class="page-content">
             <div class="single-head">
-                <h3 class="pull-left"><i class="fa fa-table lblue"></i>Liste des articles publiés</h3>
+                <h3 class="pull-left"><i class="fa fa-table lblue"></i>Liste des commentaires</h3>
                 <div class="clearfix"></div>
             </div>
             <div class="page-tables">
@@ -50,25 +50,25 @@ $(document).ready(function(){
                     <table class="table table-bordered" cellpadding="0" cellspacing="0" border="0" id="data-table" width="100%">
                         <thead>
                             <tr>
+                                <th><b>Actualité</b></th>
                                 <th><b>Auteur</b></th>
-                                <th><b>Titre</b></th>
-                                <th><b>Catégorie</b></th>
-                                <th><b>Date de création</b></th>
+                                <th><b>Adresse IP</b></th>
+                                <th><b>Commentaire</b></th>
+                                <th><b>Posté le</b></th>
                                 <th><b>Actions</b></th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach($data as $d){ ?>
                             <tr>
-                                <td><?php echo $d['Post']['author']; ?></td>
-                                <td><?php echo $d['Post']['title']; ?></td>
-                                <td><?php echo $d['Post']['cat']; ?></td>
-                                <td><?php echo $this->Time->format('d-m-Y à H:i', $d['Post']['created']); ?></td>
+                                <td><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $d['Post']['slug'], 'id' => $d['Post']['id'], 'admin' => false)); ?>" target="_blank"><?php echo '[#'.$d['Comment']['post_id'].'] '.$d['Post']['title']; ?></a></td>
+                                <td><?php echo $d['Comment']['author']; ?></td>
+                                <td>127.0.0.1</td>
+                                <td><?php echo htmlentities($d['Comment']['comment']); ?></td>
+                                <td><?php echo $this->Time->format('d-m-Y à H:i', $d['Comment']['created']); ?></td>
                                 <td>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'edit', $d['Post']['id'], 'admin' => true]); ?>" class="label label-success"><i class="fa fa-pencil"></i> Editer</a>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'delete', $d['Post']['id'], 'admin' => true]); ?>" class="label label-danger confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'publish', $d['Post']['id'], 0, 'admin' => true]); ?>" class="label label-black"><i class="fa fa-file"></i> Brouillon</a>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'read', 'slug' => $d['Post']['slug'], 'id' => $d['Post']['id'], 'admin' => false]); ?>" class="label label-black"><i class="fa fa-eye"></i> Voir</a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'edit', $d['Comment']['id'], 'admin' => true]); ?>" class="label label-success"><i class="fa fa-pencil"></i> Editer</a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'delete', $d['Comment']['id'], 'admin' => true]); ?>" class="label label-danger confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
                                 </td>
                             </tr>
                             <?php } ?>

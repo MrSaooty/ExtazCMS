@@ -5,6 +5,9 @@ class Post extends AppModel{
         'Like' => array(
             'className' => 'Like',
             'foreignKey' => 'id_article'
+        ),
+        'Comment' => array(
+        	'order' => 'Comment.id DESC'
         )
     );
 
