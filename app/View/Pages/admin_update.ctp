@@ -8,13 +8,13 @@
 		                <h3 class="pull-left"><i class="fa fa-database lblue"></i>Mise à jour du CMS</h3>
 		                <div class="clearfix"></div>
 		            </div>
-		            	<?php if($version >= $lastVersion){ ?>
-		                    Vous utilisez la dernière version disponible du CMS <?php echo '('.$lastVersion.')'; ?>
+		            	<?php if($version >= $last_version){ ?>
+		                    Vous utilisez la dernière version disponible du CMS <?php echo '('.$last_version.')'; ?>
 		                    <hr>
 		                    <button class="btn btn-default" disabled="disabled"><i class="fa fa-cogs"></i> Installer la mise à jour</button>
 		                <?php } else { ?>
 		                	Vous utilisez actuellement la version <?php echo $version; ?><br>
-		                    Une nouvelle version du CMS est disponible : <?php echo $lastVersion; ?>
+		                    Une nouvelle version du CMS est disponible : <?php echo $last_version; ?>
 		                    <hr>
 							<i class="fa fa-github"></i> <a href="https://github.com/MrSaooty/ExtazCMS/releases" target="_blank">https://github.com/MrSaooty/ExtazCMS/releases</a>
 							<hr>

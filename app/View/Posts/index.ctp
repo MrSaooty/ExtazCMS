@@ -15,7 +15,7 @@ $(document).ready(function(){
         <div class="col-md-9">
             <!-- Begin Content -->
             <?php if($use_slider == 1 && $nb_posts >= 3){ ?>
-            <div class="carousel slide carousel-v1 margin-bottom-40" id="myCarousel-1">
+            <div class="carousel slide carousel-v1 margin-bottom-40 hidden-sm hidden-xs" id="myCarousel-1">
                 <div class="carousel-inner">
                     <?php for ($i=0; $i < 3; $i++){ ?>
                         <?php if($i == 0){ ?>

@@ -5,7 +5,7 @@ App::uses('AYAH', 'Lib/AYAH');
 
 class UsersController extends AppController{
 
-    public $uses = array('User', 'Informations');
+    public $uses = ['User', 'Informations'];
 
 	public function beforeFilter(){
 	    parent::beforeFilter();
@@ -17,31 +17,18 @@ class UsersController extends AppController{
     }
 
 	public function login(){
-        if($this->Auth->loggedIn()){
-            if(isset($this->request->data['User']['rememberMe']) && $this->request->data['User']['rememberMe'] == 1){
-                $cookieTime = '12 months';
-                unset($this->request->data['User']['rememberMe']);
-                $this->request->data['User']['password'] = $this->Auth->password($this->request->data['User']['password']);
-                $this->Cookie->write('rememberMe', $this->request->data['User'], true, $cookieTime);
+        if($this->request->is('post')){
+            if($this->Auth->login()){
+                $this->Session->setFlash('Vous êtes maintenant connecté '.$this->Auth->user('username').'', 'success');
+                return $this->redirect($this->Auth->redirect(array('controller' => 'posts', 'action' => 'index')));
             }
-            return $this->redirect($this->Auth->redirect(array('controller' => 'posts', 'action' => 'index')));
-        }
-        else{
-            if($this->request->is('post')){
-                if($this->Auth->login()){
-                    $this->Session->setFlash('Vous êtes maintenant connecté '.$this->Auth->user('username').'', 'success');
-                    return $this->redirect($this->Auth->redirect(array('controller' => 'posts', 'action' => 'index')));
-                }
-                else{
-                    $this->Session->setFlash('Pseudo ou mot de passe invalide, vous pouvez réessayer', 'error');
-                }
+            else{
+                $this->Session->setFlash('Pseudo ou mot de passe invalide, vous pouvez réessayer', 'error');
             }
         }
-	    
 	}
 
 	public function logout(){
-        $this->Cookie->delete('rememberMe');
 	    $this->Auth->logout();
         return $this->redirect($this->referer());
 	}

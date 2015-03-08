@@ -38,7 +38,7 @@
                    <?php } ?>
                    <p>
                         <?php if($use_store == 1){ ?>
-                            <font color="#555"><i class="fa fa-chevron-circle-right"></i></font> 
+                            <font color="#555"><i class="fa fa-chevron-circle-right"></i></font>
                             <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'reload']); ?>">
                                 Vous avez <?php echo number_format($tokens, 0, ' ', ' ').' '.$site_money; ?>
                             </a>
@@ -53,13 +53,6 @@
                             <font color="#555"><i class="fa fa-chevron-circle-right"></i></font> 
                             <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_tickets']); ?>">
                                 Vous avez <?php echo $tickets; ?> ticket en attente
-                            </a>
-                        <?php } ?>
-                        <?php if($role == 1){ ?>
-                            <br>
-                            <font color="#555"><i class="fa fa-chevron-circle-right"></i></font> 
-                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'manage_tickets', 'admin' => true]); ?>">
-                                Gérer les tickets du support (<?php echo $nbTicketsAdmin; ?>)
                             </a>
                         <?php } ?>
                         <br>

@@ -36,106 +36,96 @@ App::uses('File', 'Utility');
  */
 class AppController extends Controller {
 
-  public $uses = ['Informations', 'User', 'starpassHistory', 'Support', 'donationLadder'];
+	public $uses = ['Informations', 'User', 'starpassHistory', 'Support', 'donationLadder'];
 
-  public $helpers = ['Html', 'Form', 'PaypalIpn.Paypal'];
+	public $helpers = ['Html', 'Form', 'PaypalIpn.Paypal'];
 
-  public $components = [
-	'Session',
-	'Auth' => [
-	  'loginRedirect' => ['controller' => 'posts', 'action' => 'index'],
-	  'logoutRedirect' => ['controller' => 'posts', 'action' => 'index']
-	],
-	'Cookie'
-  ];
+	public $components = [
+		'Session',
+		'Auth' => [
+			'loginRedirect' => ['controller' => 'posts', 'action' => 'index'],
+			'logoutRedirect' => ['controller' => 'posts', 'action' => 'index']
+		]
+	];
 
-  public function beforeFilter(){
-  	if((isset($this->params['prefix']) && ($this->params['prefix'] == 'admin'))){
-		$this->layout = 'admin';
+	public function beforeFilter(){
+		if((isset($this->params['prefix']) && ($this->params['prefix'] == 'admin'))){
+			$this->layout = 'admin';
+		}
+		// Variable qui regroupe toutes les infos depuis la bdd 
+		$this->set('informations', $this->Informations->find('first'));
+		// On déclare JSONAPI
+		$informations = $this->Informations->find('first');
+		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
+		// On transmet les données
+		$this->set('api', $api);
+		$this->set('jsonapi_ip', $informations['Informations']['jsonapi_ip']);
+		$this->set('jsonapi_port', $informations['Informations']['jsonapi_port']);
+		$this->set('jsonapi_username', $informations['Informations']['jsonapi_username']);
+		$this->set('jsonapi_password', $informations['Informations']['jsonapi_password']);
+		$this->set('jsonapi_salt', $informations['Informations']['jsonapi_salt']);
+		$this->set('name_server', $informations['Informations']['name_server']);
+		$this->set('server_ip', $informations['Informations']['ip_server']);
+		$this->set('server_port', $informations['Informations']['port_server']);
+		$this->set('money_server', $informations['Informations']['money_server']);
+		$this->set('site_money', $informations['Informations']['site_money']);
+		$this->set('starpass_idp', $informations['Informations']['starpass_idp']);
+		$this->set('starpass_idd', $informations['Informations']['starpass_idd']);
+		$this->set('starpass_tokens', $informations['Informations']['starpass_tokens']);
+		$this->set('paypal_price', $informations['Informations']['paypal_price']);
+		$this->set('paypal_tokens', $informations['Informations']['paypal_tokens']);
+		$this->set('paypal_email', $informations['Informations']['paypal_email']);
+		$this->set('logo_url', $informations['Informations']['logo_url']);
+		$this->set('facebook_url', $informations['Informations']['facebook_url']);
+		$this->set('twitter_url', $informations['Informations']['twitter_url']);
+		$this->set('use_store', $informations['Informations']['use_store']);
+		$this->set('use_paypal', $informations['Informations']['use_paypal']);
+		$this->set('use_economy', $informations['Informations']['use_economy']);
+		$this->set('use_server_money', $informations['Informations']['use_server_money']);
+		$this->set('use_team', $informations['Informations']['use_team']);
+		$this->set('use_contact', $informations['Informations']['use_contact']);
+		$this->set('use_rules', $informations['Informations']['use_rules']);
+		$this->set('use_donation_ladder', $informations['Informations']['use_donation_ladder']);
+		$this->set('use_slider', $informations['Informations']['use_slider']);
+		$this->set('happy_hour', $informations['Informations']['happy_hour']);
+		$this->set('happy_hour_bonus', $informations['Informations']['happy_hour_bonus']);
+		$this->set('rules', $informations['Informations']['rules']);
+		$this->set('background', $informations['Informations']['background']);
+		$this->set('chat_prefix', $informations['Informations']['chat_prefix']);
+		$this->set('chat_nb_messages', $informations['Informations']['chat_nb_messages']);
+		// Le reste
+		$this->set('connected', $this->Auth->user());
+		$this->set('username', $this->Auth->user('username'));
+		$this->set('email', $this->Auth->user('email'));
+		if($this->Auth->user()){
+			$user_information = $this->User->find('first', ['conditions' => ['User.id' => $this->Auth->user('id')]]);
+			$this->set('tokens', $user_information['User']['tokens']);
+			$this->set('allow_email', $user_information['User']['allow_email']);
+			$this->set('role', $user_information['User']['role']);
+		}
+		else{
+			$this->set('role', 0);
+		}
+		$this->set('tickets', $this->Support->find('count', ['conditions' => ['Support.username' => $this->Auth->user('username'), 'Support.resolved' => 0]]));
+		$this->set('nbTicketsAdmin', $this->Support->find('count', ['conditions' => ['Support.resolved' => '0']]));
+		// Donnation Ladder
+		if($this->donationLadder->find('all')){
+			$this->set('bestDonator', $this->donationLadder->find('first', ['order' => ['donationLadder.tokens DESC']]));
+			$this->set('lastDonator', $this->donationLadder->find('first', ['order' => ['donationLadder.updated DESC']]));
+			$this->set('nbDonator', $this->donationLadder->find('count'));
+		}
+		else{
+			$this->set('nbDonator', $this->donationLadder->find('count'));
+		}
+		// ExtazCMS
+		$version = '1.5';
+		$last_version = file_get_contents('http://www.extaz-mc.fr/extazcms/version.txt');
+		$this->set('version', $version);
+		$this->set('last_version', $last_version);
+		// Autre
+		Configure::write('Config.language', 'fra');
+		$this->Auth->allow();
 	}
-	// Variable qui regroupe toutes les infos depuis la bdd 
-	$this->set('informations', $this->Informations->find('first'));
-	// On déclare JSONAPI
-	$informations = $this->Informations->find('first');
-	$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
-	// On transmet les données
-	$this->set('api', $api);
-	$this->set('jsonapi_ip', $informations['Informations']['jsonapi_ip']);
-	$this->set('jsonapi_port', $informations['Informations']['jsonapi_port']);
-	$this->set('jsonapi_username', $informations['Informations']['jsonapi_username']);
-	$this->set('jsonapi_password', $informations['Informations']['jsonapi_password']);
-	$this->set('jsonapi_salt', $informations['Informations']['jsonapi_salt']);
-	$this->set('name_server', $informations['Informations']['name_server']);
-	$this->set('server_ip', $informations['Informations']['ip_server']);
-	$this->set('server_port', $informations['Informations']['port_server']);
-	$this->set('money_server', $informations['Informations']['money_server']);
-	$this->set('site_money', $informations['Informations']['site_money']);
-	$this->set('starpass_idp', $informations['Informations']['starpass_idp']);
-	$this->set('starpass_idd', $informations['Informations']['starpass_idd']);
-	$this->set('starpass_tokens', $informations['Informations']['starpass_tokens']);
-	$this->set('paypal_price', $informations['Informations']['paypal_price']);
-	$this->set('paypal_tokens', $informations['Informations']['paypal_tokens']);
-	$this->set('paypal_email', $informations['Informations']['paypal_email']);
-	$this->set('logo_url', $informations['Informations']['logo_url']);
-	$this->set('facebook_url', $informations['Informations']['facebook_url']);
-	$this->set('twitter_url', $informations['Informations']['twitter_url']);
-	$this->set('use_store', $informations['Informations']['use_store']);
-	$this->set('use_paypal', $informations['Informations']['use_paypal']);
-	$this->set('use_economy', $informations['Informations']['use_economy']);
-	$this->set('use_server_money', $informations['Informations']['use_server_money']);
-	$this->set('use_team', $informations['Informations']['use_team']);
-	$this->set('use_contact', $informations['Informations']['use_contact']);
-	$this->set('use_rules', $informations['Informations']['use_rules']);
-	$this->set('use_donation_ladder', $informations['Informations']['use_donation_ladder']);
-	$this->set('use_slider', $informations['Informations']['use_slider']);
-	$this->set('happy_hour', $informations['Informations']['happy_hour']);
-	$this->set('happy_hour_bonus', $informations['Informations']['happy_hour_bonus']);
-	$this->set('rules', $informations['Informations']['rules']);
-	$this->set('background', $informations['Informations']['background']);
-	$this->set('chat_prefix', $informations['Informations']['chat_prefix']);
-	$this->set('chat_nb_messages', $informations['Informations']['chat_nb_messages']);
-	// Le reste
-	$this->set('connected', $this->Auth->user());
-	$this->set('username', $this->Auth->user('username'));
-	$this->set('email', $this->Auth->user('email'));
-	if($this->Auth->user()){
-	  $userInformation = $this->User->find('first', ['conditions' => ['User.id' => $this->Auth->user('id')]]);
-	  $this->set('tokens', $userInformation['User']['tokens']);
-	  $this->set('allow_email', $userInformation['User']['allow_email']);
-	}
-	$this->set('role', $this->Auth->user('role'));
-	$this->set('tickets', $this->Support->find('count', ['conditions' => ['Support.username' => $this->Auth->user('username'), 'Support.resolved' => 0]]));
-	$this->set('nbTicketsAdmin', $this->Support->find('count', ['conditions' => ['Support.resolved' => '0']]));
-
-	// Donation Ladder
-	if($this->donationLadder->find('all')){
-	  $this->set('bestDonator', $this->donationLadder->find('first', ['order' => ['donationLadder.tokens DESC']]));
-	  $this->set('lastDonator', $this->donationLadder->find('first', ['order' => ['donationLadder.updated DESC']]));
-	  $this->set('nbDonator', $this->donationLadder->find('count'));
-	}
-	else{
-	  $this->set('nbDonator', $this->donationLadder->find('count'));
-	}
-
-	// ExtazCMS
-	$version = '1.5';
-	$lastVersion = file_get_contents('http://www.extaz-mc.fr/extazcms/version.txt');
-	$this->set('version', $version);
-	$this->set('lastVersion', $lastVersion);
-
-	$this->Cookie->httpOnly = true;
-	if(!$this->Auth->loggedIn() && $this->Cookie->read('rememberMe')){
-	  $cookie = $this->Cookie->read('rememberMe');
-	  $this->loadModel('User');
-	  $user = $this->User->find('first', array('conditions' => array('User.username' => $cookie['username'], 'User.password' => $cookie['password'])));
-	  if($user && !$this->Auth->login($user['User'])){
-		$this->redirect('/users/logout');
-	  }
-	}
-	Configure::write('Config.language', 'fra');
-	$this->Auth->allow();
-	$this->set('authUser', $this->Auth->user());
-    }
 
 	function afterPaypalNotification($txnId){
 		$informations = $this->Informations->find('first');

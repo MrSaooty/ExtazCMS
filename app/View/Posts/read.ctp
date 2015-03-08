@@ -154,8 +154,10 @@ $(document).ready(function(){
             <?php if($connected){ ?>
                 <br>
                 <?php echo $this->Form->create('Comments', ['action' => 'write', 'class' => 'sky-form', 'inputDefaults' => ['error' => false]]); ?>
-                    <div class="reg-header">  
-                        <header>Commentaires (<?php echo count($post['Comment']); ?>)</header>
+                    <div class="reg-header">
+                        <?php $nb_comments = count($post['Comment']); ?>
+                        <?php if($nb_comments > 1){ $comment = 'Commentaires'; } else { $comment = 'Commentaire'; } ?>
+                        <header><?php echo $comment.' ('.$nb_comments.')'; ?></header>
                     </div>
                     <fieldset>
                         <section>
