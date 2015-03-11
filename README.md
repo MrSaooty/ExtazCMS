@@ -9,6 +9,8 @@ Un véritable site pour votre serveur Minecraft
 * [Changelog](https://github.com/MrSaooty/ExtazCMS/blob/master/CHANGELOG.md)
 * [Donateurs](https://github.com/MrSaooty/ExtazCMS/blob/master/DONATORS.md)
 
-Conditions
--------------
-Merci de ne pas retirer la mention `Propulsé parExtazCMS 1.5code par @MrSaooty` je partage ce CMS gratuitement sans attentes en retour, merci de respecter mon travail.
+Condition(s)
+------------
+
+* Merci de ne pas retirer la mention `Propulsé parExtazCMS 1.5code par @MrSaooty` je partage ce CMS gratuitement sans attentes en retour, merci de respecter mon travail
+* Il est interdit de revendre ExtazCMS
