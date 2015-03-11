@@ -68,7 +68,7 @@ $(document).ready(function(){
                                 <td><?php echo $this->Time->format('d-m-Y à H:i', $d['Comment']['created']); ?></td>
                                 <td>
                                     <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'edit', $d['Comment']['id'], 'admin' => true]); ?>" class="label label-success"><i class="fa fa-pencil"></i> Editer</a>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'delete', $d['Comment']['id'], 'admin' => true]); ?>" class="label label-danger confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'delete', $d['Comment']['id'], 'list', 'admin' => true]); ?>" class="label label-danger confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
                                 </td>
                             </tr>
                             <?php } ?>

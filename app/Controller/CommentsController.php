@@ -25,22 +25,16 @@ Class CommentsController extends AppController{
 		}
 	}
 
-	public function delete($id = null){
+	public function admin_delete($id = null, $from){
 		if($this->Auth->user('role') > 0){
 			$this->Comment->delete($id);
 			$this->Session->setFlash('Commentaire supprimé', 'success');
-			return $this->redirect($this->referer());
-		}
-		else{
-			throw new NotFoundException();
-		}
-	}
-
-	public function admin_delete($id = null){
-		if($this->Auth->user('role') > 0){
-			$this->Comment->delete($id);
-			$this->Session->setFlash('Commentaire supprimé', 'success');
-			return $this->redirect(['controller' => 'comments', 'action' => 'list', 'admin' => true]);
+			if($from == 'read'){
+				return $this->redirect($this->referer());
+			}
+			else{
+				return $this->redirect(['controller' => 'comments', 'action' => 'list', 'admin' => true]);
+			}
 		}
 		else{
 			throw new NotFoundException();

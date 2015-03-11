@@ -47,12 +47,12 @@
                         <?php if($tickets > 1){ ?>
                             <font color="#555"><i class="fa fa-chevron-circle-right"></i></font> 
                             <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_tickets']); ?>">
-                                Vous avez <?php echo $tickets; ?> tickets en attente
+                                Vous avez <?php echo $tickets; ?> ouverts
                             </a>
                             <?php } else { ?>
                             <font color="#555"><i class="fa fa-chevron-circle-right"></i></font> 
                             <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_tickets']); ?>">
-                                Vous avez <?php echo $tickets; ?> ticket en attente
+                                Vous avez <?php echo $tickets; ?> ouvert
                             </a>
                         <?php } ?>
                         <br>
@@ -93,7 +93,7 @@
     </div>
     <!-- End Information -->
     
-    <?php if($use_store == 1 && $use_donation_ladder == 1 && $nbDonator > 0){ ?>
+    <?php if($use_store == 1 && $use_donation_ladder == 1 && $nb_donator > 0){ ?>
     <!-- Donation Ladder -->
     <div class="row">
         <div class="col-md-12">
@@ -102,15 +102,15 @@
                     <li>
                         <i class="fa fa-trophy"></i> Meilleur donateur
                         <br>
-                        <?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$bestDonator['User']['username'].'/16'); ?> 
-                        <span class="tooltips" data-original-title="<?php echo $bestDonator['donationLadder']['tokens'].' '.$site_money; ?>" data-toggle="tooltip" data-placement="right"><span class="text-highlights"><?php echo $bestDonator['User']['username']; ?></span></span>
+                        <?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$best_donator['User']['username'].'/16'); ?> 
+                        <span class="tooltips" data-original-title="<?php echo $best_donator['donationLadder']['tokens'].' '.$site_money; ?>" data-toggle="tooltip" data-placement="right"><span class="text-highlights"><?php echo $best_donator['User']['username']; ?></span></span>
                     </li>
                     <br>
                     <li>
                         <i class="fa fa-trophy"></i> Dernier donateur
                         <br>
-                        <?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$lastDonator['User']['username'].'/16'); ?> 
-                        <span class="tooltips" data-original-title="<?php echo $lastDonator['donationLadder']['tokens'].' '.$site_money; ?>" data-toggle="tooltip" data-placement="right"><span class="text-highlights"><?php echo $lastDonator['User']['username']; ?></span></span>
+                        <?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$last_donator['User']['username'].'/16'); ?> 
+                        <span class="tooltips" data-original-title="<?php echo $last_donator['donationLadder']['tokens'].' '.$site_money; ?>" data-toggle="tooltip" data-placement="right"><span class="text-highlights"><?php echo $last_donator['User']['username']; ?></span></span>
                     </li>
                 </ul>
             </div>

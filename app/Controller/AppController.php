@@ -98,24 +98,24 @@ class AppController extends Controller {
 		$this->set('username', $this->Auth->user('username'));
 		$this->set('email', $this->Auth->user('email'));
 		if($this->Auth->user()){
-			$user_information = $this->User->find('first', ['conditions' => ['User.id' => $this->Auth->user('id')]]);
-			$this->set('tokens', $user_information['User']['tokens']);
-			$this->set('allow_email', $user_information['User']['allow_email']);
-			$this->set('role', $user_information['User']['role']);
+			$user_informations = $this->User->find('first', ['conditions' => ['User.id' => $this->Auth->user('id')]]);
+			$this->set('tokens', $user_informations['User']['tokens']);
+			$this->set('allow_email', $user_informations['User']['allow_email']);
+			$this->set('role', $user_informations['User']['role']);
 		}
 		else{
 			$this->set('role', 0);
 		}
 		$this->set('tickets', $this->Support->find('count', ['conditions' => ['Support.username' => $this->Auth->user('username'), 'Support.resolved' => 0]]));
-		$this->set('nbTicketsAdmin', $this->Support->find('count', ['conditions' => ['Support.resolved' => '0']]));
+		$this->set('nb_tickets_admin', $this->Support->find('count', ['conditions' => ['Support.resolved' => '0']]));
 		// Donnation Ladder
 		if($this->donationLadder->find('all')){
-			$this->set('bestDonator', $this->donationLadder->find('first', ['order' => ['donationLadder.tokens DESC']]));
-			$this->set('lastDonator', $this->donationLadder->find('first', ['order' => ['donationLadder.updated DESC']]));
-			$this->set('nbDonator', $this->donationLadder->find('count'));
+			$this->set('best_donator', $this->donationLadder->find('first', ['order' => ['donationLadder.tokens DESC']]));
+			$this->set('last_donator', $this->donationLadder->find('first', ['order' => ['donationLadder.updated DESC']]));
+			$this->set('nb_donator', $this->donationLadder->find('count'));
 		}
 		else{
-			$this->set('nbDonator', $this->donationLadder->find('count'));
+			$this->set('nb_donator', $this->donationLadder->find('count'));
 		}
 		// ExtazCMS
 		$version = '1.5';

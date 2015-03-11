@@ -188,7 +188,7 @@ $(document).ready(function(){
                                 <div class="panel-heading">
                                     <strong><?php echo $comment['author']; ?></strong> <span class="text-muted"><?php echo $this->Time->timeAgoInWords($comment['created']); ?></span>
                                     <?php if($role > 0){ ?>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'delete', $comment['id'], 'admin' => false]); ?>" class="confirm-comment btn btn-default btn-xs pull-right">
+                                        <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'delete', $comment['id'], 'read', 'admin' => true]); ?>" class="confirm-comment btn btn-default btn-xs pull-right">
                                             <font color="red">
                                                 <i class="fa fa-times"></i>
                                             </font>

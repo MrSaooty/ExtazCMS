@@ -66,7 +66,7 @@
                                     <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'stats', 'admin' => true]); ?>"><i class="fa fa-area-chart"></i> Statistiques</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'manage_tickets', 'admin' => true]); ?>"><i class="fa fa-support"></i> Support <span class="badge badge-danger pull-right"><?php echo $nbTicketsAdmin; ?></span></a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'manage_tickets', 'admin' => true]); ?>"><i class="fa fa-support"></i> Support <span class="badge badge-danger pull-right"><?php echo $nb_tickets_admin; ?></span></a>
                                 </li>
                                 <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
                                 <li class="has_submenu">

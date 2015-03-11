@@ -33,7 +33,7 @@ $(document).ready(function(){
                         </div>
                         <hr>
                         <button class="btn btn-black pull-right" type="submit"><i class="fa fa-check"></i> Confirmer la modification</button>
-                        <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'delete', $data['Comment']['id']]); ?>" class="btn btn-danger confirm"><i class="fa fa-trash-o"></i> Supprimer ce commentaire</a>
+                        <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'delete', $data['Comment']['id'], 'edit']); ?>" class="btn btn-danger confirm"><i class="fa fa-trash-o"></i> Supprimer ce commentaire</a>
                     <?php echo $this->Form->end(); ?>
                 </div>
             <div class="col-md-8"></div>
