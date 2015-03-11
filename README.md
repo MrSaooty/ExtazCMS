@@ -8,3 +8,7 @@ Un véritable site pour votre serveur Minecraft
 * [Guide Starpass](https://github.com/MrSaooty/ExtazCMS/wiki/Starpass)
 * [Changelog](https://github.com/MrSaooty/ExtazCMS/blob/master/CHANGELOG.md)
 * [Donateurs](https://github.com/MrSaooty/ExtazCMS/blob/master/DONATORS.md)
+
+Conditions
+-------------
+Merci de ne pas retirer la mention `Propulsé parExtazCMS 1.5code par @MrSaooty` je partage ce CMS gratuitement sans attentes en retour, merci de respecter mon travail.
