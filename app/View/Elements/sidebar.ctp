@@ -45,14 +45,14 @@
                             <br>
                         <?php } ?>
                         <?php if($tickets > 1){ ?>
-                            <font color="#555"><i class="fa fa-chevron-circle-right"></i></font> 
+                            <font color="#555"><i class="fa fa-chevron-circle-right"></i></font>
                             <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_tickets']); ?>">
-                                Vous avez <?php echo $tickets; ?> ouverts
+                                Vous avez <?php echo $tickets; ?> tickets ouverts
                             </a>
                             <?php } else { ?>
-                            <font color="#555"><i class="fa fa-chevron-circle-right"></i></font> 
+                            <font color="#555"><i class="fa fa-chevron-circle-right"></i></font>
                             <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_tickets']); ?>">
-                                Vous avez <?php echo $tickets; ?> ouvert
+                                Vous avez <?php echo $tickets; ?> ticket ouvert
                             </a>
                         <?php } ?>
                         <br>

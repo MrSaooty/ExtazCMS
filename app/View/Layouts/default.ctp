@@ -140,7 +140,9 @@
             <div class="copyright">
                 <div class="container">
                     <p class="text-center">
+                        <!-- Merci de ne pas retirer cette mention, je partage ce CMS gratuitement sans attentes en retour, merci de respecter mon travail -->
                         Propulsé par<a href="http://cms.extaz-mc.fr/" target="_blank">ExtazCMS 1.5</a>code par<a href="http://twitter.com/MrSaooty" target="_blank">@MrSaooty</a>
+                        <!-- Merci de ne pas retirer cette mention, je partage ce CMS gratuitement sans attentes en retour, merci de respecter mon travail -->
                     </p>
                 </div> 
             </div><!--/copyright--> 

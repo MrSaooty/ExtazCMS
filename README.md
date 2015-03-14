@@ -12,5 +12,5 @@ Un véritable site pour votre serveur Minecraft
 Conditions
 ------------
 
-* Merci de ne pas retirer la mention `Propulsé parExtazCMS X.X code par @MrSaooty` je partage ce CMS gratuitement sans attentes en retour, merci de respecter mon travail
+* Merci de ne pas retirer la mention `Propulsé par ExtazCMS X.X code par @MrSaooty` je partage ce CMS gratuitement sans attentes en retour, merci de respecter mon travail
 * Il est interdit de revendre ExtazCMS
