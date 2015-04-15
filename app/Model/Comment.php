@@ -2,5 +2,6 @@
 
 class Comment extends AppModel{
 
-	public $belongsTo = 'Post';
+	public $belongsTo = ['Post', 'User'];
+	
 }

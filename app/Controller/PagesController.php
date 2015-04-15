@@ -465,13 +465,13 @@ class PagesController extends AppController {
 							// Si l'utilisateur accepte de recevoir des emails
 							if($ticketOwnerAllowEmail == 1){
 								$informations = $this->Informations->find('first');
-			                    $name_server = $informations['Informations']['name_server'];
-			                    $name_server = strtolower(preg_replace('/\s/', '', $name_server));
-			                    $Email = new CakeEmail();
-			                    $Email->from(array('support@'.$name_server.'.com' => $name_server));
-			                    $Email->to($ticketOwnerEmail);
-			                    $Email->subject('['.$informations['Informations']['name_server'].'] Support, nouvelle réponse à votre ticket #'.$ticket['Support']['id'].'');
-			                    $Email->send('Retrouvez cette nouvelle réponse ici : http://'.$_SERVER['HTTP_HOST'].$this->webroot.'tickets/'.$ticket['Support']['id']);
+								$name_server = $informations['Informations']['name_server'];
+								$name_server = strtolower(preg_replace('/\s/', '', $name_server));
+								$Email = new CakeEmail();
+								$Email->from(array('support@'.$name_server.'.com' => $name_server));
+								$Email->to($ticketOwnerEmail);
+								$Email->subject('['.$informations['Informations']['name_server'].'] Support, nouvelle réponse à votre ticket #'.$ticket['Support']['id'].'');
+								$Email->send('Retrouvez cette nouvelle réponse ici : http://'.$_SERVER['HTTP_HOST'].$this->webroot.'tickets/'.$ticket['Support']['id']);
 							}
 							$this->supportComments->create;
 							$this->supportComments->saveField('ticket_id', $this->request->data['Pages']['id']);

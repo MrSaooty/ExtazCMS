@@ -43,11 +43,11 @@ $(document).ready(function(){
 });
 </script>
 <!--=== Content Part ===-->
-<div class="container content blog-page blog-item">		
+<div class="container content blog-page blog-item">     
     <!--Post-->
     <div class="row magazine-page">
         <div class="col-md-9">
-        	<div class="blog margin-bottom-40">
+            <div class="blog margin-bottom-40">
                 <div class="blog-img">
                     <?php
                     if(filter_var($post['Post']['img'], FILTER_VALIDATE_URL)){
@@ -59,7 +59,7 @@ $(document).ready(function(){
                     ?>
                 </div>
                 <br>
-            	<h3><font color="#7AC02C"><?php echo $post['Post']['title']; ?></font></h3>
+                <h3><font color="#7AC02C"><?php echo $post['Post']['title']; ?></font></h3>
                 <hr>
                 <div class="row">
                     <div class="col-md-8">
@@ -176,38 +176,38 @@ $(document).ready(function(){
                     <h3><i class="fa fa-lock"></i> Vous devez être connecté pour poster un commentaire</h3>
                 </div>
             <?php } ?>
-                <div class="row">
-                    <?php foreach($post['Comment'] as $comment){ ?>
-                        <div class="col-sm-1">
-                            <div class="thumbnail">
-                                <?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$comment['author'].'', ['alt' => 'Player head', 'class' => 'img-responsive']); ?>
+            <div class="row">
+                <?php foreach($comments as $comment){ ?>
+                    <div class="col-sm-1">
+                        <div class="thumbnail">
+                            <?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$comment['User']['username'].'', ['alt' => 'Player head', 'class' => 'img-responsive']); ?>
+                        </div>
+                    </div>
+                    <div class="col-sm-11">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <strong><?php echo $comment['User']['username']; ?></strong> <span class="text-muted"><?php echo $this->Time->timeAgoInWords($comment['Comment']['created']); ?></span>
+                                <?php if($role > 0){ ?>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'delete', $comment['Comment']['id'], 'read', 'admin' => true]); ?>" class="confirm-comment btn btn-default btn-xs pull-right">
+                                        <font color="red">
+                                            <i class="fa fa-times"></i>
+                                        </font>
+                                    </a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'edit', $comment['Comment']['id'], 'admin' => true]); ?>" class="btn btn-default btn-xs pull-right">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                <?php } ?>
+                            </div>
+                            <div class="panel-body">
+                                <?php echo htmlentities($comment['Comment']['comment']); ?>
                             </div>
                         </div>
-                        <div class="col-sm-11">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <strong><?php echo $comment['author']; ?></strong> <span class="text-muted"><?php echo $this->Time->timeAgoInWords($comment['created']); ?></span>
-                                    <?php if($role > 0){ ?>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'delete', $comment['id'], 'read', 'admin' => true]); ?>" class="confirm-comment btn btn-default btn-xs pull-right">
-                                            <font color="red">
-                                                <i class="fa fa-times"></i>
-                                            </font>
-                                        </a>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'edit', $comment['id'], 'admin' => true]); ?>" class="btn btn-default btn-xs pull-right">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-                                    <?php } ?>
-                                </div>
-                                <div class="panel-body">
-                                    <?php echo htmlentities($comment['comment']); ?>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
+                    </div>
+                <?php } ?>
+            </div>
         </div>
         <!--End Post-->
         <?php echo $this->element('sidebar'); ?>
     </div>
-</div><!--/container-->		
+</div><!--/container-->     
 <!--=== End Content Part ===-->

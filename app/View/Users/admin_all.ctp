@@ -44,6 +44,7 @@ $(document).ready(function(){
                     <table class="table table-bordered" cellpadding="0" cellspacing="0" border="0" id="data-table" width="100%">
                         <thead>
                             <tr>
+                                <th><b>#</b></th>
                                 <th><b>Pseudo</b></th>
                                 <th><b>eMail</b></th>
                                 <th><b>Tokens</b></th>
@@ -55,6 +56,7 @@ $(document).ready(function(){
                         <tbody>
                             <?php foreach($data as $d){ ?>
                             <tr>
+                                <td><?php echo $d['User']['id']; ?></td>
                                 <td><?php echo $d['User']['username']; ?></td>
                                 <td><?php echo $d['User']['email']; ?></td>
                                 <td><?php echo $d['User']['tokens']; ?></td>

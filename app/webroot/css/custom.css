@@ -1,6 +1,7 @@
 .img-slider {
     width: 100%;
     max-height: 450px;
+    min-height: 450px;
 }
 .thumbnail {
     padding:0px;

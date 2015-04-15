@@ -96,6 +96,7 @@ class AppController extends Controller {
 		$this->set('background', $informations['Informations']['background']);
 		$this->set('chat_prefix', $informations['Informations']['chat_prefix']);
 		$this->set('chat_nb_messages', $informations['Informations']['chat_nb_messages']);
+		$this->set('analytics', $informations['Informations']['analytics']);
 		// Le reste
 		$this->set('connected', $this->Auth->user());
 		$this->set('username', $this->Auth->user('username'));

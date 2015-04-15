@@ -77,7 +77,8 @@ $(document).ready(function(){
                                 'chat_prefix' => 'Prefix pouur le chat',
                                 'chat_nb_messages' => 'Nombres de messages à afficher dans le chat',
                                 'facebook_url' => 'URL de votre page Facebook (Facultatif)',
-                                'twitter_url' => 'URL de votre compte Twitter (Facultatif)'
+                                'twitter_url' => 'URL de votre compte Twitter (Facultatif)',
+                                'analytics' => 'ID Google Analytics (Facultatif)'
                                 ]; ?>
                                 <?php foreach($informations as $k => $v){ ?>
                                 <div class="form-group">

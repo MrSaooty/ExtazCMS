@@ -4,9 +4,11 @@ Changelog
 v1.5 (en développement)
 ----
 
+* Vous pouvez désormais ajouter un script de suivi Google Analytics
 * Ajout d'un système de commentaire lié aux actualités. Les administrateurs ont accès à la liste des commentaires, ils peuvent aussi les éditer et les supprimer
 * Vous pouvez maintenant générer des codes cadeaux et accéder à la liste des codes déjà générés. Les codes cadeaux octroient un nombre de token préfini par l'administrateur et s'utilisent sur la page de rechargement
 * Corrections de bugs
+* {CSS} Modification de custom.css
 * {SQL} Ajout d'une table extaz_codes
 * {SQL} Ajout d'une table extaz_comments
 

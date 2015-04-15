@@ -56,6 +56,7 @@
 	                	</section>
 	                </fieldset>
 	            <?php echo $this->Form->end(); ?>
+	            <br>
 	            <div class="row">
 	            	<div class="col-md-8 col-md-offset-2">
 	            		<?php echo $this->Form->create('Codes', ['action' => 'consume', 'inputDefaults' => ['error' => false]]); ?>

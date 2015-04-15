@@ -20,7 +20,7 @@ $(document).ready(function(){
                     </div>
                     <?php echo $this->Form->create('Comments', ['class' => 'sky-form', 'inputDefaults' => ['error' => false]]); ?>
                         <div class="form-group">
-                            <?php echo $this->Form->input('author', array('type' => 'text', 'value' => $data['Comment']['author'], 'class' => 'form-control', 'label' => 'Pseudo', 'disabled' => 'disabled')); ?>
+                            <?php echo $this->Form->input('author', array('type' => 'text', 'value' => $data['User']['username'], 'class' => 'form-control', 'label' => 'Pseudo', 'disabled' => 'disabled')); ?>
                             </section>
                         </div>
                         <div class="form-group">

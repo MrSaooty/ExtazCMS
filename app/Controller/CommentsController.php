@@ -5,13 +5,13 @@ Class CommentsController extends AppController{
 		if($this->Auth->user()){
 			if($this->request->is('post')){
 				$post_id = $this->request->data['Comments']['post_id'];
-				$author = $this->Auth->user('username');
+				$user_id = $this->Auth->user('id');
 				$ip = $_SERVER['REMOTE_ADDR'];
 				$comment = $this->request->data['Comments']['comment'];
 				if(!empty($comment)){
 					$this->Comment->create;
 					$this->Comment->saveField('post_id', $post_id);
-					$this->Comment->saveField('author', $author);
+					$this->Comment->saveField('user_id', $user_id);
 					$this->Comment->saveField('ip', $ip);
 					$this->Comment->saveField('comment', $comment);
 					$this->Session->setFlash('Votre commentaire a été ajouté !', 'success');

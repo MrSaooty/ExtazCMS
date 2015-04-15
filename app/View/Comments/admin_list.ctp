@@ -62,7 +62,7 @@ $(document).ready(function(){
                             <?php foreach($data as $d){ ?>
                             <tr>
                                 <td><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $d['Post']['slug'], 'id' => $d['Post']['id'], 'admin' => false)); ?>" target="_blank"><?php echo '[#'.$d['Post']['id'].'] '.$d['Post']['title']; ?></a></td>
-                                <td><?php echo $d['Comment']['author']; ?></td>
+                                <td><?php echo $d['User']['username']; ?></td>
                                 <td><?php echo $d['Comment']['ip']; ?></td>
                                 <td><?php echo htmlentities($d['Comment']['comment']); ?></td>
                                 <td><?php echo $this->Time->format('d-m-Y à H:i', $d['Comment']['created']); ?></td>
