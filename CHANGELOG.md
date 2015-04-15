@@ -1,7 +1,7 @@
 Changelog
 =========
 
-v1.5 (en développement)
+v1.5 (15/04/2015)
 ----
 
 * Vous pouvez désormais ajouter un script de suivi Google Analytics
