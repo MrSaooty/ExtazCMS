@@ -79,7 +79,7 @@ class PagesController extends AppController {
 		}
 	}
 
-	public function admin_installUpdate(){
+	public function admin_install_update(){
 		/***********************************/
 		/**     Module de mise à jour     **/
 		/** automatique en developpement  **/
@@ -136,7 +136,7 @@ class PagesController extends AppController {
 		// else{
 		// 	throw new NotFoundException();
 		// }
-		$this->Session->setFlash('Module non disponible actuellement, veuillez procéder à une mise à jour manuelle.', 'warning');
+		$this->Session->setFlash('Module non disponible actuellement, veuillez procéder à une mise à jour manuelle', 'warning');
 		$this->redirect(['controller' => 'pages', 'action' => 'update', 'admin' => true]);
 	}
 
@@ -555,6 +555,13 @@ class PagesController extends AppController {
 				$username = trim($this->request->data['Pages']['username']);
 				$this->Team->saveField('username', $username);
 				$this->Team->saveField('rank', $this->request->data['Pages']['rank']);
+				if(!empty($this->request->data['Pages']['color'])){
+					$this->Team->saveField('color', $this->request->data['Pages']['color']);
+				}
+				else{
+					$this->Team->saveField('color', 'light');
+				}
+				$this->Team->saveField('order', $this->request->data['Pages']['order']);
 				$this->Team->saveField('facebook_url', $this->request->data['Pages']['facebook_url']);
 				$this->Team->saveField('twitter_url', $this->request->data['Pages']['twitter_url']);
 				$this->Session->setFlash('Membre ajouté à l\'équipe !', 'success');
@@ -601,10 +608,17 @@ class PagesController extends AppController {
                     $this->Team->id = $id;
                     $this->Team->saveField('username', $this->request->data['Pages']['username']);
 					$this->Team->saveField('rank', $this->request->data['Pages']['rank']);
+					if(!empty($this->request->data['Pages']['color'])){
+						$this->Team->saveField('color', $this->request->data['Pages']['color']);
+					}
+					else{
+						$this->Team->saveField('color', 'light');
+					}
+					$this->Team->saveField('order', $this->request->data['Pages']['order']);
 					$this->Team->saveField('facebook_url', $this->request->data['Pages']['facebook_url']);
 					$this->Team->saveField('twitter_url', $this->request->data['Pages']['twitter_url']);
                     $this->Session->setFlash('Membre modifié !', 'success');
-                    return $this->redirect($this->referer());
+                    return $this->redirect(['controller' => 'pages', 'action' => 'list_member', 'admin' => true]);
                 }
             }
             else{
@@ -615,7 +629,7 @@ class PagesController extends AppController {
     }
 
 	public function team(){
-		$this->set('data', $this->Team->find('all', ['order' => ['Team.rank ASC']]));
+		$this->set('data', $this->Team->find('all', ['order' => ['Team.order ASC']]));
 		$this->set('count', $this->Team->find('count'));
 	}
 

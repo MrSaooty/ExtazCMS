@@ -393,6 +393,8 @@ CREATE TABLE `extaz_team` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) DEFAULT '',
   `rank` text,
+  `color` text,
+  `order` int(11),
   `facebook_url` text,
   `twitter_url` text,
   PRIMARY KEY (`id`)

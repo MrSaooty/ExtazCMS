@@ -1,6 +1,13 @@
 Changelog
 =========
 
+v1.6 (en développement)
+----
+
+* La page équipe et son fonctionnement a entièrement été revue. Vous pouvez désormais définir n'importe quelle grade et n'importe quelle couleur à un membre. De plus si les réseaux sociaux de ce membre sont renseignés ils sont affichés sur la page qui liste tous les membre de l'équipe du serveur
+* {CSS} Modification de custom.css
+* {SQL} Modification de la table extaz_team
+
 v1.5 (15/04/2015)
 ----
 

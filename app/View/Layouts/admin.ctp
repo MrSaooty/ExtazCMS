@@ -13,6 +13,7 @@
         <?php echo $this->Html->css('admin/font-awesome.min.css'); ?>
         <?php echo $this->Html->css('admin/less-style.css'); ?>
         <?php echo $this->Html->css('admin/style'); ?>
+        <?php echo $this->Html->css('custom'); ?>
         <link href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>

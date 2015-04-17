@@ -28,9 +28,23 @@ $(document).ready(function(){
                         <div class="caption">
                             <center>
                                 <?php if($role > 0){ ?>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'delete_member', 'id' => $d['Team']['id'], 'admin' => true]); ?>" class="btn rounded btn-default btn-u-xs confirm">
+                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'delete_member', 'id' => $d['Team']['id'], 'admin' => true]); ?>" class="btn btn-default btn-u-xs confirm">
                                         <font color="red">
-                                            <i class="fa fa-times"> Supprimer</i>
+                                            <i class="fa fa-trash-o"></i>
+                                        </font>
+                                    </a>
+                                <?php } ?>
+                                <?php if(!empty($d['Team']['facebook_url'])){ ?>
+                                    <a href="<?php echo $d['Team']['facebook_url']; ?>" target="_blank" class="btn btn-default btn-u-xs">
+                                        <font color="#3498DB">
+                                            <i class="fa fa-facebook-square"></i>
+                                        </font>
+                                    </a>
+                                <?php } ?>
+                                <?php if(!empty($d['Team']['twitter_url'])){ ?>
+                                    <a href="<?php echo $d['Team']['twitter_url']; ?>" target="_blank" class="btn btn-default btn-u-xs">
+                                        <font color="#27D7E7">
+                                            <i class="fa fa-twitter"></i>
                                         </font>
                                     </a>
                                 <?php } ?>
@@ -39,31 +53,7 @@ $(document).ready(function(){
                                         <?php echo $d['Team']['username']; ?>
                                     </a>
                                 </h3>
-                                <?php
-                                switch($d['Team']['rank']){
-                                    case '1':
-                                        echo '<span class="label label-red">Fondateur</span>';
-                                        break;
-                                    case '2':
-                                        echo '<span class="label label-red">Administrateur</span>';
-                                        break;
-                                    case '3':
-                                        echo '<span class="label label-u">Modérateur</span>';
-                                        break;
-                                    case '4':
-                                        echo '<span class="label label-blue">Animateur</span>';
-                                        break;
-                                    case '5':
-                                        echo '<span class="label label-dark">Architecte</span>';
-                                        break;
-                                    case '6':
-                                        echo '<span class="label label-light">Guide</span>';
-                                        break;
-                                    default:
-                                        echo '<span class="label label-light">Indéfini</span>';
-                                        break;
-                                }
-                                ?>
+                                <span class="label label-<?php echo $d['Team']['color']; ?> "><?php echo $d['Team']['rank']; ?></span>
                             </center>                           
                         </div>
                     </div>

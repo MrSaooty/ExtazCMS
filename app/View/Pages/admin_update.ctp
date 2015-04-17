@@ -9,16 +9,26 @@
 		                <div class="clearfix"></div>
 		            </div>
 		            	<?php if($version >= $last_version){ ?>
-		                    Vous utilisez la dernière version disponible du CMS <?php echo '('.$last_version.')'; ?>
+		                    Félicitation ! Vous utilisez la dernière version disponible d'ExtazCMS <?php echo '('.$last_version.')'; ?>
 		                    <hr>
-		                    <button class="btn btn-default" disabled="disabled"><i class="fa fa-cogs"></i> Installer la mise à jour</button>
+							<i class="fa fa-github"></i> <b>Releases</b> : <a href="https://github.com/MrSaooty/ExtazCMS/releases" target="_blank">https://github.com/MrSaooty/ExtazCMS/releases</a>
+							<br>
+							<i class="fa fa-github"></i> <b>Changelog</b> : <a href="https://github.com/MrSaooty/ExtazCMS/blob/master/CHANGELOG.md" target="_blank">https://github.com/MrSaooty/ExtazCMS/Changelog</a>
+							<br>
+							<i class="fa fa-github"></i> <b>Aide</b> : <a href="https://github.com/MrSaooty/ExtazCMS/wiki" target="_blank">https://github.com/MrSaooty/ExtazCMS/wiki</a>
 		                <?php } else { ?>
-		                	Vous utilisez actuellement la version <?php echo $version; ?><br>
-		                    Une nouvelle version du CMS est disponible : <?php echo $last_version; ?>
+		                	Vous utilisez actuellement la version <?php echo $version; ?> d'ExtazCMS, une nouvelle version est disponible, n'hésitez pas à faire la mise a jour pour pouvoir profiter des dernières nouveautés de la version <?php echo $last_version; ?>. Consultez le changelog pour prendre connaissances de celles-ci
+		                	<hr>
+		                	<div class="alert alert-info">
+								<strong><i class="fa fa-info-circle"></i></strong> Attention le module de mise à jour automatique n'est pas encore disponible.<br>
+								Pour effectuer une mise à jour veuillez procéder manuellement
+							</div>
 		                    <hr>
-							<i class="fa fa-github"></i> <a href="https://github.com/MrSaooty/ExtazCMS/releases" target="_blank">https://github.com/MrSaooty/ExtazCMS/releases</a>
-							<hr>
-		                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'installUpdate', 'admin' => true]) ?>" class="btn btn-default"><i class="fa fa-cogs"></i> Installer la mise à jour</a>
+							<i class="fa fa-github"></i> <b>Releases</b> : <a href="https://github.com/MrSaooty/ExtazCMS/releases" target="_blank">https://github.com/MrSaooty/ExtazCMS/releases</a>
+							<br>
+							<i class="fa fa-github"></i> <b>Changelog</b> : <a href="https://github.com/MrSaooty/ExtazCMS/blob/master/CHANGELOG.md" target="_blank">https://github.com/MrSaooty/ExtazCMS/Changelog</a>
+							<br>
+							<i class="fa fa-github"></i> <b>Aide</b> : <a href="https://github.com/MrSaooty/ExtazCMS/wiki/Mise-%C3%A0-jour" target="_blank">https://github.com/MrSaooty/ExtazCMS/wiki/Mise-à-jour</a>
 		                <?php } ?>
 		            </div>
 		        </div>

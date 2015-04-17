@@ -52,6 +52,7 @@ $(document).ready(function(){
                             <tr>
                                 <th><b>Pseudo</b></th>
                                 <th><b>Rang</b></th>
+                                <th><b>Ordre</b></th>
                                 <th><b>Facebook</b></th>
                                 <th><b>Twitter</b></th>
                                 <th><b>Actions</b></th>
@@ -63,31 +64,13 @@ $(document).ready(function(){
                                 <td><?php echo $d['Team']['username']; ?></td>
                                 <td>
                                     <?php
-                                    switch($d['Team']['rank']){
-                                        case '1':
-                                            echo '<span class="label label-danger">Fondateur</span>';
-                                            break;
-                                        case '2':
-                                            echo '<span class="label label-danger">Administrateur</span>';
-                                            break;
-                                        case '3':
-                                            echo '<span class="label label-success">Modérateur</span>';
-                                            break;
-                                        case '4':
-                                            echo '<span class="label label-info">Animateur</span>';
-                                            break;
-                                        case '5':
-                                            echo '<span class="label label-black">Architecte</span>';
-                                            break;
-                                        case '6':
-                                            echo '<span class="label label-default">Guide</span>';
-                                            break;
-                                        default:
-                                            echo '<span class="label label-default">Indéfini</span>';
-                                            break;
+                                    if($d['Team']['color'] == 'light'){
+                                        $d['Team']['color'] = 'default';
                                     }
                                     ?>
+                                    <span class="label label-<?php echo $d['Team']['color']; ?> "><?php echo $d['Team']['rank']; ?></span>
                                 </td>
+                                <td><?php echo $d['Team']['order']; ?></td>
                                 <td>
                                     <?php
                                     if(empty($d['Team']['facebook_url'])){

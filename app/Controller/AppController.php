@@ -122,7 +122,7 @@ class AppController extends Controller {
 			$this->set('nb_donator', $this->donationLadder->find('count'));
 		}
 		// ExtazCMS
-		$version = '1.5';
+		$version = 1.6;
 		$last_version = file_get_contents('http://www.extaz-mc.fr/extazcms/version.txt');
 		$this->set('version', $version);
 		$this->set('last_version', $last_version);

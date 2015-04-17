@@ -16,14 +16,27 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <select name="data[Pages][rank]" class="form-control input-sm">
-                                <option value="7">Choisissez un rang</option>
-                                <option value="1">Fondateur</option>
-                                <option value="2">Administrateur</option>
-                                <option value="3">Modérateur</option>
-                                <option value="4">Animateur</option>
-                                <option value="5">Architecte</option>
-                                <option value="6">Guide</option>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-leaf"></i></span>
+                                <?php echo $this->Form->input('rank', array('type' => 'text', 'placeholder' => 'Fonction (ex: Administrateur, Modérateur...)', 'class' => 'form-control', 'label' => false, 'required' => 'required')); ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-unsorted"></i></span>
+                                <?php echo $this->Form->input('order', array('type' => 'number', 'placeholder' => 'Ordre', 'class' => 'form-control', 'label' => false, 'required' => 'required')); ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <select name="data[Pages][color]" class="form-control input-sm">
+                                <option value="">Choisissez une couleur</option>
+                                <option value="danger">Rouge</option>
+                                <option value="warning">Jaune</option>
+                                <option value="primary">Bleu foncé</option>
+                                <option value="info">Bleu clair</option>
+                                <option value="success">Vert</option>
+                                <option value="default">Gris foncé</option>
+                                <option value="light">Gris clair</option>
                             </select>
                         </div>
                         <div class="form-group">
