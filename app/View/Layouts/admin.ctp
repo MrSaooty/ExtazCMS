@@ -7,12 +7,13 @@
         <meta name="author" content="ResponsiveWebInc">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <?php echo $this->Html->meta('favicon.png', $logo_url, array('type' => 'icon')); ?>
-        <?php echo $this->Html->css('admin/bootstrap.min.css'); ?>
-        <?php echo $this->Html->css('admin/jquery.onoff.css'); ?>
-        <?php echo $this->Html->css('admin/jquery.gritter.css'); ?>
-        <?php echo $this->Html->css('admin/font-awesome.min.css'); ?>
-        <?php echo $this->Html->css('admin/less-style.css'); ?>
+        <?php echo $this->Html->css('admin/bootstrap.min'); ?>
+        <?php echo $this->Html->css('admin/jquery.onoff'); ?>
+        <?php echo $this->Html->css('admin/jquery.gritter'); ?>
+        <?php echo $this->Html->css('admin/font-awesome.min'); ?>
+        <?php echo $this->Html->css('admin/less-style'); ?>
         <?php echo $this->Html->css('admin/style'); ?>
+        <?php echo $this->Html->css('admin/jquery.selectBoxIt'); ?>
         <?php echo $this->Html->css('custom'); ?>
         <link href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -267,20 +268,21 @@
         <?php 
         echo $this->Html->script('jquery.confirm');
         echo $this->Html->script('jquery.bootstrap-growl');
-        echo $this->Html->script('admin/bootstrap.min.js');
-        echo $this->Html->script('admin/jquery-ui.min.js');
-        echo $this->Html->script('admin/wysihtml5-0.3.0.js');
-        echo $this->Html->script('admin/prettify.js');
-        echo $this->Html->script('admin/bootstrap-wysihtml5.min.js');
-        echo $this->Html->script('admin/jquery.steps.min.js');
-        echo $this->Html->script('admin/jquery.knob.js');
-        echo $this->Html->script('admin/jquery.slimscroll.min.js');
-        echo $this->Html->script('admin/jquery.prettyPhoto.js');
-        echo $this->Html->script('admin/jquery.gritter.min.js');
-        echo $this->Html->script('admin/jquery.onoff.min.js');
-        echo $this->Html->script('admin/respond.min.js');
-        echo $this->Html->script('admin/html5shiv.js');
-        echo $this->Html->script('admin/custom.js');
+        echo $this->Html->script('admin/bootstrap.min');
+        echo $this->Html->script('admin/jquery-ui.min');
+        echo $this->Html->script('admin/wysihtml5-0.3.0');
+        echo $this->Html->script('admin/prettify');
+        echo $this->Html->script('admin/bootstrap-wysihtml5.min');
+        echo $this->Html->script('admin/jquery.steps.min');
+        echo $this->Html->script('admin/jquery.knob');
+        echo $this->Html->script('admin/jquery.slimscroll.min');
+        echo $this->Html->script('admin/jquery.prettyPhoto');
+        echo $this->Html->script('admin/jquery.gritter.min');
+        echo $this->Html->script('admin/jquery.onoff.min');
+        echo $this->Html->script('admin/respond.min');
+        echo $this->Html->script('admin/html5shiv');
+        echo $this->Html->script('admin/jquery.selectBoxIt');
+        echo $this->Html->script('admin/custom');
         ?>
         <script src="//cdn.ckeditor.com/4.4.6/standard/ckeditor.js"></script>
         <script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>

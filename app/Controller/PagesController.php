@@ -575,7 +575,7 @@ class PagesController extends AppController {
 
 	public function admin_list_member(){
 		if($this->Auth->user('role') > 0){
-			$this->set('data', $this->Team->find('all', array('order' => array('Team.rank' => 'ASC'))));
+			$this->set('data', $this->Team->find('all', array('order' => array('Team.order' => 'ASC'))));
 		}
 		else{
 			throw new NotFoundException();
@@ -610,9 +610,6 @@ class PagesController extends AppController {
 					$this->Team->saveField('rank', $this->request->data['Pages']['rank']);
 					if(!empty($this->request->data['Pages']['color'])){
 						$this->Team->saveField('color', $this->request->data['Pages']['color']);
-					}
-					else{
-						$this->Team->saveField('color', 'light');
 					}
 					$this->Team->saveField('order', $this->request->data['Pages']['order']);
 					$this->Team->saveField('facebook_url', $this->request->data['Pages']['facebook_url']);

@@ -53,7 +53,7 @@ $(document).ready(function(){
                                         <?php echo $d['Team']['username']; ?>
                                     </a>
                                 </h3>
-                                <span class="label label-<?php echo $d['Team']['color']; ?> "><?php echo $d['Team']['rank']; ?></span>
+                                <span class="label label-<?php echo $d['Team']['color']; ?>"><?php echo $d['Team']['rank']; ?></span>
                             </center>                           
                         </div>
                     </div>

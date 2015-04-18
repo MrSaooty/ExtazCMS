@@ -1,4 +1,11 @@
 <?php $this->assign('title', 'Ajouter un membre à l\'équipe'); ?>
+<script type="text/javascript">
+$(function() {
+    $("select").selectBoxIt({
+        showFirstOption: false
+    });
+});
+</script>
 <div class="main-content">
     <div class="container">  
         <div class="row">
@@ -24,20 +31,8 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-unsorted"></i></span>
-                                <?php echo $this->Form->input('order', array('type' => 'number', 'placeholder' => 'Ordre', 'class' => 'form-control', 'label' => false, 'required' => 'required')); ?>
+                                <?php echo $this->Form->input('order', array('type' => 'number', 'placeholder' => 'Ordre d\'affichage (ex: 1, 2, 3)', 'class' => 'form-control', 'label' => false, 'required' => 'required')); ?>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <select name="data[Pages][color]" class="form-control input-sm">
-                                <option value="">Choisissez une couleur</option>
-                                <option value="danger">Rouge</option>
-                                <option value="warning">Jaune</option>
-                                <option value="primary">Bleu foncé</option>
-                                <option value="info">Bleu clair</option>
-                                <option value="success">Vert</option>
-                                <option value="default">Gris foncé</option>
-                                <option value="light">Gris clair</option>
-                            </select>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
@@ -51,7 +46,25 @@
                                 <?php echo $this->Form->input('twitter_url', array('type' => 'url', 'placeholder' => 'URL de son compte Twitter (Facultatif)', 'class' => 'form-control', 'label' => false)); ?>
                             </div>
                         </div>
-                        <button class="btn btn-default" type="submit"><i class="fa fa-plus"></i> Ajouter ce membre</button>
+                        <div class="form-group">
+                            <select name="data[Pages][color]" class="form-control input-sm">
+                                <option value="">Couleur du badge</option>
+                                <option value="danger" data-text='<div id="apercu" style="border: 1px solid rgb(0, 0, 0); width: 20px; height: 10px; top: 1px; left: 1px; display: inline-block; background-color: #D9534F;"></div> Rouge'></option>
+                                <option value="orange" data-text='<div id="apercu" style="border: 1px solid rgb(0, 0, 0); width: 20px; height: 10px; top: 1px; left: 1px; display: inline-block; background-color: #E67E22;"></div> Orange'></option>
+                                <option value="warning" data-text='<div id="apercu" style="border: 1px solid rgb(0, 0, 0); width: 20px; height: 10px; top: 1px; left: 1px; display: inline-block; background-color: #F0AD4E;"></div> Jaune'></option>
+                                <option value="primary" data-text='<div id="apercu" style="border: 1px solid rgb(0, 0, 0); width: 20px; height: 10px; top: 1px; left: 1px; display: inline-block; background-color: #337AB7;"></div> Bleu foncé'></option>
+                                <option value="info" data-text='<div id="apercu" style="border: 1px solid rgb(0, 0, 0); width: 20px; height: 10px; top: 1px; left: 1px; display: inline-block; background-color: #5BC0DE;"></div> Bleu clair'></option>
+                                <option value="success" data-text='<div id="apercu" style="border: 1px solid rgb(0, 0, 0); width: 20px; height: 10px; top: 1px; left: 1px; display: inline-block; background-color: #5CB85C;"></div> Vert'></option>
+                                <option value="purple" data-text='<div id="apercu" style="border: 1px solid rgb(0, 0, 0); width: 20px; height: 10px; top: 1px; left: 1px; display: inline-block; background-color: #9B6BCC;"></div> Violet'></option>
+                                <option value="default" data-text='<div id="apercu" style="border: 1px solid rgb(0, 0, 0); width: 20px; height: 10px; top: 1px; left: 1px; display: inline-block; background-color: #777777;"></div> Gris foncé'></option>
+                                <option value="light" data-text='<div id="apercu" style="border: 1px solid rgb(0, 0, 0); width: 20px; height: 10px; top: 1px; left: 1px; display: inline-block; background-color: #ECF0F1;"></div> Gris clair'></option>
+                                <option value="brown" data-text='<div id="apercu" style="border: 1px solid rgb(0, 0, 0); width: 20px; height: 10px; top: 1px; left: 1px; display: inline-block; background-color: #9C8061;"></div> Marron'></option>
+                                <option value="dark" data-text='<div id="apercu" style="border: 1px solid rgb(0, 0, 0); width: 20px; height: 10px; top: 1px; left: 1px; display: inline-block; background-color: #555555;"></div> Noir'></option>
+                            </select>
+                        </div>
+                        <hr>
+                        <button class="btn btn-black pull-right" type="submit"><i class="fa fa-plus"></i> Ajouter ce membre</button>
+                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_member']); ?>" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Annuler</a>
                     <?php echo $this->Form->end(); ?>
                 </div>
             </div>

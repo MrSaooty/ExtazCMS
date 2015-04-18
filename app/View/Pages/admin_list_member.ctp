@@ -67,6 +67,15 @@ $(document).ready(function(){
                                     if($d['Team']['color'] == 'light'){
                                         $d['Team']['color'] = 'default';
                                     }
+                                    if($d['Team']['color'] == 'dark'){
+                                        $d['Team']['color'] = 'black';
+                                    }
+                                    if($d['Team']['color'] == 'warning'){
+                                        $d['Team']['color'] = 'yellow';
+                                    }
+                                    if($d['Team']['color'] == 'orange'){
+                                        $d['Team']['color'] = 'warning';
+                                    }
                                     ?>
                                     <span class="label label-<?php echo $d['Team']['color']; ?> "><?php echo $d['Team']['rank']; ?></span>
                                 </td>
