@@ -27,13 +27,19 @@ $(document).ready(function(){
             }
         }
     });
+    $(".confirm").confirm({
+        text: "Voulez vous vraiment supprimer le compte de cet utilisateur ?",
+        title: "Confirmation",
+        confirmButton: "Oui",
+        cancelButton: "Non"
+    });
 });
 </script>
 <div class="main-content">
     <div class="container">
         <div class="page-content">
             <div class="single-head">
-                <h3 class="pull-left"><i class="fa fa-table lblue"></i>Liste des utilisateurs</h3>
+                <h3 class="pull-left"><i class="fa fa-table"></i>Liste des utilisateurs</h3>
                 <div class="breads pull-right">
                     <a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'user', 'admin' => true]); ?>" class="label label-black" target="_blank"><i class="fa fa-pie-chart"></i> Graphique</a>
                 </div>
@@ -67,9 +73,8 @@ $(document).ready(function(){
                                 <?php } ?>
                                 <td><?php echo $this->Time->format('d-m-Y à H:i', $d['User']['created']); ?></td>
                                 <td>
-                                    <center>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'edit', $d['User']['id']]); ?>" class="label label-black">Modifier</a>
-                                    </center>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'edit', $d['User']['id']]); ?>" class="label label-black"><i class="fa fa-pencil-square-o"></i> Editer</a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'delete', $d['User']['id']]); ?>" class="label label-danger confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
                                 </td>
                             </tr>
                             <?php } ?>

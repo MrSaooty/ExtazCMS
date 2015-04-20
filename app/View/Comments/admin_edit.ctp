@@ -15,7 +15,7 @@ $(document).ready(function(){
             <div class="col-md-4">
                 <div class="page-content">
                     <div class="single-head">
-                        <h3 class="pull-left"><i class="fa fa-list"></i> Editer un commentaire</h3>
+                        <h3 class="pull-left"><i class="fa fa-pencil-square-o"></i>Editer un commentaire</h3>
                         <div class="clearfix"></div>
                     </div>
                     <?php echo $this->Form->create('Comments', ['class' => 'sky-form', 'inputDefaults' => ['error' => false]]); ?>

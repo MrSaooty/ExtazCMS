@@ -121,8 +121,8 @@ $inscription = $player['User']['created'];
                         </table>
                     </div>
                     <div class="widget-foot">
-                        <span class="pull-left">Inscrit le <?php echo $this->Time->format('d/m/Y à H:i', $inscription); ?></span>
-                        <a href="" class="btn btn-xs pull-right btn-default">Rafraîchir</a>
+                        <span class="pull-left"><i class="fa fa-calendar"></i> Inscrit le <?php echo $this->Time->format('d/m/Y à H:i', $inscription); ?></span>
+                        <a href="" class="btn btn-xs pull-right btn-default"><i class="fa fa-refresh"></i> Rafraîchir</a>
                         <div class="clearfix"></div>
                     </div>
                 </div>

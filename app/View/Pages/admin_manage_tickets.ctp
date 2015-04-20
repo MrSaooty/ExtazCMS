@@ -40,7 +40,7 @@ $(document).ready(function(){
     <div class="container">
         <div class="page-content">
             <div class="single-head">
-                <h3 class="pull-left"><i class="fa fa-table lblue"></i>Liste des tickets ouverts</h3>
+                <h3 class="pull-left"><i class="fa fa-table"></i>Liste des tickets ouverts</h3>
                 <div class="clearfix"></div>
             </div>
             <div class="page-tables">
@@ -108,10 +108,8 @@ $(document).ready(function(){
                                     </small>
                                 </td>
                                 <td>
-                                    <center>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'view_ticket', 'id' => $d['Support']['id'], 'admin' => false]); ?>" class="label label-black" type="submit"><i class="fa fa-list"></i></a>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'close_ticket', 'id' => $d['Support']['id'], 'admin' => false]); ?>" class="label label-success confirm ui-tooltip" data-original-title="Clôturer" data-toggle="tooltip" data-placement="right" type="submit"><i class="fa fa-lock"></i></a>
-                                    </center>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'view_ticket', 'id' => $d['Support']['id'], 'admin' => false]); ?>" class="label label-black" type="submit"><i class="fa fa-list"></i></a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'close_ticket', 'id' => $d['Support']['id'], 'admin' => false]); ?>" class="label label-danger confirm ui-tooltip" data-original-title="Clôturer" data-toggle="tooltip" data-placement="right" type="submit"><i class="fa fa-lock"></i></a>
                                 </td>
                             </tr>
                             <?php } ?>

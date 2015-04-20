@@ -9,7 +9,6 @@ $(document).ready(function(){
             cancelButton: "Non"
         });
     });
-
     $('#data-table').dataTable({
         "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Tout"]],
         "order": [],
@@ -42,7 +41,7 @@ $(document).ready(function(){
     <div class="container">
         <div class="page-content">
             <div class="single-head">
-                <h3 class="pull-left"><i class="fa fa-table lblue"></i>Liste des codes cadeaux générés</h3>
+                <h3 class="pull-left"><i class="fa fa-table"></i>Liste des codes cadeaux générés</h3>
                 <div class="clearfix"></div>
             </div>
             <div class="page-tables">
@@ -62,16 +61,18 @@ $(document).ready(function(){
                         <tbody>
                             <?php foreach($data as $d){ ?>
                             <?php
-                            if($d['Code']['used'] == 0){
-                                echo '<tr class="success">';
+                            if($d['Code']['used'] == 1){
+                                echo '<tr class="danger">';
                             }
                             else{
                                 echo '<tr>';
                             }
                             ?>
-                                <td><?php echo $d['Code']['author']; ?></td>
+                                <td><?php echo $d['User']['username']; ?></td>
                                 <td><?php echo $d['Code']['ip']; ?></td>
-                                <td><input class="form-control input-sm" type="text" onclick="this.select();" value="<?php echo $d['Code']['code']; ?>"></td>
+                                <td>
+                                    <input onclick="select()" value="<?php echo $d['Code']['code']; ?>" readonly="readonly"></input>
+                                </td>
                                 <td><?php echo $d['Code']['value'].' '.$site_money; ?></td>
                                 <td>
                                     <?php
@@ -79,17 +80,17 @@ $(document).ready(function(){
                                         echo 'Non';
                                     }
                                     else{
-                                        echo 'Oui par '.$d['Code']['by'];
+                                        echo 'Oui par '.$d['Code']['by'].' <a href="'.$this->Html->url(['controller' => 'users', 'action' => 'edit', $d['User']['id']]).'" target="_blank"><i class="fa fa-external-link-square"></i></a>';
                                     }
                                     ?>
                                 </td>
                                 <td><?php echo $this->Time->format('d/m/Y à H:i', $d['Code']['created']); ?></td>
                                 <?php
                                 if($d['Code']['used'] == 0){
-                                    echo '<td><a href="'.$this->Html->url(['controller' => 'codes', 'action' => 'delete', $d['Code']['id']]).'" class="btn btn-danger btn-sm confirm"><i class="fa fa-trash-o"></i> Supprimer</a></td>';
+                                    echo '<td><a href="'.$this->Html->url(['controller' => 'codes', 'action' => 'delete', $d['Code']['id']]).'" class="label label-danger confirm"><i class="fa fa-trash-o"></i> Supprimer</a></td>';
                                 }
                                 else{
-                                    echo '<td><button href="#" disabled="disabled" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Supprimer</button></td>';
+                                    echo '<td><span class="label label-default" disabled="disabled"><i class="fa fa-trash-o"></i> Supprimer</span></td>';
                                 }
                                 ?>
                             </tr>

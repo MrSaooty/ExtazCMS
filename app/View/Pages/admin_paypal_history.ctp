@@ -33,7 +33,7 @@ $(document).ready(function(){
     <div class="container">
         <div class="page-content">
             <div class="single-head">
-                <h3 class="pull-left"><i class="fa fa-table lblue"></i>Historique d'achats PayPal</h3>
+                <h3 class="pull-left"><i class="fa fa-table"></i>Historique d'achats PayPal</h3>
                 <div class="breads pull-right">
                     <a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'paypal', 'admin' => true]); ?>" class="label label-black" target="_blank"><i class="fa fa-pie-chart"></i> Graphique</a>
                 </div>

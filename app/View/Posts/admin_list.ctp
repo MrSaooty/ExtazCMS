@@ -42,7 +42,7 @@ $(document).ready(function(){
     <div class="container">
         <div class="page-content">
             <div class="single-head">
-                <h3 class="pull-left"><i class="fa fa-table lblue"></i>Liste des articles publiés</h3>
+                <h3 class="pull-left"><i class="fa fa-table"></i>Liste des articles publiés</h3>
                 <div class="clearfix"></div>
             </div>
             <div class="page-tables">
@@ -65,10 +65,10 @@ $(document).ready(function(){
                                 <td><?php echo $d['Post']['cat']; ?></td>
                                 <td><?php echo $this->Time->format('d-m-Y à H:i', $d['Post']['created']); ?></td>
                                 <td>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'edit', $d['Post']['id'], 'admin' => true]); ?>" class="label label-success"><i class="fa fa-pencil"></i> Editer</a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'edit', $d['Post']['id'], 'admin' => true]); ?>" class="label label-black"><i class="fa fa-pencil-square-o"></i> Editer</a>
                                     <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'delete', $d['Post']['id'], 'admin' => true]); ?>" class="label label-danger confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
                                     <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'publish', $d['Post']['id'], 0, 'admin' => true]); ?>" class="label label-black"><i class="fa fa-file"></i> Brouillon</a>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'read', 'slug' => $d['Post']['slug'], 'id' => $d['Post']['id'], 'admin' => false]); ?>" class="label label-black"><i class="fa fa-eye"></i> Voir</a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'read', 'slug' => $d['Post']['slug'], 'id' => $d['Post']['id'], 'admin' => false]); ?>" class="label label-black" target="_blank"><i class="fa fa-eye"></i> Voir</a>
                                 </td>
                             </tr>
                             <?php } ?>

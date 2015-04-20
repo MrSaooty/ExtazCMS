@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <div class="page-content">
                     <div class="single-head">
-                        <h3 class="pull-left"><i class="fa fa-pencil lblue"></i> Ajouter un article dans la boutique</h3>
+                        <h3 class="pull-left"><i class="fa fa-pencil-square-o"></i>Ajouter un article dans la boutique</h3>
                         <div class="clearfix"></div>
                     </div>
                     <?php echo $this->Form->create('Shop', ['class' => 'sky-form', 'inputDefaults' => ['error' => false]]); ?>
@@ -69,7 +69,7 @@
                                 <?php echo $this->Form->input('command', array('type' => 'text', 'placeholder' => 'Commande(s) sans le slash (/) initial. Utilisez {{player}} pour désigner un joueur et {{new}} pour ajouter une nouvelle commande', 'class' => 'form-control', 'label' => false, 'div' => false)); ?>
                             </div>
                         </div>
-                        <button class="btn btn-default pull-right" type="submit"><i class="fa fa-plus"></i> Ajouter cet article</button>
+                        <button class="btn btn-black pull-right" type="submit"><i class="fa fa-plus"></i> Ajouter cet article</button>
                         <br>
                     <?php echo $this->Form->end(); ?>
                 </div>

@@ -1,7 +1,6 @@
 <?php $this->assign('title', 'Modifier les informations'); ?>
 <script>
 $(document).ready(function(){
-
     $('.loading').on('click', function(event){
         event.preventDefault();
     });
@@ -13,16 +12,14 @@ $(document).ready(function(){
         var password = $('#InformationsJsonapiPassword').val();
         var salt = $('#InformationsJsonapiSalt').val();
         var url = '<?php echo $this->Html->url(array('controller' => 'informations', 'action' => 'testJsonapi')); ?>';
-
         $('.test-jsonapi').hide();
         $('.loading').show();
-
         $.post(url, {ip: ip, port: port, username: username, password: password, salt: salt}, 
             function(data){
                 $('.loading').hide();
                 $('.test-jsonapi').show();
                 if(data.result == 'success'){
-                    $.bootstrapGrowl("<i class='fa fa-check'></i> Connexion effectué avec succès !", {
+                    $.bootstrapGrowl("<i class='fa fa-check'></i> Connexion effectuée avec succès !", {
                         ele: 'body', // which element to append to
                         type: 'success', // (null, 'info', 'danger', 'success')
                         offset: {from: 'top', amount: 20}, // 'top', or 'bottom'
@@ -85,7 +82,7 @@ $(document).ready(function(){
                                     <?php echo $this->Form->input($k, array('type' => 'text', 'value' => $data['Informations'][$k], 'class' => 'form-control', 'label' => $v)); ?>
                                 </div>
                                 <?php } ?>
-                                <button class="btn btn-black pull-right" type="submit">Confirmer les modifications</button><br>
+                                <button class="btn btn-black pull-right" type="submit"><i class="fa fa-check"></i> Confirmer les modifications</button><br>
                             <?php echo $this->Form->end(); ?>
                         </div>
                         <div class="tab-pane fade" id="tab-2">
@@ -102,9 +99,9 @@ $(document).ready(function(){
                                     <?php echo $this->Form->input($k, array('type' => 'text', 'value' => $data['Informations'][$k], 'class' => 'form-control', 'label' => $v)); ?>
                                 </div>
                                 <?php } ?>
-                                <button class="btn btn-default test-jsonapi"><i class="fa fa-globe"></i> Tester la connexion</button>
-                                <button class="btn btn-default loading" style="display:none;"><i class="fa fa-refresh fa-spin"></i> Connexion en cours...</button>
-                                <button class="btn btn-black pull-right" type="submit">Confirmer les modifications</button><br>
+                                <button class="btn btn-black test-jsonapi"><i class="fa fa-globe"></i> Tester la connexion</button>
+                                <button class="btn btn-black loading" style="display:none;"><i class="fa fa-refresh fa-spin"></i> Connexion en cours...</button>
+                                <button class="btn btn-black pull-right" type="submit"><i class="fa fa-check"></i> Confirmer les modifications</button><br>
                             <?php echo $this->Form->end(); ?>
                         </div>
                         <div class="tab-pane fade" id="tab-3">
@@ -123,7 +120,7 @@ $(document).ready(function(){
                                     <?php echo $this->Form->input($k, array('type' => 'text', 'value' => $data['Informations'][$k], 'class' => 'form-control', 'label' => $v)); ?>
                                 </div>
                                 <?php } ?>
-                                <button class="btn btn-black pull-right" type="submit">Confirmer les modifications</button><br>
+                                <button class="btn btn-black pull-right" type="submit"><i class="fa fa-check"></i> Confirmer les modifications</button><br>
                             <?php echo $this->Form->end(); ?>
                         </div>
                         <div class="tab-pane fade" id="tab-4">
@@ -231,7 +228,7 @@ $(document).ready(function(){
                                     </div>
                                 </div>
                                 <hr>
-                                <button class="btn btn-black pull-right" type="submit">Confirmer les modifications</button><br>
+                                <button class="btn btn-black pull-right" type="submit"><i class="fa fa-check"></i> Confirmer les modifications</button><br>
                             <?php echo $this->Form->end(); ?>
                         </div>
                         <div class="tab-pane fade" id="tab-6">
@@ -244,7 +241,7 @@ $(document).ready(function(){
                                     <?php echo $this->Form->textarea($k, array('type' => 'text', 'value' => $data['Informations'][$k], 'class' => 'ckeditor', 'label' => $v)); ?>
                                 </div>
                                 <?php } ?>
-                                <button class="btn btn-black pull-right" type="submit">Confirmer les modifications</button><br>
+                                <button class="btn btn-black pull-right" type="submit"><i class="fa fa-check"></i> Confirmer les modifications</button><br>
                             <?php echo $this->Form->end(); ?>
                         </div>
                     </div>

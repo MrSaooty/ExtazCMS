@@ -46,7 +46,7 @@ $count = count($players);
     <div class="container">
         <div class="page-content">
             <div class="single-head">
-                <h3 class="pull-left"><i class="fa fa-table lblue"></i><?php echo $count; ?> joueurs connecté(s) sur le serveur</h3>
+                <h3 class="pull-left"><i class="fa fa-table"></i><?php echo $count; ?> joueurs connecté(s) sur le serveur</h3>
                 <div class="clearfix"></div>
             </div>
             <div class="page-tables">

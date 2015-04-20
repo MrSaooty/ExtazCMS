@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <div class="page-content">
                     <div class="single-head">
-                        <h3 class="pull-left"><i class="fa fa-pencil lblue"></i> Modifier un article</h3>
+                        <h3 class="pull-left"><i class="fa fa-pencil-square-o"></i>Modifier un article</h3>
                         <div class="clearfix"></div>
                     </div>
                     <?php echo $this->Form->create('Shop', ['inputDefaults' => ['error' => false]]); ?>
@@ -34,16 +34,18 @@
                             <font color="#A94442"><small><?php echo $this->Form->error('price_money_server'); ?></small></font>
                             <?php echo $this->Form->input('price_money_server', array('type' => 'number', 'value' => $data['Shop']['price_money_server'], 'class' => 'form-control', 'label' => 'Prix avec la monnaie du serveur')); ?>
                         </div>
+                        <label>Prérequis</label>
                         <div class="form-group">
                             <select name="data[Shop][required]" id="ShopRequired" class="form-control">
                                 <option value="<?php echo $data['Shop']['required'].'--'.$data['Shop']['required_name']; ?>">Prérequis actuel: <?php echo $data['Shop']['required_name']; ?></option>
-                                <option value="-1--Aucun">PAS DE PRÉREQUIS</option>
+                                <option value="-1--Aucun">Pas de prérequis</option>
                                 <?php foreach($list_item as $item){ ?>
                                     <option value="<?php echo $item['Shop']['id'].'--'.$item['Shop']['name']; ?>"><?php echo $item['Shop']['name']; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <?php } ?>
+                        <label>Commande(s)</label>
                         <div class="form-group">
                             <font color="#A94442"><small><?php echo $this->Form->error('command'); ?></small></font>
                             <div class="input-group margin-bottom-20">
@@ -52,7 +54,7 @@
                             </div>
                             <small>Commande(s) sans le slash (/) initial. Utilisez {{player}} pour désigner un joueur et {{new}} pour ajouter une nouvelle commande</small>
                         </div>
-                        <button class="btn btn-default pull-right" type="submit">Modifier cet article</button>
+                        <button class="btn btn-black pull-right" type="submit"><i class="fa fa-pencil-square-o"-square-o"></i> Modifier cet article</button>
                         <br>
                     <?php echo $this->Form->end(); ?>
                 </div>

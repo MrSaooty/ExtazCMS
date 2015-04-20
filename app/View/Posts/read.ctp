@@ -180,13 +180,30 @@ $(document).ready(function(){
                 <?php foreach($comments as $comment){ ?>
                     <div class="col-sm-1">
                         <div class="thumbnail">
-                            <?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$comment['User']['username'].'', ['alt' => 'Player head', 'class' => 'img-responsive']); ?>
+                            <?php
+                            if($comment['User']['username'] === null){
+                                echo $this->Html->image('http://cravatar.eu/helmavatar/Steve', ['alt' => 'Player head', 'class' => 'img-responsive']);
+                            }
+                            else{
+                                echo $this->Html->image('http://cravatar.eu/helmavatar/'.$comment['User']['username'].'', ['alt' => 'Player head', 'class' => 'img-responsive']);
+                            }
+                            ?>
                         </div>
                     </div>
                     <div class="col-sm-11">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <strong><?php echo $comment['User']['username']; ?></strong> <span class="text-muted"><?php echo $this->Time->timeAgoInWords($comment['Comment']['created']); ?></span>
+                                <strong>
+                                    <?php
+                                    if($comment['User']['username'] === null){
+                                        echo '<u>Compte supprimé</u>';
+                                    }
+                                    else{
+                                        echo $comment['User']['username'];
+                                    }
+                                    ?>
+                                </strong>
+                                <span class="text-muted"><?php echo $this->Time->timeAgoInWords($comment['Comment']['created']); ?></span>
                                 <?php if($role > 0){ ?>
                                     <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'delete', $comment['Comment']['id'], 'read', 'admin' => true]); ?>" class="confirm-comment btn btn-default btn-xs pull-right">
                                         <font color="red">

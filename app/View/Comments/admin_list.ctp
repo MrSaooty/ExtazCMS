@@ -42,7 +42,7 @@ $(document).ready(function(){
     <div class="container">
         <div class="page-content">
             <div class="single-head">
-                <h3 class="pull-left"><i class="fa fa-table lblue"></i>Liste des commentaires</h3>
+                <h3 class="pull-left"><i class="fa fa-table"></i>Liste des commentaires</h3>
                 <div class="clearfix"></div>
             </div>
             <div class="page-tables">
@@ -67,7 +67,7 @@ $(document).ready(function(){
                                 <td><?php echo htmlentities($d['Comment']['comment']); ?></td>
                                 <td><?php echo $this->Time->format('d-m-Y à H:i', $d['Comment']['created']); ?></td>
                                 <td>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'edit', $d['Comment']['id'], 'admin' => true]); ?>" class="label label-success"><i class="fa fa-pencil"></i> Editer</a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'edit', $d['Comment']['id'], 'admin' => true]); ?>" class="label label-black"><i class="fa fa-pencil-square-o"></i> Editer</a>
                                     <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'delete', $d['Comment']['id'], 'list', 'admin' => true]); ?>" class="label label-danger confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
                                 </td>
                             </tr>

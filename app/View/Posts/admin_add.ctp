@@ -13,7 +13,7 @@ $(document).ready(function(){
             <div class="col-md-12">
                 <div class="page-content">
                     <div class="single-head">
-                        <h3 class="pull-left"><i class="fa fa-pencil lblue"></i> Rédiger un article</h3>
+                        <h3 class="pull-left"><i class="fa fa-pencil-square-o"></i>Rédiger un article</h3>
                         <div class="clearfix"></div>
                     </div>
                     <?php echo $this->Form->create('Post', array('class' => 'sky-form', 'type' => 'file', 'inputDefaults' => array('error' => false))); ?>

@@ -3,7 +3,7 @@
 	<div class="container">
 		<div class="page-content page-statement">
 			<div class="single-head">
-				<h3 class="pull-left"><i class="fa fa-area-chart lblue"></i> Statistiques</h3>
+				<h3 class="pull-left"><i class="fa fa-area-chart"></i>Statistiques</h3>
 				<div class="clearfix"></div>
 			</div>
 			<div class="row">

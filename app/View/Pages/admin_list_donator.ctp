@@ -42,7 +42,7 @@ $(document).ready(function(){
     <div class="container">
         <div class="page-content">
             <div class="single-head">
-                <h3 class="pull-left"><i class="fa fa-table lblue"></i>Liste des utilisateurs</h3>
+                <h3 class="pull-left"><i class="fa fa-table"></i>Liste des utilisateurs</h3>
                 <div class="breads pull-right">
                     <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'donator_chart', 'admin' => true]); ?>" class="label label-black" target="_blank"><i class="fa fa-pie-chart"></i> Graphique</a>
                 </div>
@@ -68,8 +68,8 @@ $(document).ready(function(){
                                 <td><?php echo $d['donationLadder']['tokens']; ?></td>
                                 <td><?php echo $d['User']['tokens']; ?></td>
                                 <td>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'edit_donator', $d['donationLadder']['id']]); ?>" class="label label-black">Modifier</a>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'delete_donator', $d['donationLadder']['id']]); ?>" class="label label-danger confirm">Supprimer</a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'edit_donator', $d['donationLadder']['id']]); ?>" class="label label-black"><i class="fa fa-pencil-square-o"></i> Editer</a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'delete_donator', $d['donationLadder']['id']]); ?>" class="label label-danger confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
                                 </td>
                             </tr>
                             <?php } ?>
