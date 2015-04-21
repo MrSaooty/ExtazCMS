@@ -116,7 +116,6 @@ $count = count($players);
 	                                </td>
 	                            </tr>
 								<?php
-								// debug($p);
 							}
 							?>
                         </tbody>

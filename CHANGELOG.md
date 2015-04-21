@@ -4,8 +4,10 @@ Changelog
 v1.6 (en développement)
 ----
 
+* Dans la boutique les prérequis des articles sont désormais affichés au survol de la souris sur les boutons d'achats
 * Vous pouvez désormais générer jusqu'à 25 codes cadeaux en une seule fois
 * La page équipe et son fonctionnement a entièrement été revue. Vous pouvez désormais définir n'importe quelle grade et n'importe quelle couleur à un membre. De plus si les réseaux sociaux de ce membre sont renseignés ils sont affichés sur la page qui liste tous les membre de l'équipe du serveur
+* Corrections de bugs majeurs
 * {CSS} Modification de custom.css
 * {SQL} Modification de la table extaz_team
 

@@ -5,7 +5,7 @@ App::uses('AYAH', 'Lib/AYAH');
 
 class UsersController extends AppController{
 
-    public $uses = ['User', 'Informations'];
+    public $uses = ['User', 'Informations', 'donationLadder'];
 
 	public function beforeFilter(){
 	    parent::beforeFilter();
@@ -176,6 +176,7 @@ class UsersController extends AppController{
             $this->User->id = $id;
             if($this->User->exists()){
                 if($this->User->delete($id)){
+                    $this->donationLadder->deleteAll(['donationLadder.user_id' => $id]);
                     $this->Session->setFlash('Utilisateur supprimé !', 'success');
                     return $this->redirect(['controller' => 'users', 'action' => 'all']);
                 }

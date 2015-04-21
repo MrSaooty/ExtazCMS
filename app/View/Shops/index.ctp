@@ -85,7 +85,7 @@ $(document).ready(function(){
                                             <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'edit', $i['Shop']['id'], 'admin' => true]); ?>" class="tooltips btn rounded btn-default btn-u-xs" data-toggle="tooltip" data-placement="top" title="" data-original-title="Modifier"><i class="fa fa-wrench"></i></a>
                                         </td>
                                         <td>
-                                            <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'delete', $i['Shop']['id']]); ?>" class="tooltips btn rounded btn-default btn-u-xs confirm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Supprimer"><font color="red"><i class="fa fa-times"></i></font></a>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'delete', $i['Shop']['id']]); ?>" class="tooltips btn rounded btn-default btn-u-xs confirm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Supprimer"><font color="red"><i class="fa fa-trash-o"></i></font></a>
                                         </td>
                                         <?php } ?>
                                         <td>
@@ -105,7 +105,7 @@ $(document).ready(function(){
     	                                        <td>
     	                                            <center>
                                                         <?php if($connected){ ?>
-                                                            <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'server']); ?>" class="btn-u rounded btn-u btn-u-xs btn-block" type="submit"><font color="white"><i class="fa fa-shopping-cart"></i> <?php echo number_format($i['Shop']['price_money_server'], 0, ' ', ' ').' '.$money_server; ?></a></font></a>
+                                                            <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'server']); ?>" class="tooltips btn-u rounded btn-u btn-u-xs btn-block" data-toggle="tooltip" data-placement="top" title="" data-original-title="Prérequis : <?php echo $i['Shop']['required_name']; ?>" disabled="disabled" type="submit"><font color="white"><i class="fa fa-shopping-cart"></i> <?php echo number_format($i['Shop']['price_money_server'], 0, ' ', ' ').' '.$money_server; ?></a></font></a>
                                                         <?php } else { ?>
                                                             <a href="#" class="tooltips btn-u rounded btn-u btn-u-xs btn-block" data-toggle="tooltip" data-placement="top" title="" data-original-title="Vous devez être connecté pour acheter dans la boutique" disabled="disabled" type="submit"><font color="white"><i class="fa fa-shopping-cart"></i> <?php echo number_format($i['Shop']['price_money_server'], 0, ' ', ' ').' '.$money_server; ?></a></font></a>
                                                         <?php } ?>
@@ -116,7 +116,7 @@ $(document).ready(function(){
                                             <td>
                                                 <center>
                                                     <?php if($connected){ ?>
-                                                        <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'site']); ?>" class="btn-u rounded btn-u-dark btn-u-xs btn-block" type="submit"><font color="white"><i class="fa fa-shopping-cart"></i> <?php echo number_format($i['Shop']['price_money_site'], 0, ' ', ' ').' '.$site_money; ?></a></font></a>
+                                                        <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'site']); ?>" class="tooltips btn-u rounded btn-u-dark btn-u-xs btn-block" data-toggle="tooltip" data-placement="top" title="" data-original-title="Prérequis : <?php echo $i['Shop']['required_name']; ?>"  type="submit"><font color="white"><i class="fa fa-shopping-cart"></i> <?php echo number_format($i['Shop']['price_money_site'], 0, ' ', ' ').' '.$site_money; ?></a></font></a>
                                                     <?php } else { ?>
                                                         <a href="#" class="tooltips btn-u rounded btn-u-dark btn-u-xs btn-block" data-toggle="tooltip" data-placement="top" title="" data-original-title="Vous devez être connecté pour acheter dans la boutique" disabled="disabled" type="submit"><font color="white"><i class="fa fa-shopping-cart"></i> <?php echo number_format($i['Shop']['price_money_site'], 0, ' ', ' ').' '.$site_money; ?></a></font></a>
                                                     <?php } ?>

@@ -22,7 +22,6 @@
         <script type="text/javascript">
         $(document).ready(function(){
             $('.send-command').on('click', function(){
-                event.preventDefault();
                 var command = $('#command').val();
                 var url = '<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'send_command')); ?>';
                 $.post(url, {command: command}, function(data){
@@ -38,6 +37,7 @@
                       stackup_spacing: 10
                     });
                 });
+                return false;
             });
         });
         </script>

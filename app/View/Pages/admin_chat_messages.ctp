@@ -30,7 +30,7 @@ $(document).ready(function(){
     }, 5000);
 
     $('.send-message').on('click', function(){
-    	event.preventDefault();
+    	// event.preventDefault();
         var message = $('#message').val();
         var url = '<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'send_message')); ?>';
         $.post(url, {message: message}, function(data){
@@ -50,6 +50,7 @@ $(document).ready(function(){
 			  stackup_spacing: 10
 			});
         });
+        return false;
     });
 });
 </script>

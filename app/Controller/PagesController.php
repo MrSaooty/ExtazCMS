@@ -271,11 +271,11 @@ class PagesController extends AppController {
 			if($this->donationLadder->exists()){
 				$this->donationLadder->delete($id);
 				$this->Session->setFlash('Ce donateur a été retiré du classement !', 'success');
-				return $this->redirect(['controller' => 'pages', 'action' => 'list_donators', 'admin' => true]);
+				return $this->redirect(['controller' => 'pages', 'action' => 'list_donator', 'admin' => true]);
 			}
 			else{
 				$this->Session->setFlash('Ce dontateur n\'existe pas !', 'error');
-				return $this->redirect(['controller' => 'pages', 'action' => 'list_donators', 'admin' => true]);
+				return $this->redirect(['controller' => 'pages', 'action' => 'list_donator', 'admin' => true]);
 			}
 		}
 		else{
