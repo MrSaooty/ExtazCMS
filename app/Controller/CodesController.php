@@ -27,7 +27,7 @@ Class CodesController extends AppController{
 			$ip = $_SERVER['REMOTE_ADDR'];
 			$value = $this->request->data['Codes']['value'];
 			$number = $this->request->data['Codes']['number'];
-			if($number === null){
+			if($number == null){
 				$number = 1;
 			}
 			for($i = 1; $i <= $number; $i++){

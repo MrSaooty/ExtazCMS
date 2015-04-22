@@ -75,7 +75,10 @@
                                     <a href="#"><i class="fa fa-cloud"></i> Serveur <span class="nav-caret fa fa-caret-down"></span></a>
                                     <ul class="list-unstyled">
                                         <li>
-                                            <a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'memory', 'admin' => true]); ?>"><i class="fa fa-pie-chart"></i> Consommation</a>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'memory', 'admin' => true]); ?>"><i class="fa fa-pie-chart"></i> Mémoire vive</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'disk', 'admin' => true]); ?>"><i class="fa fa-pie-chart"></i> Disque dur</a>
                                         </li>
                                         <li>
                                             <a href="<?php echo $this->Html->url(['controller' => 'players', 'action' => 'index', 'admin' => true]); ?>"><i class="fa fa-users"></i> Joueurs</a>

@@ -181,7 +181,7 @@ $(document).ready(function(){
                     <div class="col-sm-1">
                         <div class="thumbnail">
                             <?php
-                            if($comment['User']['username'] === null){
+                            if($comment['User']['username'] == null){
                                 echo $this->Html->image('http://cravatar.eu/helmavatar/Steve', ['alt' => 'Player head', 'class' => 'img-responsive']);
                             }
                             else{
@@ -195,7 +195,7 @@ $(document).ready(function(){
                             <div class="panel-heading">
                                 <strong>
                                     <?php
-                                    if($comment['User']['username'] === null){
+                                    if($comment['User']['username'] == null){
                                         echo '<u>Compte supprimé</u>';
                                     }
                                     else{

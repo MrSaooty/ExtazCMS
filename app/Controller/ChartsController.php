@@ -613,33 +613,60 @@ class ChartsController extends AppController{
 		}
 	}
 
-	public function display(){
-		$path = func_get_args();
-
-		$count = count($path);
-		if (!$count) {
-			return $this->redirect('/');
+	public function admin_disk(){
+		if($this->Auth->user('role') > 0){
+			$informations = $this->Informations->find('first');
+    		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
+			$totalMemory = round($api->call('server.performance.disk.free')['0']['success']);
+			$usedMemory = round($api->call('server.performance.disk.used')['0']['success']);
+			$pieData = array(
+	            array('Espace disponible', $totalMemory),
+	            array('Espace utilisé', $usedMemory)
+	        );
+	        $chartName = 'disk_chart';
+	        $pieChart = $this->Highcharts->create($chartName, 'pie');
+	        $this->Highcharts->setChartParams($chartName, array(
+	            'renderTo' => 'disk_chart',
+	            'chartWidth' => 650,
+	            'chartHeight' => 600,
+	            'chartMarginTop' => 60,
+	            'chartMarginLeft' => 90,
+	            'chartMarginRight' => 30,
+	            'chartMarginBottom' => 0,
+	            'chartSpacingRight' => 10,
+	            'chartSpacingBottom' => 15,
+	            'chartSpacingLeft' => 0,
+	            'chartAlignTicks' => FALSE,
+	            'chartBackgroundColorLinearGradient' => array(255, 255, 255, 255),
+	            'chartBackgroundColorStops' => array(array(0, 'rgb(255, 255, 255)'), array(1, 'rgb(255, 255, 255)')),
+	            'title' => 'Utilisation de l\'espace disque du serveur (en MB)',
+	            'titleAlign' => 'center',
+	            'titleFloating' => TRUE,
+	            'titleStyleFont' => '18px Metrophobic, Arial, sans-serif',
+	            'titleStyleColor' => '#606060',
+	            'titleX' => 20,
+	            'titleY' => 20,
+	            'legendEnabled' => TRUE,
+	            'legendLayout' => 'horizontal',
+	            'legendAlign' => 'center',
+	            'legendVerticalAlign ' => 'bottom',
+	            'legendItemStyle' => array('color' => '#222'),
+	            'legendBackgroundColorLinearGradient' => array(0, 0, 0, 25),
+	            'legendBackgroundColorStops' => array(array(0, '#FFFFFF'), array(1, '#FFFFFF')),
+	            'tooltipEnabled' => TRUE,
+	            'tooltipBackgroundColorLinearGradient' => array(0, 0, 0, 50),
+	            'tooltipBackgroundColorStops' => array(array(0, 'rgb(217, 217, 217)'), array(1, 'rgb(255, 255, 255)')),
+	            'creditsEnabled' => FALSE
+	            )
+	        );
+	        $series = $this->Highcharts->addChartSeries();
+	        $series->addName('En megabytes')->addData($pieData);
+	        $pieChart->addSeries($series);
+	        
+	        $this->set(compact('chartName'));
 		}
-		$page = $subpage = $title_for_layout = null;
-
-		if (!empty($path[0])) {
-			$page = $path[0];
-		}
-		if (!empty($path[1])) {
-			$subpage = $path[1];
-		}
-		if (!empty($path[$count - 1])) {
-			$title_for_layout = Inflector::humanize($path[$count - 1]);
-		}
-		$this->set(compact('page', 'subpage', 'title_for_layout'));
-
-		try {
-			$this->render(implode('/', $path));
-		} catch (MissingViewException $e) {
-			if (Configure::read('debug')) {
-				throw $e;
-			}
-			throw new NotFoundException();
-		}
+	    else{
+	    	throw new NotFoundException();
+	    }
 	}
 }
