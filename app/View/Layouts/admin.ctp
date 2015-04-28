@@ -14,6 +14,7 @@
         <?php echo $this->Html->css('admin/less-style'); ?>
         <?php echo $this->Html->css('admin/style'); ?>
         <?php echo $this->Html->css('admin/jquery.selectBoxIt'); ?>
+        <?php echo $this->Html->css('admin/btn'); ?>
         <?php echo $this->Html->css('custom'); ?>
         <link href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -174,6 +175,17 @@
                                     </ul>
                                 </li>
                                 <?php } ?>
+                                <li class="has_submenu">
+                                    <a href="#"><i class="fa fa-photo"></i> Theme <span class="nav-caret fa fa-caret-down"></span></a>
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'background', 'admin' => true]); ?>"><i class="fa fa-gear"></i> Background</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'buttons', 'action' => 'index', 'admin' => true]); ?>"><i class="fa fa-gear"></i> Sidebar</a>
+                                        </li>
+                                    </ul>
+                                </li>
                                 <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
                                 <li>
                                     <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'chat_messages', 'admin' => true]); ?>"><i class="fa fa-comments"></i>Chat</a>

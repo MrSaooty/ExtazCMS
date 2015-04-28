@@ -80,7 +80,7 @@ $(document).ready(function(){
                                         echo 'Non';
                                     }
                                     else{
-                                        echo 'Oui par '.$d['Code']['by'].' <a href="'.$this->Html->url(['controller' => 'users', 'action' => 'edit', $d['User']['id']]).'" target="_blank"><i class="fa fa-external-link-square"></i></a>';
+                                        echo 'Oui par '.$d['Code']['by'];
                                     }
                                     ?>
                                 </td>

@@ -36,8 +36,8 @@ class User extends AppModel{
             'required' => true
         )
     );
-
-    public function beforeSave($options = array()) {
+    
+    public function beforeSave($options = []){
 	    if(isset($this->data[$this->alias]['password'])){
 	        $passwordHasher = new SimplePasswordHasher();
 	        $this->data[$this->alias]['password'] = $passwordHasher->hash(

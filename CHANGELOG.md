@@ -4,6 +4,7 @@ Changelog
 v1.6 (en développement)
 ----
 
+* Le module des réseaux sociaux à totalement été revu. Vous n'avez plus à préciser le lien vers votre page facebook ou votre compte twitter depuis la configuration du panel. Vous pouvez désormais ajouter vos propres boutons customisables depuis une nouvelle interface. Vous pouvez choisir le texte qui sera afficher, le lien vers lequel le bouton redirigera, l'icône, la couleur et l'ordre d'affichage. Un aperçu est également disponible pour visualiser le bouton
 * Vous pouvez désormais consulter l'utilisation du disque dur depuis l'administration (par Edered)
 * Dans la boutique les prérequis des articles sont désormais affichés au survol de la souris sur les boutons d'achats
 * Vous pouvez désormais générer jusqu'à 25 codes cadeaux en une seule fois

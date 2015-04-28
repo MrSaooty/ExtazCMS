@@ -121,12 +121,21 @@ class InformationsController extends AppController{
 		}
 	}
 
-	public function admin_updateBackground($background){
+	public function admin_background(){
+		if($this->Auth->user('role') > 0){
+			
+		}
+		else{
+			throw new NotFoundException();
+		}
+	}
+
+	public function admin_update_background($background){
 		if($this->Auth->user('role') > 0){
 			$this->Informations->id = 1;
 			$this->Informations->saveField('background', $background);
 			$this->Session->setFlash('Background mis à jour !', 'success');
-			return $this->redirect(['controller' => 'informations', 'action' => 'index']);
+			return $this->redirect(['controller' => 'informations', 'action' => 'background']);
 		}
 		else{
 			throw new NotFoundException();

@@ -54,7 +54,7 @@
                             </div>
                             <small>Commande(s) sans le slash (/) initial. Utilisez {{player}} pour désigner un joueur et {{new}} pour ajouter une nouvelle commande</small>
                         </div>
-                        <button class="btn btn-black pull-right" type="submit"><i class="fa fa-pencil-square-o"-square-o"></i> Modifier cet article</button>
+                        <button class="btn btn-black pull-right" type="submit"><i class="fa fa-pencil-square-o"></i> Modifier cet article</button>
                         <br>
                     <?php echo $this->Form->end(); ?>
                 </div>

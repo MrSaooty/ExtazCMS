@@ -1,19 +1,20 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : Localhost
-Source Server Version : 50617
-Source Host           : localhost:3306
-Source Database       : cms
-
-Target Server Type    : MYSQL
-Target Server Version : 50617
-File Encoding         : 65001
-
-Date: 2015-01-02 21:17:35
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for extaz_buttons
+-- ----------------------------
+CREATE TABLE IF NOT EXISTS `extaz_buttons` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `icon` varchar(255) NOT NULL,
+  `color` varchar(255) NOT NULL,
+  `order` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- ----------------------------
 -- Table structure for extaz_comments
@@ -26,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `extaz_comments` (
   `comment` text NOT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- ----------------------------
 -- Table structure for extaz_codes
@@ -57,10 +58,6 @@ CREATE TABLE `extaz_donation_ladder` (
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of extaz_donation_ladder
--- ----------------------------
-
--- ----------------------------
 -- Table structure for extaz_informations
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_informations`;
@@ -84,8 +81,6 @@ CREATE TABLE `extaz_informations` (
   `paypal_email` text,
   `contact_email` text,
   `logo_url` text,
-  `facebook_url` text,
-  `twitter_url` text,
   `use_store` int(11) DEFAULT NULL,
   `use_paypal` int(11) DEFAULT NULL,
   `use_economy` int(11) DEFAULT NULL,
@@ -207,10 +202,6 @@ CREATE TABLE `extaz_instant_payment_notifications` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of extaz_instant_payment_notifications
--- ----------------------------
-
--- ----------------------------
 -- Table structure for extaz_likes
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_likes`;
@@ -222,10 +213,6 @@ CREATE TABLE `extaz_likes` (
   `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-
--- ----------------------------
--- Records of extaz_likes
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for extaz_paypal_items
@@ -245,10 +232,6 @@ CREATE TABLE `extaz_paypal_items` (
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- ----------------------------
--- Records of extaz_paypal_items
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for extaz_posts
@@ -305,10 +288,6 @@ CREATE TABLE `extaz_shop` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of extaz_shop
--- ----------------------------
-
--- ----------------------------
 -- Table structure for extaz_shop_history
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_shop_history`;
@@ -325,10 +304,6 @@ CREATE TABLE `extaz_shop_history` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of extaz_shop_history
--- ----------------------------
-
--- ----------------------------
 -- Table structure for extaz_starpass_history
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_starpass_history`;
@@ -342,10 +317,6 @@ CREATE TABLE `extaz_starpass_history` (
   `updated` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
-
--- ----------------------------
--- Records of extaz_starpass_history
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for extaz_support
@@ -364,10 +335,6 @@ CREATE TABLE `extaz_support` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of extaz_support
--- ----------------------------
-
--- ----------------------------
 -- Table structure for extaz_support_comments
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_support_comments`;
@@ -380,10 +347,6 @@ CREATE TABLE `extaz_support_comments` (
   `updated` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-
--- ----------------------------
--- Records of extaz_support_comments
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for extaz_team
@@ -401,10 +364,6 @@ CREATE TABLE `extaz_team` (
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of extaz_team
--- ----------------------------
-
--- ----------------------------
 -- Table structure for extaz_users
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_users`;
@@ -420,7 +379,3 @@ CREATE TABLE `extaz_users` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
-
--- ----------------------------
--- Records of extaz_users
--- ----------------------------

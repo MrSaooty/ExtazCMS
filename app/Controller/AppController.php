@@ -36,7 +36,7 @@ App::uses('File', 'Utility');
  */
 class AppController extends Controller {
 
-	public $uses = ['Informations', 'User', 'starpassHistory', 'Support', 'donationLadder'];
+	public $uses = ['Informations', 'User', 'starpassHistory', 'Support', 'donationLadder', 'Button'];
 
 	public $helpers = ['Html', 'Form', 'PaypalIpn.Paypal'];
 
@@ -79,8 +79,6 @@ class AppController extends Controller {
 		$this->set('paypal_tokens', $informations['Informations']['paypal_tokens']);
 		$this->set('paypal_email', $informations['Informations']['paypal_email']);
 		$this->set('logo_url', $informations['Informations']['logo_url']);
-		$this->set('facebook_url', $informations['Informations']['facebook_url']);
-		$this->set('twitter_url', $informations['Informations']['twitter_url']);
 		$this->set('use_store', $informations['Informations']['use_store']);
 		$this->set('use_paypal', $informations['Informations']['use_paypal']);
 		$this->set('use_economy', $informations['Informations']['use_economy']);
@@ -121,6 +119,8 @@ class AppController extends Controller {
 		else{
 			$this->set('nb_donator', $this->donationLadder->find('count'));
 		}
+		// Boutons pour la sidebar
+		$this->set('buttons', $this->Button->find('all', ['order' => ['Button.order ASC']]));
 		// ExtazCMS
 		$version = 1.6;
 		$last_version = file_get_contents('http://www.extaz-mc.fr/extazcms/version.txt');

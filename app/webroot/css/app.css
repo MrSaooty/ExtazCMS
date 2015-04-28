@@ -687,7 +687,51 @@ a.btn-u-xs {
 .btn-u.btn-u-split-blue.dropdown-toggle {
    border-left: solid 1px #2980b9;
 }
-
+.btn-u.btn-u-white {
+  color: #333;
+  background-color: #fff;
+  border: solid 1px #C5C4C4;
+}
+.btn-u.btn-u-white:hover,
+.btn-u.btn-u-white:focus,
+.btn-u.btn-u-white.focus,
+.btn-u.btn-u-white:active,
+.btn-u.btn-u-white.active,
+.open > .dropdown-toggle.btn-u.btn-u-white {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+.btn-u.btn-u-white:active,
+.btn-u.btn-u-white.active,
+.open > .dropdown-toggle.btn-u.btn-u-white {
+  background-image: none;
+}
+.btn-u.btn-u-white.disabled,
+.btn-u.btn-u-white[disabled],
+fieldset[disabled] .btn-u.btn-u-white,
+.btn-u.btn-u-white.disabled:hover,
+.btn-u.btn-u-white[disabled]:hover,
+fieldset[disabled] .btn-u.btn-u-white:hover,
+.btn-u.btn-u-white.disabled:focus,
+.btn-u.btn-u-white[disabled]:focus,
+fieldset[disabled] .btn-u.btn-u-white:focus,
+.btn-u.btn-u-white.disabled.focus,
+.btn-u.btn-u-white[disabled].focus,
+fieldset[disabled] .btn-u.btn-u-white.focus,
+.btn-u.btn-u-white.disabled:active,
+.btn-u.btn-u-white[disabled]:active,
+fieldset[disabled] .btn-u.btn-u-white:active,
+.btn-u.btn-u-white.disabled.active,
+.btn-u.btn-u-white[disabled].active,
+fieldset[disabled] .btn-u.btn-u-white.active {
+  background-color: #fff;
+  border-color: #ccc;
+}
+.btn-u.btn-u-white .badge {
+  color: #fff;
+  background-color: #333;
+}
 .btn-u.btn-u-red {
    background: #e74c3c;
 }

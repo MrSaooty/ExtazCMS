@@ -128,7 +128,7 @@ $(document).ready(function(){
                             </div>
                         </div>
                         <div class="btn-group pull-right">
-                            <button class="btn btn-default pull-right" type="submit">Éditer cet article</button>
+                            <button class="btn btn-black pull-right" type="submit"><i class="fa fa-pencil-square-o"></i> Éditer cet article</button>
                         </div>
                         <br>
                     <?php echo $this->Form->end(); ?>

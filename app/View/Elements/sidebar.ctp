@@ -119,27 +119,22 @@
     <!-- End Donation Ladder -->
     <?php } ?>
 
-    <?php if(!empty($facebook_url) OR !empty($twitter_url)){  ?>
-        <!-- Social Network -->
+    <?php if(!empty($buttons)){  ?>
+        <!-- Custom Buttons -->
         <div class="row">
             <div class="col-md-12">
                 <div class="tag-box tag-box-v4">
                     <center>
-                        <p class="lead">
-                            Réseaux sociaux
-                        </p>
-                        <br>
-                        <?php if(!empty($facebook_url)){ ?>
-                            <a href="<?php echo $facebook_url ?>" target="_blank" class="btn-u btn-u-blue btn-u-xs" type="button" style="margin-bottom:6px;"><i class="fa fa-facebook-square"></i> Facebook</a>
-                        <?php } ?>
-                        <?php if(!empty($twitter_url)){ ?>
-                                <a href="<?php echo $twitter_url ?>" target="_blank" class="btn-u btn-u-aqua btn-u-xs" type="button"><i class="fa fa-twitter"></i> Twitter</a>
-                        <?php } ?>
+                        <?php
+                        foreach($buttons as $b){
+                            echo '<a href="'.$b['Button']['url'].'" target="_blank" class="btn-u btn-u-'.$b['Button']['color'].' btn-u-xs" style="margin-bottom: 3px;margin-top: 3px" type="button"><i class="fa fa-'.$b['Button']['icon'].'"></i> '.$b['Button']['content'].'</a> ';
+                        }
+                        ?>
                     </center>
                 </div>
             </div>
         </div>
-        <!-- End Social Network -->
+        <!-- End Custom Buttons -->
     <?php } ?>
     </center>
 </div>

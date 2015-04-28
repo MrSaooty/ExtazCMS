@@ -8,9 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ExtazCMS">
     <meta name="author" content="MrSaooty">
-
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>    
-
     <?php
     // Favicon
     echo $this->Html->meta('favicon.png', $logo_url, array('type' => 'icon'));
