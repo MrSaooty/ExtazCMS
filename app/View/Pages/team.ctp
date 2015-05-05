@@ -40,10 +40,22 @@ $(document).ready(function(){
                                             <i class="fa fa-facebook-square"></i>
                                         </font>
                                     </a>
+                                <?php } else { ?>
+                                    <a href="#" target="_blank" class="btn btn-default btn-u-xs" disabled="disabled">
+                                        <font color="#969696">
+                                            <i class="fa fa-facebook-square"></i>
+                                        </font>
+                                    </a>
                                 <?php } ?>
                                 <?php if(!empty($d['Team']['twitter_url'])){ ?>
                                     <a href="<?php echo $d['Team']['twitter_url']; ?>" target="_blank" class="btn btn-default btn-u-xs">
                                         <font color="#27D7E7">
+                                            <i class="fa fa-twitter"></i>
+                                        </font>
+                                    </a>
+                                <?php } else { ?>
+                                    <a href="#" target="_blank" class="btn btn-default btn-u-xs" disabled="disabled">
+                                        <font color="#969696">
                                             <i class="fa fa-twitter"></i>
                                         </font>
                                     </a>
