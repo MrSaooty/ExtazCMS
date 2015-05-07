@@ -9,8 +9,8 @@ class ChartsController extends AppController{
 		if($this->Auth->user('role') > 0){
 			$informations = $this->Informations->find('first');
     		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
-			$totalMemory = round($api->call('server.performance.memory.total')['0']['success']);
 			$usedMemory = round($api->call('server.performance.memory.used')['0']['success']);
+			$totalMemory = round($api->call('server.performance.memory.total')['0']['success']) - ($usedMemory);
 			$pieData = array(
 	            array('Mémoire disponible', $totalMemory),
 	            array('Mémoire utilisé', $usedMemory)
@@ -52,7 +52,7 @@ class ChartsController extends AppController{
 	            )
 	        );
 	        $series = $this->Highcharts->addChartSeries();
-	        $series->addName('En megabytes')->addData($pieData);
+	        $series->addName('En megabytes (mb)')->addData($pieData);
 	        $pieChart->addSeries($series);
 	        
 	        $this->set(compact('chartName'));
