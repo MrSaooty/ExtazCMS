@@ -137,9 +137,6 @@ class AppController extends Controller {
 					$this->render('/Errors/maintenance');
 				}
 			}
-			else{
-
-			}
 		}
 	}
 
