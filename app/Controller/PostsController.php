@@ -69,6 +69,7 @@ class PostsController extends AppController{
 						// On enregistre les données
 						$this->Post->save($this->request->data);
 						$slug = strtolower($this->request->data['Post']['slug']);
+						// $slug = str_replace(' ', '-', $slug);
 						$this->Post->saveField('slug', $slug);
 						$this->Post->saveField('author', $this->Auth->user('username'));
 						$this->Post->saveField('likes', 0);

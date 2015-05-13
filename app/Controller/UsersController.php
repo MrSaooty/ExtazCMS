@@ -35,7 +35,7 @@ class UsersController extends AppController{
 
     public function signup(){
         if($this->Auth->loggedIn()){
-            $this->redirect($this->Auth->redirect(array('controller' => 'posts', 'action' => 'index')));
+            $this->redirect($this->Auth->redirect(['controller' => 'posts', 'action' => 'index']));
         }
         else{
             $ayah = new AYAH();

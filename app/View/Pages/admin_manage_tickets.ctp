@@ -60,15 +60,15 @@ $(document).ready(function(){
                             <?php foreach($data as $d){ ?>
                             <tr>
                                 <td>
-                                    <?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$d['Support']['username'].'/12', ['alt' => 'Player head', 'style' => 'margin-top:-1px;']); ?>
+                                    <?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$d['User']['username'].'/12', ['alt' => 'Player head', 'style' => 'margin-top:-1px;']); ?>
                                     <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'edit', $d['User']['id']]); ?>" target="blank">
                                         <?php
-                                        $username = $d['Support']['username'];
+                                        $username = $d['User']['username'];
                                         if(strlen($username) > 12){
-                                            echo '<font color="#555">'.substr($d['Support']['username'], 0, 9).'...</font>';
+                                            echo '<font color="#555">'.substr($d['User']['username'], 0, 9).'...</font>';
                                         }
                                         else{
-                                            echo '<font color="#555">'.$d['Support']['username'].'</font>';
+                                            echo '<font color="#555">'.$d['User']['username'].'</font>';
                                         }
                                         ?>
                                     </a>
@@ -108,7 +108,7 @@ $(document).ready(function(){
                                     </small>
                                 </td>
                                 <td>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'view_ticket', 'id' => $d['Support']['id'], 'admin' => false]); ?>" class="label label-black" type="submit"><i class="fa fa-list"></i></a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'view_ticket', 'id' => $d['Support']['id'], 'admin' => false]); ?>" target="_blank" class="label label-black" type="submit"><i class="fa fa-list"></i></a>
                                     <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'close_ticket', 'id' => $d['Support']['id'], 'admin' => false]); ?>" class="label label-danger confirm ui-tooltip" data-original-title="Clôturer" data-toggle="tooltip" data-placement="right" type="submit"><i class="fa fa-lock"></i></a>
                                 </td>
                             </tr>

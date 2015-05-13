@@ -58,7 +58,7 @@ $(document).ready(function(){
                             <?php } else { ?>
                             <tr>
                             <?php } ?>
-                                <td><?php echo $d['starpassHistory']['username']; ?></td>
+                                <td><?php echo $d['User']['username']; ?></td>
                                 <td><?php echo $d['starpassHistory']['tokens']; ?></td>
                                 <td><?php echo $d['starpassHistory']['code']; ?></td>
                                 <td><?php echo $d['starpassHistory']['note']; ?></td>

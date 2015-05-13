@@ -5,7 +5,7 @@ Class CodesController extends AppController{
 
 	public function index(){
 		if($this->Auth->user('role' > 0)){
-			return $this->redirect(['controller' => 'codes', 'action' => 'create', 'admin' => true]);
+			return $this->redirect(['controller' => 'codes', 'action' => 'generate', 'admin' => true]);
 		}
 		else{
 			return $this->redirect($this->referer());
@@ -30,27 +30,39 @@ Class CodesController extends AppController{
 			if($number == null){
 				$number = 1;
 			}
-			for($i = 1; $i <= $number; $i++){
-				// On génère un code
-				$char = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-				$random = str_shuffle($char);
-				$random2 = str_shuffle($char);
-				$random3 = str_shuffle($char);
-				$random4 = str_shuffle($char);
-				$code = substr($random, 0, 4).'-'.substr($random2, 0, 4).'-'.substr($random3, 0, 4).'-'.substr($random4, 0, 4);
-				// On l'enregistre
-				$this->Code->create;
-				$this->Code->saveField('user_id', $user_id);
-				$this->Code->saveField('ip', $ip);
-				$this->Code->saveField('code', $code);
-				$this->Code->saveField('value', $value);
-				$this->Code->saveField('used', 0);
-				$this->Code->saveField('by', '');
-				$this->Code->clear();
+			if($number > 250){
+				$this->Session->setFlash('Vous ne pouvez générer que 250 codes maximum', 'error');
+				return $this->redirect(['controller' => 'codes', 'action' => 'generate', 'admin' => true]);
 			}
-			// On redirige
-			$this->Session->setFlash('Votre code a bien été créé !', 'success');
-			return $this->redirect(['controller' => 'codes', 'action' => 'list', 'admin' => true]);
+			else{
+				for($i = 1; $i <= $number; $i++){
+					// On génère un code
+					$char = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+					$random = str_shuffle($char);
+					$random2 = str_shuffle($char);
+					$random3 = str_shuffle($char);
+					$random4 = str_shuffle($char);
+					$code = substr($random, 0, 4).'-'.substr($random2, 0, 4).'-'.substr($random3, 0, 4).'-'.substr($random4, 0, 4);
+					// On l'enregistre
+					$this->Code->create;
+					$this->Code->saveField('user_id', $user_id);
+					$this->Code->saveField('ip', $ip);
+					$this->Code->saveField('code', $code);
+					$this->Code->saveField('value', $value);
+					$this->Code->saveField('used', 0);
+					$this->Code->saveField('by', '');
+					$this->Code->clear();
+				}
+				// On redirige
+				if($number > 1){
+					$this->Session->setFlash('Vos codes ont bien étés générés !', 'success');
+				}
+				else{
+					$this->Session->setFlash('Votre code a bien été généré !', 'success');
+				}
+				return $this->redirect(['controller' => 'codes', 'action' => 'list', 'admin' => true]);
+			}
+			
 		}
 	}
 

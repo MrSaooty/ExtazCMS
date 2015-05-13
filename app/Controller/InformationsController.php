@@ -112,6 +112,12 @@ class InformationsController extends AppController{
 				else{
 					$this->Informations->saveField('happy_hour', 0);
 				}
+				if(isset($this->request->data['maintenance'])){
+					$this->Informations->saveField('maintenance', 1);
+				}
+				else{
+					$this->Informations->saveField('maintenance', 0);
+				}
 				$this->Session->setFlash('Options mises à jour !', 'success');
 				return $this->redirect(['controller' => 'informations', 'action' => 'index']);
 			}

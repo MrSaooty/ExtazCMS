@@ -42,6 +42,9 @@ $(document).ready(function(){
         <div class="page-content">
             <div class="single-head">
                 <h3 class="pull-left"><i class="fa fa-table"></i>Liste des codes cadeaux générés</h3>
+                <div class="breads pull-right">
+                    <a href="<?php echo $this->Html->url(['controller' => 'codes', 'action' => 'generate', 'admin' => true]); ?>" class="label label-black"><i class="fa fa-plus-square"></i> Générer d'autres codes</a>
+                </div>
                 <div class="clearfix"></div>
             </div>
             <div class="page-tables">

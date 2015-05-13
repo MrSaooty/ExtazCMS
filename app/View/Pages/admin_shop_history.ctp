@@ -58,7 +58,7 @@ $(document).ready(function(){
                             <?php } else { ?>
                             <tr>
                             <?php } ?>
-                                <td><?php echo $d['shopHistory']['username']; ?></td>
+                                <td><?php echo $d['User']['username']; ?></td>
                                 <td><?php echo $d['shopHistory']['item']; ?></td>
                                 <td><?php echo number_format($d['shopHistory']['price'], 0, ',', ' '); ?></td>
                                 <?php if($d['shopHistory']['money'] == 'site'){ ?>

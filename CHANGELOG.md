@@ -4,14 +4,28 @@ Changelog
 v1.6 (en développement)
 ----
 
+* Vous pouvez désormais mettre le site en maintenance, ce qui aura pour effet d'empêcher tous les utilisateurs d'accéder au site. Cependant les administrateurs pourront toujours se connecter et naviguer normalement
 * Le module des réseaux sociaux à totalement été revu. Vous n'avez plus à préciser le lien vers votre page facebook ou votre compte twitter depuis la configuration du panel. Vous pouvez désormais ajouter vos propres boutons customisables depuis une nouvelle interface. Vous pouvez choisir le texte qui sera afficher, le lien vers lequel le bouton redirigera, l'icône, la couleur et l'ordre d'affichage. Un aperçu est également disponible pour visualiser le bouton
 * Vous pouvez désormais consulter l'utilisation du disque dur depuis l'administration (par Edered)
 * Dans la boutique les prérequis des articles sont désormais affichés au survol de la souris sur les boutons d'achats
-* Vous pouvez désormais générer jusqu'à 25 codes cadeaux en une seule fois
-* La page équipe et son fonctionnement a entièrement été revue. Vous pouvez désormais définir n'importe quelle grade et n'importe quelle couleur à un membre. De plus si les réseaux sociaux de ce membre sont renseignés ils sont affichés sur la page qui liste tous les membre de l'équipe du serveur
+* Vous pouvez désormais générer jusqu'à 250 codes cadeaux en une seule fois
+* La page équipe et son fonctionnement a entièrement été revue. Vous pouvez désormais définir n'importe quelle grade et n'importe quelle couleur à un membre. Un aperçu en direct est également disponible lors de l'ajout et de l'édition d'un membre. Si les réseaux sociaux de ce membre sont renseignés ils sont affichés sur la page de l'équipe du serveur
 * Corrections de bugs majeurs
 * {CSS} Modification de custom.css
+* {CSS} Modification de app.css
+* {CSS} Modification de less-style.css (admin)
+* {CSS} Ajout d'un fichier selectBoxIt.css
+* {CSS} Ajout d'un fichier custom.css (admin)
+* {JS} Ajout d'un fichier selectBoxIt.js
+* {SQL} Ajout d'une table extaz_buttons
 * {SQL} Modification de la table extaz_team
+* {SQL} Modification de la table extaz_codes
+* {SQL} Modification de la table extaz_informations
+* {SQL} Modification de la table extaz_support
+* {SQL} Modification de la table extaz_support_comments
+* {SQL} Modification de la table extaz_shop_history
+* {SQL} Modification de la table extaz_starpass_history
+
 
 v1.5 (15/04/2015)
 ----

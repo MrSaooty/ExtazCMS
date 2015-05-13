@@ -1,9 +1,19 @@
 <?php $this->assign('title', 'Rédiger un article'); ?>
 <script type="text/javascript">
+function verif(evt) {
+    var keyCode = evt.which ? evt.which : evt.keyCode;
+    var accept = 'abcdefghijklmnopqrstuvwxyz0123456789-';
+    if(accept.indexOf(String.fromCharCode(keyCode)) >= 0){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 $(document).ready(function(){
     $(window).load(function(){
-        $('#chargement').empty()
-        $('#content').fadeIn()
+        $('#chargement').empty();
+        $('#content').fadeIn();
     });
 });
 </script>
@@ -35,7 +45,7 @@ $(document).ready(function(){
                             <font color="#A94442"><small><?php echo $this->Form->error('slug'); ?></small></font>
                             <div class="input-group margin-bottom-20">
                                 <span class="input-group-addon"><i class="fa fa-comment"></i></span>
-                                <?php echo $this->Form->input('slug', array('type' => 'text', 'placeholder' => 'Slug, mots clefs dans l\'url (par ex: nouveau-serveur-pvp)', 'class' => 'form-control', 'label' => false)); ?>
+                                <?php echo $this->Form->input('slug', array('type' => 'text', 'placeholder' => 'Slug, mots clefs dans l\'url (par ex: nouveau-serveur-pvp)', 'class' => 'form-control', 'onkeypress' => 'return verif(event);', 'label' => false)); ?>
                             </div>
                         </div>
                         <div class="form-group">

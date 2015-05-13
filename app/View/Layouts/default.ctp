@@ -50,7 +50,17 @@
                             <div class="container">
                                 <!-- Topbar Navigation -->
                                 <ul class="loginbar pull-right">
-                                    <li><i class="fa fa-globe"></i> <a href="">IP du serveur : </a><a href="#"><?php echo $server_ip.':'.$server_port; ?></a> </li>
+                                    <li>
+                                        <?php
+                                        // Si le port est 25565 alors il est inutile de l'afficher
+                                        if($server_port != 25565){
+                                            echo '<i class="fa fa-globe"></i> <a href="">IP du serveur : </a><a href="#">'.$server_ip.':'.$server_port.'</a>';
+                                        }
+                                        else{
+                                            echo '<i class="fa fa-globe"></i> <a href="">IP du serveur : </a><a href="#">'.$server_ip.'</a>';
+                                        }
+                                        ?>
+                                    </li>
                                 </ul>
                                 <!-- End Topbar Navigation -->
                             </div>
@@ -139,7 +149,7 @@
                 <div class="container">
                     <p class="text-center">
                         <!-- Merci de ne pas retirer cette mention, je partage ce CMS gratuitement sans attentes en retour, merci de respecter mon travail -->
-                        Propulsé par<a href="http://cms.extaz-mc.fr/" target="_blank">ExtazCMS <?php echo $version; ?></a>code par<a href="http://twitter.com/MrSaooty" target="_blank">@MrSaooty</a>
+                        Propulsé par<a href="http://extaz-cms.com/" target="_blank">ExtazCMS <?php echo $version; ?></a>code par<a href="http://twitter.com/MrSaooty" target="_blank">@MrSaooty</a>
                         <!-- Merci de ne pas retirer cette mention, je partage ce CMS gratuitement sans attentes en retour, merci de respecter mon travail -->
                     </p>
                 </div> 

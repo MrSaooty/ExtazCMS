@@ -182,6 +182,12 @@ $(document).ready(function(){
                                         <div class="onoffswitch"><input name="happy_hour" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($happy_hour == 1) echo 'checked="checked"'; ?> id="onoffswitch9"><label for="onoffswitch9" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
                                     </div>
                                 </div>
+                                 <div class="form-group">
+                                    Maintenance activé ?
+                                    <div class="sw-red pull-right">
+                                        <div class="onoffswitch"><input name="maintenance" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($maintenance == 1) echo 'checked="checked"'; ?> id="onoffswitch10"><label for="onoffswitch10" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                    </div>
+                                </div>
                                 <hr>
                                 <button class="btn btn-black pull-right" type="submit"><i class="fa fa-check"></i> Confirmer les modifications</button><br>
                             <?php echo $this->Form->end(); ?>

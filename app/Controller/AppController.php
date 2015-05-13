@@ -95,6 +95,7 @@ class AppController extends Controller {
 		$this->set('chat_prefix', $informations['Informations']['chat_prefix']);
 		$this->set('chat_nb_messages', $informations['Informations']['chat_nb_messages']);
 		$this->set('analytics', $informations['Informations']['analytics']);
+		$this->set('maintenance', $informations['Informations']['maintenance']);
 		// Le reste
 		$this->set('connected', $this->Auth->user());
 		$this->set('username', $this->Auth->user('username'));
@@ -108,7 +109,7 @@ class AppController extends Controller {
 		else{
 			$this->set('role', 0);
 		}
-		$this->set('tickets', $this->Support->find('count', ['conditions' => ['Support.username' => $this->Auth->user('username'), 'Support.resolved' => 0]]));
+		$this->set('tickets', $this->Support->find('count', ['conditions' => ['Support.user_id' => $this->Auth->user('id'), 'Support.resolved' => 0]]));
 		$this->set('nb_tickets_admin', $this->Support->find('count', ['conditions' => ['Support.resolved' => '0']]));
 		// Donnation Ladder
 		if($this->donationLadder->find('all')){
@@ -123,12 +124,23 @@ class AppController extends Controller {
 		$this->set('buttons', $this->Button->find('all', ['order' => ['Button.order ASC']]));
 		// ExtazCMS
 		$version = 1.6;
-		$last_version = file_get_contents('http://www.extaz-mc.fr/extazcms/version.txt');
+		$last_version = file_get_contents('http://www.extaz-cms.com/extazcms.version');
 		$this->set('version', $version);
 		$this->set('last_version', $last_version);
 		// Autre
 		Configure::write('Config.language', 'fra');
 		$this->Auth->allow();
+		// Maintenance du site
+		if($informations['Informations']['maintenance'] == 1){
+			if($this->Auth->user('role') != 1){
+				if($this->request->url != 'connexion'){
+					$this->render('/Errors/maintenance');
+				}
+			}
+			else{
+
+			}
+		}
 	}
 
 	function afterPaypalNotification($txnId){

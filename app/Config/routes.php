@@ -25,6 +25,7 @@
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
 	Router::connect('/', ['controller' => 'posts', 'action' => 'index']);
+	Router::connect('/accueil', ['controller' => 'posts', 'action' => 'index']);
 	Router::connect('/admin', ['controller' => 'pages', 'action' => 'stats', 'admin' => true]);
 	Router::connect('/connexion', ['controller' => 'users', 'action' => 'login']);
 	Router::connect('/deconnexion', ['controller' => 'users', 'action' => 'logout']);

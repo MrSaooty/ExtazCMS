@@ -365,8 +365,8 @@ class PagesController extends AppController {
 
 	public function list_tickets(){
 		if($this->Auth->user()){
-			$this->set('data', $this->Support->find('all', ['conditions' => ['Support.username' => $this->Auth->user('username')], 'order' => ['Support.created DESC']]));
-			$this->set('nbTickets', $this->Support->find('count', ['conditions' => ['Support.username' => $this->Auth->user('username')]]));
+			$this->set('data', $this->Support->find('all', ['conditions' => ['Support.user_id' => $this->Auth->user('id')], 'order' => ['Support.created DESC']]));
+			$this->set('nbTickets', $this->Support->find('count', ['conditions' => ['Support.user_id' => $this->Auth->user('id')]]));
 		}
 		else{
 			$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
@@ -377,7 +377,7 @@ class PagesController extends AppController {
 	public function view_ticket($id = null){
 		if($this->Auth->user()){
 			$ticket = $this->Support->find('first', ['conditions' => ['Support.id' => $id]]);
-			$ticketOwner = $ticket['Support']['username'];
+			$ticketOwner = $ticket['User']['username'];
 			if($ticketOwner == $this->Auth->user('username') OR $this->Auth->user('role') > 0){
 				if($this->Support->findById($id)){
 					$this->set('data', $this->Support->find('first', ['conditions' => ['Support.id' => $id]]));
@@ -457,25 +457,25 @@ class PagesController extends AppController {
 			if($this->request->is('post')){
 				if(!empty($this->request->data['Pages']['message'])){
 					$ticket = $this->Support->find('first', ['conditions' => ['Support.id' => $this->request->data['Pages']['id']]]);
-					$ticketOwner = $this->User->find('first', ['conditions' => ['User.username' => $ticket['Support']['username']]]);
+					$ticketOwner = $this->User->find('first', ['conditions' => ['User.username' => $ticket['User']['username']]]);
 					$ticketOwnerEmail = $ticketOwner['User']['email'];
 					$ticketOwnerAllowEmail = $ticketOwner['User']['allow_email'];
 					if($ticketOwner['User']['username'] == $this->Auth->user('username') OR $this->Auth->user('role') > 0){
 						if($ticket['Support']['resolved'] == 0){
 							// Si l'utilisateur accepte de recevoir des emails
-							if($ticketOwnerAllowEmail == 1){
-								$informations = $this->Informations->find('first');
-								$name_server = $informations['Informations']['name_server'];
-								$name_server = strtolower(preg_replace('/\s/', '', $name_server));
-								$Email = new CakeEmail();
-								$Email->from(array('support@'.$name_server.'.com' => $name_server));
-								$Email->to($ticketOwnerEmail);
-								$Email->subject('['.$informations['Informations']['name_server'].'] Support, nouvelle réponse à votre ticket #'.$ticket['Support']['id'].'');
-								$Email->send('Retrouvez cette nouvelle réponse ici : http://'.$_SERVER['HTTP_HOST'].$this->webroot.'tickets/'.$ticket['Support']['id']);
-							}
+							// if($ticketOwnerAllowEmail == 1){
+							// 	$informations = $this->Informations->find('first');
+							// 	$name_server = $informations['Informations']['name_server'];
+							// 	$name_server = strtolower(preg_replace('/\s/', '', $name_server));
+							// 	$Email = new CakeEmail();
+							// 	$Email->from(array('support@'.$name_server.'.com' => $name_server));
+							// 	$Email->to($ticketOwnerEmail);
+							// 	$Email->subject('['.$informations['Informations']['name_server'].'] Support, nouvelle réponse à votre ticket #'.$ticket['Support']['id'].'');
+							// 	$Email->send('Retrouvez cette nouvelle réponse ici : http://'.$_SERVER['HTTP_HOST'].$this->webroot.'tickets/'.$ticket['Support']['id']);
+							// }
 							$this->supportComments->create;
 							$this->supportComments->saveField('ticket_id', $this->request->data['Pages']['id']);
-							$this->supportComments->saveField('username', $this->Auth->user('username'));
+							$this->supportComments->saveField('user_id', $this->Auth->user('id'));
 							$this->supportComments->saveField('message', $this->request->data['Pages']['message']);
 							$this->Session->setFlash('Réponse ajoutée !', 'success');
 							return $this->redirect($this->referer());

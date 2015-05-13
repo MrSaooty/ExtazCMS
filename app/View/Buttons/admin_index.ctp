@@ -42,26 +42,26 @@ $(function() {
         var content = $('#ButtonsContent').val();
         var icon = $('#ButtonsIcon').val();
         if(icon == -1){
-            $('#apercu').html('<i class="fa fa-question-circle"></i> ' + ' ' + content);
+            $('#apercu').html('<i class="fa fa-question-circle"></i> ' + ' ' + content).hide().fadeIn(500);
         }
         else{
-            $('#apercu').html('<i class="fa fa-' + icon + '"></i> ' + ' ' + content);
+            $('#apercu').html('<i class="fa fa-' + icon + '"></i> ' + ' ' + content).hide().fadeIn(500);
         }
     });
     $('#ButtonsIcon').change(function(){
         var content = $('#ButtonsContent').val();
         var icon = $('#ButtonsIcon').val();
         if(content == ''){
-            $('#apercu').html('<i class="fa fa-' + icon + '"></i> ' + 'Texte à afficher');
+            $('#apercu').html('<i class="fa fa-' + icon + '"></i> ' + 'Texte à afficher').hide().fadeIn(500);
         }
         else{
-            $('#apercu').html('<i class="fa fa-' + icon + '"></i> ' + ' ' + content);
+            $('#apercu').html('<i class="fa fa-' + icon + '"></i> ' + ' ' + content).hide().fadeIn(500);
         }
     });
     $('#ButtonsColor').change(function(){
         var color = $('#ButtonsColor').val();
         $('#apercu').removeClass();
-        $('#apercu').addClass('btn-u btn-u-' + color + ' btn-u-lg');
+        $('#apercu').addClass('btn-u btn-u-' + color + ' btn-u-lg').hide().fadeIn(500);
     });
 });
 </script>

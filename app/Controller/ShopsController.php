@@ -203,7 +203,7 @@ Class ShopsController extends AppController{
 					$this->User->saveField('tokens', $newUserMoneySite);
 					// Historique
 					$this->starpassHistory->create;
-					$this->starpassHistory->saveField('username', $this->Auth->user('username'));
+					$this->starpassHistory->saveField('user_id', $this->Auth->user('id'));
 					$this->starpassHistory->saveField('code', $this->request->data['code1']);
 					if($informations['Informations']['happy_hour'] == 1){
 						$this->starpassHistory->saveField('tokens', $starpass_tokens_hh);
@@ -300,7 +300,7 @@ Class ShopsController extends AppController{
 								}
 								// Historique d'achat
 								$this->shopHistory->create;
-								$this->shopHistory->saveField('username', $this->Auth->user('username'));
+								$this->shopHistory->saveField('user_id', $this->Auth->user('id'));
 								$this->shopHistory->saveField('item', $item['Shop']['name']);
 								$this->shopHistory->saveField('item_id', $item['Shop']['id']);
 								$this->shopHistory->saveField('price', $price);
@@ -356,7 +356,7 @@ Class ShopsController extends AppController{
 									}
 									// Historique d'achat
 									$this->shopHistory->create;
-									$this->shopHistory->saveField('username', $this->Auth->user('username'));
+									$this->shopHistory->saveField('user_id', $this->Auth->user('id'));
 									$this->shopHistory->saveField('item', $item['Shop']['name']);
 									$this->shopHistory->saveField('item_id', $item['Shop']['id']);
 									$this->shopHistory->saveField('price', $price);

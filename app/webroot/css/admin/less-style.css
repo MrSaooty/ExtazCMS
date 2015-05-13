@@ -229,6 +229,43 @@ a:focus {
 .label.label-brown {
   background: #d08166;
 }
+/****************/
+/* Label U */
+/****************/
+.label.label-u-danger{
+  background: #D9534F;
+}
+.label.label-u-orange{
+  background: #E67E22;
+}
+.label.label-u-warning{
+  background: #F0AD4E;
+}
+.label.label-u-primary{
+  background: #337AB7;
+}
+.label.label-u-info{
+  background: #5BC0DE;
+}
+.label.label-u-success{
+  background: #5CB85C;
+}
+.label.label-u-purple{
+  background: #9B6BCC;
+}
+.label.label-u-grey{
+  background: #777777;
+}
+.label.label-u-light{
+  color: #777777;
+  background: #ECF0F1;
+}
+.label.label-u-brown{
+  background: #9C8061;
+}
+.label.label-u-dark{
+  background: #555555;
+}
 /*********/
 /* Badge */
 /*********/
