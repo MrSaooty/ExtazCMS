@@ -71,7 +71,7 @@ $(document).ready(function(){
                                     echo 'Réponse de <u>Compte supprimé</u>';
                                 }
                                 else{
-                                    echo 'Ticket de '.$comment['User']['username'];
+                                    echo 'Réponse de '.$comment['User']['username'];
                                 }
                                 ?>
                                 <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'delete_support_comment', 'id' => $comment['supportComments']['id']]); ?>" class="tooltips btn btn-default btn-sm pull-right confirm" data-toggle="tooltip" data-placement="left" title="" data-original-title="Supprimer cette réponse"><font color="red"><i class="fa fa-times"></i> Supprimer</font></a>
