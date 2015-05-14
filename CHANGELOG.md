@@ -1,7 +1,7 @@
 Changelog
 =========
 
-v1.6 (en développement)
+v1.6 (14/05/2015)
 ----
 
 * Vous pouvez désormais mettre le site en maintenance, ce qui aura pour effet d'empêcher tous les utilisateurs d'accéder au site. Cependant les administrateurs pourront toujours se connecter et naviguer normalement
