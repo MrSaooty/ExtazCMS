@@ -206,6 +206,11 @@
                                         <i class="fa fa-file-text"></i> Besoin d'aide ?
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="http://www.sparklehosting.ch/" target="_blank">
+                                        <i class="fa fa-database"></i> SparkleHosting
+                                    </a>
+                                </li>
                                 <?php if($version >= $last_version){ ?>
                                 <li>
                                     <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'update', 'admin' => true]); ?>">
