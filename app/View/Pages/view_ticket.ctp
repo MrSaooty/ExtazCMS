@@ -21,9 +21,18 @@ $(document).ready(function(){
                     <div class="cbp_tmlabel">
                         <h2>
                             <?php if($role > 0){ ?>
-                                <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'edit', $data['User']['id'], 'admin' => true]); ?>">
-                                    Ticket de <?php echo $data['User']['username']; ?>
-                                </a>
+                                <?php
+                                if($data['User']['username'] == null){
+                                    echo 'Ticket de <u>Compte supprimé</u>';
+                                }
+                                else{
+                                    ?>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'edit', $data['User']['id'], 'admin' => true]); ?>">
+                                        Ticket de <?php echo $data['User']['username']; ?>
+                                    </a>
+                                    <?php
+                                }
+                                ?>
                             <?php } else { ?>
                                 Ticket de <?php echo $data['User']['username']; ?>
                             <?php } ?>
@@ -57,7 +66,14 @@ $(document).ready(function(){
 	                    <i class="cbp_tmicon rounded-x hidden-xs"></i>
 	                    <div class="cbp_tmlabel">
 	                        <h2>
-	                            Réponse de <?php echo $comment['User']['username']; ?>
+                                <?php
+                                if($comment['User']['username'] == null){
+                                    echo 'Réponse de <u>Compte supprimé</u>';
+                                }
+                                else{
+                                    echo 'Ticket de '.$comment['User']['username'];
+                                }
+                                ?>
                                 <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'delete_support_comment', 'id' => $comment['supportComments']['id']]); ?>" class="tooltips btn btn-default btn-sm pull-right confirm" data-toggle="tooltip" data-placement="left" title="" data-original-title="Supprimer cette réponse"><font color="red"><i class="fa fa-times"></i> Supprimer</font></a>
 	                        </h2>
 	                        <p class="text-justify">

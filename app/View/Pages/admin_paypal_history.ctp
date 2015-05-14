@@ -53,7 +53,16 @@ $(document).ready(function(){
                         <tbody>
                             <?php foreach($data as $d){ ?>
                             <tr>
-                                <td><?php echo $d['User']['username']; ?></td>
+                                <td>
+                                    <?php
+                                    if($d['User']['username'] == null){
+                                        echo '<u>Compte supprimé</u>';
+                                    }
+                                    else{
+                                        echo $d['User']['username'];
+                                    }
+                                    ?>
+                                </td>
                                 <td><?php echo $d['paypalHistory']['item_name']; ?></td>
                                 <td>
                                     <?php

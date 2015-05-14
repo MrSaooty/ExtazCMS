@@ -60,15 +60,35 @@ $(document).ready(function(){
                             <?php foreach($data as $d){ ?>
                             <tr>
                                 <td>
-                                    <?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$d['User']['username'].'/12', ['alt' => 'Player head', 'style' => 'margin-top:-1px;']); ?>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'edit', $d['User']['id']]); ?>" target="blank">
+                                    <?php
+                                    // Avatar
+                                    if($d['User']['username'] == null){
+                                        echo $this->Html->image('http://cravatar.eu/helmavatar/steve/12', ['alt' => 'Player head', 'style' => 'margin-top:-1px;']);
+                                    }
+                                    else{
+                                        echo $this->Html->image('http://cravatar.eu/helmavatar/'.$d['User']['username'].'/12', ['alt' => 'Player head', 'style' => 'margin-top:-1px;']);
+                                    }
+
+                                    // Lien
+                                    if($d['User']['username'] == null){
+                                        echo '<a href="#">';
+                                    }
+                                    else{
+                                        echo '<a href="'.$this->Html->url(['controller' => 'users', 'action' => 'edit', $d['User']['id']]).'" target="blank">';
+                                    }
+                                    ?>
                                         <?php
-                                        $username = $d['User']['username'];
-                                        if(strlen($username) > 12){
-                                            echo '<font color="#555">'.substr($d['User']['username'], 0, 9).'...</font>';
+                                        // Pseudo
+                                        if($d['User']['username'] == null){
+                                            echo '<font color="#555"><u>Compte supprimé</u></font>';
                                         }
                                         else{
-                                            echo '<font color="#555">'.$d['User']['username'].'</font>';
+                                            if(strlen($d['User']['username']) > 12){
+                                                echo '<font color="#555">'.substr($d['User']['username'], 0, 9).'...</font>';
+                                            }
+                                            else{
+                                                echo '<font color="#555">'.$d['User']['username'].'</font>';
+                                            }
                                         }
                                         ?>
                                     </a>
