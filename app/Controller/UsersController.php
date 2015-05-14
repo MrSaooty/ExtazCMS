@@ -5,7 +5,7 @@ App::uses('AYAH', 'Lib/AYAH');
 
 class UsersController extends AppController{
 
-    public $uses = ['User', 'Informations', 'donationLadder'];
+    public $uses = ['User', 'Informations', 'donationLadder', 'Support', 'supportComments'];
 
 	public function beforeFilter(){
 	    parent::beforeFilter();
@@ -176,7 +176,11 @@ class UsersController extends AppController{
             $this->User->id = $id;
             if($this->User->exists()){
                 if($this->User->delete($id)){
+                    // Lorsque l'on supprime un compte on supprime également
+                    // Son existance au niveau des donateurs, et des tickets supports
                     $this->donationLadder->deleteAll(['donationLadder.user_id' => $id]);
+                    $this->Support->deleteAll(['Support.user_id' => $id]);
+                    $this->supportComments->deleteAll(['supportComments.user_id' => $id]);
                     $this->Session->setFlash('Utilisateur supprimé !', 'success');
                     return $this->redirect(['controller' => 'users', 'action' => 'all']);
                 }

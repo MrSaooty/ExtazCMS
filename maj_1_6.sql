@@ -2,6 +2,8 @@ DELETE FROM `extaz_team`
 ALTER TABLE `extaz_team` ADD `color` TEXT NOT NULL AFTER `rank`, ADD `order` INT(11) NOT NULL AFTER `color`;
 DELETE FROM `extaz_codes`
 ALTER TABLE `extaz_codes` CHANGE `author` `user_id` INT NOT NULL;
+ALTER TABLE `extaz_codes` ADD `creator` TEXT NOT NULL AFTER `id`;
+ALTER TABLE `extaz_codes` DROP `by`;
 CREATE TABLE IF NOT EXISTS `extaz_buttons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,

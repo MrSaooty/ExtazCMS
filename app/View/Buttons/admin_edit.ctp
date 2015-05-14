@@ -12,9 +12,12 @@ $(function() {
     $(".select").selectBoxIt({
         showFirstOption: false
     });
-    $('#ButtonsContent').change(function(){
+    $('#ButtonsContent').keyup(function(){
         var content = $('#ButtonsContent').val();
         var icon = $('#ButtonsIcon').val();
+        if(content == ''){
+            content = 'Votre texte ici';
+        }
         if(icon == -1){
             $('#apercu').html('<i class="fa fa-question-circle"></i> ' + ' ' + content);
         }
@@ -60,7 +63,7 @@ $(function() {
                         </div>
                         <div class="form-group">
                             <select name="data[Buttons][icon]" class="select" id="ButtonsIcon">
-                                <option value="-1">Icône du bouton</option>
+                                <option value="<?php echo $data['Button']['icon']; ?>">Icône du bouton</option>
                                 <option value="facebook-square" data-text='<i class="fa fa-facebook-square"></i> Facebook'></option>
                                 <option value="facebook" data-text='<i class="fa fa-facebook"></i> Facebook'></option>
                                 <option value="twitter-square" data-text='<i class="fa fa-twitter-square"></i> Twitter'></option>

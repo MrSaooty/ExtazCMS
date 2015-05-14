@@ -38,21 +38,24 @@ $(function() {
     $(".select").selectBoxIt({
         showFirstOption: false
     });
-    $('#ButtonsContent').change(function(){
+    $('#ButtonsContent').keyup(function(){
         var content = $('#ButtonsContent').val();
         var icon = $('#ButtonsIcon').val();
+        if(content == ''){
+            content = 'Votre texte ici';
+        }
         if(icon == -1){
-            $('#apercu').html('<i class="fa fa-question-circle"></i> ' + ' ' + content).hide().fadeIn(500);
+            $('#apercu').html('<i class="fa fa-question-circle"></i> ' + ' ' + content);
         }
         else{
-            $('#apercu').html('<i class="fa fa-' + icon + '"></i> ' + ' ' + content).hide().fadeIn(500);
+            $('#apercu').html('<i class="fa fa-' + icon + '"></i> ' + ' ' + content);
         }
     });
     $('#ButtonsIcon').change(function(){
         var content = $('#ButtonsContent').val();
         var icon = $('#ButtonsIcon').val();
         if(content == ''){
-            $('#apercu').html('<i class="fa fa-' + icon + '"></i> ' + 'Texte à afficher').hide().fadeIn(500);
+            $('#apercu').html('<i class="fa fa-' + icon + '"></i> ' + 'Votre texte ici').hide().fadeIn(500);
         }
         else{
             $('#apercu').html('<i class="fa fa-' + icon + '"></i> ' + ' ' + content).hide().fadeIn(500);

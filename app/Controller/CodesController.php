@@ -23,7 +23,8 @@ Class CodesController extends AppController{
 
 	public function admin_generate(){
 		if($this->request->is('post')){
-			$user_id = $this->Auth->user('id');
+			$creator = $this->Auth->user('username');
+			$user_id = 0;
 			$ip = $_SERVER['REMOTE_ADDR'];
 			$value = $this->request->data['Codes']['value'];
 			$number = $this->request->data['Codes']['number'];
@@ -45,12 +46,12 @@ Class CodesController extends AppController{
 					$code = substr($random, 0, 4).'-'.substr($random2, 0, 4).'-'.substr($random3, 0, 4).'-'.substr($random4, 0, 4);
 					// On l'enregistre
 					$this->Code->create;
+					$this->Code->saveField('creator', $creator);
 					$this->Code->saveField('user_id', $user_id);
 					$this->Code->saveField('ip', $ip);
 					$this->Code->saveField('code', $code);
 					$this->Code->saveField('value', $value);
 					$this->Code->saveField('used', 0);
-					$this->Code->saveField('by', '');
 					$this->Code->clear();
 				}
 				// On redirige
@@ -102,8 +103,8 @@ Class CodesController extends AppController{
 					if($used == 0){
 						// On utilise le code
 						$this->Code->id = $id;
+						$this->Code->saveField('user_id', $this->Auth->user('id'));
 						$this->Code->saveField('used', 1);
-						$this->Code->saveField('by', $this->Auth->user('username'));
 						// On va chercher les infos de l'utilisateur
 						$user = $this->User->find('first', ['conditions' => ['User.id' => $this->Auth->user('id')]]);
 						// On récupère son nombre de tokens actuels

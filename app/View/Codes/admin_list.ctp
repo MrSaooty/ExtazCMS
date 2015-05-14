@@ -71,16 +71,7 @@ $(document).ready(function(){
                                 echo '<tr>';
                             }
                             ?>
-                                <td>
-                                    <?php
-                                    if($d['User']['username'] == null){
-                                        echo '<u>Compte supprimé</u>';
-                                    }
-                                    else{
-                                        echo $d['User']['username'];
-                                    }
-                                    ?>
-                                </td>
+                                <td><?php echo $d['Code']['creator']; ?></td>
                                 <td><?php echo $d['Code']['ip']; ?></td>
                                 <td>
                                     <input onclick="select()" value="<?php echo $d['Code']['code']; ?>" readonly="readonly"></input>
@@ -92,7 +83,7 @@ $(document).ready(function(){
                                         echo 'Non';
                                     }
                                     else{
-                                        echo 'Oui par '.$d['Code']['by'];
+                                        echo 'Oui par '.$d['User']['username'];
                                     }
                                     ?>
                                 </td>
