@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v1.7 (en développement)
+----
+
+* Corrections de bugs mineurs
+
 v1.6 (14/05/2015)
 ----
 

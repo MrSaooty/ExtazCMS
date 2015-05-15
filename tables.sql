@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS `extaz_buttons` (
 -- ----------------------------
 -- Table structure for extaz_comments
 -- ----------------------------
+DROP TABLE IF EXISTS `extaz_comments`;
 CREATE TABLE IF NOT EXISTS `extaz_comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `post_id` int(11) NOT NULL,

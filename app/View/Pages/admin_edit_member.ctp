@@ -13,16 +13,19 @@ $(function() {
     $("select").selectBoxIt({
         showFirstOption: false
     });
-    $('#PagesUsername').change(function(){
+    $('#PagesUsername').keyup(function(){
         var username = $('#PagesUsername').val();
         if(username != ''){
-            $('#avatar').attr('src', 'http://cravatar.eu/helmhead/' + username + '/110.png').hide().fadeIn(500);
-            $('#username').html(username).hide().fadeIn(500);
+            $('#avatar').attr('src', 'http://cravatar.eu/helmhead/' + username + '/110.png');
+            $('#username').html(username);
         }
     });
-    $('#PagesRank').change(function(){
+    $('#PagesRank').keyup(function(){
         var rank = $('#PagesRank').val();
-        $('#rank').html(rank).hide().fadeIn(500);
+        if(rank == ''){
+            rank = 'Rang';
+        }
+        $('#rank').html(rank);
     });
     $('#PagesFacebookUrl').change(function(){
         var facebook = $('#PagesFacebookUrl').val();

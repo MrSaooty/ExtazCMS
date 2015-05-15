@@ -5,7 +5,7 @@ class ButtonsController extends AppController{
         if($this->Auth->user('role') > 0){
             $this->set('data', $this->Button->find('all', ['order' => ['Button.order' => 'ASC']]));
             if($this->request->is('post')){
-                if($this->request->data['Buttons']['icon'] != -1 && $this->request->data['Buttons']['color'] != -1){
+                if(isset($this->request->data['Buttons']['icon']) && isset($this->request->data['Buttons']['color'])){
                     $this->Button->create;
                     $this->Button->saveField('user_id', $this->Auth->user('id'));
                     $this->Button->saveField('content', $this->request->data['Buttons']['content']);

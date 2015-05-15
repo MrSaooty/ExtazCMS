@@ -64,6 +64,11 @@ $(function() {
                         <div class="form-group">
                             <select name="data[Buttons][icon]" class="select" id="ButtonsIcon">
                                 <option value="<?php echo $data['Button']['icon']; ?>">Icône du bouton</option>
+                                <option value="bars" data-text='<i class="fa fa-bars"></i> Liste'></option>
+                                <option value="check" data-text='<i class="fa fa-check"></i> Check'></option>
+                                <option value="comment-o" data-text='<i class="fa fa-comment-o"></i> Commentaire'></option>
+                                <option value="flag" data-text='<i class="fa fa-flag"></i> Drapeau'></option>
+                                <option value="file" data-text='<i class="fa fa-file"></i> Fichier'></option>
                                 <option value="facebook-square" data-text='<i class="fa fa-facebook-square"></i> Facebook'></option>
                                 <option value="facebook" data-text='<i class="fa fa-facebook"></i> Facebook'></option>
                                 <option value="twitter-square" data-text='<i class="fa fa-twitter-square"></i> Twitter'></option>
