@@ -52,6 +52,7 @@
                                 <?php echo $this->Form->input('price_money_server', array('type' => 'number', 'placeholder' => 'Prix en '.$money_server.'', 'class' => 'form-control', 'label' => false)); ?>
                             </div>
                         </div>
+                        <?php } ?>
                         <div class="form-group">
                             <select name="data[Shop][required]" id="ShopRequired" class="form-control">
                                 <option value="-1--Aucun">Le joueur doit-il acheter un objet dans la boutique avant d'acheter celui-ci ? Si oui lequel ?</option>
@@ -61,7 +62,6 @@
                                 <?php } ?>
                             </select>
                         </div>
-                        <?php } ?>
                         <div class="form-group">
                             <font color="#A94442"><small><?php echo $this->Form->error('command'); ?></small></font>
                             <div class="input-group margin-bottom-20">

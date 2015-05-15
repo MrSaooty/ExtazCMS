@@ -34,6 +34,7 @@
                             <font color="#A94442"><small><?php echo $this->Form->error('price_money_server'); ?></small></font>
                             <?php echo $this->Form->input('price_money_server', array('type' => 'number', 'value' => $data['Shop']['price_money_server'], 'class' => 'form-control', 'label' => 'Prix avec la monnaie du serveur')); ?>
                         </div>
+                        <?php } ?>
                         <label>Prérequis</label>
                         <div class="form-group">
                             <select name="data[Shop][required]" id="ShopRequired" class="form-control">
@@ -44,7 +45,6 @@
                                 <?php } ?>
                             </select>
                         </div>
-                        <?php } ?>
                         <label>Commande(s)</label>
                         <div class="form-group">
                             <font color="#A94442"><small><?php echo $this->Form->error('command'); ?></small></font>

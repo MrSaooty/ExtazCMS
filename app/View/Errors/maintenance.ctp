@@ -10,7 +10,9 @@ if((isset($this->params['prefix']) && ($this->params['prefix'] == 'admin'))){
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="error-v1">
-            <?php echo $this->Html->image('maintenance.jpg'); ?>
+                <div class="hidden-xs hidden-sm">
+                    <?php echo $this->Html->image('maintenance.jpg'); ?>
+                </div>
             	<h3>
             		L'équipe de <b><?php echo $name_server; ?></b> s'éfforce de rétablir l'accès au site web.<br>
             		Excusez-nous pour la gêne occasionée. Restez au courant de l'actualité du serveur en nous suivant sur les réseaux sociaux !<br><br>

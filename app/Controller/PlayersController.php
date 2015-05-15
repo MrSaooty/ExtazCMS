@@ -21,8 +21,8 @@ class PlayersController extends AppController{
 					$player = $this->User->find('first', ['conditions' => ['User.username' => $username]]);
 					$playerId = $player['User']['id'];
 					$this->set('player', $this->User->find('first', ['conditions' => ['User.username' => $username]]));
-					$this->set('achatsBoutique', $this->shopHistory->find('count', ['conditions' => ['shopHistory.username' => $username]]));
-					$this->set('achatsStarpass', $this->starpassHistory->find('count', ['conditions' => ['starpassHistory.username' => $username]]));
+					$this->set('achatsBoutique', $this->shopHistory->find('count', ['conditions' => ['shopHistory.user_id' => $playerId]]));
+					$this->set('achatsStarpass', $this->starpassHistory->find('count', ['conditions' => ['starpassHistory.user_id' => $playerId]]));
 					$this->set('achatsPaypal', $this->paypalHistory->find('count', ['conditions' => ['paypalHistory.custom' => $playerId]]));
 				}
 				else{
