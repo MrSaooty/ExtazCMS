@@ -342,11 +342,24 @@ class PagesController extends AppController {
 		if($this->Auth->user()){
 			if($this->request->is('post')){
 				if(!empty($this->request->data['Pages']['message'])){
+					if($this->request->data['Pages']['type'] == 'report'){
+						$reported = $this->request->data['Pages']['report_input'];
+						$message = '(Signalement de '.$reported.') '.$this->request->data['Pages']['message'];
+					}
+					else{
+						$message = $this->request->data['Pages']['message'];
+					}
 					$this->Support->create;
 					$this->Support->saveField('user_id', $this->Auth->user('id'));
 					$this->Support->saveField('username', $this->Auth->user('username'));
-					$this->Support->saveField('priority', $this->request->data['Pages']['priority']);
-					$this->Support->saveField('message', $this->request->data['Pages']['message']);
+					$this->Support->saveField('type', $this->request->data['Pages']['type']);
+					if($this->request->data['Pages']['type'] == 'report'){
+						$this->Support->saveField('priority', '2');
+					}
+					else{
+						$this->Support->saveField('priority', $this->request->data['Pages']['priority']);
+					}
+					$this->Support->saveField('message', $message);
 					$this->Support->saveField('resolved', 0);
 					$this->Session->setFlash('Votre message a été envoyé au support, merci !', 'success');
 					return $this->redirect(['controller' => 'pages', 'action' => 'list_tickets']);

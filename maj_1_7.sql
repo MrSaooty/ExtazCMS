@@ -1,0 +1,1 @@
+ALTER TABLE `extaz_support` ADD `type` TEXT NOT NULL AFTER `user_id`;

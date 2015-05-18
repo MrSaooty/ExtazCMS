@@ -327,6 +327,7 @@ DROP TABLE IF EXISTS `extaz_support`;
 CREATE TABLE `extaz_support` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
+  `priority` text DEFAULT NULL,
   `priority` int(11) DEFAULT NULL,
   `message` longtext,
   `resolved` int(11) DEFAULT NULL,

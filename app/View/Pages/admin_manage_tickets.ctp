@@ -49,9 +49,10 @@ $(document).ready(function(){
                         <thead>
                             <tr>
                                 <th><b>Pseudo</b></th>
+                                <th><b>Type</b></th>
+                                <th><b>Priorité</b></th>
                                 <th><b>Message envoyé</b></th>
                                 <th><b>Dernière réponse</b></th>
-                                <th><b>Priorité</b></th>
                                 <th><b>Envoyé le</b></th>
                                 <th><b>Actions</b></th>
                             </tr>
@@ -93,14 +94,18 @@ $(document).ready(function(){
                                         ?>
                                     </a>
                                 </td>
-                                <td><?php echo substr($d['Support']['message'], 0, 100).'...'; ?></td>
                                 <td>
                                     <?php
-                                    if(!empty($d['supportComments'][0]['username'])){ 
-                                        echo substr($d['supportComments'][0]['message'], 0, 100).'...';
-                                    }
-                                    else{
-                                        echo '<i>Aucune réponse</i>';
+                                    switch($d['Support']['type']){
+                                        case 'question':
+                                            echo '<span class="label label-black btn-xs btn-block">Question</span>';
+                                            break;
+                                        case 'report':
+                                            echo '<span class="label label-danger btn-xs btn-block">Signalement</span>';
+                                            break;
+                                        case 'other':
+                                            echo '<span class="label label-black btn-xs btn-block">Autre</span>';
+                                            break;
                                     }
                                     ?>
                                 </td>
@@ -111,7 +116,7 @@ $(document).ready(function(){
                                             echo '<span class="label label-success btn-xs btn-block">Basse</span>';
                                             break;
                                         case '2':
-                                            echo '<span class="label label-info btn-xs btn-block">Moyenne</span>';
+                                            echo '<span class="label label-black btn-xs btn-block">Moyenne</span>';
                                             break;
                                         case '3':
                                             echo '<span class="label label-warning btn-xs btn-block">Haute</span>';
@@ -119,6 +124,17 @@ $(document).ready(function(){
                                         case '4':
                                         echo '<span class="label label-danger btn-xs btn-block">Très haute</span>';
                                             break;
+                                    }
+                                    ?>
+                                </td>
+                                <td><?php echo substr($d['Support']['message'], 0, 100).'...'; ?></td>
+                                <td>
+                                    <?php
+                                    if(!empty($d['supportComments'][0]['username'])){ 
+                                        echo substr($d['supportComments'][0]['message'], 0, 100).'...';
+                                    }
+                                    else{
+                                        echo '<i>Aucune réponse</i>';
                                     }
                                     ?>
                                 </td>
