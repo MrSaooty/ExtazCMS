@@ -13,14 +13,12 @@ Class ShopsController extends AppController{
 		));
 
 	public function index(){
-		$informations = $this->Informations->find('first');
-		$use_store = $informations['Informations']['use_store'];
 		// Si la boutique est activée
-		if($use_store == 1){
+		if($this->infos['use_store'] == 1){
 			// Pagination
 			$q = $this->paginate('Shop');
 			$this->set('items', $q);
-			$this->set('nbItems', $this->Shop->find('count'));
+			$this->set('nb_items', $this->Shop->find('count'));
 		}
 		// Si la boutique est désactivée
 		else{
@@ -112,10 +110,7 @@ Class ShopsController extends AppController{
 	}
 
 	public function reload(){
-		if($this->Auth->user()){
-			
-		}
-		else{
+		if(!$this->Auth->user()){
 			$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
 			return $this->redirect(['controller' => 'users', 'action' => 'login', 'admin' => false]);
 		}
@@ -132,15 +127,15 @@ Class ShopsController extends AppController{
 				// On va chercher les articles qui correspondent à la recherche
 				$this->set('items', $this->Shop->find('all', ['conditions' => ['Shop.name LIKE' => '%'.$this->request->data['Shop']['search'].'%'], 'order' => ['Shop.created DESC']]));
 				// Et on compte combien d'articles correspondent à la recherche
-				$this->set('nbItems', $this->Shop->find('count', ['conditions' => ['Shop.name LIKE' => '%'.$this->request->data['Shop']['search'].'%'], 'order' => ['Shop.created DESC']]));
+				$this->set('nb_items', $this->Shop->find('count', ['conditions' => ['Shop.name LIKE' => '%'.$this->request->data['Shop']['search'].'%'], 'order' => ['Shop.created DESC']]));
 			}
-			// Si la recherche est trop courte ou trop longu
+			// Si la recherche est trop courte ou trop longue
 			else{
-				$this->set('nbItems', 0);
+				$this->set('nb_items', 0);
 				$this->Session->setFlash('Faites une recherche qui contient entre '.$min.' et '.$max.' caractères', 'warning');
 			}
 		}
-		// Si aucune recherche n'a été effectué
+		// Si aucune recherche n'a été effectuée
 		else{
 			throw new NotFoundException();
 		}
@@ -149,12 +144,11 @@ Class ShopsController extends AppController{
 	public function starpass(){
 		if($this->Auth->user()){
 			if($this->request->is('post')){
-				$informations = $this->Informations->find('first');
 				// Déclaration des variables
 				$ident = $idp = $ids = $idd = $code = $code1 = $datas = ''; 
-				$idp = $informations['Informations']['starpass_idp'];
-				$idd = $informations['Informations']['starpass_idd'];
-				$ident = $idp.";".$ids.";".$idd;
+				$idp = $this->infos['starpass_idp'];
+				$idd = $this->infos['starpass_idd'];
+				$ident = $idp.';'.$ids.';'.$idd;
 				// On récupère le code
 				if(isset($this->request->data['code1'])){
 					$code = $this->request->data['code1'];
@@ -165,16 +159,14 @@ Class ShopsController extends AppController{
 				$ident = urlencode($ident);
 				$code = urlencode($code);
 				$datas = urlencode($datas);
-
 				// Envoi de la requête vers le serveur StarPass
 				// Dans la variable tab[0] on récupère la réponse du serveur
 				// Dans la variable tab[1] on récupère l'URL d'accès ou d'erreur suivant la réponse du serveur
 				$get_f = file("http://script.starpass.fr/check_php.php?ident=$ident&codes=$code&DATAS=$datas"); 
 				if(!$get_f){ 
-					exit('Votre serveur n\'a pas accès au serveur de StarPass, merci de contacter votre hébergeur.'); 
+					exit('Votre serveur n\'a pas accès au serveur de Starpass, merci de contacter votre hébergeur.'); 
 				} 
 				$tab = explode('|',$get_f[0]);
-
 				if(!$tab[1]){
 					$url = 'http://script.starpass.fr/error.php';
 				}
@@ -188,25 +180,23 @@ Class ShopsController extends AppController{
 				else{
 					// On recup les infos de l'utlisateur
 					$user = $this->User->find('first', ['conditions' => ['User.username' => $this->Auth->user('username')]]);
-					$userTokens = $user['User']['tokens'];
+					$user_tokens = $user['User']['tokens'];
 					// On définit son nv nb de tokens
-					$happy_hour_bonus = $informations['Informations']['happy_hour_bonus'];
-					$starpass_tokens = $informations['Informations']['starpass_tokens'];
-					$starpass_tokens_hh = $happy_hour_bonus/100 * $starpass_tokens + $starpass_tokens;
-					if($informations['Informations']['happy_hour'] == 1){
-						$newUserMoneySite = $userTokens + $starpass_tokens_hh;
+					$starpass_tokens = $this->infos['starpass_tokens'];
+					if($this->infos['happy_hour'] == 1){
+						$new_user_tokens = $user_tokens + $this->starpass_tokens_during_happy_hour;
 					}
 					else{
-						$newUserMoneySite = $userTokens + $starpass_tokens;
+						$new_user_tokens = $user_tokens + $starpass_tokens;
 					}
 					$this->User->id = $this->Auth->user('id');
-					$this->User->saveField('tokens', $newUserMoneySite);
+					$this->User->saveField('tokens', $new_user_tokens);
 					// Historique
 					$this->starpassHistory->create;
 					$this->starpassHistory->saveField('user_id', $this->Auth->user('id'));
 					$this->starpassHistory->saveField('code', $this->request->data['code1']);
-					if($informations['Informations']['happy_hour'] == 1){
-						$this->starpassHistory->saveField('tokens', $starpass_tokens_hh);
+					if($this->infos['happy_hour'] == 1){
+						$this->starpassHistory->saveField('tokens', $this->starpass_tokens_during_happy_hour);
 						$this->starpassHistory->saveField('note', 'Happy hour');
 					}
 					else{
@@ -215,24 +205,24 @@ Class ShopsController extends AppController{
 					}
 					// Donation ladder
 					if($this->donationLadder->find('first', ['conditions' => ['donationLadder.user_id' => $this->Auth->user('id')]])){
-						if($informations['Informations']['happy_hour'] == 1){
+						if($this->infos['happy_hour'] == 1){
 							$donationLadder = $this->donationLadder->find('first', ['conditions' => ['donationLadder.user_id' => $this->Auth->user('id')]]);
-							$newTokens = $donationLadder['donationLadder']['tokens'] + $starpass_tokens_hh;
+							$new_tokens = $donationLadder['donationLadder']['tokens'] + $this->starpass_tokens_during_happy_hour;
 							$this->donationLadder->id = $donationLadder['donationLadder']['id'];
-							$this->donationLadder->saveField('tokens', $newTokens);
+							$this->donationLadder->saveField('tokens', $new_tokens);
 						}
 						else{
 							$donationLadder = $this->donationLadder->find('first', ['conditions' => ['donationLadder.user_id' => $this->Auth->user('id')]]);
-							$newTokens = $donationLadder['donationLadder']['tokens'] + $starpass_tokens;
+							$new_tokens = $donationLadder['donationLadder']['tokens'] + $starpass_tokens;
 							$this->donationLadder->id = $donationLadder['donationLadder']['id'];
-							$this->donationLadder->saveField('tokens', $newTokens);
+							$this->donationLadder->saveField('tokens', $new_tokens);
 						}
 					}
 					else{
-						if($informations['Informations']['happy_hour'] == 1){
+						if($this->infos['happy_hour'] == 1){
 							$this->donationLadder->create;
 							$this->donationLadder->saveField('user_id', $this->Auth->user('id'));
-							$this->donationLadder->saveField('tokens', $starpass_tokens_hh);
+							$this->donationLadder->saveField('tokens', $this->starpass_tokens_during_happy_hour);
 						}
 						else{
 							$this->donationLadder->create;
@@ -240,8 +230,7 @@ Class ShopsController extends AppController{
 							$this->donationLadder->saveField('tokens', $starpass_tokens);
 						}
 					}
-					// Message
-					$this->Session->setFlash('Merci de votre confiance, vous avez maintenant '.$newUserMoneySite.' '.$informations['Informations']['site_money'].' !', 'success');
+					$this->Session->setFlash('Merci de votre confiance, vous avez maintenant '.$new_user_tokens.' '.$this->infos['site_money'].' !', 'success');
 				}
 			}
 			else{
@@ -257,44 +246,37 @@ Class ShopsController extends AppController{
 
 	public function buy($id, $money){
 		// JSONAPI
-		$informations = $this->Informations->find('first');
-		$use_store = $informations['Informations']['use_store'];
-		$use_server_money = $informations['Informations']['use_server_money'];
-    	$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
+		$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
     	// On test si le joueur est en ligne
-    	$playersOnline = $api->call('players.online.names'); // Tableau des joueurs en lignes
-		$testPlayerOnline = in_array($this->Auth->user('username'), $playersOnline[0]['success']); // On cherche dans ce tableau
-		// Si on a trouvé le pseudo du joueur dans le tableau des joueurs en ligne
-		if($testPlayerOnline){
-			$testPlayerOnline = 'online';
-		}
-		// Sinon... il n'est pas connecté IG
-		else{
-			$testPlayerOnline = 'offline';
-		}
-		// Si l'utlisateur est co au site
-		if($this->Auth->user()){
-			// Si l'item existe
-			if($this->Shop->find('first', ['conditions' => ['Shop.id' => $id]])){
-				// Si la boutique est activée
-				if($use_store == 1){
-					// Si l'utlisateur est co en jeu
-					if($testPlayerOnline == 'online'){
+    	$online_players = $api->call('players.online.names');
+		$player_is_online = in_array($this->Auth->user('username'), $online_players[0]['success']);
+		// Si l'utilisateur est connecté en jeu
+		if($player_is_online){
+			// Si l'utlisateur est co au site
+			if($this->Auth->user()){
+				// Si l'item existe
+				if($this->Shop->find('first', ['conditions' => ['Shop.id' => $id]])){
+					// Si la boutique est activée
+					if($this->infos['use_store'] == 1){
 						// Si l'utilisateur paye avec la monnaie du site
 						if($money == 'site'){
-							$user = $this->User->find('first', ['conditions' => ['User.username' => $this->Auth->user('username')]]); // On recup les infos de l'utlisateur
-							$userMoneySite = $user['User']['tokens']; // Le nombre de tokens de l'utilisateur
-							$item = $this->Shop->find('first', ['conditions' => ['Shop.id' => $id]]); // On recup les infos de l'item
-							$price = $item['Shop']['price_money_site']; // Cout de l'achat avec la monnaie du site
+							// On recupère les infos de l'utlisateur
+							$user = $this->User->find('first', ['conditions' => ['User.username' => $this->Auth->user('username')]]);
+							// Le nombre de tokens que possède l'utilisateur
+							$user_tokens = $user['User']['tokens'];
+							// On recupère les infos de l'item
+							$item = $this->Shop->find('first', ['conditions' => ['Shop.id' => $id]]);
+							// Cout de l'achat avec la monnaie du site
+							$price = $item['Shop']['price_money_site'];
 							// Si l'utilisateur a assez
-							if($userMoneySite >= $price){
+							if($user_tokens >= $price){
 								// S'il y a un prérequis pour cet achat
 								if($item['Shop']['required'] != -1){
-									$itemRequired = $item['Shop']['required'];
-									$itemName = $this->Shop->find('first', ['conditions' => ['Shop.id' => $itemRequired]]);
+									$item_required = $this->Shop->find('first', ['conditions' => ['Shop.id' => $item['Shop']['required']]]);
+									$item_required_name = $item_required['Shop']['name'];
 									// Si l'utilisateur n'a pas le prérequis
-									if(!$this->shopHistory->find('first', ['conditions' => ['username' => $this->Auth->user('username'), 'item_id' => $itemRequired]])){
-										$this->Session->setFlash('Cet achat a un prérequis vous devez d\'abord acheter <u>'.$itemName['Shop']['name'].'</u>', 'error');
+									if(!$this->shopHistory->find('first', ['conditions' => ['username' => $this->Auth->user('username'), 'item_id' => $item_required]])){
+										$this->Session->setFlash('Cet achat a un prérequis vous devez d\'abord acheter <u>'.$item_required_name.'</u>', 'error');
 										return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 									}
 								}
@@ -306,10 +288,10 @@ Class ShopsController extends AppController{
 								$this->shopHistory->saveField('price', $price);
 								$this->shopHistory->saveField('money', $money);
 								// On définit son nv nb de tokens
-								$newUserMoneySite = $userMoneySite - $price;
+								$new_user_tokens = $user_tokens - $price;
 								$this->User->id = $this->Auth->user('id');
-								$this->User->saveField('tokens', $newUserMoneySite);
-								// On execute la commande
+								$this->User->saveField('tokens', $new_user_tokens);
+								// On execute la/les commande(s)
 								$command = str_replace('{{player}}', $this->Auth->user('username'), $item['Shop']['command']);
 								if(strstr($item['Shop']['command'], '{{new}}')){
 									$new_command = explode('{{new}}', $command);
@@ -321,36 +303,40 @@ Class ShopsController extends AppController{
 									$api->call('server.run_command', [$command]);
 								}
 								// On redirige avec un message
-								$this->Session->setFlash('Achat effectué, vous avez depensé '.$price.' '.$informations['Informations']['site_money'].'', 'success');
+								$this->Session->setFlash('Achat effectué, vous avez depensé '.$price.' '.$this->infos['site_money'].'', 'success');
 								return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 							}
 							// Si l'utilisateur n'a pas assez
 							else{
-								$this->Session->setFlash('Vous n\'avez pas assez de '.$informations['Informations']['site_money'].'', 'error');
+								$this->Session->setFlash('Vous n\'avez pas assez de '.$this->infos['site_money'].'', 'error');
 								return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 							}
 						}
 						// L'utilisateur paye avec la monnaie du serveur
 						else{
 							// Si l'utilisation de la monnaie du serveur est activée
-							if($use_server_money == 1){
-								$user = $this->User->find('first', ['conditions' => ['User.username' => $this->Auth->user('username')]]); // On recup les infos de l'utlisateur
-								$userMoneyServer = $api->call('players.name.bank.balance', [$this->Auth->user('username')])[0]['success']; // Le nombre d'argent, sur le serveur
-								$item = $this->Shop->find('first', ['conditions' => ['Shop.id' => $id]]); // On recup les infos de l'item
-								$price = $item['Shop']['price_money_server']; // Cout de l'achat avec la monnaie du serveur
+							if($this->infos['use_server_money'] == 1){
+								// On recupère les infos de l'utlisateur
+								$user = $this->User->find('first', ['conditions' => ['User.username' => $this->Auth->user('username')]]);
+								// L'argent que possède l'utilisateur sur le serveur
+								$user_server_money = $api->call('players.name.bank.balance', [$this->Auth->user('username')])[0]['success'];
+								// On recupère les infos de l'item
+								$item = $this->Shop->find('first', ['conditions' => ['Shop.id' => $id]]);
+								// Cout de l'achat avec la monnaie du serveur
+								$price = $item['Shop']['price_money_server'];
 								if($price == -1){
 									return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 									exit();
 								}
 								// Si l'utilisateur a assez
-								if($userMoneyServer >= $price){
+								if($user_server_money >= $price){
 									// S'il y a un prérequis pour cet achat
 									if($item['Shop']['required'] != -1){
-										$itemRequired = $item['Shop']['required'];
-										$itemName = $this->Shop->find('first', ['conditions' => ['Shop.id' => $itemRequired]]);
+										$item_required = $this->Shop->find('first', ['conditions' => ['Shop.id' => $item['Shop']['required']]]);
+										$item_required_name = $item_required['Shop']['name'];
 										// Si l'utilisateur n'a pas le prérequis
-										if(!$this->shopHistory->find('first', ['conditions' => ['username' => $this->Auth->user('username'), 'item_id' => $itemRequired]])){
-											$this->Session->setFlash('Cet achat a un prérequis vous devez d\'abord acheter <u>'.$itemName['Shop']['name'].'</u>', 'error');
+										if(!$this->shopHistory->find('first', ['conditions' => ['username' => $this->Auth->user('username'), 'item_id' => $item_required]])){
+											$this->Session->setFlash('Cet achat a un prérequis vous devez d\'abord acheter <u>'.$item_required_name.'</u>', 'error');
 											return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 										}
 									}
@@ -361,10 +347,9 @@ Class ShopsController extends AppController{
 									$this->shopHistory->saveField('item_id', $item['Shop']['id']);
 									$this->shopHistory->saveField('price', $price);
 									$this->shopHistory->saveField('money', $money);
-									// On définit son nv nb de tokens
-									$newUserMoneyServer = $userMoneyServer - $price;
+									// On fait payer l'utilisateur sur le serveur
 									$api->call('players.name.bank.withdraw', [$this->Auth->user('username'), $price]);
-									// On execute la commande
+									// On execute la/les commande(s)
 									$command = str_replace('{{player}}', $this->Auth->user('username'), $item['Shop']['command']);
 									if(strstr($item['Shop']['command'], '{{new}}')){
 										$new_command = explode('{{new}}', $command);
@@ -376,12 +361,12 @@ Class ShopsController extends AppController{
 										$api->call('server.run_command', [$command]);
 									}
 									// On redirige avec un message
-									$this->Session->setFlash('Achat effectué, vous avez depensé '.$price.' '.$informations['Informations']['money_server'].'', 'success');
+									$this->Session->setFlash('Achat effectué, vous avez depensé '.$price.' '.$this->infos['money_server'].'', 'success');
 									return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 								}
 								// Si l'utilisateur n'a pas assez
 								else{
-									$this->Session->setFlash('Vous n\'avez pas assez de '.$informations['Informations']['money_server'].'', 'error');
+									$this->Session->setFlash('Vous n\'avez pas assez de '.$this->infos['money_server'].'', 'error');
 									return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 								}
 							}
@@ -391,28 +376,28 @@ Class ShopsController extends AppController{
 								return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 							}
 						}
-					// Si l'utlisateur n'est pas co en jeu
+					// Si la boutique n'est pas activé
 					}
 					else{
-						$this->Session->setFlash('Vous devez être connecté en jeu avant de faire des achats', 'error');
+						$this->Session->setFlash('Désolé mais la boutique est désactivé, contactez un administrateur', 'error');
 						return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 					}
-				// Si la boutique n'est pas activé
 				}
+				// Si l'item n'existe pas
 				else{
-					$this->Session->setFlash('Désolé mais la boutique est désactivé, contactez un administrateur', 'error');
+					$this->Session->setFlash('Cet article n\'existe pas !', 'error');
 					return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 				}
+			// Si l'utlisateur n'est pas co au site
 			}
-			// Si l'item n'existe pas
 			else{
-				$this->Session->setFlash('Cet article n\'existe pas !', 'error');
-				return $this->redirect(['controller' => 'shops', 'action' => 'index']);
+				$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
+				return $this->redirect(['controller' => 'users', 'action' => 'login', 'admin' => false]);
 			}
-		// Si l'utlisateur n'est pas co au site
+		// Si l'utlisateur n'est pas co en jeu
 		}
 		else{
-			$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
+			$this->Session->setFlash('Vous devez être connecté en jeu pour faire un achat', 'error');
 			return $this->redirect(['controller' => 'users', 'action' => 'login', 'admin' => false]);
 		}
 	}

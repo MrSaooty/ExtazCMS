@@ -89,16 +89,14 @@ Class CodesController extends AppController{
 
 	public function consume(){
 		if($this->Auth->user()){
-			$informations = $this->Informations->find('first');
-			$site_money = $informations['Informations']['site_money'];
 			if($this->request->is('post')){
 				$code = $this->request->data['Codes']['code'];
 				// Si ce code existe
 				if($this->Code->findByCode($code)){
-					$infos = $this->Code->findByCode($code);
-					$id = $infos['Code']['id'];
-					$used = $infos['Code']['used'];
-					$value = $infos['Code']['value'];
+					$code = $this->Code->findByCode($code);
+					$id = $code['Code']['id'];
+					$used = $code['Code']['used'];
+					$value = $code['Code']['value'];
 					// S'il n'est pas déjà utilisé
 					if($used == 0){
 						// On utilise le code
@@ -115,7 +113,7 @@ Class CodesController extends AppController{
 						$this->User->id = $this->Auth->user('id');
 						$this->User->saveField('tokens', $new_user_tokens);
 						// Et on redirige
-						$this->Session->setFlash('Votre avez été crédité de '.$value.' '.$site_money.' !', 'success');
+						$this->Session->setFlash('Votre avez été crédité de '.$value.' '.$this->infos['site_money'].' !', 'success');
 						return $this->redirect(['controller' => 'shops', 'action' => 'reload', 'admin' => false]);
 					}
 					else{

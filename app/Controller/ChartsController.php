@@ -7,8 +7,7 @@ class ChartsController extends AppController{
 
     public function admin_memory(){
 		if($this->Auth->user('role') > 0){
-			$informations = $this->Informations->find('first');
-    		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
+    		$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
 			$usedMemory = round($api->call('server.performance.memory.used')['0']['success']);
 			$totalMemory = round($api->call('server.performance.memory.total')['0']['success']) - ($usedMemory);
 			$pieData = array(
@@ -64,8 +63,7 @@ class ChartsController extends AppController{
 
 	public function admin_donator(){
 		if($this->Auth->user('role') > 0){
-			$informations = $this->Informations->find('first');
-			$site_money = ucfirst($informations['Informations']['site_money']);
+			$site_money = ucfirst($this->infos['site_money']);
 			$donatorsTokens = $this->donationLadder->find('all', ['limit' => 5, 'order' => ['donationLadder.tokens' => 'DESC']]);
 			$donatorsUsername = $this->donationLadder->find('list', ['fields' => ['donationLadder.id'], 'limit' => 5]);
 			$countDonators = $this->donationLadder->find('count');
@@ -615,8 +613,7 @@ class ChartsController extends AppController{
 
 	public function admin_disk(){
 		if($this->Auth->user('role') > 0){
-			$informations = $this->Informations->find('first');
-    		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
+    		$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
 			$totalMemory = round($api->call('server.performance.disk.free')['0']['success']);
 			$usedMemory = round($api->call('server.performance.disk.used')['0']['success']);
 			$pieData = array(

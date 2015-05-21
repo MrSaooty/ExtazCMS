@@ -24,14 +24,14 @@ class PostsController extends AppController{
 
 	public function read($slug, $id){
 		// Si c'est un utilisateur spécial
-		if($this->Auth->user('role') == 0){
+		if($this->Auth->user('role') > 0){
 			// Si l'article ciblé existe, on va le chercher même si c'est un brouillon
-			if($this->Post->find('all', array('conditions' => array('Post.id' => $id, 'Post.slug' => $slug, 'Post.visible' => 1, 'Post.draft' => 0)))){
-				$this->set('post', $this->Post->find('first', array('conditions' => array('Post.id' => $id, 'Post.slug' => $slug, 'Post.visible' => 1, 'Post.draft' => 0))));
+			if($this->Post->find('all', array('conditions' => array('Post.id' => $id, 'Post.slug' => $slug, 'Post.visible' => 1)))){
+				$this->set('post', $this->Post->find('first', array('conditions' => array('Post.id' => $id, 'Post.slug' => $slug, 'Post.visible' => 1))));
 				$this->set('comments', $this->Comment->find('all', array('conditions' => array('Comment.post_id' => $id), 'order' => ['Comment.created' => 'DESC'])));
 				$this->set('lasts_posts', $this->Post->find('all', array('conditions' => array('Post.visible' => 1, 'Post.draft' => 0), 'order' => array('Post.posted' => 'DESC'))));
 				$this->set('liked', $this->Like->find('all', array('conditions' => array('Like.id_article' => $id, 'Like.ip' => $_SERVER['REMOTE_ADDR']))));
-				$this->set('nbLikes', $this->Like->find('count', array('conditions' => array('Like.id_article' => $id))));
+				$this->set('nb_likes', $this->Like->find('count', array('conditions' => array('Like.id_article' => $id))));
 			}
 			// Si l'article ciblé n'existe pas, erreur 404
 			else{
@@ -41,12 +41,12 @@ class PostsController extends AppController{
 		// Si c'est un utilisateur
 		else{
 			// Si l'article ciblé existe, on va le chercher mais pas si c'est un brouillon
-			if($this->Post->find('all', array('conditions' => array('Post.id' => $id, 'Post.slug' => $slug, 'Post.visible' => 1)))){
-				$this->set('post', $this->Post->find('first', array('conditions' => array('Post.id' => $id, 'Post.slug' => $slug, 'Post.visible' => 1))));
+			if($this->Post->find('all', array('conditions' => array('Post.id' => $id, 'Post.slug' => $slug, 'Post.visible' => 1, 'Post.draft' => 0)))){
+				$this->set('post', $this->Post->find('first', array('conditions' => array('Post.id' => $id, 'Post.slug' => $slug, 'Post.visible' => 1, 'Post.draft' => 0))));
 				$this->set('comments', $this->Comment->find('all', array('conditions' => array('Comment.post_id' => $id), 'order' => ['Comment.created' => 'DESC'])));
 				$this->set('lasts_posts', $this->Post->find('all', array('conditions' => array('Post.visible' => 1, 'Post.draft' => 0), 'order' => array('Post.posted' => 'DESC'))));
 				$this->set('liked', $this->Like->find('all', array('conditions' => array('Like.id_article' => $id, 'Like.ip' => $_SERVER['REMOTE_ADDR']))));
-				$this->set('nbLikes', $this->Like->find('count', array('conditions' => array('Like.id_article' => $id))));
+				$this->set('nb_likes', $this->Like->find('count', array('conditions' => array('Like.id_article' => $id))));
 			}
 			// Si l'article ciblé n'existe pas, erreur 404
 			else{
@@ -69,7 +69,6 @@ class PostsController extends AppController{
 						// On enregistre les données
 						$this->Post->save($this->request->data);
 						$slug = strtolower($this->request->data['Post']['slug']);
-						// $slug = str_replace(' ', '-', $slug);
 						$this->Post->saveField('slug', $slug);
 						$this->Post->saveField('author', $this->Auth->user('username'));
 						$this->Post->saveField('likes', 0);

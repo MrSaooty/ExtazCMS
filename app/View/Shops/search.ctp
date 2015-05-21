@@ -14,15 +14,15 @@ $(document).ready(function(){
     <div class="row blog-page">    
         <!-- Left Sidebar -->
         <div class="col-md-9 md-margin-bottom-40">
-            <?php if($nbItems > 0){ ?>
+            <?php if($nb_items > 0){ ?>
                 <div class="servive-block servive-block-default">
                     <h2 class="heading-md">
                         <?php
-                        if($nbItems < 2){
-                            echo $nbItems.' résultat';
+                        if($nb_items < 2){
+                            echo $nb_items.' résultat';
                         }
                         else{
-                            echo $nbItems.' résultats';
+                            echo $nb_items.' résultats';
                         }
                         ?>
                         pour "<?php echo $request; ?>"

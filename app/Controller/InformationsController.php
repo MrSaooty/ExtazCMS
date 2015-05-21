@@ -28,7 +28,6 @@ class InformationsController extends AppController{
 	public function admin_testJsonapi(){
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('ajax')){
-				sleep(2);
 		    	$api = new JSONAPI($this->request->data['ip'], $this->request->data['port'], $this->request->data['username'], $this->request->data['password'], $this->request->data['salt']);
 				if($api->call('players.online.limit')[0]['result'] == 'success'){
 					$result = 'success';
@@ -104,9 +103,8 @@ class InformationsController extends AppController{
 					$this->Informations->saveField('use_rules', 0);
 				}
 				if(isset($this->request->data['happy_hour'])){
-					$informations = $this->Informations->find('first');
-			    	$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
-					$api->call('server.run_command', ['say Happy hour activé, rendez-vous sur le site. '.$informations['Informations']['happy_hour_bonus'].'% de '.$informations['Informations']['site_money'].' gratuits ! (http://'.$_SERVER['HTTP_HOST'].$this->webroot.'recharger)']);
+			    	$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
+					$api->call('server.run_command', ['say Happy hour ! Rendez-vous sur le site. '.$this->infos['happy_hour_bonus'].'% de '.$this->infos['site_money'].' offerts ! (http://'.$_SERVER['HTTP_HOST'].$this->webroot.'recharger)']);
 					$this->Informations->saveField('happy_hour', 1);
 				}
 				else{

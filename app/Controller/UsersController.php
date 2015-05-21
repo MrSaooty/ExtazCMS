@@ -154,8 +154,7 @@ class UsersController extends AppController{
                     $data = $this->User->find('first', array('conditions' => array('User.email' => $email)));
                     $this->User->id = $data['User']['id'];
                     $this->User->saveField('password', $newPassword);
-                    $informations = $this->Informations->find('first');
-                    $name_server = $informations['Informations']['name_server'];
+                    $name_server = $this->infos['name_server'];
                     $name_server = strtolower(preg_replace('/\s/', '', $name_server));
                     $Email = new CakeEmail();
                     $Email->from(array('admin@'.$name_server.'.com' => $name_server));
@@ -220,15 +219,6 @@ class UsersController extends AppController{
                 $this->Session->setFlash('Cet utilisateur n\'existe pas !', 'error');
                 return $this->redirect($this->referer());
             }
-        }
-    }
-
-    public function manage(){
-        if($this->Auth->user('role') > 0){
-
-        }
-        else{
-            throw new NotFoundException();
         }
     }
 

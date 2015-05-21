@@ -15,7 +15,7 @@ $(document).ready(function(){
         cancelButton: "Non"
     });
 
-    var nbLikes = <?php echo $nbLikes; ?>;
+    var nb_likes = <?php echo $nb_likes; ?>;
 
     $('#like').on('click', function(){
         $('#chargement').show();
@@ -24,8 +24,8 @@ $(document).ready(function(){
         $.post('<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'like']); ?>', {id: id}, function(){
             $('#chargement').hide();
             $('#dislike').fadeIn();
-            nbLikes++;
-            $('#dislike').html('<font color="red"><i class="fa fa-heart"></i></font> J\'aime (' + nbLikes + ')');
+            nb_likes++;
+            $('#dislike').html('<font color="red"><i class="fa fa-heart"></i></font> J\'aime (' + nb_likes + ')');
         });
     });
 
@@ -36,8 +36,8 @@ $(document).ready(function(){
         $.post('<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'like']); ?>', {id: id}, function(){
             $('#chargement').hide();
             $('#like').fadeIn();
-            nbLikes--;
-            $('#like').html('<i class="fa fa-heart"></i> J\'aime (' + nbLikes + ')');
+            nb_likes--;
+            $('#like').html('<i class="fa fa-heart"></i> J\'aime (' + nb_likes + ')');
         });
     });
 });
@@ -81,17 +81,17 @@ $(document).ready(function(){
                         <div class="btn-group pull-right">
                             <?php if($liked){ ?>
                                 <button class="btn btn-default btn-xs rounded-3x" id="dislike">
-                                    <font color="red"><i class="fa fa-heart"></i></font> J'aime (<?php echo $nbLikes; ?>)
+                                    <font color="red"><i class="fa fa-heart"></i></font> J'aime (<?php echo $nb_likes; ?>)
                                 </button>
                                 <button class="btn btn-default btn-xs rounded-3x" id="like" style="display:none;">
-                                    <i class="fa fa-heart"></i> J'aime (<?php echo $nbLikes; ?>)
+                                    <i class="fa fa-heart"></i> J'aime (<?php echo $nb_likes; ?>)
                                 </button>
                             <?php } else { ?>
                                 <button class="btn btn-default btn-xs rounded-3x" id="dislike" style="display:none;">
-                                    <font color="red"><i class="fa fa-heart"></i></font> J'aime (<?php echo $nbLikes; ?>)
+                                    <font color="red"><i class="fa fa-heart"></i></font> J'aime (<?php echo $nb_likes; ?>)
                                 </button>
                                 <button class="btn btn-default btn-xs rounded-3x" id="like">
-                                    <i class="fa fa-heart"></i> J'aime (<?php echo $nbLikes; ?>)
+                                    <i class="fa fa-heart"></i> J'aime (<?php echo $nb_likes; ?>)
                                 </button>
                             <?php } ?>        
                             <button class="btn btn-default btn-xs rounded-3x" id="chargement" style="display:none;">

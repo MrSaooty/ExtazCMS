@@ -56,7 +56,10 @@ class AppController extends Controller {
 			$this->layout = 'admin';
 		}
 		// Variable qui regroupe toutes les infos depuis la bdd 
+		$this->infos = $this->Informations->find('first');
+		$this->infos = $this->infos['Informations'];
 		$this->set('informations', $this->Informations->find('first'));
+		$this->set('infos', $this->infos);
 		// On déclare JSONAPI
 		$informations = $this->Informations->find('first');
 		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
@@ -120,6 +123,35 @@ class AppController extends Controller {
 		else{
 			$this->set('nb_donator', $this->donationLadder->find('count'));
 		}
+		// Boutique
+		/*
+		* Nombre de tokens gratuit avec un code Starpass
+		* starpass_happy_hour_bonus = bonus de l'happy (en %) divisé par 100 fois le nombre de tokens obtenu pour un code Starpass
+		*/
+		$starpass_happy_hour_bonus = $informations['Informations']['happy_hour_bonus'] / 100 * $informations['Informations']['starpass_tokens'];
+		$this->starpass_happy_hour_bonus = $starpass_happy_hour_bonus;
+		$this->set('starpass_happy_hour_bonus', $starpass_happy_hour_bonus);
+		/*
+		* Nombre de tokens gratuit avec un paiement via PayPal
+		* paypal_happy_hour_bonus = bonus de l'happy (en %) divisé par 100 fois le nombre de tokens obtenu pour un paiement via PayPal
+		*/
+		$paypal_happy_hour_bonus = $informations['Informations']['happy_hour_bonus'] / 100 * $informations['Informations']['paypal_tokens'];
+		$this->paypal_happy_hour_bonus = $paypal_happy_hour_bonus;
+		$this->set('paypal_happy_hour_bonus', $paypal_happy_hour_bonus);
+		/*
+		* Nombre total de tokens obtenu avec un code Starpass pendant une happy hour
+		* starpass_tokens_during_happy_hour = Nombre de tokens gratuit grâce à l'happy hour + le nombre de tokens normal
+		*/
+		$starpass_tokens_during_happy_hour = $starpass_happy_hour_bonus + $informations['Informations']['starpass_tokens'];
+		$this->starpass_tokens_during_happy_hour = $starpass_tokens_during_happy_hour;
+		$this->set('starpass_tokens_during_happy_hour', $starpass_tokens_during_happy_hour);
+		/*
+		* Nombre total de tokens obtenu avec un paiement via PayPal pendant une happy hour
+		* paypal_tokens_during_happy_hour = Nombre de tokens gratuit grâce à l'happy hour + le nombre de tokens normal
+		*/
+		$paypal_tokens_during_happy_hour = $paypal_happy_hour_bonus + $informations['Informations']['paypal_tokens'];
+		$this->paypal_tokens_during_happy_hour = $paypal_tokens_during_happy_hour;
+		$this->set('paypal_tokens_during_happy_hour', $paypal_tokens_during_happy_hour);
 		// Boutons pour la sidebar
 		$this->set('buttons', $this->Button->find('all', ['order' => ['Button.order ASC']]));
 		// ExtazCMS
@@ -152,44 +184,52 @@ class AppController extends Controller {
 			if($transaction['InstantPaymentNotification']['mc_currency'] == 'EUR'){
 				// Si le prix n'a pas été modifié 
 				if($transaction['InstantPaymentNotification']['mc_gross'] == $mc_gross){
-					// Nombre de tokens avec l'happy hour
-					$paypal_tokens_happy_hour = $informations['Informations']['happy_hour_bonus']/100 * $informations['Informations']['paypal_tokens'] + $informations['Informations']['paypal_tokens'];
+					/*
+					* Nombre de tokens gratuit avec un paiement via PayPal
+					* paypal_happy_hour_bonus = bonus de l'happy (en %) divisé par 100 fois le nombre de tokens obtenu pour un paiement via PayPal
+					*/
+					$paypal_happy_hour_bonus = $informations['Informations']['happy_hour_bonus'] / 100 * $informations['Informations']['paypal_tokens'];
+					/*
+					* Nombre total de tokens obtenu avec un paiement via PayPal pendant une happy hour
+					* paypal_tokens_during_happy_hour = Nombre de tokens gratuit grâce à l'happy hour + le nombre de tokens normal
+					*/
+					$paypal_tokens_during_happy_hour = $paypal_happy_hour_bonus + $informations['Informations']['paypal_tokens'];
 					// Nombre de tokens sans happy hour
 					$paypal_tokens = $informations['Informations']['paypal_tokens'];
 					// On recup les infos de l'utlisateur
 					$user = $this->User->find('first', ['conditions' => ['User.id' => $transaction['InstantPaymentNotification']['custom']]]);
-					$userTokens = $user['User']['tokens'];
+					$user_tokens = $user['User']['tokens'];
 					// On définit son nv nb de tokens
 					if($informations['Informations']['happy_hour'] == 1){
-						$newTokens = $userTokens + $paypal_tokens_happy_hour;
+						$new_user_tokens = $user_tokens + $paypal_tokens_during_happy_hour;
 						$this->User->id = $transaction['InstantPaymentNotification']['custom'];
-						$this->User->saveField('tokens', $newTokens);
+						$this->User->saveField('tokens', $new_user_tokens);
 					}
 					else{
-						$newTokens = $userTokens + $paypal_tokens;
+						$new_user_tokens = $user_tokens + $paypal_tokens;
 						$this->User->id = $transaction['InstantPaymentNotification']['custom'];
-						$this->User->saveField('tokens', $newTokens);
+						$this->User->saveField('tokens', $new_user_tokens);
 					}
 					// Donation ladder
 					if($this->donationLadder->find('first', ['conditions' => ['donationLadder.user_id' => $transaction['InstantPaymentNotification']['custom']]])){
 						if($informations['Informations']['happy_hour'] == 1){
 							$donationLadder = $this->donationLadder->find('first', ['conditions' => ['donationLadder.user_id' => $transaction['InstantPaymentNotification']['custom']]]);
-							$newTokens = $donationLadder['donationLadder']['tokens'] + $paypal_tokens_happy_hour;
+							$new_user_tokens = $donationLadder['donationLadder']['tokens'] + $paypal_tokens_during_happy_hour;
 							$this->donationLadder->id = $donationLadder['donationLadder']['id'];
-							$this->donationLadder->saveField('tokens', $newTokens);
+							$this->donationLadder->saveField('tokens', $new_user_tokens);
 						}
 						else{
 							$donationLadder = $this->donationLadder->find('first', ['conditions' => ['donationLadder.user_id' => $transaction['InstantPaymentNotification']['custom']]]);
-							$newTokens = $donationLadder['donationLadder']['tokens'] + $paypal_tokens;
+							$new_user_tokens = $donationLadder['donationLadder']['tokens'] + $paypal_tokens;
 							$this->donationLadder->id = $donationLadder['donationLadder']['id'];
-							$this->donationLadder->saveField('tokens', $newTokens);
+							$this->donationLadder->saveField('tokens', $new_user_tokens);
 						}
 					}
 					else{
 						if($informations['Informations']['happy_hour'] == 1){
 							$this->donationLadder->create;
 							$this->donationLadder->saveField('user_id', $transaction['InstantPaymentNotification']['custom']);
-							$this->donationLadder->saveField('tokens', $paypal_tokens_happy_hour);
+							$this->donationLadder->saveField('tokens', $paypal_tokens_during_happy_hour);
 						}
 						else{
 							$this->donationLadder->create;

@@ -152,8 +152,7 @@ class PagesController extends AppController {
 	public function admin_chat_update(){
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('ajax')){
-				$informations = $this->Informations->find('first');
-    			$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
+    			$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
 				$data = '<i class="fa fa-clock-o"></i> Dernière mise à jour à '.date('H:i:s').', il y a '.$api->call('players.online.count')[0]['success'].' joueur(s) connecté(s)';
 				echo json_encode($data);
 				exit();
@@ -168,10 +167,9 @@ class PagesController extends AppController {
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('ajax')){
 				$data = '';
-				$informations = $this->Informations->find('first');
-    			$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
-				$messages = $api->call('streams.chat.latest', [$informations['Informations']['chat_nb_messages']])[0]['success'];
-				if(count($messages) >= $informations['Informations']['chat_nb_messages']){
+    			$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
+				$messages = $api->call('streams.chat.latest', [$this->infos['chat_nb_messages']])[0]['success'];
+				if(count($messages) >= $this->infos['chat_nb_messages']){
 					foreach($messages as $m){
 						if(empty($m['player'])){
 							$explode = explode(']', $m['message']);
@@ -187,7 +185,7 @@ class PagesController extends AppController {
 					}
 				}
 				else{
-					$data = '<div class="alert alert-warning alert-dismissable"><small>Désolé mais il n\'y a pas assez de messages pour afficher le chat (minimum '.$informations['Informations']['chat_nb_messages'].')</small></div>';
+					$data = '<div class="alert alert-warning alert-dismissable"><small>Désolé mais il n\'y a pas assez de messages pour afficher le chat (minimum '.$this->infos['chat_nb_messages'].')</small></div>';
 				}
 				echo json_encode($data);
 				exit();
@@ -201,20 +199,14 @@ class PagesController extends AppController {
 	public function admin_send_message(){
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('ajax')){
-				$informations = $this->Informations->find('first');
-	    		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
+	    		$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
 				$message = str_replace('/', '', $this->request->data['message']);
-				//if(!empty($message) && $api->call('chat.with_name', [$message, $this->Auth->user('username')])){
-				// if(!empty($message) && $api->call('chat.broadcast', ['['.$this->Auth->user('username').'] '.$message])){
-				// 	exit();
-				// }
-
-				if(empty($informations['Informations']['chat_prefix'])){
+				if(empty($this->infos['chat_prefix'])){
 					$prefix = '';
 					$command = '['.$this->Auth->user('username').'] '.$message;
 				}
 				else{
-					$prefix = '('.$informations['Informations']['chat_prefix'].') ';
+					$prefix = '('.$this->infos['chat_prefix'].') ';
 					$command = $prefix.'['.$this->Auth->user('username').'] '.$message;
 				}
 				if(!empty($message)){
@@ -232,8 +224,7 @@ class PagesController extends AppController {
 	public function admin_send_command(){
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('ajax')){
-				$informations = $this->Informations->find('first');
-	    		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
+	    		$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
 				$command = str_replace('/', '', $this->request->data['command']);
 				if(!empty($command) && $api->call('server.run_command', [$command])){
 					exit();
@@ -390,8 +381,8 @@ class PagesController extends AppController {
 	public function view_ticket($id = null){
 		if($this->Auth->user()){
 			$ticket = $this->Support->find('first', ['conditions' => ['Support.id' => $id]]);
-			$ticketOwner = $ticket['User']['username'];
-			if($ticketOwner == $this->Auth->user('username') OR $this->Auth->user('role') > 0){
+			$ticket_owner = $ticket['User']['username'];
+			if($ticket_owner == $this->Auth->user('username') OR $this->Auth->user('role') > 0){
 				if($this->Support->findById($id)){
 					$this->set('data', $this->Support->find('first', ['conditions' => ['Support.id' => $id]]));
 					$this->set('comments', $this->supportComments->find('all', ['conditions' => ['supportComments.ticket_id' => $id], 'order' => ['supportComments.created DESC']]));
@@ -470,20 +461,19 @@ class PagesController extends AppController {
 			if($this->request->is('post')){
 				if(!empty($this->request->data['Pages']['message'])){
 					$ticket = $this->Support->find('first', ['conditions' => ['Support.id' => $this->request->data['Pages']['id']]]);
-					$ticketOwner = $this->User->find('first', ['conditions' => ['User.username' => $ticket['User']['username']]]);
-					$ticketOwnerEmail = $ticketOwner['User']['email'];
-					$ticketOwnerAllowEmail = $ticketOwner['User']['allow_email'];
-					if($ticketOwner['User']['username'] == $this->Auth->user('username') OR $this->Auth->user('role') > 0){
+					$ticket_owner = $this->User->find('first', ['conditions' => ['User.username' => $ticket['User']['username']]]);
+					$ticket_owner_email = $ticket_owner['User']['email'];
+					$ticket_owner_allow_email = $ticket_owner['User']['allow_email'];
+					if($ticket_owner['User']['username'] == $this->Auth->user('username') OR $this->Auth->user('role') > 0){
 						if($ticket['Support']['resolved'] == 0){
 							// Si l'utilisateur accepte de recevoir des emails
-							// if($ticketOwnerAllowEmail == 1){
-							// 	$informations = $this->Informations->find('first');
-							// 	$name_server = $informations['Informations']['name_server'];
+							// if($ticket_owner_allow_email == 1){
+							// 	$name_server = $this->infos['name_server'];
 							// 	$name_server = strtolower(preg_replace('/\s/', '', $name_server));
 							// 	$Email = new CakeEmail();
 							// 	$Email->from(array('support@'.$name_server.'.com' => $name_server));
-							// 	$Email->to($ticketOwnerEmail);
-							// 	$Email->subject('['.$informations['Informations']['name_server'].'] Support, nouvelle réponse à votre ticket #'.$ticket['Support']['id'].'');
+							// 	$Email->to($ticket_owner_email);
+							// 	$Email->subject('['.$this->infos['name_server'].'] Support, nouvelle réponse à votre ticket #'.$ticket['Support']['id'].'');
 							// 	$Email->send('Retrouvez cette nouvelle réponse ici : http://'.$_SERVER['HTTP_HOST'].$this->webroot.'tickets/'.$ticket['Support']['id']);
 							// }
 							$this->supportComments->create;
@@ -651,9 +641,8 @@ class PagesController extends AppController {
                 if(array_key_exists('captcha', $this->request->data)){
                     $score = $ayah->scoreResult();
                     if($score){
-						$informations = $this->Informations->find('first');
-						$contact_email = $informations['Informations']['contact_email'];
-						$name_server = $informations['Informations']['name_server'];
+						$contact_email = $this->infos['contact_email'];
+						$name_server = $this->infos['name_server'];
 						$username = $this->Auth->user('username');
 						$email = $this->Auth->user('email');
 						$subject = $this->request->data['Pages']['subject'];

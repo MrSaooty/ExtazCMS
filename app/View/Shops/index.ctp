@@ -14,7 +14,7 @@ $(document).ready(function(){
     <div class="row">
         <!-- Begin Content -->
             <div class="col-md-9">
-                <?php if($nbItems == 0){ ?>
+                <?php if($nb_items == 0){ ?>
                 <div class="servive-block servive-block-default">
                     <i class="icon-custom icon-color-dark rounded-x fa fa-info-circle"></i>
                     <h2 class="heading-md">Aucun résultat</h2>
@@ -138,7 +138,7 @@ $(document).ready(function(){
                     <div class="text-center">
                         <ul class="pagination">
                             <?php
-                            if($nbItems > 9){
+                            if($nb_items > 9){
                                 echo '<li>'.$this->Paginator->prev(__('«'), array('tag' => 'li'), null, array('tag' => 'li', 'class' => 'disabled', 'disabledTag' => 'a')).'</li>';
                                 echo $this->Paginator->numbers(array('separator' => '', 'currentTag' => 'a', 'currentClass' => 'active', 'tag' => 'li', 'first' => 'Première', 'last' => 'Dernière', 'ellipsis' => ''));
                                 echo '<li>'.$this->Paginator->next(__('»'), array('tag' => 'li'), null, array('tag' => 'li', 'class' => 'disabled', 'disabledTag' => 'a')).'</li>';
