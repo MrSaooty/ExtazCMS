@@ -1,11 +1,11 @@
 <?php
 Class ShopsController extends AppController{
 
-	public $uses = ['Shop', 'User', 'Informations', 'starpassHistory', 'shopHistory', 'donationLadder'];
+	public $uses = ['Shop', 'User', 'Informations', 'starpassHistory', 'shopHistory', 'donationLadder', 'shopCategories'];
 
 	var $paginate = array(
 		'Shop' => array(
-			'limit' => 9,
+			'limit' => 20,
 			'order' => array(
 				'Shop.id' => 'ASC'
 			),
@@ -19,6 +19,7 @@ Class ShopsController extends AppController{
 			$q = $this->paginate('Shop');
 			$this->set('items', $q);
 			$this->set('nb_items', $this->Shop->find('count'));
+			$this->set('categories', $this->shopCategories->find('all', ['order' => ['shopCategories.id ASC']]));
 		}
 		// Si la boutique est désactivée
 		else{
@@ -29,6 +30,7 @@ Class ShopsController extends AppController{
 	public function admin_add(){
 		if($this->Auth->user('role') > 0){
 			$this->set('list_item', $this->Shop->find('all', ['fields' => ['name', 'id']]));
+			$this->set('categories', $this->shopCategories->find('all', ['order' => ['shopCategories.id ASC']]));
 			if($this->request->is('post')){
 				$this->Shop->set($this->request->data);
 				if($this->Shop->validates()){
@@ -70,6 +72,7 @@ Class ShopsController extends AppController{
 		if($this->Auth->user('role') > 0){
 			$this->set('data', $this->Shop->find('first', ['conditions' => ['Shop.id' => $id]]));
 			$this->set('list_item', $this->Shop->find('all', ['conditions' => ['Shop.id !=' => $id], 'fields' => ['name', 'id']]));
+			$this->set('categories', $this->shopCategories->find('all', ['order' => ['shopCategories.id ASC']]));
 			if($this->request->is('post')){
 				$this->Shop->set($this->request->data);
 				if($this->Shop->validates()){
@@ -398,7 +401,7 @@ Class ShopsController extends AppController{
 		}
 		else{
 			$this->Session->setFlash('Vous devez être connecté en jeu pour faire un achat', 'error');
-			return $this->redirect(['controller' => 'users', 'action' => 'login', 'admin' => false]);
+			return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 		}
 	}
 }

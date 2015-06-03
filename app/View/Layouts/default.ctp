@@ -35,6 +35,7 @@
     ?>
     <link href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.0/isotope.pkgd.js"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>	
 <body cz-shortcut-listen="true" class="boxed-layout container" background="<?php echo $this->webroot.'img/bg/'.$background.'.jpg'; ?>">
@@ -172,6 +173,7 @@
     echo $this->Html->script('jquery.confirm');
     echo $this->Html->script('jquery.bootstrap-growl');
     echo $this->Html->script('index');
+    echo $this->Html->script('custom');
     ?>
     <script type="text/javascript">
         jQuery(document).ready(function() {

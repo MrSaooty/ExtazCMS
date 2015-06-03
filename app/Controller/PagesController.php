@@ -37,7 +37,7 @@ class PagesController extends AppController {
  *
  * @var array
  */
-	public $uses = ['Informations', 'shopHistory', 'starpassHistory', 'paypalHistory', 'Team', 'Support', 'supportComments', 'donationLadder'];
+	public $uses = ['Informations', 'shopHistory', 'starpassHistory', 'paypalHistory', 'Team', 'Support', 'supportComments', 'donationLadder', 'shopCategories'];
 
 /**
  * Displays a view
@@ -138,6 +138,71 @@ class PagesController extends AppController {
 		// }
 		$this->Session->setFlash('Module non disponible actuellement, veuillez procéder à une mise à jour manuelle', 'warning');
 		$this->redirect(['controller' => 'pages', 'action' => 'update', 'admin' => true]);
+	}
+
+	public function admin_edit_shop_categories($id) {
+		if($this->Auth->user('role') > 0){
+			$this->set('data', $this->shopCategories->findById($id));
+			if($this->request->is('post')){
+				if(!empty($this->request->data['Pages']['name'])){
+					$this->shopCategories->id = $id;
+					$name = ucfirst($this->request->data['Pages']['name']);
+					$this->shopCategories->saveField('name', $name);
+					$this->Session->setFlash('Catégorie modifiée avec succès !', 'success');
+					return $this->redirect(['controller' => 'pages', 'action' => 'list_shop_categories']);
+				}
+				else{
+					$this->Session->setFlash('Vous devez entrer une catégorie !', 'success');
+					return $this->redirect(['controller' => 'pages', 'action' => 'edit_shop_categories', 'id' => $id]);
+				}
+			}
+		}
+		else{
+			throw new NotFoundException();
+		}
+	}
+
+	public function admin_delete_shop_categories($id) {
+		if($this->Auth->user('role') > 0){
+			$this->shopCategories->delete($id);
+			$this->Session->setFlash('Catégorie supprimée avec succès !', 'success');
+			return $this->redirect(['controller' => 'pages', 'action' => 'list_shop_categories']);
+		}
+		else{
+			throw new NotFoundException();
+		}
+	}
+
+	public function admin_add_shop_categories() {
+		if($this->Auth->user('role') > 0){
+			if($this->request->is('post')){
+				if(!empty($this->request->data['Pages']['name'])){
+					$this->shopCategories->create;
+					$name = ucfirst($this->request->data['Pages']['name']);
+					$this->shopCategories->saveField('name', $name);
+					$this->Session->setFlash('Catégorie créée avec succès !', 'success');
+					return $this->redirect(['controller' => 'pages', 'action' => 'list_shop_categories']);
+				}
+				else{
+					$this->Session->setFlash('Vous devez entrer une catégorie !', 'success');
+				}
+			}
+		}
+		else{
+			throw new NotFoundException();
+		}
+	}
+
+	public function admin_list_shop_categories() {
+		if($this->Auth->user('role') > 0){
+			$categories = $this->shopCategories->find('all');
+			$nb_categories = $this->shopCategories->find('count');
+			$this->set('categories', $categories);
+			$this->set('nb_categories', $nb_categories);
+		}
+		else{
+			throw new NotFoundException();
+		}
 	}
 
 	public function admin_update(){

@@ -1,21 +1,11 @@
 <?php $this->assign('title', 'Chat du serveur'); ?>
 <link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
-<style>
-	.chat-messages {
-		font-size: 17px;
-		font-family: 'Play', sans-serif;
-	}
-	.player {
-		cursor: pointer;
-	}
-</style>
 <script type="text/javascript">
 $(document).ready(function(){
 	$(document).on('click', '.player', function(){
     	var message = $('#message').val();
     	$('#message').val('@' + this.id + ' ' + message).focus();
     });
-	
     setInterval(function(){
     	if($('.update').is(":checked")){
 	    	var url_chat_messages = '<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'chat_messages')); ?>';
@@ -28,7 +18,6 @@ $(document).ready(function(){
 			}, 'json');
 		}
     }, 5000);
-
     $('.send-message').on('click', function(){
         var message = $('#message').val();
         var url = '<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'send_message')); ?>';
@@ -83,7 +72,7 @@ $(document).ready(function(){
 							}
 						}
 						else{
-							echo '<div class="alert alert-warning alert-dismissable"><small>Désolé mais il n\'y a pas assez de messages pour afficher le chat (minimum 20)</small></div>';
+							echo '<div class="alert alert-warning alert-dismissable"><small>Désolé mais il n\'y a pas assez de messages pour afficher le chat (minimum '.$chat_nb_messages.')</small></div>';
 						}
 						?>
 					</div>

@@ -128,28 +128,28 @@ class AppController extends Controller {
 		* Nombre de tokens gratuit avec un code Starpass
 		* starpass_happy_hour_bonus = bonus de l'happy (en %) divisé par 100 fois le nombre de tokens obtenu pour un code Starpass
 		*/
-		$starpass_happy_hour_bonus = $informations['Informations']['happy_hour_bonus'] / 100 * $informations['Informations']['starpass_tokens'];
+		$starpass_happy_hour_bonus = $this->infos['happy_hour_bonus'] / 100 * $this->infos['starpass_tokens'];
 		$this->starpass_happy_hour_bonus = $starpass_happy_hour_bonus;
 		$this->set('starpass_happy_hour_bonus', $starpass_happy_hour_bonus);
 		/*
 		* Nombre de tokens gratuit avec un paiement via PayPal
 		* paypal_happy_hour_bonus = bonus de l'happy (en %) divisé par 100 fois le nombre de tokens obtenu pour un paiement via PayPal
 		*/
-		$paypal_happy_hour_bonus = $informations['Informations']['happy_hour_bonus'] / 100 * $informations['Informations']['paypal_tokens'];
+		$paypal_happy_hour_bonus = $this->infos['happy_hour_bonus'] / 100 * $this->infos['paypal_tokens'];
 		$this->paypal_happy_hour_bonus = $paypal_happy_hour_bonus;
 		$this->set('paypal_happy_hour_bonus', $paypal_happy_hour_bonus);
 		/*
 		* Nombre total de tokens obtenu avec un code Starpass pendant une happy hour
 		* starpass_tokens_during_happy_hour = Nombre de tokens gratuit grâce à l'happy hour + le nombre de tokens normal
 		*/
-		$starpass_tokens_during_happy_hour = $starpass_happy_hour_bonus + $informations['Informations']['starpass_tokens'];
+		$starpass_tokens_during_happy_hour = $starpass_happy_hour_bonus + $this->infos['starpass_tokens'];
 		$this->starpass_tokens_during_happy_hour = $starpass_tokens_during_happy_hour;
 		$this->set('starpass_tokens_during_happy_hour', $starpass_tokens_during_happy_hour);
 		/*
 		* Nombre total de tokens obtenu avec un paiement via PayPal pendant une happy hour
 		* paypal_tokens_during_happy_hour = Nombre de tokens gratuit grâce à l'happy hour + le nombre de tokens normal
 		*/
-		$paypal_tokens_during_happy_hour = $paypal_happy_hour_bonus + $informations['Informations']['paypal_tokens'];
+		$paypal_tokens_during_happy_hour = $paypal_happy_hour_bonus + $this->infos['paypal_tokens'];
 		$this->paypal_tokens_during_happy_hour = $paypal_tokens_during_happy_hour;
 		$this->set('paypal_tokens_during_happy_hour', $paypal_tokens_during_happy_hour);
 		// Boutons pour la sidebar

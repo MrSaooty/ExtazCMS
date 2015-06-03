@@ -24,11 +24,13 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <font color="#A94442"><small><?php echo $this->Form->error('cat'); ?></small></font>
-                            <div class="input-group margin-bottom-20">
-                                <span class="input-group-addon"><i class="fa fa-tags"></i></span>
-                                <?php echo $this->Form->input('cat', array('type' => 'text', 'placeholder' => 'Catégorie', 'class' => 'form-control', 'label' => false)); ?>
-                            </div>
+                            <select name="data[Shop][cat]" id="ShopCat" class="form-control">
+                                <option value="0">Choisissez une catégorie</option>
+                                <option value="0">Aucune catégorie</option>
+                                <?php foreach($categories as $category){ ?>
+                                    <option value="<?php echo $category['shopCategories']['id']; ?>"><?php echo $category['shopCategories']['name']; ?></option>
+                                <?php } ?>
+                            </select>
                         </div>
                         <div class="form-group">
                             <font color="#A94442"><small><?php echo $this->Form->error('img'); ?></small></font>

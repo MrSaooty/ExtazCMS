@@ -82,6 +82,9 @@
                                             <a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'disk', 'admin' => true]); ?>"><i class="fa fa-pie-chart"></i> Disque dur</a>
                                         </li>
                                         <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'plugins', 'action' => 'index', 'admin' => true]); ?>"><i class="fa fa-plug"></i> Plugins</a>
+                                        </li>
+                                        <li>
                                             <a href="<?php echo $this->Html->url(['controller' => 'players', 'action' => 'index', 'admin' => true]); ?>"><i class="fa fa-users"></i> Joueurs</a>
                                         </li>
                                     </ul>
@@ -92,10 +95,16 @@
                                     <a href="#"><i class="fa fa-shopping-cart"></i> Boutique <span class="nav-caret fa fa-caret-down"></span></a>
                                     <ul class="list-unstyled">
                                         <li>
-                                            <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'add', 'admin' => true]); ?>"><i class="fa fa-plus"></i> Ajouter</a>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'add', 'admin' => true]); ?>"><i class="fa fa-plus"></i> Ajouter un produit</a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'list', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste</a>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'add_shop_categories', 'admin' => true]); ?>"><i class="fa fa-plus"></i> Ajouter une catégorie</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'list', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste des produits</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_shop_categories', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste des catégories</a>
                                         </li>
                                     </ul>
                                 </li>

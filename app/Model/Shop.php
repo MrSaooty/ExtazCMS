@@ -1,6 +1,12 @@
 <?php
 Class Shop extends AppModel{
 	public $useTable = 'shop';
+	public $belongsTo = array(
+        'shopCategories' => array(
+            'className' => 'shopCategories',
+            'foreignKey' => 'cat'
+        )
+    );
 	public $validate = array(
 			'name' => array(
 				'rule' => array('minlength', '3'),
@@ -13,7 +19,7 @@ Class Shop extends AppModel{
 				'required' => 'required'
 			),
 			'cat' => array(
-				'rule' => array('minlength', '3'),
+				'rule' => array('minlength', '1'),
 				'message' => 'Vous devez saisir un catégorie pour cet article',
 				'required' => 'required'
 			),

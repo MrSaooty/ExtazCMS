@@ -607,3 +607,26 @@ a.thumbnail {
    -ms-transform: scale(1.2) rotate(2deg);
    transform: scale(1.2) rotate(2deg);
 }
+.chat-messages {
+  font-size: 17px;
+  font-family: 'Play', sans-serif;
+}
+.player {
+  cursor: pointer;
+}
+status.enabled{
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  left: 1px;
+  display: inline-block;
+  background-color: #51D466;
+}
+status.disabled{
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  left: 1px;
+  display: inline-block;
+  background-color: #F75353;
+}

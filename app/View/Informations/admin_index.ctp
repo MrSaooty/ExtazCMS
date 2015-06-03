@@ -131,61 +131,61 @@ $(document).ready(function(){
                                 <div class="form-group">
                                     Afficher la page équipe ?
                                     <div class="sw-red pull-right">
-                                        <div class="onoffswitch"><input name="use_team" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_team == 1) echo 'checked="checked"'; ?> id="onoffswitch1"><label for="onoffswitch1" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                        <div class="onoffswitch"><input name="use_team" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_team == 1) echo 'checked="checked"'; ?> id="onoffswitch2"><label for="onoffswitch2" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     Afficher la page de contact ?
                                     <div class="sw-red pull-right">
-                                        <div class="onoffswitch"><input name="use_contact" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_contact == 1) echo 'checked="checked"'; ?> id="onoffswitch2"><label for="onoffswitch2" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                        <div class="onoffswitch"><input name="use_contact" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_contact == 1) echo 'checked="checked"'; ?> id="onoffswitch3"><label for="onoffswitch3" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     Afficher la page du règlement ?
                                     <div class="sw-red pull-right">
-                                        <div class="onoffswitch"><input name="use_rules" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_rules == 1) echo 'checked="checked"'; ?> id="onoffswitch3"><label for="onoffswitch3" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                        <div class="onoffswitch"><input name="use_rules" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_rules == 1) echo 'checked="checked"'; ?> id="onoffswitch4"><label for="onoffswitch4" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     Activer la boutique ?
                                     <div class="sw-red pull-right">
-                                        <div class="onoffswitch"><input name="use_store" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_store == 1) echo 'checked="checked"'; ?> id="onoffswitch4"><label for="onoffswitch4" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                        <div class="onoffswitch"><input name="use_store" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_store == 1) echo 'checked="checked"'; ?> id="onoffswitch5"><label for="onoffswitch5" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     Activer le module "meilleur donateur" ?
                                     <div class="sw-red pull-right">
-                                        <div class="onoffswitch"><input name="use_donation_ladder" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_donation_ladder == 1) echo 'checked="checked"'; ?> id="onoffswitch5"><label for="onoffswitch5" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                        <div class="onoffswitch"><input name="use_donation_ladder" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_donation_ladder == 1) echo 'checked="checked"'; ?> id="onoffswitch6"><label for="onoffswitch6" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     Activer le paiement via PayPal ?
                                     <div class="sw-red pull-right">
-                                        <div class="onoffswitch"><input name="use_paypal" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_paypal == 1) echo 'checked="checked"'; ?> id="onoffswitch6"><label for="onoffswitch6" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                        <div class="onoffswitch"><input name="use_paypal" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_paypal == 1) echo 'checked="checked"'; ?> id="onoffswitch7"><label for="onoffswitch7" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     Votre serveur utilise-t-il un système d'économie ?
                                     <div class="sw-red pull-right">
-                                        <div class="onoffswitch"><input name="use_economy" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_economy == 1) echo 'checked="checked"'; ?> id="onoffswitch7"><label for="onoffswitch7" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                        <div class="onoffswitch"><input name="use_economy" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_economy == 1) echo 'checked="checked"'; ?> id="onoffswitch8"><label for="onoffswitch8" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     Voulez vous autoriser le paiement via la monnaie du serveur dans la boutique ?
                                     <div class="sw-red pull-right">
-                                        <div class="onoffswitch"><input name="use_server_money" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_server_money == 1) echo 'checked="checked"'; ?> id="onoffswitch8"><label for="onoffswitch8" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                        <div class="onoffswitch"><input name="use_server_money" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_server_money == 1) echo 'checked="checked"'; ?> id="onoffswitch9"><label for="onoffswitch9" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     Happy hour activée ?
                                     <div class="sw-red pull-right">
-                                        <div class="onoffswitch"><input name="happy_hour" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($happy_hour == 1) echo 'checked="checked"'; ?> id="onoffswitch9"><label for="onoffswitch9" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                        <div class="onoffswitch"><input name="happy_hour" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($happy_hour == 1) echo 'checked="checked"'; ?> id="onoffswitch10"><label for="onoffswitch10" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
                                     </div>
                                 </div>
                                  <div class="form-group">
                                     Maintenance activé ?
                                     <div class="sw-red pull-right">
-                                        <div class="onoffswitch"><input name="maintenance" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($maintenance == 1) echo 'checked="checked"'; ?> id="onoffswitch10"><label for="onoffswitch10" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                        <div class="onoffswitch"><input name="maintenance" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($maintenance == 1) echo 'checked="checked"'; ?> id="onoffswitch11"><label for="onoffswitch11" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
                                     </div>
                                 </div>
                                 <hr>

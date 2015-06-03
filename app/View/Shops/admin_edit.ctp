@@ -17,9 +17,15 @@
                             <font color="#A94442"><small><?php echo $this->Form->error('description'); ?></small></font>
                             <?php echo $this->Form->input('description', array('type' => 'text', 'value' => $data['Shop']['description'], 'class' => 'form-control', 'label' => 'Description')); ?>
                         </div>
+                        <label>Catégorie</label>
                         <div class="form-group">
-                            <font color="#A94442"><small><?php echo $this->Form->error('cat'); ?></small></font>
-                            <?php echo $this->Form->input('cat', array('type' => 'text', 'value' => $data['Shop']['cat'], 'class' => 'form-control', 'label' => 'Catégorie')); ?>
+                            <select name="data[Shop][cat]" id="ShopCat" class="form-control">
+                                <option value="<?php echo $data['shopCategories']['id']; ?>">Catégorie actuel: <?php echo $data['shopCategories']['name']; ?></option>
+                                <option value="0">Pas de catégorie</option>
+                                <?php foreach($categories as $category){ ?>
+                                    <option value="<?php echo $category['shopCategories']['id']; ?>"><?php echo $category['shopCategories']['name']; ?></option>
+                                <?php } ?>
+                            </select>
                         </div>
                         <div class="form-group">
                             <font color="#A94442"><small><?php echo $this->Form->error('img'); ?></small></font>

@@ -61,6 +61,10 @@
 	Router::connect('/admin/chat', ['controller' => 'pages', 'action' => 'chat_messages', 'admin' => true]);
 	Router::connect('/admin/update', ['controller' => 'pages', 'action' => 'update', 'admin' => true]);
 	Router::connect('/admin/install/update', ['controller' => 'pages', 'action' => 'installUpdate', 'admin' => true]);
+	Router::connect('/admin/categories/add', ['controller' => 'pages', 'action' => 'add_shop_categories', 'admin' => true]);
+	Router::connect('/admin/categories/list', ['controller' => 'pages', 'action' => 'list_shop_categories', 'admin' => true]);
+	Router::connect('/admin/categories/edit/:id', ['controller' => 'pages', 'action' => 'edit_shop_categories', 'admin' => true], ['pass' => ['id'], 'id' => '[0-9]+']);
+	Router::connect('/admin/categories/delete/:id', ['controller' => 'pages', 'action' => 'delete_shop_categories', 'admin' => true], ['pass' => ['id'], 'id' => '[0-9]+']);
 	Router::connect('/:slug-:id', ['controller' => 'posts', 'action' => 'read'], ['pass' => ['slug', 'id'], 'slug' => '[a-z0-9\-]+', 'id' => '[0-9]+']);
 
 	/* Paypal IPN plugin */
