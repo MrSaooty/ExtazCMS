@@ -161,9 +161,23 @@ img.shop {
     margin-right: 10px;
 }
 
-div.filters{
+div.filters {
   border: solid 1px #E1E1E1;
-  padding: 5px;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
   margin-top: -15px;
   margin-bottom: 15px;
+}
+.filters button {
+    margin-bottom: 5px;
+}
+a.modal-button-1 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 5px;
+}
+a.modal-button-2 {
+    text-align: center;
+    width: 100%;
 }

@@ -106,15 +106,15 @@ else{
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel">
+                        <div id="carousel-example" class="carousel slide" data-ride="carousel">
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
                                 <div class="item active">
                                     <div class="row items">
                                         <?php foreach($items as $i){ ?>
-                                            <div class="col-sm-2" data-category="<?php echo $i['shopCategories']['name']; ?>">
+                                            <div class="col-sm-2 hidden-xs hidden-sm hidden-md" data-category="<?php echo $i['shopCategories']['name']; ?>">
                                                 <div class="col-item">
-                                                    <div class="name col-md-12">
+                                                    <div class="col-md-12">
                                                         <h5>
                                                             <?php 
                                                             if(mb_strlen($i['Shop']['name']) > 15){
@@ -126,7 +126,38 @@ else{
                                                             ?>
                                                         </h5>
                                                     </div>
-                                                    <div class="photo">
+                                                    <div class="photo hidden-xs hidden-sm">
+                                                        <?php echo $this->Html->image($i['Shop']['img'], ['width' => 250, 'height' => 170, 'alt' => 'a']); ?>
+                                                    </div>
+                                                    <div class="info">
+                                                        <?php
+                                                        if($connected){
+                                                            echo '<button class="buy btn btn-default" data-toggle="modal" data-target="#shopping'.$i['Shop']['id'].'"><i class="fa fa-shopping-cart"></i> Acheter</button>';
+                                                        }
+                                                        else{
+                                                            echo '<button class="buy btn btn-default" data-toggle="modal" data-target="#please_connect"><i class="fa fa-shopping-cart"></i> Acheter</button>';
+                                                        }
+                                                        ?>
+                                                        <div class="clearfix">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 hidden-lg" data-category="<?php echo $i['shopCategories']['name']; ?>">
+                                                <div class="col-item">
+                                                    <div class="col-md-12">
+                                                        <h5>
+                                                            <?php 
+                                                            if(mb_strlen($i['Shop']['name']) > 15){
+                                                                echo mb_substr($i['Shop']['name'], 0, 15).'...';
+                                                            }
+                                                            else{
+                                                                echo $i['Shop']['name'];
+                                                            }
+                                                            ?>
+                                                        </h5>
+                                                    </div>
+                                                    <div class="photo hidden-xs hidden-sm">
                                                         <?php echo $this->Html->image($i['Shop']['img'], ['width' => 250, 'height' => 170, 'alt' => 'a']); ?>
                                                     </div>
                                                     <div class="info">
