@@ -170,6 +170,12 @@ class AppController extends Controller {
 				}
 			}
 		}
+		// Si JSONAPI est injoignable
+		if($api->call('server.bukkit.version')[0]['result'] != 'success'){
+			if($this->request->url == 'boutique'){
+				$this->render('/Errors/jsonapi');
+			}
+		}
 	}
 
 	function afterPaypalNotification($txnId){

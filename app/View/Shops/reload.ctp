@@ -49,8 +49,21 @@
 	                <?php } ?>
 	                <fieldset>
 	                	<section>
-	                		<div id="starpass_<?php echo $starpass_idd; ?>"></div>
-	                		<iframe src="http://script.starpass.fr/iframe/kit_default.php?idd=<?php echo $starpass_idd; ?>&amp;background=fff&amp;verif_en_php=1" width="660" height="520" frameborder="0"></iframe>
+	                		<?php
+	                		if($starpass_idd != 0 && $starpass_idp != 0){
+	                			?>
+								<div id="starpass_<?php echo $starpass_idd; ?>"></div>
+	                			<iframe src="http://script.starpass.fr/iframe/kit_default.php?idd=<?php echo $starpass_idd; ?>&amp;background=fff&amp;verif_en_php=1" width="660" height="520" frameborder="0"></iframe>
+	                			<?php
+	                		}
+	                		else{
+	                			?>
+								<div class="alert alert-info">
+									<i class="fa fa-info-circle"></i> Vous devez renseigner l'IDP et l'IDD dans la configuration afin d'afficher le formulaire de paiement Starpass
+								</div>
+	                			<?php
+	                		}
+	                		?>
 	                	</section>
 	                </fieldset>
 	            <?php echo $this->Form->end(); ?>

@@ -15,6 +15,10 @@
    border-radius: 0 !important;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 body { 
    color: #333; 
    font-size: 13px;

@@ -9,10 +9,12 @@ v1.7 (en développement)
 * Dans la boutique les catégories ont désormais une réèlle utilité, vous pouvez désormais trier les produits grâce à leurs catégories sans recharger la page
 * Vous pouvez désormais consulter la liste des plugins installés sur votre serveur depuis le panel d'administration
 * Lors de l'envoi d'un message au support vous devez maintenant préciser le type de requête, signalement, question ou autre. Par conséquent vous pouvez désormais signaler un joueur via les tickets du support. Dans l'administration les signalements sont graphiquement différent des autres requêtes
+* Si le port de votre serveur est 25565 alors il n'est pas affiché dans le header (à côte de l'adresse ip du serveur)
 * Corrections de bugs mineurs
 * {SQL} Ajout d'une table extaz_shop_categories
 * {SQL} Ajout d'un champs type (text, default: '') dans la table extaz_support
 * {JS} Ajout de custom.js
+* {CSS} Modification de app.css
 * {CSS} Modification de custom.css
 * {CSS} Modification de custom.css (admin)
 * {CAKE} Modification des routes

@@ -1,4 +1,11 @@
 <?php $this->assign('title', 'Modifier un article'); ?>
+<script type="text/javascript">
+$(function() {
+    $("select").selectBoxIt({
+        showFirstOption: false
+    });
+});
+</script>
 <div class="main-content">
     <div class="container">  
         <div class="row">
@@ -21,7 +28,6 @@
                         <div class="form-group">
                             <select name="data[Shop][cat]" id="ShopCat" class="form-control">
                                 <option value="<?php echo $data['shopCategories']['id']; ?>">Catégorie actuel: <?php echo $data['shopCategories']['name']; ?></option>
-                                <option value="0">Pas de catégorie</option>
                                 <?php foreach($categories as $category){ ?>
                                     <option value="<?php echo $category['shopCategories']['id']; ?>"><?php echo $category['shopCategories']['name']; ?></option>
                                 <?php } ?>

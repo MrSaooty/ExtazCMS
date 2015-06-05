@@ -76,6 +76,7 @@
   color: #72c02c;
   padding-bottom: 5px;
   border-bottom: solid 1px #E6E6E6;
+  text-align: center;
 }
 
 .col-item .price h5
@@ -180,4 +181,23 @@ a.modal-button-1 {
 a.modal-button-2 {
     text-align: center;
     width: 100%;
+}
+a.categories {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+.search-input input {
+  height: 22px;
+}
+.search-input button {
+  height: 22px;
+}
+.search-form {
+  margin-top: 0px;
+}
+.alert-search-shop {
+  border: solid 1px #E1E1E1;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 10px;
 }

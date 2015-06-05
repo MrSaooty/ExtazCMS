@@ -77,17 +77,14 @@ Class ShopsController extends AppController{
 				$this->Shop->set($this->request->data);
 				if($this->Shop->validates()){
 					$this->Shop->id = $id;
-					$explode = explode('--', $this->request->data['Shop']['required']);
-					$required = $explode[0];
-					$required_name = $explode[1];
 					$this->Shop->save($this->request->data);
-					if(empty($this->request->data['Shop']['required'])){
-						$this->request->data['Shop']['required'] = -1;
-					}
-					else{
+					if(isset($this->request->data['Shop']['required'])){
+						$explode = explode('--', $this->request->data['Shop']['required']);
+						$required = $explode[0];
+						$required_name = $explode[1];
 						$this->Shop->saveField('required', $required);
+						$this->Shop->saveField('required_name', $required_name);
 					}
-					$this->Shop->saveField('required_name', $required_name);
 					$this->Session->setFlash('Article modifié !', 'success');
 					return $this->redirect($this->referer());
 				}

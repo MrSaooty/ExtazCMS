@@ -29,6 +29,7 @@
 
     // CSS Theme
     echo $this->Html->css('themes/default');
+    echo $this->Html->css('flatty');
 
     // CSS Customization
     echo $this->Html->css('custom');
@@ -173,6 +174,7 @@
     echo $this->Html->script('jquery.confirm');
     echo $this->Html->script('jquery.bootstrap-growl');
     echo $this->Html->script('index');
+    echo $this->Html->script('humane');
     echo $this->Html->script('custom');
     ?>
     <script type="text/javascript">

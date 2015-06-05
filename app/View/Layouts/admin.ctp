@@ -15,6 +15,7 @@
         <?php echo $this->Html->css('admin/style'); ?>
         <?php echo $this->Html->css('admin/jquery.selectBoxIt'); ?>
         <?php echo $this->Html->css('admin/custom'); ?>
+        <?php echo $this->Html->css('flatty'); ?>
         <?php echo $this->Html->css('custom'); ?>
         <link href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -27,16 +28,7 @@
                 var url = '<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'send_command')); ?>';
                 $.post(url, {command: command}, function(data){
                     $('#command').val('');
-                    $.bootstrapGrowl("<i class='fa fa-check'></i> Commande envoyée au serveur !", {
-                      ele: 'body',
-                      type: 'success',
-                      offset: {from: 'top', amount: 20},
-                      align: 'center',
-                      width: 'integer',
-                      delay: 4000,
-                      allow_dismiss: false,
-                      stackup_spacing: 10
-                    });
+                    humane.log("<i class='fa fa-check'></i> Commande envoyée au serveur !", { timeout: 4000, clickToClose: true, addnCls: 'humane-flatty-success' });
                 });
                 return false;
             });
@@ -312,6 +304,7 @@
         echo $this->Html->script('admin/html5shiv');
         echo $this->Html->script('admin/jquery.selectBoxIt');
         echo $this->Html->script('admin/custom');
+        echo $this->Html->script('humane');
         ?>
         <script src="//cdn.ckeditor.com/4.4.6/standard/ckeditor.js"></script>
         <script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
