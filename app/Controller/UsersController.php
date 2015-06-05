@@ -20,7 +20,7 @@ class UsersController extends AppController{
         if($this->request->is('post')){
             if($this->Auth->login()){
                 $this->Session->setFlash('Vous êtes maintenant connecté '.$this->Auth->user('username').'', 'success');
-                return $this->redirect($this->Auth->redirect(array('controller' => 'posts', 'action' => 'index')));
+                return $this->redirect($this->Auth->redirect(['controller' => 'posts', 'action' => 'index']));
             }
             else{
                 $this->Session->setFlash('Pseudo ou mot de passe invalide, vous pouvez réessayer', 'error');

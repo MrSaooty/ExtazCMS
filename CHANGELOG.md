@@ -5,6 +5,7 @@ v1.7 (en développement)
 ----
 
 * Nettoyage du code PHP
+* Les utilisateurs peuvent désormais s'envoyer des tokens entre eux
 * Refonte graphique de la boutique
 * Dans la boutique les catégories ont désormais une réèlle utilité, vous pouvez désormais trier les produits grâce à leurs catégories sans recharger la page
 * Vous pouvez désormais consulter la liste des plugins installés sur votre serveur depuis le panel d'administration
@@ -14,6 +15,8 @@ v1.7 (en développement)
 * {SQL} Ajout d'une table extaz_shop_categories
 * {SQL} Ajout d'un champs type (text, default: '') dans la table extaz_support
 * {JS} Ajout de custom.js
+* {JS} Ajout de humane.js
+* {CSS} Ajout de flatty.css
 * {CSS} Modification de app.css
 * {CSS} Modification de custom.css
 * {CSS} Modification de custom.css (admin)

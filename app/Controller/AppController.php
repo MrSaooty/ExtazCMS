@@ -106,6 +106,7 @@ class AppController extends Controller {
 		if($this->Auth->user()){
 			$user_informations = $this->User->find('first', ['conditions' => ['User.id' => $this->Auth->user('id')]]);
 			$this->set('tokens', $user_informations['User']['tokens']);
+			$this->tokens = $user_informations['User']['tokens'];
 			$this->set('allow_email', $user_informations['User']['allow_email']);
 			$this->set('role', $user_informations['User']['role']);
 		}

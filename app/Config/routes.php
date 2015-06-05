@@ -39,7 +39,6 @@
 	Router::connect('/contact', ['controller' => 'pages', 'action' => 'contact']);
 	Router::connect('/admin/stats', ['controller' => 'pages', 'action' => 'stats', 'admin' => true]);
 	Router::connect('/support', ['controller' => 'pages', 'action' => 'add_ticket']);
-	Router::connect('/admin/manage_tickets', ['controller' => 'pages', 'action' => 'manage_tickets', 'admin' => true]);
 	Router::connect('/tickets', ['controller' => 'pages', 'action' => 'list_tickets']);
 	Router::connect('/tickets/:id', ['controller' => 'pages', 'action' => 'view_ticket'], ['pass' => ['id'], 'id' => '[0-9]+']);
 	Router::connect('/delete_support_comment/:id', ['controller' => 'pages', 'action' => 'delete_support_comment'], ['pass' => ['id'], 'id' => '[0-9]+']);
@@ -48,6 +47,8 @@
 	Router::connect('/close_my_ticket/:id', ['controller' => 'pages', 'action' => 'close_my_ticket'], ['pass' => ['id'], 'id' => '[0-9]+']);
 	Router::connect('/answer_ticket', ['controller' => 'pages', 'action' => 'answer_ticket']);
 	Router::connect('/equipe', ['controller' => 'pages', 'action' => 'team']);
+	Router::connect('/send_tokens', ['controller' => 'pages', 'action' => 'send_tokens']);
+	Router::connect('/admin/manage_tickets', ['controller' => 'pages', 'action' => 'manage_tickets', 'admin' => true]);
 	Router::connect('/admin/add_member', ['controller' => 'pages', 'action' => 'add_member', 'admin' => true]);
 	Router::connect('/admin/list_member', ['controller' => 'pages', 'action' => 'list_member', 'admin' => true]);
 	Router::connect('/admin/edit_member/:id', ['controller' => 'pages', 'action' => 'edit_member', 'admin' => true], ['pass' => ['id'], 'id' => '[0-9]+']);
