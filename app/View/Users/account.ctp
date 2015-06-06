@@ -1,6 +1,19 @@
 <?php
 $this->assign('title', 'Mes informations');
 $player = $api->call('players.name', [$username]);
+
+if(in_array('send_tokens', $this->request->pass)){
+    ?>
+    <script>
+        $(document).ready(function(){
+            $('#infos').removeClass().addClass('tab-pane fade in');
+            $('#send_tokens').removeClass().addClass('tab-pane fade in active');
+            $('#li_infos').removeClass();
+            $('#li_send_tokens').addClass('active');
+        });
+    </script>
+    <?php
+}
 ?>
 <!--=== Content Part ===-->
 <div class="container content">     
@@ -8,8 +21,14 @@ $player = $api->call('players.name', [$username]);
         <div class="col-md-9">
             <div class="tab-v1">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#infos" data-toggle="tab">Mes infos</a></li>
-                    <li><a href="#send_tokens" data-toggle="tab">Envoyer des <?php echo $site_money; ?></a></li>
+                    <li class="active" id="li_infos"><a href="#infos" data-toggle="tab">Mes infos</a></li>
+                    <?php
+                    if($use_store == 1){
+                        ?>
+                        <li id="li_send_tokens"><a href="#send_tokens" data-toggle="tab">Envoyer des <?php echo $site_money; ?></a></li>
+                        <?php
+                    }
+                    ?>
                 </ul>                
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="infos">
@@ -67,7 +86,9 @@ $player = $api->call('players.name', [$username]);
                             </div>
                             <fieldset>
                                 <section>
-                                    <i class="fa fa-info-circle"></i> Vous avez <?php echo $tokens.' '.$site_money; ?>
+                                    <div class="alert alert-info">
+                                        <i class="fa fa-info-circle"></i> Vous avez <?php echo $tokens.' '.$site_money; ?>
+                                    </div>
                                 </section>
                             </fieldset>
                             <fieldset>
@@ -80,6 +101,17 @@ $player = $api->call('players.name', [$username]);
                                     <?php echo $this->Form->input('nb_tokens', array('type' => 'number', 'class' => 'form-control', 'label' => 'Nombre de '.$site_money.' à envoyer')); ?>
                                 </section>
                             </fieldset>
+                            <?php
+                            if($send_tokens_loss_rate > 0){
+                                ?>
+                                <fieldset>
+                                    <section>
+                                        <div class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Attention <?php echo $send_tokens_loss_rate; ?>% des <?php echo $site_money; ?> envoyés seront perdus lors de la transaction</div>
+                                    </section>
+                                </fieldset>
+                                <?php
+                            }
+                            ?>
                             <footer>
                                 <button class="btn-u pull-right" type="submit">Envoyer</button>
                             </footer>

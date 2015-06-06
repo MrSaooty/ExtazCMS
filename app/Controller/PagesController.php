@@ -37,7 +37,7 @@ class PagesController extends AppController {
  *
  * @var array
  */
-	public $uses = ['Informations', 'shopHistory', 'starpassHistory', 'paypalHistory', 'Team', 'Support', 'supportComments', 'donationLadder', 'shopCategories'];
+	public $uses = ['Informations', 'shopHistory', 'starpassHistory', 'paypalHistory', 'Team', 'Support', 'supportComments', 'donationLadder', 'shopCategories', 'sendTokensHistory'];
 
 /**
  * Displays a view
@@ -140,51 +140,89 @@ class PagesController extends AppController {
 		$this->redirect(['controller' => 'pages', 'action' => 'update', 'admin' => true]);
 	}
 
+	public function admin_send_tokens_history(){
+		if($this->Auth->user('role') > 0){
+			$this->set('data', $this->sendTokensHistory->find('all'));
+		}
+		else{
+			throw new NotFoundException();
+		}
+	}
+
+	public function admin_send_tokens_delete($id){
+		if($this->Auth->user('role') > 0){
+			if($this->sendTokensHistory->find('first')){
+				$this->sendTokensHistory->delete($id);
+				$this->redirect($this->referer());
+			}
+			else{
+				$this->Session->setFlash('Erreur', 'error');
+				$this->redirect($this->referer());
+			}
+		}
+		else{
+			throw new NotFoundException();
+		}
+	}
+
 	public function send_tokens(){
 		if($this->Auth->user()){
 			if($this->request->is('post')){
 				$shipper = strtolower($this->Auth->user('username'));
-				$username = strtolower($this->request->data['Pages']['username']);
-				$original_username = $this->request->data['Pages']['username'];
+				$recipient = strtolower($this->request->data['Pages']['username']);
+				$recipient_username = $this->request->data['Pages']['username'];
 				$nb_tokens = $this->request->data['Pages']['nb_tokens'];
+				$send_tokens_loss_rate = $this->infos['send_tokens_loss_rate'];
+				/*
+				* Nombre de tokens avec le taux de perte
+				* $nb_tokens_with_loss_rate = $nb_tokens - round($send_tokens_loss_rate / 100 * $nb_tokens);
+				*/
+				$nb_tokens_with_loss_rate = $nb_tokens - round($send_tokens_loss_rate / 100 * $nb_tokens);
 				// Si l'expéditeur est différent du destinataire
-				if($shipper != $username){
+				if($shipper != $recipient){
 					// Si le destinataire existe (c'est mieux)
-					if($this->User->find('first', ['conditions' => ['User.username' => $username]])){
+					if($this->User->find('first', ['conditions' => ['User.username' => $recipient]])){
 						// Si l'expéditeur à assez de tokens
 						if($nb_tokens <= $this->tokens){
 							// On récupère les infos
 							$shipper_tokens = $this->tokens;
 							$shipper_id = $this->Auth->user('id');
-							$user_infos = $this->User->find('first', ['conditions' => ['User.username' => $username]]);
+							$user_infos = $this->User->find('first', ['conditions' => ['User.username' => $recipient]]);
 							$user_tokens = $user_infos['User']['tokens'];
 							$user_id = $user_infos['User']['id'];
 							// On calcul le nouveau nb de tokens
 							$new_shipper_tokens = $shipper_tokens - $nb_tokens;
-							$new_user_tokens = $user_tokens + $nb_tokens;
+							$new_user_tokens = $user_tokens + $nb_tokens_with_loss_rate;
 							// On définit le nv nb de tokens de l'expéditeur
 							$this->User->id = $shipper_id;
 							$this->User->saveField('tokens', $new_shipper_tokens);
 							// On définit le nv nb de tokens du destinataire
 							$this->User->id = $user_id;
 							$this->User->saveField('tokens', $new_user_tokens);
+							// Historique
+							$this->sendTokensHistory->create;
+							$this->sendTokensHistory->saveField('shipper', $shipper);
+							$this->sendTokensHistory->saveField('recipient', $recipient_username);
+							$this->sendTokensHistory->saveField('nb_tokens', $nb_tokens);
+							$this->sendTokensHistory->saveField('loss_rate', $this->infos['send_tokens_loss_rate'].'%');
+							$this->sendTokensHistory->saveField('nb_tokens_with_loss_rate', $nb_tokens_with_loss_rate);
 							// Message et redirection
-							$this->Session->setFlash('Vous avez envoyé '.$nb_tokens.' '.$this->infos['site_money'].' à '.$original_username.'', 'success');
-							return $this->redirect(['controller' => 'users', 'action' => 'account', 'admin' => false]);
+							$this->Session->setFlash(''.$recipient_username.' a reçu '.$nb_tokens_with_loss_rate.' '.$this->infos['site_money'].'', 'success');
+							return $this->redirect(['controller' => 'users', 'action' => 'account', 'send_tokens', 'admin' => false]);
 						}
 						else{
 							$this->Session->setFlash('Vous n\'avez pas assez de tokens', 'error');
-							return $this->redirect(['controller' => 'users', 'action' => 'account', 'admin' => false]);
+							return $this->redirect(['controller' => 'users', 'action' => 'account', 'send_tokens', 'admin' => false]);
 						}
 					}
 					else{
 						$this->Session->setFlash('Le destinataire n\'existe pas', 'error');
-						return $this->redirect(['controller' => 'users', 'action' => 'account', 'admin' => false]);
+						return $this->redirect(['controller' => 'users', 'action' => 'account', 'send_tokens', 'admin' => false]);
 					}
 				}
 				else{
 					$this->Session->setFlash('Vous ne pouvez pas vous envoyer des '.$this->infos['site_money'].' vous même...', 'error');
-					return $this->redirect(['controller' => 'users', 'action' => 'account', 'admin' => false]);
+					return $this->redirect(['controller' => 'users', 'action' => 'account', 'send_tokens', 'admin' => false]);
 				}
 			}
 		}

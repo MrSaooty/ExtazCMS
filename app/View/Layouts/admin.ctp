@@ -139,6 +139,9 @@
                                     <a href="#"><i class="fa fa-history"></i> Historiques <span class="nav-caret fa fa-caret-down"></span></a>
                                     <ul class="list-unstyled">
                                         <li>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'send_tokens_history', 'admin' => true]); ?>"><i class="fa fa-history"></i> Transactions</a>
+                                        </li>
+                                        <li>
                                             <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'shop_history', 'admin' => true]); ?>"><i class="fa fa-history"></i> Boutique</a>
                                         </li>
                                         <li>

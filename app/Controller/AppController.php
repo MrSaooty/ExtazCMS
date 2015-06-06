@@ -99,6 +99,7 @@ class AppController extends Controller {
 		$this->set('chat_nb_messages', $informations['Informations']['chat_nb_messages']);
 		$this->set('analytics', $informations['Informations']['analytics']);
 		$this->set('maintenance', $informations['Informations']['maintenance']);
+		$this->set('send_tokens_loss_rate', $informations['Informations']['send_tokens_loss_rate']);
 		// Le reste
 		$this->set('connected', $this->Auth->user());
 		$this->set('username', $this->Auth->user('username'));

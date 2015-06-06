@@ -66,6 +66,8 @@
 	Router::connect('/admin/categories/list', ['controller' => 'pages', 'action' => 'list_shop_categories', 'admin' => true]);
 	Router::connect('/admin/categories/edit/:id', ['controller' => 'pages', 'action' => 'edit_shop_categories', 'admin' => true], ['pass' => ['id'], 'id' => '[0-9]+']);
 	Router::connect('/admin/categories/delete/:id', ['controller' => 'pages', 'action' => 'delete_shop_categories', 'admin' => true], ['pass' => ['id'], 'id' => '[0-9]+']);
+	Router::connect('/admin/send_tokens/history', ['controller' => 'pages', 'action' => 'send_tokens_history', 'admin' => true]);
+	Router::connect('/admin/send_tokens/delete/:id', ['controller' => 'pages', 'action' => 'send_tokens_delete', 'admin' => true], ['pass' => ['id'], 'id' => '[0-9]+']);
 	Router::connect('/:slug-:id', ['controller' => 'posts', 'action' => 'read'], ['pass' => ['slug', 'id'], 'slug' => '[a-z0-9\-]+', 'id' => '[0-9]+']);
 
 	/* Paypal IPN plugin */

@@ -14,8 +14,17 @@ class InformationsController extends AppController{
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('post')){
 				$this->Informations->id = 1;
+				if(isset($this->request->data['Informations']['send_tokens_loss_rate'])){
+					$send_tokens_loss_rate = $this->request->data['Informations']['send_tokens_loss_rate'];
+					if($send_tokens_loss_rate < 0){
+						$this->request->data['Informations']['send_tokens_loss_rate'] = 0;
+					}
+					if($send_tokens_loss_rate > 100){
+						$this->request->data['Informations']['send_tokens_loss_rate'] = 100;
+					}
+				}
 				if($this->Informations->save($this->request->data)){
-					$this->Session->setFlash('Informations modifiées !', 'success');
+					$this->Session->setFlash('Configuration mise à jour !', 'success');
 				}
 				return $this->redirect(['controller' => 'informations', 'action' => 'index']);
 			}

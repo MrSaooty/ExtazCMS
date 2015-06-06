@@ -614,7 +614,7 @@ a.thumbnail {
 .player {
   cursor: pointer;
 }
-status.enabled{
+status.enabled {
   border-radius: 50%;
   width: 10px;
   height: 10px;
@@ -622,11 +622,14 @@ status.enabled{
   display: inline-block;
   background-color: #51D466;
 }
-status.disabled{
+status.disabled {
   border-radius: 50%;
   width: 10px;
   height: 10px;
   left: 1px;
   display: inline-block;
   background-color: #F75353;
+}
+.margin-right-15 {
+  margin-right: 15px;
 }

@@ -5,7 +5,7 @@ v1.7 (en développement)
 ----
 
 * Nettoyage du code PHP
-* Les utilisateurs peuvent désormais s'envoyer des tokens entre eux
+* Les utilisateurs peuvent désormais s'envoyer des tokens entre eux. Vous pouvez définir un taux de perte pour chaque transaction. Par exemple si vous fixez un taux de perte à 25% et qu'un utilisateur envoie 400 tokens, le destinataire n'en recevra que 300. Vous pouvez fixez un taux de perte entre 0 et 100%. Un historique des transactions est également disponible pour les administrateurs
 * Refonte graphique de la boutique
 * Dans la boutique les catégories ont désormais une réèlle utilité, vous pouvez désormais trier les produits grâce à leurs catégories sans recharger la page
 * Vous pouvez désormais consulter la liste des plugins installés sur votre serveur depuis le panel d'administration
