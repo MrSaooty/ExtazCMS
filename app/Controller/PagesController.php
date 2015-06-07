@@ -151,13 +151,14 @@ class PagesController extends AppController {
 
 	public function admin_send_tokens_delete($id){
 		if($this->Auth->user('role') > 0){
-			if($this->sendTokensHistory->find('first')){
+			if($this->sendTokensHistory->findById($id)){
 				$this->sendTokensHistory->delete($id);
-				$this->redirect($this->referer());
+				$this->Session->setFlash('Action effectuée !', 'success');
+				return $this->redirect($this->referer());
 			}
 			else{
-				$this->Session->setFlash('Erreur', 'error');
-				$this->redirect($this->referer());
+				$this->Session->setFlash('Action impossible !', 'error');
+				return $this->redirect($this->referer());
 			}
 		}
 		else{
@@ -234,19 +235,25 @@ class PagesController extends AppController {
 
 	public function admin_edit_shop_categories($id) {
 		if($this->Auth->user('role') > 0){
-			$this->set('data', $this->shopCategories->findById($id));
-			if($this->request->is('post')){
-				if(!empty($this->request->data['Pages']['name'])){
-					$this->shopCategories->id = $id;
-					$name = ucfirst($this->request->data['Pages']['name']);
-					$this->shopCategories->saveField('name', $name);
-					$this->Session->setFlash('Catégorie modifiée avec succès !', 'success');
-					return $this->redirect(['controller' => 'pages', 'action' => 'list_shop_categories']);
+			if($this->shopCategories->findById($id)){
+				$this->set('data', $this->shopCategories->findById($id));
+				if($this->request->is('post')){
+					if(!empty($this->request->data['Pages']['name'])){
+						$this->shopCategories->id = $id;
+						$name = ucfirst($this->request->data['Pages']['name']);
+						$this->shopCategories->saveField('name', $name);
+						$this->Session->setFlash('Catégorie modifiée avec succès !', 'success');
+						return $this->redirect(['controller' => 'pages', 'action' => 'list_shop_categories']);
+					}
+					else{
+						$this->Session->setFlash('Vous devez entrer une catégorie !', 'success');
+						return $this->redirect(['controller' => 'pages', 'action' => 'edit_shop_categories', 'id' => $id]);
+					}
 				}
-				else{
-					$this->Session->setFlash('Vous devez entrer une catégorie !', 'success');
-					return $this->redirect(['controller' => 'pages', 'action' => 'edit_shop_categories', 'id' => $id]);
-				}
+			}
+			else{
+				$this->Session->setFlash('Cette catégorie n\'existe pas', 'error');
+				return $this->redirect(['controller' => 'pages', 'action' => 'list_shop_categories']);
 			}
 		}
 		else{
@@ -256,9 +263,15 @@ class PagesController extends AppController {
 
 	public function admin_delete_shop_categories($id) {
 		if($this->Auth->user('role') > 0){
-			$this->shopCategories->delete($id);
-			$this->Session->setFlash('Catégorie supprimée avec succès !', 'success');
-			return $this->redirect(['controller' => 'pages', 'action' => 'list_shop_categories']);
+			if($this->shopCategories->findById($id)){
+				$this->shopCategories->delete($id);
+				$this->Session->setFlash('Catégorie supprimée avec succès !', 'success');
+				return $this->redirect(['controller' => 'pages', 'action' => 'list_shop_categories']);
+			}
+			else{
+				$this->Session->setFlash('Action impossible !', 'error');
+				return $this->redirect(['controller' => 'pages', 'action' => 'list_shop_categories']);
+			}
 		}
 		else{
 			throw new NotFoundException();
@@ -395,8 +408,7 @@ class PagesController extends AppController {
 
 	public function admin_edit_donator($id = null){
         if($this->Auth->user('role') > 0){
-            $this->donationLadder->id = $id;
-            if($this->donationLadder->exists()){
+            if($this->donationLadder->findById($id)){
                 $this->set('data', $this->donationLadder->find('first', ['conditions' => ['donationLadder.id' => $id]]));
                 if($this->request->is('post')){
                     $this->donationLadder->id = $id;
@@ -407,7 +419,7 @@ class PagesController extends AppController {
                 }
             }
             else{
-                $this->Session->setFlash('Cet membre n\'existe pas !', 'error');
+                $this->Session->setFlash('Ce donateur n\'existe pas !', 'error');
                 return $this->redirect($this->referer());
             }
         }
@@ -415,8 +427,7 @@ class PagesController extends AppController {
 
 	public function admin_delete_donator($id = null){
 		if($this->Auth->user('role') > 0){
-			$this->donationLadder->id = $id;
-			if($this->donationLadder->exists()){
+			if($this->donationLadder->findById($id)){
 				$this->donationLadder->delete($id);
 				$this->Session->setFlash('Ce donateur a été retiré du classement !', 'success');
 				return $this->redirect(['controller' => 'pages', 'action' => 'list_donator', 'admin' => true]);
@@ -761,8 +772,7 @@ class PagesController extends AppController {
 
 	public function admin_edit_member($id = null){
         if($this->Auth->user('role') > 0){
-            $this->Team->id = $id;
-            if($this->Team->exists()){
+            if($this->Team->findById($id)){
                 $this->set('data', $this->Team->find('first', ['conditions' => ['Team.id' => $id]]));
                 if($this->request->is('post')){
                     $this->Team->id = $id;
@@ -779,7 +789,7 @@ class PagesController extends AppController {
                 }
             }
             else{
-                $this->Session->setFlash('Cet membre n\'existe pas !', 'error');
+                $this->Session->setFlash('Ce membre n\'existe pas !', 'error');
                 return $this->redirect($this->referer());
             }
         }
@@ -792,12 +802,16 @@ class PagesController extends AppController {
 
 	public function contact(){
 		if($this->Auth->user()){
-			$ayah = new AYAH();
-            $this->set('ayah', $ayah);
+			if($this->infos['use_captcha'] == 1){
+				$ayah = new AYAH();
+            	$this->set('ayah', $ayah);
+			}
 			if($this->request->is('post')){
-                if(array_key_exists('captcha', $this->request->data)){
-                    $score = $ayah->scoreResult();
-                    if($score){
+                if($this->infos['use_captcha'] == 0 OR array_key_exists('captcha', $this->request->data)){
+                	if($this->infos['use_captcha'] == 1){
+						$score = $ayah->scoreResult();
+					}
+                    if($this->infos['use_captcha'] == 0 OR $score){
 						$contact_email = $this->infos['contact_email'];
 						$name_server = $this->infos['name_server'];
 						$username = $this->Auth->user('username');

@@ -201,3 +201,21 @@ a.categories {
   padding: 10px;
   margin-bottom: 10px;
 }
+div.happy-hour {
+  position: fixed;
+  background-color: #333333;
+  color: #fff;
+  font-size: 1em;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+  border-top: solid 1px #555;
+  opacity: 0.9;
+  z-index: 99;
+}
+button.happy-hour-btn {
+  margin-left: 2px;
+}

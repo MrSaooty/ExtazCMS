@@ -34,3 +34,5 @@ CREATE TABLE IF NOT EXISTS `extaz_send_tokens_history` (
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+
+ALTER TABLE `extaz_informations` ADD `use_captcha` INT NOT NULL DEFAULT '0' AFTER `use_slider`;

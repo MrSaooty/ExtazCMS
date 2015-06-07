@@ -28,17 +28,17 @@
                     <section>
                         <div class="input-group margin-bottom-20">
                             <span class="input-group-addon"><i class="fa fa-comment"></i></span>
-                            <?php echo $this->Form->input('subject', array('type' => 'text', 'placeholder' => 'Sujet du message', 'class' => 'form-control', 'label' => false)); ?>
+                            <?php echo $this->Form->input('subject', array('type' => 'text', 'placeholder' => 'Sujet du message', 'class' => 'form-control', 'label' => false, 'required' => 'required')); ?>
                         </div>
                     </section>
                 </fieldset>
                 <fieldset>
                     <section>
-                        <?php echo $this->Form->textarea('message', array('type' => 'text', 'placeholder' => 'Votre message', 'class' => 'form-control', 'rows' => '5', 'cols' => '5', 'label' => false)); ?>
+                        <?php echo $this->Form->textarea('message', array('type' => 'text', 'placeholder' => 'Votre message', 'class' => 'form-control', 'rows' => '5', 'cols' => '5', 'label' => false, 'required' => 'required')); ?>
                     </section>
                 </fieldset>
                 <footer>
-                    <?php echo $ayah->getPublisherHTML(); ?>
+                    <?php if($use_captcha == 1) echo $ayah->getPublisherHTML(); ?>
                     <input name="captcha" class="btn-u pull-right" type="Submit" value="Envoyer le message">      
                 </footer>
             <?php echo $this->Form->end(); ?>

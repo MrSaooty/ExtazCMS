@@ -13,7 +13,7 @@
                         <label class="input">
                             <i class="icon-prepend fa fa-user"></i>
                             <i class="icon-append fa fa-question-circle"></i>
-                            <?php echo $this->Form->input('username', array('type' => 'text', 'placeholder' => 'Pseudo', 'class' => 'form-control', 'label' => false, 'div' => false)); ?>
+                            <?php echo $this->Form->input('username', array('type' => 'text', 'placeholder' => 'Pseudo', 'class' => 'form-control', 'label' => false, 'div' => false, 'required' => 'required')); ?>
                             <b class="tooltip tooltip-bottom-right">
                                 Veuillez entrer votre véritable pseudo Minecraft, celui que vous utiliser sur le serveur.<br>
                                 De plus il est nécessaire de bien respecter les majuscules, merci !
@@ -26,7 +26,7 @@
                         <font color="#A94442"><small><?php echo $this->Form->error('email'); ?></small></font>
                         <div class="input-group margin-bottom-20">
                             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                            <?php echo $this->Form->input('email', array('type' => 'email', 'placeholder' => 'Adresse email', 'class' => 'form-control', 'label' => false, 'div' => false)); ?>
+                            <?php echo $this->Form->input('email', array('type' => 'email', 'placeholder' => 'Adresse email', 'class' => 'form-control', 'label' => false, 'div' => false, 'required' => 'required')); ?>
                         </div>
                     </section>
                 </fieldset>
@@ -35,7 +35,7 @@
                         <font color="#A94442"><small><?php echo $this->Form->error('password'); ?></small></font>
                         <div class="input-group margin-bottom-20">
                             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                            <?php echo $this->Form->input('password', array('type' => 'password', 'placeholder' => 'Mot de passe', 'class' => 'form-control', 'label' => false)); ?>
+                            <?php echo $this->Form->input('password', array('type' => 'password', 'placeholder' => 'Mot de passe', 'class' => 'form-control', 'label' => false, 'required' => 'required')); ?>
                         </div>
                     </section>
                 </fieldset>
@@ -44,12 +44,12 @@
                         <font color="#A94442"><small><?php echo $this->Form->error('password_confirmation'); ?></small></font>
                         <div class="input-group margin-bottom-20">
                             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                            <?php echo $this->Form->input('password_confirmation', array('type' => 'password', 'placeholder' => 'Confirmation', 'class' => 'form-control', 'label' => false)); ?>
+                            <?php echo $this->Form->input('password_confirmation', array('type' => 'password', 'placeholder' => 'Confirmation', 'class' => 'form-control', 'label' => false, 'required' => 'required')); ?>
                         </div>
                     </section>
                 </fieldset>
                 <footer>
-                    <?php echo $ayah->getPublisherHTML(); ?>
+                    <?php if($use_captcha == 1) echo $ayah->getPublisherHTML(); ?>
                     <input name="captcha" class="btn-u pull-right" type="Submit" value="Confirmer l'inscription">
                 </fotter>
             <?php echo $this->Form->end(); ?>

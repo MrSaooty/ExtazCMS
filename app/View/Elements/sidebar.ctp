@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12">
             <?php if(!$connected){ ?>
-                <div class="tag-box tag-box-v4">
+                <div class="tag-box tag-box-v1">
                     <?php echo $this->Form->create('User', ['action' => 'login']); ?>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -32,10 +32,6 @@
                         <br>
                    </p>
                    <hr>
-                   <?php if($use_store == 1 && $happy_hour == 1){ ?>
-                   	    <h4><font color="#555"><i class="fa fa-gift"></i></font> Happy hour en cours !</h4>
-                   	    <hr>
-                   <?php } ?>
                    <p>
                         <?php if($use_store == 1){ ?>
                             <font color="#555"><i class="fa fa-chevron-circle-right"></i></font>

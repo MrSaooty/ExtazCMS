@@ -143,10 +143,29 @@
             <!-- End Navbar -->
         </div>
         <!--End Header-->
-
+        <?php if($happy_hour == 1){ ?>
+            <div class="happy-hour">
+                <?php
+                if($use_paypal == 1){
+                    ?>
+                    <i class="fa fa-gift"></i> Happy hour en cours, <?php echo $happy_hour_bonus.'% de '.$site_money.' gratuits'; ?>. Achetez <?php echo $starpass_tokens.' '.$site_money.' + '.$starpass_happy_hour_bonus.' gratuits '; ?> via Starpass ou <?php echo $paypal_tokens.' '.$site_money.' + '.$paypal_happy_hour_bonus.' gratuits'; ?> via PayPal !
+                    <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'reload']); ?>" class="btn btn-default btn-xs happy-hour-btn"><i class="fa fa-shopping-cart"></i> Recharger</a>
+                    <button class="btn btn-default btn-xs happy-hour-close"><i class="fa fa-times"></i></button>
+                    <?php
+                }
+                else{
+                    ?>
+                    <i class="fa fa-gift"></i> Happy hour en cours, <?php echo $happy_hour_bonus.'% de '.$site_money.' gratuits'; ?>. Achetez <?php echo $starpass_tokens.' '.$site_money.' + '.$starpass_happy_hour_bonus.' gratuits '; ?> via Starpass !
+                    <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'reload']); ?>" class="btn btn-default btn-xs happy-hour-btn"><i class="fa fa-shopping-cart"></i> Recharger</a>
+                    <button class="btn btn-default btn-xs happy-hour-close"><i class="fa fa-times"></i></button>
+                    <?php
+                }
+                ?>
+            </div>
+        <?php } ?>
         <?php echo $this->Session->flash(); ?>
         <?php echo $this->fetch('content'); ?>
-
+    
             <div class="copyright">
                 <div class="container">
                     <p class="text-center">

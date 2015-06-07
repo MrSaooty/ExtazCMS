@@ -5,6 +5,8 @@ v1.7 (en développement)
 ----
 
 * Nettoyage du code PHP
+* Lorsqu'une happy hour est en cours ce n'est plus affiché dans la sidebar. En revanche un bandeau publicitaire apparait sur chaque page pour prévenir les utilisateurs
+* Vous pouvez désormais désactiver les captchas sur la page d'inscription et sur la page de contact
 * Les utilisateurs peuvent désormais s'envoyer des tokens entre eux. Vous pouvez définir un taux de perte pour chaque transaction. Par exemple si vous fixez un taux de perte à 25% et qu'un utilisateur envoie 400 tokens, le destinataire n'en recevra que 300. Vous pouvez fixez un taux de perte entre 0 et 100%. Un historique des transactions est également disponible pour les administrateurs
 * Refonte graphique de la boutique
 * Dans la boutique les catégories ont désormais une réèlle utilité, vous pouvez désormais trier les produits grâce à leurs catégories sans recharger la page

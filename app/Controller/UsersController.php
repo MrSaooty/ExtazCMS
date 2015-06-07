@@ -38,12 +38,16 @@ class UsersController extends AppController{
             $this->redirect($this->Auth->redirect(['controller' => 'posts', 'action' => 'index']));
         }
         else{
-            $ayah = new AYAH();
-            $this->set('ayah', $ayah);
+            if($this->infos['use_captcha'] == 1){
+                $ayah = new AYAH();
+                $this->set('ayah', $ayah);
+            }
             if($this->request->is('post')){
-                if(array_key_exists('captcha', $this->request->data)){
-                    $score = $ayah->scoreResult();
-                    if($score){
+                if($this->infos['use_captcha'] == 0 OR array_key_exists('captcha', $this->request->data)){
+                    if($this->infos['use_captcha'] == 1){
+                        $score = $ayah->scoreResult();
+                    }
+                    if($this->infos['use_captcha'] == 0 OR $score){
                         $this->User->set($this->request->data);
                         $password = $this->request->data['User']['password'];
                         $password_confirmation = $this->request->data['User']['password_confirmation'];

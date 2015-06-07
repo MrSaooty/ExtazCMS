@@ -86,19 +86,12 @@ if(in_array('send_tokens', $this->request->pass)){
                             </div>
                             <fieldset>
                                 <section>
-                                    <div class="alert alert-info">
-                                        <i class="fa fa-info-circle"></i> Vous avez <?php echo $tokens.' '.$site_money; ?>
-                                    </div>
+                                    <?php echo $this->Form->input('username', array('type' => 'text', 'class' => 'form-control', 'placeholder' => 'Insensible à la casse', 'label' => 'Pseudo du destinataire', 'required' => 'required')); ?>
                                 </section>
                             </fieldset>
                             <fieldset>
                                 <section>
-                                    <?php echo $this->Form->input('username', array('type' => 'text', 'class' => 'form-control', 'label' => 'Pseudo du destinataire')); ?>
-                                </section>
-                            </fieldset>
-                            <fieldset>
-                                <section>
-                                    <?php echo $this->Form->input('nb_tokens', array('type' => 'number', 'class' => 'form-control', 'label' => 'Nombre de '.$site_money.' à envoyer')); ?>
+                                    <?php echo $this->Form->input('nb_tokens', array('type' => 'number', 'class' => 'form-control', 'placeholder' => 'Vous avez '.$tokens.' '.$site_money, 'label' => 'Nombre de '.$site_money.' à envoyer', 'required' => 'required')); ?>
                                 </section>
                             </fieldset>
                             <?php

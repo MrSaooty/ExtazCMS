@@ -10,7 +10,7 @@ class InformationsController extends AppController{
 		}
 	}
 
-	public function admin_updateInformations(){
+	public function admin_update_informations(){
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('post')){
 				$this->Informations->id = 1;
@@ -34,7 +34,7 @@ class InformationsController extends AppController{
 		}
 	}
 
-	public function admin_testJsonapi(){
+	public function admin_test_jsonapi(){
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('ajax')){
 		    	$api = new JSONAPI($this->request->data['ip'], $this->request->data['port'], $this->request->data['username'], $this->request->data['password'], $this->request->data['salt']);
@@ -53,7 +53,7 @@ class InformationsController extends AppController{
 		}
 	}
 
-	public function admin_updateOptions(){
+	public function admin_update_options(){
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('post')){
 				$this->Informations->id = 1;
@@ -62,6 +62,12 @@ class InformationsController extends AppController{
 				}
 				else{
 					$this->Informations->saveField('use_slider', 0);
+				}
+				if(isset($this->request->data['use_captcha'])){
+					$this->Informations->saveField('use_captcha', 1);
+				}
+				else{
+					$this->Informations->saveField('use_captcha', 0);
 				}
 				if(isset($this->request->data['use_store'])){
 					$this->Informations->saveField('use_store', 1);
@@ -113,7 +119,9 @@ class InformationsController extends AppController{
 				}
 				if(isset($this->request->data['happy_hour'])){
 			    	$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
-					$api->call('server.run_command', ['say Happy hour ! Rendez-vous sur le site. '.$this->infos['happy_hour_bonus'].'% de '.$this->infos['site_money'].' offerts ! (http://'.$_SERVER['HTTP_HOST'].$this->webroot.'recharger)']);
+					if($api->call('server.bukkit.version')[0]['result'] == 'success'){
+						$api->call('server.run_command', ['say Happy hour ! Rendez-vous sur le site. '.$this->infos['happy_hour_bonus'].'% de '.$this->infos['site_money'].' offerts ! (http://'.$_SERVER['HTTP_HOST'].$this->webroot.'recharger)']);
+					}
 					$this->Informations->saveField('happy_hour', 1);
 				}
 				else{
@@ -126,7 +134,7 @@ class InformationsController extends AppController{
 					$this->Informations->saveField('maintenance', 0);
 				}
 				$this->Session->setFlash('Options mises à jour !', 'success');
-				return $this->redirect(['controller' => 'informations', 'action' => 'index']);
+				return $this->redirect(['controller' => 'informations', 'action' => 'index', '?' => ['tab' => 'options']]);
 			}
 		}
 		else{

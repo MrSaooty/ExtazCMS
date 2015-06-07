@@ -48,6 +48,7 @@
 	Router::connect('/answer_ticket', ['controller' => 'pages', 'action' => 'answer_ticket']);
 	Router::connect('/equipe', ['controller' => 'pages', 'action' => 'team']);
 	Router::connect('/send_tokens', ['controller' => 'pages', 'action' => 'send_tokens']);
+	Router::connect('/admin/configuration', ['controller' => 'informations', 'action' => 'index', 'admin' => true]);
 	Router::connect('/admin/manage_tickets', ['controller' => 'pages', 'action' => 'manage_tickets', 'admin' => true]);
 	Router::connect('/admin/add_member', ['controller' => 'pages', 'action' => 'add_member', 'admin' => true]);
 	Router::connect('/admin/list_member', ['controller' => 'pages', 'action' => 'list_member', 'admin' => true]);
