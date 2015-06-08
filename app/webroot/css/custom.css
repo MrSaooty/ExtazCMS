@@ -162,14 +162,16 @@ img.shop {
     margin-right: 10px;
 }
 
-div.filters {
+.filters {
   border: solid 1px #E1E1E1;
   padding-top: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-right: -10px;
   margin-top: -15px;
   margin-bottom: 15px;
+  margin-left: 0;
+  margin-right: 0;
 }
+
 .filters button {
     margin-bottom: 5px;
 }
@@ -218,4 +220,7 @@ div.happy-hour {
 }
 button.happy-hour-btn {
   margin-left: 2px;
+}
+.margin-right-5 {
+  margin-right: 5px;
 }

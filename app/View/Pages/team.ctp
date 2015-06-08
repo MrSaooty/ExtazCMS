@@ -27,7 +27,7 @@ $(document).ready(function(){
                         </a>            
                         <div class="caption">
                             <center>
-                                <?php if($role > 0){ ?>
+                                <?php if($role > 1){ ?>
                                     <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'delete_member', 'id' => $d['Team']['id'], 'admin' => true]); ?>" class="btn btn-default btn-u-xs confirm">
                                         <font color="red">
                                             <i class="fa fa-trash-o"></i>

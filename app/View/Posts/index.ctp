@@ -36,10 +36,10 @@ $(document).ready(function(){
                                     <?php
                                     $content = '<h3><font color="white">'.$slider[$i]['Post']['title'].'</font></h3>'.html_entity_decode(strip_tags($slider[$i]['Post']['content']));
                                     if(mb_strlen($content) > 400){
-                                        echo mb_substr($content, 0, 400).'... <a href="'.$this->Html->url(['controller' => 'posts', 'action' => 'read', 'slug' => $slider[$i]['Post']['slug'], 'id' => $slider[$i]['Post']['id']]).'">Lire la suite</a>';
+                                        echo mb_substr($content, 0, 400).'... <a href="'.$this->Html->url(['controller' => 'posts', 'action' => 'read', 'slug' => $slider[$i]['Post']['slug'], 'id' => $slider[$i]['Post']['id']]).'">Lire</a>';
                                     }
                                     else{
-                                        echo $content.' <a href="'.$this->Html->url(['controller' => 'posts', 'action' => 'read', 'slug' => $slider[$i]['Post']['slug'], 'id' => $slider[$i]['Post']['id']]).'">Lire la suite</a>';;
+                                        echo $content.' <a href="'.$this->Html->url(['controller' => 'posts', 'action' => 'read', 'slug' => $slider[$i]['Post']['slug'], 'id' => $slider[$i]['Post']['id']]).'">Lire</a>';;
                                     }
                                     ?>
                                 </p>
@@ -94,7 +94,7 @@ $(document).ready(function(){
                                 <span>Par</span> <strong><?php echo $articles[$a]['Post']['author']; ?></strong>
                                 <span>
                                     le <?php echo $this->Time->format('d/m/Y à H:i', $articles[$a]['Post']['posted']); ?>
-                                    <?php if($role > 0){ ?>
+                                    <?php if($role > 1){ ?>
                                         <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'edit', $articles[$a]['Post']['id'], 'admin' => true]); ?>" class="btn btn-default btn-xs">
                                             <font color="#777777">
                                                 <i class="fa fa-pencil"></i>
@@ -113,7 +113,7 @@ $(document).ready(function(){
                                         <i class="fa fa-comments"></i> <?php echo count($articles[$a]['Comment']); ?>
                                     </a>
                                     <a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $articles[$a]['Post']['slug'], 'id' => $articles[$a]['Post']['id'])); ?>" class="btn btn-default btn-xs">
-                                        <i class="fa fa-paper-plane"></i> Lire la suite
+                                        <i class="fa fa-paper-plane"></i> Lire
                                     </a>
                                 </span>
                             </div>
@@ -160,7 +160,7 @@ $(document).ready(function(){
                                 <span>Par</span> <strong><?php echo $articles[$a]['Post']['author']; ?></strong>
                                 <span>
                                     le <?php echo $this->Time->format('d/m/Y à H:i', $articles[$a]['Post']['posted']); ?>
-                                    <?php if($role > 0){ ?>
+                                    <?php if($role > 1){ ?>
                                         <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'edit', $articles[$a]['Post']['id'], 'admin' => true]); ?>" class="btn btn-default btn-xs">
                                             <font color="#777777">
                                                 <i class="fa fa-pencil"></i>
@@ -179,7 +179,7 @@ $(document).ready(function(){
                                         <i class="fa fa-comments"></i> <?php echo count($articles[$a]['Comment']); ?>
                                     </a>
                                     <a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $articles[$a]['Post']['slug'], 'id' => $articles[$a]['Post']['id'])); ?>" class="btn btn-default btn-xs">
-                                        <i class="fa fa-paper-plane"></i> Lire la suite
+                                        <i class="fa fa-paper-plane"></i> Lire
                                     </a>
                                 </span>
                             </div>

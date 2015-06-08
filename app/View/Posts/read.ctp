@@ -100,7 +100,7 @@ $(document).ready(function(){
                         </div>
                     </div>
                 </div>
-                <?php if($role > 0){ ?>
+                <?php if($role > 1){ ?>
                     <hr>
                     <div class="row">
                         <div class="col-md-4">

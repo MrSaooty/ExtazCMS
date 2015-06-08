@@ -28,7 +28,7 @@ Class ShopsController extends AppController{
 	}
 
 	public function admin_add(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			$this->set('list_item', $this->Shop->find('all', ['fields' => ['name', 'id']]));
 			$this->set('categories', $this->shopCategories->find('all', ['order' => ['shopCategories.id ASC']]));
 			if($this->request->is('post')){
@@ -60,7 +60,7 @@ Class ShopsController extends AppController{
 	}
 
 	public function admin_list(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			$this->set('data', $this->Shop->find('all', array('order' => array('Shop.created' => 'DESC'))));
 		}
 		else{
@@ -69,7 +69,7 @@ Class ShopsController extends AppController{
 	}
 
 	public function admin_edit($id){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			$this->set('data', $this->Shop->find('first', ['conditions' => ['Shop.id' => $id]]));
 			$this->set('list_item', $this->Shop->find('all', ['conditions' => ['Shop.id !=' => $id], 'fields' => ['name', 'id']]));
 			$this->set('categories', $this->shopCategories->find('all', ['order' => ['shopCategories.id ASC']]));
@@ -99,7 +99,7 @@ Class ShopsController extends AppController{
 	}
 
 	public function delete($id){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			$this->Shop->delete($id);
 			$this->Session->setFlash('Article supprimé !', 'success');
 			return $this->redirect($this->referer());
@@ -399,6 +399,32 @@ Class ShopsController extends AppController{
 		else{
 			$this->Session->setFlash('Vous devez être connecté en jeu pour faire un achat', 'error');
 			return $this->redirect(['controller' => 'shops', 'action' => 'index']);
+		}
+	}
+
+	public function admin_add_prerequisite(){
+		if($this->Auth->user('role') > 1){
+			$user_id = $this->request->data['Shop']['user_id'];
+			$item_id = $this->request->data['Shop']['item'];
+			if($this->Shop->findById($item_id)){
+				$item = $this->Shop->find('first', ['conditions' => ['Shop.id' => $item_id]]);
+				$item_name = $item['Shop']['name'];
+				$this->shopHistory->create;
+				$this->shopHistory->saveField('user_id', $user_id);
+				$this->shopHistory->saveField('item', $item_name);
+				$this->shopHistory->saveField('item_id', $item_id);
+				$this->shopHistory->saveField('price', '0');
+				$this->shopHistory->saveField('money', '['.$this->Auth->user('username').']');
+				$this->Session->setFlash('Prérequis octroyé', 'success');
+				return $this->redirect($this->referer());
+			}
+			else{
+				$this->Session->setFlash('Erreur', 'error');
+				return $this->redirect($this->referer());
+			}
+		}
+		else{
+			throw new NotFoundException();
 		}
 	}
 }

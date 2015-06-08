@@ -37,15 +37,23 @@ $(document).ready(function(){
                         <div class="form-group">
                             <label>Rang</label>
                             <font color="#A94442"><small><?php echo $this->Form->error('role'); ?></small></font>
-                            <?php if($data['User']['role'] == 0){ ?>
+                            <?php if($data['User']['role'] == 2){ ?>
                             <select name="data[User][role]" class="form-control" label="Rang" id="UserRole">
+                                <option value="2">Administrateur</option>
+                                <option value="1">Modérateur</option>
                                 <option value="0">Utilisateur</option>
-                                <option value="1">Administrateur</option>
+                            </select>
+                            <?php } elseif($data['User']['role'] == 1) { ?>
+                            <select name="data[User][role]" class="form-control" label="Rang" id="UserRole">
+                                <option value="1">Modérateur</option>
+                                <option value="2">Administrateur</option>
+                                <option value="0">Utilisateur</option>
                             </select>
                             <?php } else { ?>
                             <select name="data[User][role]" class="form-control" label="Rang" id="UserRole">
-                                <option value="1">Administrateur</option>
                                 <option value="0">Utilisateur</option>
+                                <option value="1">Modérateur</option>
+                                <option value="2">Administrateur</option>
                             </select>
                             <?php } ?>
                         </div>
@@ -54,7 +62,38 @@ $(document).ready(function(){
                         <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'delete', $data['User']['id']]); ?>" class="btn btn-danger confirm"><i class="fa fa-trash-o"></i> Supprimer ce compte</a>
                     <?php echo $this->Form->end(); ?>
                 </div>
-            <div class="col-md-8"></div>
+            </div>
+            <?php if($use_store == 1){ ?>
+            <div class="col-md-4">
+                <div class="page-content">
+                    <div class="single-head">
+                        <h3 class="pull-left"><i class="fa fa-plus-square"></i>Octroyer un prérequis à cet utilisateur</h3>
+                        <div class="clearfix"></div>
+                    </div>
+                    <?php echo $this->Form->create('Shop', ['action' => 'add_prerequisite', 'class' => 'sky-form', 'inputDefaults' => ['error' => false]]); ?>
+                        <?php echo $this->Form->input('user_id', array('type' => 'hidden', 'value' => $data['User']['id'])); ?>
+                        <div class="form-group">
+                            <select name="data[Shop][item]" class="form-control" id="ShopItem">
+                                <?php
+                                foreach($items as $i){
+                                    echo '<option value="'.$i['Shop']['id'].'">'.$i['Shop']['name'].'</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <hr>
+                        <button class="btn btn-black pull-right" type="submit"><i class="fa fa-check"></i> Confirmer l'ajout</button>
+                        <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'all']); ?>" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Retour</a>
+                    <?php echo $this->Form->end(); ?>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+            <?php
+            }
+            else{
+                echo '<div class="col-md-8"></div>';
+            }
+            ?>
         </div>
     </div>
 </div>

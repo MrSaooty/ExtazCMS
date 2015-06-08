@@ -6,7 +6,7 @@ class ChartsController extends AppController{
     public $Highcharts = null;
 
     public function admin_memory(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
     		$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
 			$usedMemory = round($api->call('server.performance.memory.used')['0']['success']);
 			$totalMemory = round($api->call('server.performance.memory.total')['0']['success']) - ($usedMemory);
@@ -62,7 +62,7 @@ class ChartsController extends AppController{
 	}
 
 	public function admin_donator(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			$site_money = ucfirst($this->infos['site_money']);
 			$donatorsTokens = $this->donationLadder->find('all', ['limit' => 5, 'order' => ['donationLadder.tokens' => 'DESC']]);
 			$donatorsUsername = $this->donationLadder->find('list', ['fields' => ['donationLadder.id'], 'limit' => 5]);
@@ -236,7 +236,7 @@ class ChartsController extends AppController{
 	}
 
 	public function admin_shop(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			$chartName = 'shop_chart';
 	        $mychart = $this->Highcharts->create($chartName, 'areaspline');
 
@@ -330,7 +330,7 @@ class ChartsController extends AppController{
 	}
 
 	public function admin_user(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			$chartName = 'user_chart';
 	        $mychart = $this->Highcharts->create($chartName, 'areaspline');
 
@@ -424,7 +424,7 @@ class ChartsController extends AppController{
 	}
 
 	public function admin_paypal(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			$chartName = 'paypal_chart';
 	        $mychart = $this->Highcharts->create($chartName, 'areaspline');
 
@@ -518,7 +518,7 @@ class ChartsController extends AppController{
 	}
 
 	public function admin_starpass(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			$chartName = 'starpass_chart';
 	        $mychart = $this->Highcharts->create($chartName, 'areaspline');
 
@@ -612,7 +612,7 @@ class ChartsController extends AppController{
 	}
 
 	public function admin_disk(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
     		$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
 			$totalMemory = round($api->call('server.performance.disk.free')['0']['success']);
 			$usedMemory = round($api->call('server.performance.disk.used')['0']['success']);

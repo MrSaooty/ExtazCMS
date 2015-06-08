@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12">
             <?php if(!$connected){ ?>
-                <div class="tag-box tag-box-v1">
+                <div class="tag-box tag-box-v4">
                     <?php echo $this->Form->create('User', ['action' => 'login']); ?>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>

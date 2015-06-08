@@ -85,7 +85,7 @@ class PagesController extends AppController {
 		/** automatique en developpement  **/
 		/***********************************/
 
-		// if($this->Auth->user('role') > 0){
+		// if($this->Auth->user('role') > 1){
 		// 	// Mise à jour MYSQL (non fonctionelle)
 		// 	$mysql = file_get_contents('http://extaz-mc.fr/extazcms/maj.sql');
 		// 	$db = ConnectionManager::getDataSource('default');
@@ -141,7 +141,7 @@ class PagesController extends AppController {
 	}
 
 	public function admin_send_tokens_history(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			$this->set('data', $this->sendTokensHistory->find('all'));
 		}
 		else{
@@ -150,7 +150,7 @@ class PagesController extends AppController {
 	}
 
 	public function admin_send_tokens_delete($id){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			if($this->sendTokensHistory->findById($id)){
 				$this->sendTokensHistory->delete($id);
 				$this->Session->setFlash('Action effectuée !', 'success');
@@ -234,7 +234,7 @@ class PagesController extends AppController {
 	}
 
 	public function admin_edit_shop_categories($id) {
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			if($this->shopCategories->findById($id)){
 				$this->set('data', $this->shopCategories->findById($id));
 				if($this->request->is('post')){
@@ -262,7 +262,7 @@ class PagesController extends AppController {
 	}
 
 	public function admin_delete_shop_categories($id) {
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			if($this->shopCategories->findById($id)){
 				$this->shopCategories->delete($id);
 				$this->Session->setFlash('Catégorie supprimée avec succès !', 'success');
@@ -279,7 +279,7 @@ class PagesController extends AppController {
 	}
 
 	public function admin_add_shop_categories() {
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			if($this->request->is('post')){
 				if(!empty($this->request->data['Pages']['name'])){
 					$this->shopCategories->create;
@@ -299,7 +299,7 @@ class PagesController extends AppController {
 	}
 
 	public function admin_list_shop_categories() {
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			$categories = $this->shopCategories->find('all');
 			$nb_categories = $this->shopCategories->find('count');
 			$this->set('categories', $categories);
@@ -311,7 +311,7 @@ class PagesController extends AppController {
 	}
 
 	public function admin_update(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			
 		}
 		else{
@@ -392,7 +392,7 @@ class PagesController extends AppController {
 	}
 
 	public function admin_send_command(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			if($this->request->is('ajax')){
 	    		$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
 				$command = str_replace('/', '', $this->request->data['command']);
@@ -407,7 +407,7 @@ class PagesController extends AppController {
 	}
 
 	public function admin_edit_donator($id = null){
-        if($this->Auth->user('role') > 0){
+        if($this->Auth->user('role') > 1){
             if($this->donationLadder->findById($id)){
                 $this->set('data', $this->donationLadder->find('first', ['conditions' => ['donationLadder.id' => $id]]));
                 if($this->request->is('post')){
@@ -426,7 +426,7 @@ class PagesController extends AppController {
     }
 
 	public function admin_delete_donator($id = null){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			if($this->donationLadder->findById($id)){
 				$this->donationLadder->delete($id);
 				$this->Session->setFlash('Ce donateur a été retiré du classement !', 'success');
@@ -443,7 +443,7 @@ class PagesController extends AppController {
 	}
 
 	public function admin_list_donator(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			$this->set('data', $this->donationLadder->find('all', ['order' => ['donationLadder.tokens' => 'DESC']]));
 		}
 		else{
@@ -452,7 +452,7 @@ class PagesController extends AppController {
 	}
 
 	public function admin_stats(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			$today = date('Y-m-j').' 00:00:00';
 			$hier = date('Y-m-j', strtotime('-1 day')).' 00:00:00';
 			$thisWeek = date('Y-m-j', strtotime('-7 day')).' 00:00:00';
@@ -491,6 +491,9 @@ class PagesController extends AppController {
 			$this->set('utilisateursHier', $this->User->find('count', ['conditions' => ['User.created >' => $hier, 'User.created <' => $today]]));
 			$this->set('ticketsHier', $this->Support->find('count', ['conditions' => ['Support.created >' => $hier, 'Support.created <' => $today]]));
 			$this->set('reponsesHier', $this->supportComments->find('count', ['conditions' => ['supportComments.created >' => $hier, 'supportComments.created <' => $today]]));
+		}
+		elseif($this->Auth->user('role') > 0){
+			return $this->redirect(['controller' => 'pages', 'action' => 'manage_tickets']);
 		}
 		else{
 			throw new NotFoundException();
@@ -694,7 +697,7 @@ class PagesController extends AppController {
 	}
 
 	public function admin_shop_history(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			$this->set('data', $this->shopHistory->find('all', ['order' => ['shopHistory.created DESC']]));
 		}
 		else{
@@ -703,7 +706,7 @@ class PagesController extends AppController {
 	}
 
 	public function admin_starpass_history(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			$this->set('data', $this->starpassHistory->find('all', ['order' => ['starpassHistory.created DESC']]));
 		}
 		else{
@@ -712,7 +715,7 @@ class PagesController extends AppController {
 	}
 
 	public function admin_paypal_history(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			$this->set('data', $this->paypalHistory->find('all', ['order' => ['paypalHistory.created DESC']]));
 		}
 		else{
@@ -721,7 +724,7 @@ class PagesController extends AppController {
 	}
 
 	public function admin_add_member(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			if($this->request->is('post')){
 				$username = trim($this->request->data['Pages']['username']);
 				$this->Team->saveField('username', $username);
@@ -745,7 +748,7 @@ class PagesController extends AppController {
 	}
 
 	public function admin_list_member(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			$this->set('data', $this->Team->find('all', array('order' => array('Team.order' => 'ASC'))));
 		}
 		else{
@@ -754,7 +757,7 @@ class PagesController extends AppController {
 	}
 
 	public function admin_delete_member($id = null){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			if($this->Team->findById($id)){
 				$this->Team->delete($id);
 				$this->Session->setFlash('Membre retiré de l\'équipe !', 'success');
@@ -771,7 +774,7 @@ class PagesController extends AppController {
 	}
 
 	public function admin_edit_member($id = null){
-        if($this->Auth->user('role') > 0){
+        if($this->Auth->user('role') > 1){
             if($this->Team->findById($id)){
                 $this->set('data', $this->Team->find('first', ['conditions' => ['Team.id' => $id]]));
                 if($this->request->is('post')){

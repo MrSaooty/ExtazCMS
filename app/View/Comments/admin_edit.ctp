@@ -28,7 +28,8 @@ $(document).ready(function(){
                             </section>
                         </div>
                         <div class="form-group">
-                            <?php echo $this->Form->textarea('comment', array('type' => 'text', 'value' => $data['Comment']['comment'], 'class' => 'form-control', 'label' => 'Commentaire')); ?>
+                            <label>Commentaire</label>
+                            <?php echo $this->Form->textarea('comment', array('type' => 'text', 'value' => $data['Comment']['comment'], 'class' => 'form-control')); ?>
                             </section>
                         </div>
                         <hr>

@@ -25,7 +25,7 @@ Class CommentsController extends AppController{
 		}
 	}
 
-	public function admin_delete($id = null, $from){
+	public function admin_delete($id, $from){
 		if($this->Auth->user('role') > 0){
 			$this->Comment->delete($id);
 			$this->Session->setFlash('Commentaire supprimé', 'success');
@@ -41,7 +41,7 @@ Class CommentsController extends AppController{
 		}
 	}
 
-	public function admin_edit($id = null){
+	public function admin_edit($id){
         if($this->Auth->user('role') > 0){
             $this->Comment->id = $id;
             if($this->Comment->exists()){

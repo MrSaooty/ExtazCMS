@@ -66,10 +66,12 @@ $(document).ready(function(){
                                 <td><?php echo $d['User']['username']; ?></td>
                                 <td><?php echo $d['User']['email']; ?></td>
                                 <td><?php echo $d['User']['tokens']; ?></td>
-                                <?php if($d['User']['role'] == 0){ ?>
-                                    <td><span class="label label-success">Utilisateur</span></td>
-                                <?php } else { ?>
+                                <?php if($d['User']['role'] == 2){ ?>
                                     <td><span class="label label-danger">Administrateur</span></td>
+                                <?php } elseif($d['User']['role'] == 1) { ?>
+                                    <td><span class="label label-success">Modérateur</span></td>
+                                <?php } else { ?>
+                                    <td><span class="label label-black">Utilisateur</span></td>
                                 <?php } ?>
                                 <td><?php echo $this->Time->format('d-m-Y à H:i', $d['User']['created']); ?></td>
                                 <td>

@@ -5,7 +5,7 @@ App::uses('AYAH', 'Lib/AYAH');
 
 class UsersController extends AppController{
 
-    public $uses = ['User', 'Informations', 'donationLadder', 'Support', 'supportComments'];
+    public $uses = ['User', 'Informations', 'donationLadder', 'Support', 'supportComments', 'Shop', 'shopHistory', 'starpassHistory', 'paypalHistory', 'sendTokensHistory'];
 
 	public function beforeFilter(){
 	    parent::beforeFilter();
@@ -51,15 +51,15 @@ class UsersController extends AppController{
                         $this->User->set($this->request->data);
                         $password = $this->request->data['User']['password'];
                         $password_confirmation = $this->request->data['User']['password_confirmation'];
-                        $nbAccount = $this->User->find('count');
+                        $nb_account = $this->User->find('count');
                         if($password == $password_confirmation){
                             if($this->User->validates()){
                                 $this->User->create();
                                 if($this->User->save($this->request->data)){
                                     $this->User->saveField('tokens', '0');
                                     $this->User->saveField('allow_email', '1');
-                                    if($nbAccount == 0){
-                                        $this->User->saveField('role', '1');
+                                    if($nb_account == 0){
+                                        $this->User->saveField('role', '2');
                                     }
                                     else{
                                         $this->User->saveField('role', '0');
@@ -98,7 +98,19 @@ class UsersController extends AppController{
 
     public function account(){
         if($this->Auth->user()){
-            $this->set('data', $this->User->find('first', array('conditions' => array('User.id' => $this->Auth->user('id')))));
+            $id = $this->Auth->user('id');
+            $username = $this->Auth->user('username');
+            $this->set('data', $this->User->find('first', ['conditions' => ['User.id' => $id]]));
+            $this->set('shop_history', $this->shopHistory->find('all', ['conditions' => ['shopHistory.user_id' => $id], 'order' => ['shopHistory.created DESC']]));
+            $this->set('starpass_history', $this->starpassHistory->find('all', ['conditions' => ['starpassHistory.user_id' => $id], 'order' => ['starpassHistory.created DESC']]));
+            if($this->infos['use_paypal'] == 1){
+                $this->set('paypal_history', $this->paypalHistory->find('all', ['conditions' => ['paypalHistory.custom' => $id], 'order' => ['paypalHistory.created DESC']]));
+            }
+            $this->set('send_tokens_history', $this->sendTokensHistory->find('all', ['conditions' => ['sendTokensHistory.shipper' => $username], 'order' => ['sendTokensHistory.created DESC']]));
+            $this->set('count_shop_history', $this->shopHistory->find('count'));
+            $this->set('count_starpass_history', $this->starpassHistory->find('count'));
+            $this->set('count_paypal_history', $this->paypalHistory->find('count'));
+            $this->set('count_send_tokens_history', $this->sendTokensHistory->find('count'));
         }
         else{
             $this->redirect(['controller' => 'posts', 'action' => 'index']);
@@ -175,7 +187,7 @@ class UsersController extends AppController{
     }
 
     public function admin_delete($id = null){
-        if($this->Auth->user('role') > 0){
+        if($this->Auth->user('role') > 1){
             $this->User->id = $id;
             if($this->User->exists()){
                 if($this->User->delete($id)){
@@ -203,9 +215,10 @@ class UsersController extends AppController{
     }
 
     public function admin_edit($id = null){
-        if($this->Auth->user('role') > 0){
+        if($this->Auth->user('role') > 1){
             $this->User->id = $id;
             if($this->User->exists()){
+                $this->set('items', $this->Shop->find('all'));
                 $this->set('data', $this->User->find('first', ['conditions' => ['User.id' => $id]]));
                 if($this->request->is('post')){
                     $this->User->id = $id;
@@ -227,7 +240,7 @@ class UsersController extends AppController{
     }
 
     public function admin_all(){
-        if($this->Auth->user('role') > 0){
+        if($this->Auth->user('role') > 1){
             $this->set('data', $this->User->find('all', ['order' => ['User.tokens' => 'DESC']]));
         }
         else{

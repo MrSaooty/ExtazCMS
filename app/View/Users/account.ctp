@@ -26,6 +26,7 @@ if(in_array('send_tokens', $this->request->pass)){
                     if($use_store == 1){
                         ?>
                         <li id="li_send_tokens"><a href="#send_tokens" data-toggle="tab">Envoyer des <?php echo $site_money; ?></a></li>
+                        <li id="li_history"><a href="#history" data-toggle="tab">Historiques</a></li>
                         <?php
                     }
                     ?>
@@ -46,11 +47,6 @@ if(in_array('send_tokens', $this->request->pass)){
                                     <?php echo $this->Form->input('username', array('type' => 'text', 'value' => $data['User']['username'], 'class' => 'form-control', 'label' => 'Pseudo', 'disabled')); ?>
                                 </section>
                             </fieldset>
-                            <!-- <fieldset>
-                                <section>
-                                    <?php echo $this->Form->input('group', array('type' => 'text', 'value' => $api->call('worlds.world.players.player.chat.groups.primary', ['world', $username])[0]['success'], 'class' => 'form-control', 'label' => 'Groupe', 'disabled')); ?>
-                                </section>
-                            </fieldset> -->
                             <fieldset>
                                 <section>
                                     <?php echo $this->Form->input('email', array('type' => 'text', 'value' => $data['User']['email'], 'class' => 'form-control', 'label' => 'Email', 'disabled')); ?>
@@ -109,6 +105,113 @@ if(in_array('send_tokens', $this->request->pass)){
                                 <button class="btn-u pull-right" type="submit">Envoyer</button>
                             </footer>
                         <?php echo $this->Form->end(); ?>
+                    </div>
+                    <div class="tab-pane fade in" id="history">
+                        <div class="panel-group acc-v1" id="accordion-1">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-One" aria-expanded="true">
+                                            Achats boutique
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse-One" class="panel-collapse collapse" aria-expanded="true">
+                                    <div class="panel-body">
+                                        <?php
+                                        if($count_shop_history > 0){
+                                            foreach($shop_history as $shop_h){
+                                                if($shop_h['shopHistory']['money'] == 'site'){
+                                                    $money = $site_money;
+                                                }
+                                                else{
+                                                    $money = $server_money;
+                                                }
+                                                echo '<small>('.$this->Time->timeAgoInWords($shop_h['shopHistory']['created']).')</small> Vous avez achetez "'.$shop_h['shopHistory']['item'].'" pour '.$shop_h['shopHistory']['price'].' '.$money.'<br>';
+                                            }
+                                        }
+                                        else{
+                                            echo '<div class="alert alert-info"><i class="fa fa-info-circle"></i> Aucun élément disponible dans l\'historique</div>';
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-Two" aria-expanded="false">
+                                            Achats Starpass
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse-Two" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <?php
+                                        if($count_starpass_history > 0){
+                                            foreach($starpass_history as $starpass_h){
+                                                echo '<small>('.$this->Time->timeAgoInWords($starpass_h['starpassHistory']['created']).')</small> Vous avez achetez '.$starpass_h['starpassHistory']['tokens'].' '.$site_money.'<br>';
+                                            }
+                                        }
+                                        else{
+                                            echo '<div class="alert alert-info"><i class="fa fa-info-circle"></i> Aucun élément disponible dans l\'historique</div>';
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <?php if($use_paypal == 1){ ?>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-Three" aria-expanded="false">
+                                            Achats PayPal
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse-Three" class="panel-collapse collapse" aria-expanded="false">
+                                    <div class="panel-body">
+                                        <?php
+                                        if($count_paypal_history > 0){
+                                            foreach($paypal_history as $paypal_h){
+                                                echo '<small>('.$this->Time->timeAgoInWords($paypal_h['paypalHistory']['created']).')</small> Vous avez achetez '.$paypal_h['paypalHistory']['item_name'].' '.$site_money.'<br>';
+                                            }
+                                        }
+                                        else{
+                                            echo '<div class="alert alert-info"><i class="fa fa-info-circle"></i> Aucun élément disponible dans l\'historique</div>';
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php } ?>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-Four" aria-expanded="false">
+                                            Envoie de <?php echo $site_money; ?>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse-Four" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <?php
+                                        if($count_send_tokens_history > 0){
+                                            foreach($send_tokens_history as $send_tokens_h){
+                                                echo '<small>('.$this->Time->timeAgoInWords($send_tokens_h['sendTokensHistory']['created']).')</small> Vous avez envoyé '.$send_tokens_h['sendTokensHistory']['nb_tokens'].' '.$site_money.', et '.$send_tokens_h['sendTokensHistory']['recipient'].' a reçu '.$send_tokens_h['sendTokensHistory']['nb_tokens_with_loss_rate'].' '.$site_money.'<br>';
+                                            }
+                                        }
+                                        else{
+                                            echo '<div class="alert alert-info"><i class="fa fa-info-circle"></i> Aucun élément disponible dans l\'historique</div>';
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

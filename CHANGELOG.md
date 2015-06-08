@@ -5,6 +5,8 @@ v1.7 (en développement)
 ----
 
 * Nettoyage du code PHP
+* Un rang modérateur est désormais diponible lors de l'édition d'un utilisateur, ce groupe modérateur a accès au panel d'administration, mais uniquement à la partie support. Cependant ils ont également la possibilité de modérer les commentaires et d'accéder au chat en temps réel
+* Vous pouvez ajouter manuellement un prérequis (pour la boutique) à un utilisateur
 * Lorsqu'une happy hour est en cours ce n'est plus affiché dans la sidebar. En revanche un bandeau publicitaire apparait sur chaque page pour prévenir les utilisateurs
 * Vous pouvez désormais désactiver les captchas sur la page d'inscription et sur la page de contact
 * Les utilisateurs peuvent désormais s'envoyer des tokens entre eux. Vous pouvez définir un taux de perte pour chaque transaction. Par exemple si vous fixez un taux de perte à 25% et qu'un utilisateur envoie 400 tokens, le destinataire n'en recevra que 300. Vous pouvez fixez un taux de perte entre 0 et 100%. Un historique des transactions est également disponible pour les administrateurs
@@ -15,7 +17,10 @@ v1.7 (en développement)
 * Si le port de votre serveur est 25565 alors il n'est pas affiché dans le header (à côte de l'adresse ip du serveur)
 * Corrections de bugs mineurs
 * {SQL} Ajout d'une table extaz_shop_categories
+* {SQL} Ajout d'une table extaz_send_tokens_history
 * {SQL} Ajout d'un champs type (text, default: '') dans la table extaz_support
+* {SQL} Ajout d'un champs send_tokens_loss_rate (int, default: 0) dans la table extaz_informations
+* {SQL} Ajout d'un champs use_captcha (int, default: 0) dans la table extaz_informations
 * {JS} Ajout de custom.js
 * {JS} Ajout de humane.js
 * {CSS} Ajout de flatty.css

@@ -133,8 +133,8 @@ $(document).ready(function(){
 	            </div>
         	</center>
         </div>
-        <?php echo $this->element('sidebar'); ?>
         <!-- End Left Sidebar -->
+        <?php echo $this->element('sidebar'); ?>
     </div><!--/row-->        
 </div><!--/container-->     
 <!--=== End Content Part ===-->

@@ -106,33 +106,46 @@ else{
                 <p>Aucun article n'a été ajouté dans la boutique</p>                        
             </div>
             <?php } else { ?>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="filters">
-                        <button class="search btn-u btn-u-xs"><i class="fa fa-search"></i></button>
-                        <?php 
-                        foreach($categories as $category){
-                            echo '<button id="filter" class="category btn-u btn-u-xs" data-category="'.$category['shopCategories']['name'].'"><i class="fa fa-tag"></i> '.$category['shopCategories']['name'].'</button> ';
-                        }
-                        ?>
-                        <div class="row search-input" style="display:none;">
-                            <div class="col-md-4">
-                                <?php echo $this->Form->create('Shop', ['action' => 'search', 'inputDefaults' => ['error' => false]]); ?>
-                                    <div class="input-group">
-                                        <span class="input-group-btn">
-                                            <a class="categories btn-u btn-u-xs" style="display:none;"><i class="fa fa-tags"></i></a>
-                                        </span>
-                                        <div class="input text">
-                                            <?php echo $this->Form->input('search', ['type' => 'text', 'placeholder' => 'Rechercher un article', 'class' => 'form-control input-sm', 'label' => false, 'div' => false]); ?>
-                                        </div>
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
-                                        </span>
+            <div class="row filters">
+                <div class="col-md-8">
+                    <button class="search btn-u btn-u-xs" style="margin-left: -10px;"><i class="fa fa-search"></i></button>
+                    <?php 
+                    foreach($categories as $category){
+                        echo '<button id="filter" class="category btn-u btn-u-xs" data-category="'.$category['shopCategories']['name'].'"><i class="fa fa-tag"></i> '.$category['shopCategories']['name'].'</button> ';
+                    }
+                    ?>
+                    <div class="row search-input" style="display:none;">
+                        <div class="col-md-4">
+                            <?php echo $this->Form->create('Shop', ['action' => 'search', 'inputDefaults' => ['error' => false]]); ?>
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <a class="categories btn-u btn-u-xs" style="display:none;"><i class="fa fa-tags"></i></a>
+                                    </span>
+                                    <div class="input text">
+                                        <?php echo $this->Form->input('search', ['type' => 'text', 'placeholder' => 'Rechercher un article', 'class' => 'form-control input-sm', 'label' => false, 'div' => false]); ?>
                                     </div>
-                                <?php echo $this->Form->end(); ?>
-                            </div>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            <?php echo $this->Form->end(); ?>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-4">
+                    <?php
+                    if($connected){
+                        ?>
+                        <button class="btn-u btn-u-dark btn-u-xs pull-right hidden-xs hidden-sm" style="margin-right: -10px;"><i class="fa fa-info-circle"></i> <?php echo $tokens.' '.$site_money; ?></button>
+                        <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'reload']); ?>" class="btn-u btn-u-orange btn-u-xs pull-right margin-right-5 hidden-xs hidden-sm"><i class="fa fa-refresh"></i> Recharger</a>
+                        <?php
+                    }
+                    else{
+                        ?>
+                        <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'login']); ?>" class="btn-u btn-u-dark btn-u-xs pull-right hidden-xs hidden-sm"><i class="fa fa-sign-in"></i> Connexion</a>
+                        <?php
+                    }
+                    ?>
                 </div>
             </div>
             <div class="row">

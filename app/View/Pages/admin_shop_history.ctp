@@ -72,8 +72,10 @@ $(document).ready(function(){
                                 <td><?php echo number_format($d['shopHistory']['price'], 0, ',', ' '); ?></td>
                                 <?php if($d['shopHistory']['money'] == 'site'){ ?>
                                     <td><?php echo ucfirst($site_money); ?></td>
-                                <?php } else { ?>
+                                <?php } elseif($d['shopHistory']['money'] == 'server') { ?>
                                     <td><?php echo $money_server; ?></td>
+                                <?php } else { ?>
+                                    <td><?php echo $d['shopHistory']['money']; ?></td>
                                 <?php } ?>
                                 <td><small><span class="label label-black"><?php echo $this->Time->format('d-m-Y à H:i', $d['shopHistory']['created']); ?></span></small></td>
                             </tr>

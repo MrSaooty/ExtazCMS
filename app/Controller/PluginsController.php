@@ -2,7 +2,7 @@
 Class PluginsController extends AppController{
 
 	public function admin_index(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			
 		}
 		else{
@@ -11,7 +11,7 @@ Class PluginsController extends AppController{
 	}
 
 	// public function admin_enabled($name){
-	// 	if($this->Auth->user('role') > 0){
+	// 	if($this->Auth->user('role') > 1){
 	// 		$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
 	// 		$api->call('plugins.name.enable', [$name]);
 	// 		$this->Session->setFlash($name.' a été activé !', 'success');
@@ -23,7 +23,7 @@ Class PluginsController extends AppController{
 	// }
 
 	// public function admin_disabled($name){
-	// 	if($this->Auth->user('role') > 0){
+	// 	if($this->Auth->user('role') > 1){
 	// 		$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
 	// 		$api->call('plugins.name.disabled', [$name]);
 	// 		$this->Session->setFlash($name.' a été désactivé !', 'success');

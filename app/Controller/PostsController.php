@@ -24,7 +24,7 @@ class PostsController extends AppController{
 
 	public function read($slug, $id){
 		// Si c'est un utilisateur spécial
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			// Si l'article ciblé existe, on va le chercher même si c'est un brouillon
 			if($this->Post->find('all', array('conditions' => array('Post.id' => $id, 'Post.slug' => $slug, 'Post.visible' => 1)))){
 				$this->set('post', $this->Post->find('first', array('conditions' => array('Post.id' => $id, 'Post.slug' => $slug, 'Post.visible' => 1))));
@@ -57,7 +57,7 @@ class PostsController extends AppController{
 
 	public function admin_add(){
 		// Si c'est un utilisateur spécial
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			// Si le formulaire à été posté
 			if($this->request->is('post')){
 				// On envoie les data au model
@@ -101,7 +101,7 @@ class PostsController extends AppController{
 	public function admin_edit($id = null){
 		$this->set('data', $this->Post->findById($id));
 		// Si c'est un utilisateur spécial
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			// Si l'article existe
 			if($this->Post->findById($id)){
 				$corrected = $this->Post->find('count', ['conditions' => ['Post.id' => $id, 'Post.corrected' => 1]]);
@@ -162,7 +162,7 @@ class PostsController extends AppController{
 
 	public function admin_drafts(){
 		// Si c'est un utilisateur spécial
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			// On va chercher les brouillons
 			$this->set('drafts', $this->Post->find('all', array('conditions' => array('Post.visible' => 1, 'Post.draft' => 1), 'order' => array('Post.created' => 'DESC'))));
 		}
@@ -174,7 +174,7 @@ class PostsController extends AppController{
 
 	public function admin_list(){
 		// Si c'est un utilisateur spécial
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			// On va chercher les brouillons
 			$this->set('data', $this->Post->find('all', array('conditions' => array('Post.visible' => 1), 'order' => array('Post.created' => 'DESC'))));
 		}
@@ -186,7 +186,7 @@ class PostsController extends AppController{
 
 	public function admin_delete($id = null){
 		// Si c'est un utilisateur spécial
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			// Si l'article existe
 			if($this->Post->findById($id)){
 				// On défini sur quel article on veut agir
@@ -253,7 +253,7 @@ class PostsController extends AppController{
 	}
 
 	public function admin_publish($id, $draft){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			// On va agir sur l'id passé via l'url
 			$this->Post->id = $id;
 			// $draft = $this->request->params['named']['draft'];

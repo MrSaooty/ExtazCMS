@@ -2,7 +2,7 @@
 class ButtonsController extends AppController{
 
     public function admin_index(){
-        if($this->Auth->user('role') > 0){
+        if($this->Auth->user('role') > 1){
             $this->set('data', $this->Button->find('all', ['order' => ['Button.order' => 'ASC']]));
             if($this->request->is('post')){
                 if(isset($this->request->data['Buttons']['icon']) && isset($this->request->data['Buttons']['color'])){
@@ -24,7 +24,7 @@ class ButtonsController extends AppController{
     }
 
     public function admin_edit($id){
-        if($this->Auth->user('role') > 0){
+        if($this->Auth->user('role') > 1){
             $this->Button->id = $id;
             if($this->Button->exists()){
                 $this->set('data', $this->Button->find('first', ['conditions' => ['Button.id' => $id]]));
@@ -50,7 +50,7 @@ class ButtonsController extends AppController{
     }
 
     public function admin_delete($id){
-        if($this->Auth->user('role') > 0){
+        if($this->Auth->user('role') > 1){
             $this->Button->delete($id);
             $this->Session->setFlash('Ce bouton a été supprimé', 'success');
             return $this->redirect(['controller' => 'buttons', 'action' => 'index', 'admin' => true]);

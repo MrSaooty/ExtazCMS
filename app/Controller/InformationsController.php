@@ -2,7 +2,7 @@
 class InformationsController extends AppController{
 
 	public function admin_index(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			$this->set('data', $this->Informations->find('first', ['conditions' => ['Informations.id' => 1]]));
 		}
 		else{
@@ -11,7 +11,7 @@ class InformationsController extends AppController{
 	}
 
 	public function admin_update_informations(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			if($this->request->is('post')){
 				$this->Informations->id = 1;
 				if(isset($this->request->data['Informations']['send_tokens_loss_rate'])){
@@ -35,7 +35,7 @@ class InformationsController extends AppController{
 	}
 
 	public function admin_test_jsonapi(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			if($this->request->is('ajax')){
 		    	$api = new JSONAPI($this->request->data['ip'], $this->request->data['port'], $this->request->data['username'], $this->request->data['password'], $this->request->data['salt']);
 				if($api->call('players.online.limit')[0]['result'] == 'success'){
@@ -54,7 +54,7 @@ class InformationsController extends AppController{
 	}
 
 	public function admin_update_options(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			if($this->request->is('post')){
 				$this->Informations->id = 1;
 				if(isset($this->request->data['use_slider'])){
@@ -143,7 +143,7 @@ class InformationsController extends AppController{
 	}
 
 	public function admin_background(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			
 		}
 		else{
@@ -152,7 +152,7 @@ class InformationsController extends AppController{
 	}
 
 	public function admin_update_background($background){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			$this->Informations->id = 1;
 			$this->Informations->saveField('background', $background);
 			$this->Session->setFlash('Background mis à jour !', 'success');

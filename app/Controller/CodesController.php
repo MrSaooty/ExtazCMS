@@ -68,7 +68,7 @@ Class CodesController extends AppController{
 	}
 
 	public function admin_list(){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			$this->set('data', $this->Code->find('all', ['order' => ['Code.id' => 'DESC']]));
 		}
 		else{
@@ -77,7 +77,7 @@ Class CodesController extends AppController{
 	}
 
 	public function admin_delete($id){
-		if($this->Auth->user('role') > 0){
+		if($this->Auth->user('role') > 1){
 			$this->Code->delete($id);
 			$this->Session->setFlash('Ce code a été supprimé', 'success');
 			return $this->redirect(['controller' => 'codes', 'action' => 'list', 'admin' => true]);
