@@ -5,7 +5,7 @@ Class ShopsController extends AppController{
 
 	var $paginate = array(
 		'Shop' => array(
-			'limit' => 20,
+			'limit' => 18,
 			'order' => array(
 				'Shop.id' => 'ASC'
 			),

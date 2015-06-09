@@ -63,7 +63,7 @@ $(document).ready(function(){
                                 <td><?php echo $d['Cpage']['name']; ?></td>
                                 <td><?php echo $this->Time->format('d-m-Y à H:i', $d['Cpage']['created']); ?></td>
                                 <td>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'read', $d['Cpage']['slug'], 'admin' => false]); ?>" class="label label-black" target="_blank"><i class="fa fa-eye"></i> Voir</a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'read', 'slug' => $d['Cpage']['slug'], 'admin' => false]); ?>" class="label label-black" target="_blank"><i class="fa fa-eye"></i> Voir</a>
                                     <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'edit', $d['Cpage']['id'], 'admin' => true]); ?>" class="label label-black"><i class="fa fa-pencil-square-o"></i> Editer</a>
                                     <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'delete', $d['Cpage']['id'], 'admin' => true]); ?>" class="label label-danger confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
                                 </td>

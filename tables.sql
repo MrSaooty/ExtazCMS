@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS `extaz_cpages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `slug` text NOT NULL,
+  `sidebar` int(11) NOT NULL,
   `name` text NOT NULL,
   `content` longtext NOT NULL,
   `created` datetime NOT NULL,

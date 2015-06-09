@@ -48,7 +48,7 @@
 	Router::connect('/answer_ticket', ['controller' => 'pages', 'action' => 'answer_ticket']);
 	Router::connect('/equipe', ['controller' => 'pages', 'action' => 'team']);
 	Router::connect('/send_tokens', ['controller' => 'pages', 'action' => 'send_tokens']);
-	Router::connect('/page/:slug', ['controller' => 'cpages', 'action' => 'read'], ['pass' => ['slug'], 'slug' => '[a-z0-9\-]+']);
+	Router::connect('/pages/:slug', ['controller' => 'cpages', 'action' => 'read'], ['pass' => ['slug'], 'slug' => '[a-z0-9\-]+']);
 	Router::connect('/admin/configuration', ['controller' => 'informations', 'action' => 'index', 'admin' => true]);
 	Router::connect('/admin/manage_tickets', ['controller' => 'pages', 'action' => 'manage_tickets', 'admin' => true]);
 	Router::connect('/admin/add_member', ['controller' => 'pages', 'action' => 'add_member', 'admin' => true]);
@@ -81,7 +81,7 @@
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */
-	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+	Router::connect('/p/*', array('controller' => 'pages', 'action' => 'display'));
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on
