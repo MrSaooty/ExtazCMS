@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `extaz_shop_categories` (
   `created` date NOT NULL,
   `updated` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
 
 -- ----------------------------
 -- Records of extaz_shop_categories
@@ -52,4 +52,4 @@ CREATE TABLE IF NOT EXISTS `extaz_cpages` (
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;

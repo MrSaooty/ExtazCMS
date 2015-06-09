@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `extaz_cpages` (
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
 
 -- ----------------------------
 -- Table structure for extaz_send_tokens_history

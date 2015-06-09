@@ -20,6 +20,7 @@ v1.7 (en développement)
 * Corrections de bugs mineurs
 * {SQL} Ajout d'une table extaz_shop_categories
 * {SQL} Ajout d'une table extaz_send_tokens_history
+* {SQL} Ajout d'une table extaz_cpages
 * {SQL} Ajout d'un champs type (text, default: '') dans la table extaz_support
 * {SQL} Ajout d'un champs send_tokens_loss_rate (int, default: 0) dans la table extaz_informations
 * {SQL} Ajout d'un champs use_captcha (int, default: 0) dans la table extaz_informations

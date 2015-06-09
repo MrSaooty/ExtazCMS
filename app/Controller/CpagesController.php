@@ -16,6 +16,9 @@ class CpagesController extends AppController {
 				$this->Cpage->create;
 				$this->Cpage->saveField('user_id', $this->Auth->user('id'));
 				$this->Cpage->saveField('name', $this->request->data['Cpages']['name']);
+				if(isset($this->request->data['Cpages']['sidebar'])){
+					$this->Cpage->saveField('sidebar', $this->request->data['Cpages']['sidebar']);
+				}
 				$this->Cpage->saveField('slug', $this->request->data['Cpages']['slug']);
 				$this->Cpage->saveField('content', $this->request->data['Cpages']['content']);
 				$this->Session->setFlash('Page créée avec succès !', 'success');
@@ -60,6 +63,9 @@ class CpagesController extends AppController {
 				if($this->request->is('post')){
 					$this->Cpage->id = $id;
 					$this->Cpage->saveField('name', $this->request->data['Cpages']['name']);
+					if(isset($this->request->data['Cpages']['sidebar'])){
+						$this->Cpage->saveField('sidebar', $this->request->data['Cpages']['sidebar']);
+					}
 					$this->Cpage->saveField('slug', $this->request->data['Cpages']['slug']);
 					$this->Cpage->saveField('content', $this->request->data['Cpages']['content']);
 					$this->Session->setFlash('Page éditée !', 'success');

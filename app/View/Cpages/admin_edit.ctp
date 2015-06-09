@@ -15,6 +15,9 @@ $(document).ready(function(){
         $('#chargement').empty();
         $('#content').fadeIn();
     });
+    $("select").selectBoxIt({
+        showFirstOption: false
+    });
 });
 </script>
 <div class="main-content">
@@ -38,6 +41,13 @@ $(document).ready(function(){
                                 <span class="input-group-addon"><i class="fa fa-comment"></i></span>
                                 <?php echo $this->Form->input('slug', array('type' => 'text', 'value' => $data['Cpage']['slug'], 'class' => 'form-control', 'onkeypress' => 'return verif(event);', 'label' => false)); ?>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <select name="data[Cpages][sidebar]" id="CpagesSidebar" class="form-control">
+                                <option value="">Afficher la sidebar ?</option>
+                                <option value="1">Oui</option>
+                                <option value="0">Non</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <div id="chargement"><?php echo $this->Html->image('loader.gif', array('alt' => 'chargement')); ?> Chargement de l'éditeur de texte en cours, veuillez patienter</div>
