@@ -36,7 +36,7 @@ App::uses('File', 'Utility');
  */
 class AppController extends Controller {
 
-	public $uses = ['Informations', 'User', 'starpassHistory', 'Support', 'donationLadder', 'Button'];
+	public $uses = ['Informations', 'User', 'starpassHistory', 'Support', 'donationLadder', 'Button', 'Cpage'];
 
 	public $helpers = ['Html', 'Form', 'PaypalIpn.Paypal'];
 
@@ -157,6 +157,9 @@ class AppController extends Controller {
 		$this->set('paypal_tokens_during_happy_hour', $paypal_tokens_during_happy_hour);
 		// Boutons pour la sidebar
 		$this->set('buttons', $this->Button->find('all', ['order' => ['Button.order ASC']]));
+		// Pages customs
+		$this->set('cpages', $this->Cpage->find('all'));
+		$this->set('nb_cpages', $this->Cpage->find('count'));
 		// ExtazCMS
 		$version = 1.7;
 		$last_version = file_get_contents('http://www.extaz-cms.com/extazcms.version');

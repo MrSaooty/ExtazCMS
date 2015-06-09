@@ -5,6 +5,7 @@ v1.7 (en développement)
 ----
 
 * Nettoyage du code PHP
+* * Vous pouvez désormais ajouter, éditer et supprimer très facilement des pages via le panel d'administration
 * Chaque utilisateur peut désormais visualiser l'historique de toutes ses transactions à savoir : achats dans la boutique, achats starpass, achats paypal et les transactions de tokens
 * Un rang modérateur est désormais diponible lors de l'édition d'un utilisateur, ce groupe modérateur a accès au panel d'administration, mais uniquement à la partie support. Cependant ils ont également la possibilité de modérer les commentaires et d'accéder au chat en temps réel
 * Vous pouvez ajouter manuellement un prérequis (pour la boutique) à un utilisateur

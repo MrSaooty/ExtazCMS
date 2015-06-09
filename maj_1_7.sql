@@ -38,3 +38,18 @@ CREATE TABLE IF NOT EXISTS `extaz_send_tokens_history` (
 ALTER TABLE `extaz_informations` ADD `use_captcha` INT NOT NULL DEFAULT '0' AFTER `use_slider`;
 
 UPDATE `extaz_users` SET `role`= 2 WHERE `role`= 1;
+
+-- ----------------------------
+-- Table structure for extaz_cpages
+-- ----------------------------
+DROP TABLE IF EXISTS `extaz_cpages`;
+CREATE TABLE IF NOT EXISTS `extaz_cpages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `slug` text NOT NULL,
+  `name` text NOT NULL,
+  `content` longtext NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;

@@ -193,6 +193,17 @@
                                             </li>
                                         </ul>
                                     </li>
+                                    <li class="has_submenu">
+                                        <a href="#"><i class="fa fa-file-text"></i> Pages <span class="nav-caret fa fa-caret-down"></span></a>
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'add', 'admin' => true]); ?>"><i class="fa fa-plus"></i> Créer</a>
+                                            </li>
+                                            <li>
+                                                <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'list', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste</a>
+                                            </li>
+                                        </ul>
+                                    </li>
                                     <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
                                     <li>
                                         <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'chat_messages', 'admin' => true]); ?>"><i class="fa fa-comments"></i>Chat</a>

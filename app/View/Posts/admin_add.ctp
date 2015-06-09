@@ -66,7 +66,7 @@ $(document).ready(function(){
                                 <?php echo $this->Form->textarea('content', array('type' => 'textarea', 'rows' => '5', 'cols' => '5', 'placeholder' => 'Contenu', 'class' => 'ckeditor', 'label' => false)); ?>
                             </div>
                         </div>
-                        <i class="fa fa-info-circle"></i> Cet article sera enregistré en tant que brouillon <button class="btn btn-default pull-right" type="submit"><i class="fa fa-plus"></i> Ajouter cet article</button>
+                        <i class="fa fa-info-circle"></i> Cet article sera enregistré en tant que brouillon <button class="btn btn-black pull-right pull-right" type="submit"><i class="fa fa-plus"></i> Ajouter cet article</button>
                     <?php echo $this->Form->end(); ?>
                 </div>
             </div>

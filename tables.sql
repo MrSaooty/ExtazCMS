@@ -1,8 +1,24 @@
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
+-- Table structure for extaz_cpages
+-- ----------------------------
+DROP TABLE IF EXISTS `extaz_cpages`;
+CREATE TABLE IF NOT EXISTS `extaz_cpages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `slug` text NOT NULL,
+  `name` text NOT NULL,
+  `content` longtext NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+-- ----------------------------
 -- Table structure for extaz_send_tokens_history
 -- ----------------------------
+DROP TABLE IF EXISTS `extaz_send_tokens_history`;
 CREATE TABLE IF NOT EXISTS `extaz_send_tokens_history` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `shipper` text NOT NULL,
@@ -18,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `extaz_send_tokens_history` (
 -- ----------------------------
 -- Table structure for extaz_shop_categories
 -- ----------------------------
+DROP TABLE IF EXISTS `extaz_shop_categories`;
 CREATE TABLE IF NOT EXISTS `extaz_shop_categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
@@ -34,6 +51,7 @@ INSERT INTO `extaz_shop_categories` VALUES ('0', 'Sans catégorie',  '2015-06-03
 -- ----------------------------
 -- Table structure for extaz_buttons
 -- ----------------------------
+DROP TABLE IF EXISTS `extaz_buttons`;
 CREATE TABLE IF NOT EXISTS `extaz_buttons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -64,6 +82,7 @@ CREATE TABLE IF NOT EXISTS `extaz_comments` (
 -- ----------------------------
 -- Table structure for extaz_codes
 -- ----------------------------
+DROP TABLE IF EXISTS `extaz_codes`;
 CREATE TABLE IF NOT EXISTS `extaz_codes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `creator` text NOT NULL,
@@ -80,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `extaz_codes` (
 -- Table structure for extaz_donation_ladder
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_donation_ladder`;
-CREATE TABLE `extaz_donation_ladder` (
+CREATE TABLE IF NOT EXISTS `extaz_donation_ladder` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `tokens` int(11) DEFAULT NULL,
@@ -93,7 +112,7 @@ CREATE TABLE `extaz_donation_ladder` (
 -- Table structure for extaz_informations
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_informations`;
-CREATE TABLE `extaz_informations` (
+CREATE TABLE IF NOT EXISTS `extaz_informations` (
   `id` int(11) NOT NULL DEFAULT '1',
   `name_server` varchar(255) DEFAULT '',
   `ip_server` text,
@@ -144,7 +163,7 @@ INSERT INTO `extaz_informations` VALUES ('1', 'Nom du serveur', '127.0.0.1', '12
 -- Table structure for extaz_instant_payment_notifications
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_instant_payment_notifications`;
-CREATE TABLE `extaz_instant_payment_notifications` (
+CREATE TABLE IF NOT EXISTS `extaz_instant_payment_notifications` (
   `id` char(36) NOT NULL,
   `notify_version` varchar(64) DEFAULT NULL COMMENT 'IPN Version Number',
   `verify_sign` varchar(127) DEFAULT NULL COMMENT 'Encrypted string used to verify the authenticityof the tansaction',
@@ -240,7 +259,7 @@ CREATE TABLE `extaz_instant_payment_notifications` (
 -- Table structure for extaz_likes
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_likes`;
-CREATE TABLE `extaz_likes` (
+CREATE TABLE IF NOT EXISTS `extaz_likes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_article` int(11) DEFAULT '0',
   `ip` varchar(255) DEFAULT NULL,
@@ -253,7 +272,7 @@ CREATE TABLE `extaz_likes` (
 -- Table structure for extaz_paypal_items
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_paypal_items`;
-CREATE TABLE `extaz_paypal_items` (
+CREATE TABLE IF NOT EXISTS `extaz_paypal_items` (
   `id` varchar(36) NOT NULL,
   `instant_payment_notification_id` varchar(36) NOT NULL,
   `item_name` varchar(127) DEFAULT NULL,
@@ -272,7 +291,7 @@ CREATE TABLE `extaz_paypal_items` (
 -- Table structure for extaz_posts
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_posts`;
-CREATE TABLE `extaz_posts` (
+CREATE TABLE IF NOT EXISTS `extaz_posts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cat` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
@@ -306,7 +325,7 @@ INSERT INTO `extaz_posts` VALUES ('6', 'Ipsum', 'Lorem', 'slug-slug-slug', '<p>S
 -- Table structure for extaz_shop
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_shop`;
-CREATE TABLE `extaz_shop` (
+CREATE TABLE IF NOT EXISTS `extaz_shop` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text,
   `description` text,
@@ -326,7 +345,7 @@ CREATE TABLE `extaz_shop` (
 -- Table structure for extaz_shop_history
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_shop_history`;
-CREATE TABLE `extaz_shop_history` (
+CREATE TABLE IF NOT EXISTS `extaz_shop_history` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `item` text,
@@ -342,7 +361,7 @@ CREATE TABLE `extaz_shop_history` (
 -- Table structure for extaz_starpass_history
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_starpass_history`;
-CREATE TABLE `extaz_starpass_history` (
+CREATE TABLE IF NOT EXISTS `extaz_starpass_history` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `tokens` int(11) DEFAULT NULL,
@@ -357,7 +376,7 @@ CREATE TABLE `extaz_starpass_history` (
 -- Table structure for extaz_support
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_support`;
-CREATE TABLE `extaz_support` (
+CREATE TABLE IF NOT EXISTS `extaz_support` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `type` text DEFAULT NULL,
@@ -373,7 +392,7 @@ CREATE TABLE `extaz_support` (
 -- Table structure for extaz_support_comments
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_support_comments`;
-CREATE TABLE `extaz_support_comments` (
+CREATE TABLE IF NOT EXISTS `extaz_support_comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ticket_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
@@ -387,7 +406,7 @@ CREATE TABLE `extaz_support_comments` (
 -- Table structure for extaz_team
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_team`;
-CREATE TABLE `extaz_team` (
+CREATE TABLE IF NOT EXISTS `extaz_team` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) DEFAULT '',
   `rank` text,
@@ -402,7 +421,7 @@ CREATE TABLE `extaz_team` (
 -- Table structure for extaz_users
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_users`;
-CREATE TABLE `extaz_users` (
+CREATE TABLE IF NOT EXISTS `extaz_users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(50) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,

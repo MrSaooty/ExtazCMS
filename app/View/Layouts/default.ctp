@@ -131,6 +131,28 @@
                                 <?php echo $this->Html->link('Contact', ['controller' => 'pages', 'action' => 'contact']); ?>
                             </li>
                             <?php } ?>
+                            <?php if($nb_cpages > 0 && $nb_cpages == 1){ ?>
+                            <li class="none">
+                                <?php echo $this->Html->link($cpages[0]['Cpage']['name'], ['controller' => 'cpages', 'action' => 'read', 'slug' => $cpages[0]['Cpage']['slug']]); ?>
+                            </li>
+                            <?php } else { ?>
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                                    Pages
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <?php
+                                    foreach($cpages as $cp){
+                                        ?>
+                                        <li>
+                                            <?php echo $this->Html->link($cp['Cpage']['name'], ['controller' => 'pages', 'action' => 'read', 'slug' => $cp['Cpage']['slug']]); ?>
+                                        </li>
+                                        <?php
+                                    }
+                                    ?>
+                                </ul>
+                            </li>
+                            <?php } ?>
                             <?php if($role > 0){ ?>
                             <li class="none">
                                 <?php echo $this->Html->link('Administration', ['controller' => 'pages', 'action' => 'stats', 'admin' => true]); ?>
