@@ -28,7 +28,7 @@
 							<br>
 							<i class="fa fa-github"></i> <b>Changelog</b> : <a href="https://github.com/MrSaooty/ExtazCMS/blob/master/CHANGELOG.md" target="_blank">https://github.com/MrSaooty/ExtazCMS/Changelog</a>
 							<br>
-							<i class="fa fa-github"></i> <b>Aide</b> : <a href="https://github.com/MrSaooty/ExtazCMS/wiki/Mise-%C3%A0-jour" target="_blank">https://github.com/MrSaooty/ExtazCMS/wiki/Mise-à-jour</a>
+							<i class="fa fa-github"></i> <b>Aide</b> : <a href="http://extaz-cms.com/wiki/index.php?title=Mise_%C3%A0_jour" target="_blank">http://extaz-cms.com/wiki/Mise_à_jour</a>
 		                <?php } ?>
 		            </div>
 		        </div>

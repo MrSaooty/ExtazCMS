@@ -161,7 +161,7 @@ class AppController extends Controller {
 		$this->set('cpages', $this->Cpage->find('all'));
 		$this->set('nb_cpages', $this->Cpage->find('count'));
 		// ExtazCMS
-		$version = 1.7;
+		$version = 1.8;
 		$last_version = file_get_contents('http://www.extaz-cms.com/extazcms.version');
 		$this->set('version', $version);
 		$this->set('last_version', $last_version);
