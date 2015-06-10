@@ -170,7 +170,7 @@ class AppController extends Controller {
 		$this->Auth->allow();
 		// Maintenance du site
 		if($informations['Informations']['maintenance'] == 1){
-			if($this->Auth->user('role') != 1){
+			if($this->Auth->user('role') < 1){
 				if($this->request->url != 'connexion'){
 					$this->render('/Errors/maintenance');
 				}

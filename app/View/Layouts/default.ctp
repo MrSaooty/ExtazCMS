@@ -145,7 +145,7 @@
                                     foreach($cpages as $cp){
                                         ?>
                                         <li>
-                                            <?php echo $this->Html->link($cp['Cpage']['name'], ['controller' => 'pages', 'action' => 'read', 'slug' => $cp['Cpage']['slug']]); ?>
+                                            <?php echo $this->Html->link($cp['Cpage']['name'], ['controller' => 'cpages', 'action' => 'read', 'slug' => $cp['Cpage']['slug']]); ?>
                                         </li>
                                         <?php
                                     }

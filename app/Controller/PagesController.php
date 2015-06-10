@@ -142,7 +142,7 @@ class PagesController extends AppController {
 
 	public function admin_send_tokens_history(){
 		if($this->Auth->user('role') > 1){
-
+			$this->set('data', $this->sendTokensHistory->find('all'));
 		}
 		else{
 			throw new NotFoundException();
