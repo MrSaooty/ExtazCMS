@@ -125,7 +125,7 @@ if(in_array('send_tokens', $this->request->pass)){
                                                     $money = $site_money;
                                                 }
                                                 else{
-                                                    $money = $server_money;
+                                                    $money = $money_server;
                                                 }
                                                 echo '<span class="text-highlights text-highlights-green"><i class="fa fa-clock-o"></i> '.$this->Time->format('d/m/Y H:i:s', $shop_h['shopHistory']['created']).'</span> Vous avez achetez "'.$shop_h['shopHistory']['item'].'" pour '.$shop_h['shopHistory']['price'].' '.$money.'<br>';
                                             }
