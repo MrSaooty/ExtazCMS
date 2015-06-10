@@ -216,6 +216,7 @@
     echo $this->Html->script('jquery.bootstrap-growl');
     echo $this->Html->script('index');
     echo $this->Html->script('humane');
+    echo $this->Html->script('jquery.autocomplete');
     echo $this->Html->script('custom');
     ?>
     <script type="text/javascript">

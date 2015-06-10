@@ -111,6 +111,8 @@ class UsersController extends AppController{
             $this->set('count_starpass_history', $this->starpassHistory->find('count', ['conditions' => ['starpassHistory.user_id' => $id]]));
             $this->set('count_paypal_history', $this->paypalHistory->find('count', ['conditions' => ['paypalHistory.custom' => $id]]));
             $this->set('count_send_tokens_history', $this->sendTokensHistory->find('count', ['conditions' => ['sendTokensHistory.shipper' => $username]]));
+            // Liste des utilisateurs pour l'autocomplete
+            $this->set('users', $this->User->find('all'));
         }
         else{
             $this->redirect(['controller' => 'posts', 'action' => 'index']);

@@ -15,6 +15,21 @@ if(in_array('send_tokens', $this->request->pass)){
     <?php
 }
 ?>
+<script>
+$(document).ready(function(){
+    var users = [
+        <?php
+        foreach($users as $user){
+            echo '{ value: "'.$user['User']['username'].'", data: "'.$user['User']['id'].'" },';
+        }
+        ?>
+    ];
+
+    $('#autocomplete').autocomplete({
+        lookup: users
+    });
+});
+</script>
 <!--=== Content Part ===-->
 <div class="container content">     
     <div class="row">
@@ -82,7 +97,7 @@ if(in_array('send_tokens', $this->request->pass)){
                             </div>
                             <fieldset>
                                 <section>
-                                    <?php echo $this->Form->input('username', array('type' => 'text', 'class' => 'form-control', 'placeholder' => 'Insensible à la casse', 'label' => 'Pseudo du destinataire', 'required' => 'required')); ?>
+                                    <?php echo $this->Form->input('username', array('type' => 'text', 'id' => 'autocomplete', 'class' => 'form-control', 'placeholder' => 'Insensible à la casse', 'label' => 'Pseudo du destinataire', 'required' => 'required')); ?>
                                 </section>
                             </fieldset>
                             <fieldset>
