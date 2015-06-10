@@ -105,7 +105,7 @@
                             <?php } ?>
                             <li class="dropdown">
                                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                                    Support
+                                    Support <i class="fa fa-angle-down"></i>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
@@ -131,14 +131,14 @@
                                 <?php echo $this->Html->link('Contact', ['controller' => 'pages', 'action' => 'contact']); ?>
                             </li>
                             <?php } ?>
-                            <?php if($nb_cpages > 0 && $nb_cpages == 1){ ?>
+                            <?php if($nb_cpages == 1){ ?>
                             <li class="none">
                                 <?php echo $this->Html->link($cpages[0]['Cpage']['name'], ['controller' => 'cpages', 'action' => 'read', 'slug' => $cpages[0]['Cpage']['slug']]); ?>
                             </li>
-                            <?php } else { ?>
+                            <?php } elseif($nb_cpages != 0 && $nb_cpages > 1) { ?>
                             <li class="dropdown">
                                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                                    Pages
+                                    Autres <i class="fa fa-angle-down"></i>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <?php

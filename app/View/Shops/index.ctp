@@ -119,7 +119,7 @@ else{
                             <?php echo $this->Form->create('Shop', ['action' => 'search', 'inputDefaults' => ['error' => false]]); ?>
                                 <div class="input-group">
                                     <span class="input-group-btn">
-                                        <a class="categories btn-u btn-u-xs" style="display:none;"><i class="fa fa-tags"></i></a>
+                                        <a class="categories btn-u btn-u-xs" style="display:none;margin-left: -10px;"><i class="fa fa-tags"></i></a>
                                     </span>
                                     <div class="input text">
                                         <?php echo $this->Form->input('search', ['type' => 'text', 'placeholder' => 'Rechercher un article', 'class' => 'form-control input-sm', 'label' => false, 'div' => false]); ?>
@@ -142,7 +142,7 @@ else{
                     }
                     else{
                         ?>
-                        <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'login']); ?>" class="btn-u btn-u-dark btn-u-xs pull-right hidden-xs hidden-sm"><i class="fa fa-sign-in"></i> Connexion</a>
+                        <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'login']); ?>" class="btn-u btn-u-dark btn-u-xs pull-right hidden-xs hidden-sm" style="margin-right: -10px;"><i class="fa fa-sign-in"></i> Connexion</a>
                         <?php
                     }
                     ?>
