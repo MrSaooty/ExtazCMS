@@ -1,33 +1,38 @@
 <?php
 $this->assign('title', 'Mes informations');
 $player = $api->call('players.name', [$username]);
-
-if(in_array('send_tokens', $this->request->pass)){
-    ?>
-    <script>
-        $(document).ready(function(){
-            $('#infos').removeClass().addClass('tab-pane fade in');
-            $('#send_tokens').removeClass().addClass('tab-pane fade in active');
-            $('#li_infos').removeClass();
-            $('#li_send_tokens').addClass('active');
-        });
-    </script>
-    <?php
-}
 ?>
 <script>
 $(document).ready(function(){
     var users = [
         <?php
         foreach($users as $user){
-            echo '{ value: "'.$user['User']['username'].'", data: "'.$user['User']['id'].'" },';
+            echo '{ value: "'.$user['User']['username'].'", role: "'.$user['User']['role'].'" },';
         }
         ?>
     ];
 
     $('#autocomplete').autocomplete({
-        lookup: users
+        lookup: users,
+        onSelect: function(suggestion){
+            if(suggestion.role == 2){
+                humane.log('<i class="fa fa-exclamation-triangle"></i> Attention ' + suggestion.value + ' est un administrateur', { timeout: 4000, clickToClose: true, addnCls: 'humane-flatty-warning' });
+            }
+            if(suggestion.role == 1){
+                humane.log('<i class="fa fa-exclamation-triangle"></i> Attention ' + suggestion.value + ' est un modérateur', { timeout: 4000, clickToClose: true, addnCls: 'humane-flatty-warning' });
+            }
+        }
     });
+    <?php
+    if(in_array('send_tokens', $this->request->pass)){
+        ?>
+        $('#infos').removeClass().addClass('tab-pane fade in');
+        $('#send_tokens').removeClass().addClass('tab-pane fade in active');
+        $('#li_infos').removeClass();
+        $('#li_send_tokens').addClass('active');
+        <?php
+    }
+    ?>
 });
 </script>
 <!--=== Content Part ===-->

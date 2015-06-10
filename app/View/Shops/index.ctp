@@ -32,6 +32,21 @@ $(function(){
         $('.category').show();
         $('.categories').hide();
     });
+
+    var items = [
+        <?php
+        foreach($items as $item){
+            echo '{ value: "'.$item['Shop']['name'].'", role: "'.$item['Shop']['price_money_site'].'" },';
+        }
+        ?>
+    ];
+
+    $('#autocomplete').autocomplete({
+        lookup: items,
+        onSelect: function(suggestion){
+
+        }
+    });
 });
 </script>
 <?php
@@ -122,7 +137,7 @@ else{
                                         <a class="categories btn-u btn-u-xs" style="display:none;margin-left: -10px;"><i class="fa fa-tags"></i></a>
                                     </span>
                                     <div class="input text">
-                                        <?php echo $this->Form->input('search', ['type' => 'text', 'placeholder' => 'Rechercher un article', 'class' => 'form-control input-sm', 'label' => false, 'div' => false]); ?>
+                                        <?php echo $this->Form->input('search', ['type' => 'text', 'id' => 'autocomplete', 'placeholder' => 'Rechercher un article', 'class' => 'form-control input-sm', 'label' => false, 'div' => false]); ?>
                                     </div>
                                     <span class="input-group-btn">
                                         <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>

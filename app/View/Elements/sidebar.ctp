@@ -40,17 +40,17 @@
                             </a>
                             <br>
                         <?php } ?>
-                        <?php if($tickets > 1){ ?>
-                            <font color="#555"><i class="fa fa-chevron-circle-right"></i></font>
-                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_tickets']); ?>">
-                                Vous avez <?php echo $tickets; ?> tickets ouverts
-                            </a>
-                            <?php } else { ?>
-                            <font color="#555"><i class="fa fa-chevron-circle-right"></i></font>
-                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_tickets']); ?>">
-                                Vous avez <?php echo $tickets; ?> ticket ouvert
-                            </a>
-                        <?php } ?>
+                        <font color="#555"><i class="fa fa-chevron-circle-right"></i></font>
+                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_tickets']); ?>">
+                            <?php
+                            if($tickets > 1){
+                                echo 'Vous avez '.$tickets.' tickets ouverts';
+                            }
+                            else{
+                                echo 'Vous avez '.$tickets.' ticket ouvert';
+                            }
+                            ?>
+                        </a>
                         <br>
                         <?php if($use_store == 1){ ?>
                         <font color="#555"><i class="fa fa-chevron-circle-right"></i></font> 

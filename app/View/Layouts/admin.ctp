@@ -361,6 +361,7 @@
         <?php 
         echo $this->Html->script('jquery.confirm');
         echo $this->Html->script('jquery.bootstrap-growl');
+        echo $this->Html->script('jquery.autocomplete');
         echo $this->Html->script('admin/bootstrap.min');
         echo $this->Html->script('admin/jquery-ui.min');
         echo $this->Html->script('admin/wysihtml5-0.3.0');

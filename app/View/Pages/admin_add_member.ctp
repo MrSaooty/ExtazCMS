@@ -44,6 +44,20 @@ $(function() {
         var color = $('#PagesColor').val();
         $('#rank').removeClass().addClass('label label-u-' + color).hide().fadeIn(500);
     });
+
+    var roles = [
+        {value: 'Fondateur'},
+        {value: 'Administrateur'},
+        {value: 'Modérateur'},
+        {value: 'Animateur'},
+        {value: 'Architecte'},
+        {value: 'Webmaster'},
+        {value: 'Guide'}
+    ];
+
+    $('#autocomplete').autocomplete({
+        lookup: roles
+    });
 });
 </script>
 <div class="main-content">
@@ -60,7 +74,7 @@ $(function() {
                             <?php echo $this->Form->input('username', array('type' => 'text', 'placeholder' => 'Pseudo', 'class' => 'form-control', 'label' => false, 'required' => 'required')); ?>
                         </div>
                         <div class="form-group">
-                            <?php echo $this->Form->input('rank', array('type' => 'text', 'placeholder' => 'Fonction (ex: Administrateur, Modérateur...)', 'class' => 'form-control', 'label' => false, 'required' => 'required')); ?>
+                            <?php echo $this->Form->input('rank', array('type' => 'text', 'id' => 'autocomplete', 'placeholder' => 'Fonction (ex: Administrateur, Modérateur...)', 'class' => 'form-control', 'label' => false, 'required' => 'required')); ?>
                         </div>
                         <div class="form-group">
                             <?php echo $this->Form->input('order', array('type' => 'number', 'placeholder' => 'Ordre d\'affichage (ex: 1, 2, 3)', 'class' => 'form-control', 'label' => false, 'required' => 'required')); ?>
