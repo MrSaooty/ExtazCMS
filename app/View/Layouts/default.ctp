@@ -1,3 +1,4 @@
+<?php if(!isset($server_ip)) exit('Impossible de joindre la base de donn&eacute;es, v&eacute;rifiez vos informations de connexion (database.php)'); ?>
 <!DOCTYPE html>
 <!--[if IE 8]><html lang="fr" class="ie8"><![endif]-->  
 <!--[if IE 9]><html lang="fr" class="ie9"><![endif]-->  

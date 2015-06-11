@@ -1,7 +1,12 @@
 CHANGELOG
 =========
 
-v1.7 (pre release)
+v1.8 (En développement)
+----
+
+* Corrections de bugs mineurs
+
+v1.7 (10/06/2015)
 ----
 
 * Nettoyage du code PHP

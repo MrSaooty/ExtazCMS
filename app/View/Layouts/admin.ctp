@@ -220,7 +220,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://www.bukkit.fr/index.php/topic/15381-extazcms-un-v%C3%A9ritable-site-pour-votre-serveur-minecraft/" target="_blank">
+                                        <a href="http://extaz-cms.com/wiki" target="_blank">
                                             <i class="fa fa-file-text"></i> Besoin d'aide ?
                                         </a>
                                     </li>

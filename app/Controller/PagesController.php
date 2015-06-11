@@ -21,6 +21,8 @@
 App::uses('AppController', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
 App::uses('AYAH', 'Lib/AYAH');
+App::uses('Folder', 'Utility');
+App::uses('File', 'Utility');
 
 /**
  * Static content controller
