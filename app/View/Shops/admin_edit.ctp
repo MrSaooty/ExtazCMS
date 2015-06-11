@@ -9,7 +9,7 @@ $(function() {
 <div class="main-content">
     <div class="container">  
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="page-content">
                     <div class="single-head">
                         <h3 class="pull-left"><i class="fa fa-pencil-square-o"></i>Modifier un article</h3>
@@ -31,6 +31,43 @@ $(function() {
                                 <?php foreach($categories as $category){ ?>
                                     <option value="<?php echo $category['shopCategories']['id']; ?>"><?php echo $category['shopCategories']['name']; ?></option>
                                 <?php } ?>
+                            </select>
+                        </div>
+                        <label>Afficher dans la boutique ?</label>
+                        <div class="form-group">
+                            <select name="data[Shop][visible]" id="ShopVisible" class="form-control">
+                                <?php
+                                if($data['Shop']['visible'] == 1){
+                                    echo '<option value="">Oui</option>';
+                                }
+                                else{
+                                    echo '<option value="">Non</option>';
+                                }
+                                ?>
+                                <option value="1">Oui</option>
+                                <option value="0">Non</option>
+                            </select>
+                        </div>
+                        <label>Promotion</label>
+                        <div class="form-group">
+                            <select name="data[Shop][promo]" id="ShopPromo" class="form-control">
+                                <?php
+                                if($data['Shop']['promo'] == -1){
+                                    echo '<option value="">Pas de promotion</option>';
+                                }
+                                else{
+                                    echo '<option value="">Promotion actuelle: -'.$data['Shop']['promo'].'%</option>';
+                                }
+                                ?>
+                                <option value="-1">Pas de promotion</option>
+                                <option value="5">-5%</option>
+                                <option value="10">-10%</option>
+                                <option value="15">-15%</option>
+                                <option value="25">-25%</option>
+                                <option value="50">-50%</option>
+                                <option value="70">-70%</option>
+                                <option value="80">-80%</option>
+                                <option value="90">-90%</option>
                             </select>
                         </div>
                         <div class="form-group">

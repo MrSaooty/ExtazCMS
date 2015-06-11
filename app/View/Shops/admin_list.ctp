@@ -59,6 +59,8 @@ $(document).ready(function(){
                                     echo '<th><b>Prix en '.$money_server.'</b></th>';
                                 }
                                 ?>
+                                <th><b>Promo</b></th>
+                                <th><b>Etat</b></th>
                                 <th><b>Date de création</b></th>
                                 <th><b>Actions</b></th>
                             </tr>
@@ -73,6 +75,20 @@ $(document).ready(function(){
                                 }
                                 if($use_server_money == 1){
                                     echo '<td>'.$d['Shop']['price_money_server'].'</td>';
+                                }
+
+                                if($d['Shop']['promo'] == -1){
+                                    echo '<td><span class="label label-success">Aucune</span></td>';
+                                }
+                                else{
+                                    echo '<td><span class="label label-black">-'.$d['Shop']['promo'].'%</span></td>';
+                                }
+
+                                if($d['Shop']['visible'] == 1){
+                                    echo '<td><span class="label label-success">Affiché</span></td>';
+                                }
+                                else{
+                                    echo '<td><span class="label label-black">Caché</span></td>';
                                 }
                                 ?>
                                 <td><?php echo $this->Time->format('d-m-Y à H:i', $d['Shop']['created']); ?></td>

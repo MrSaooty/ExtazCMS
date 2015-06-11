@@ -24,7 +24,6 @@ $(function(){
         $('.search-input').show();
         $('.category').hide();
         $('.categories').show();
-        $('#ShopSearch').focus();
     });
     $('.categories').on('click', function(){
         $('.search').show();
@@ -68,7 +67,7 @@ if($connected){
                             <?php echo $i['Shop']['description']; ?>
                         </p>
                         <?php 
-                        if($use_economy == 1){
+                        if($use_economy == 1 && $i['Shop']['price_money_server'] != -1){
                             ?>
                             <a type="button" class="modal-button-1 btn-u btn-u-dark" href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'server']); ?>">
                                 <i class="fa fa-shopping-cart"></i> <?php echo number_format($i['Shop']['price_money_server'], 0, ',', ' ').' '; echo ucfirst($money_server); ?>
@@ -186,6 +185,11 @@ else{
                                                 </div>
                                                 <div class="photo hidden-xs hidden-sm">
                                                     <?php echo $this->Html->image($i['Shop']['img'], ['width' => 250, 'height' => 170, 'alt' => 'a']); ?>
+                                                    <?php
+                                                    if($i['Shop']['promo'] != -1){
+                                                        echo '<span class="shop-badge">-'.$i['Shop']['promo'].'%</span>';
+                                                    }
+                                                    ?>
                                                 </div>
                                                 <div class="info">
                                                     <?php
@@ -215,16 +219,23 @@ else{
                                                         ?>
                                                     </h5>
                                                 </div>
-                                                <div class="photo hidden-xs hidden-sm">
-                                                    <?php echo $this->Html->image($i['Shop']['img'], ['width' => 250, 'height' => 170, 'alt' => 'a']); ?>
-                                                </div>
                                                 <div class="info">
                                                     <?php
-                                                    if($connected){
-                                                        echo '<button class="buy btn btn-default" data-toggle="modal" data-target="#shopping'.$i['Shop']['id'].'"><i class="fa fa-shopping-cart"></i> Acheter</button>';
+                                                    if($i['Shop']['promo'] != -1){
+                                                        if($connected){
+                                                        echo '<button class="buy btn btn-default" data-toggle="modal" data-target="#shopping'.$i['Shop']['id'].'"><small>(-'.$i['Shop']['promo'].'%)</small> <i class="fa fa-shopping-cart"></i> Acheter</button>';
+                                                        }
+                                                        else{
+                                                            echo '<button class="buy btn btn-default" data-toggle="modal" data-target="#please_connect"><small>(-'.$i['Shop']['promo'].'%)</small> <i class="fa fa-shopping-cart"></i> Acheter</button>';
+                                                        }
                                                     }
                                                     else{
-                                                        echo '<button class="buy btn btn-default" data-toggle="modal" data-target="#please_connect"><i class="fa fa-shopping-cart"></i> Acheter</button>';
+                                                        if($connected){
+                                                        echo '<button class="buy btn btn-default" data-toggle="modal" data-target="#shopping'.$i['Shop']['id'].'"><i class="fa fa-shopping-cart"></i> Acheter</button>';
+                                                        }
+                                                        else{
+                                                            echo '<button class="buy btn btn-default" data-toggle="modal" data-target="#please_connect"><i class="fa fa-shopping-cart"></i> Acheter</button>';
+                                                        }
                                                     }
                                                     ?>
                                                     <div class="clearfix">

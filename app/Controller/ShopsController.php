@@ -6,6 +6,9 @@ Class ShopsController extends AppController{
 	var $paginate = array(
 		'Shop' => array(
 			'limit' => 18,
+			'conditions' => array(
+				'Shop.visible' => '1' 
+			),
 			'order' => array(
 				'Shop.id' => 'ASC'
 			),
@@ -35,17 +38,25 @@ Class ShopsController extends AppController{
 				$this->Shop->set($this->request->data);
 				if($this->Shop->validates()){
 					$this->Shop->create;
-					$explode = explode('--', $this->request->data['Shop']['required']);
-					$required = $explode[0];
-					$required_name = $explode[1];
 					$this->Shop->save($this->request->data);
-					if(empty($this->request->data['Shop']['required'])){
-						$this->request->data['Shop']['required'] = -1;
+					$this->Shop->saveField('visible', '1');
+					if(!isset($this->request->data['Shop']['cat'])){
+						$this->Shop->saveField('cat', '0');
+					}
+					if(!isset($this->request->data['Shop']['promo'])){
+						$this->Shop->saveField('promo', '-1');
+					}
+					if(isset($this->request->data['Shop']['required'])){
+						$explode = explode('--', $this->request->data['Shop']['required']);
+						$required = $explode[0];
+						$required_name = $explode[1];
+						$this->Shop->saveField('required', $required);
+						$this->Shop->saveField('required_name', $required_name);
 					}
 					else{
-						$this->Shop->saveField('required', $required);
+						$this->Shop->saveField('required', '-1');
+						$this->Shop->saveField('required_name', 'Aucun');
 					}
-					$this->Shop->saveField('required_name', $required_name);
 					$this->Session->setFlash('Article ajouté à la boutique !', 'success');
 					return $this->redirect(['controller' => 'shops', 'action' => 'list', 'admin' => true]);
 				}
@@ -125,9 +136,9 @@ Class ShopsController extends AppController{
 			// Si la recherche n'est pas trop courte ou n'est pas trop longue
 			if(strlen($this->request->data['Shop']['search']) >= $min && strlen($this->request->data['Shop']['search']) <= $max){
 				// On va chercher les articles qui correspondent à la recherche
-				$this->set('items', $this->Shop->find('all', ['conditions' => ['Shop.name LIKE' => '%'.$this->request->data['Shop']['search'].'%'], 'order' => ['Shop.created DESC']]));
+				$this->set('items', $this->Shop->find('all', ['conditions' => ['Shop.name LIKE' => '%'.$this->request->data['Shop']['search'].'%', 'Shop.visible' => '1'], 'order' => ['Shop.created DESC']]));
 				// Et on compte combien d'articles correspondent à la recherche
-				$this->set('nb_items', $this->Shop->find('count', ['conditions' => ['Shop.name LIKE' => '%'.$this->request->data['Shop']['search'].'%'], 'order' => ['Shop.created DESC']]));
+				$this->set('nb_items', $this->Shop->find('count', ['conditions' => ['Shop.name LIKE' => '%'.$this->request->data['Shop']['search'].'%', 'Shop.visible' => '1'], 'order' => ['Shop.created DESC']]));
 			}
 			// Si la recherche est trop courte ou trop longue
 			else{
@@ -268,6 +279,12 @@ Class ShopsController extends AppController{
 							$item = $this->Shop->find('first', ['conditions' => ['Shop.id' => $id]]);
 							// Cout de l'achat avec la monnaie du site
 							$price = $item['Shop']['price_money_site'];
+							// Promotion du produit
+							$promo = $item['Shop']['promo'];
+							if($promo != -1){
+								$promo = round($price / 100 * $promo);
+								$price = $price - $promo;
+							}
 							// Si l'utilisateur a assez
 							if($user_tokens >= $price){
 								// S'il y a un prérequis pour cet achat
@@ -327,6 +344,11 @@ Class ShopsController extends AppController{
 								if($price == -1){
 									return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 									exit();
+								}
+								$promo = $item['Shop']['promo'];
+								if($promo != -1){
+									$promo = round($price / 100 * $promo);
+									$price = $price - $promo;
 								}
 								// Si l'utilisateur a assez
 								if($user_server_money >= $price){

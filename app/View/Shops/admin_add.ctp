@@ -9,7 +9,7 @@ $(function() {
 <div class="main-content">
     <div class="container">  
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="page-content">
                     <div class="single-head">
                         <h3 class="pull-left"><i class="fa fa-pencil-square-o"></i>Ajouter un article dans la boutique</h3>
@@ -32,10 +32,31 @@ $(function() {
                         </div>
                         <div class="form-group">
                             <select name="data[Shop][cat]" id="ShopCat" class="form-control">
-                                <option value="0">Choisissez une catégorie</option>
+                                <option value="">Choisissez une catégorie</option>
                                 <?php foreach($categories as $category){ ?>
                                     <option value="<?php echo $category['shopCategories']['id']; ?>"><?php echo $category['shopCategories']['name']; ?></option>
                                 <?php } ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select name="data[Shop][visible]" id="ShopVisible" class="form-control">
+                                <option value="">Voulez vous que ce produit soit visible immédiatement dans la boutique ?</option>
+                                <option value="1">Oui</option>
+                                <option value="0">Non</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select name="data[Shop][promo]" id="ShopPromo" class="form-control">
+                                <option value="">Ce produit sera-t-il en promotion ?</option>
+                                <option value="-1">Non</option>
+                                <option value="5">Oui, -5%</option>
+                                <option value="10">Oui, -10%</option>
+                                <option value="15">Oui, -15%</option>
+                                <option value="25">Oui, -25%</option>
+                                <option value="50">Oui, -50%</option>
+                                <option value="70">Oui, -70%</option>
+                                <option value="80">Oui, -80%</option>
+                                <option value="90">Oui, -90%</option>
                             </select>
                         </div>
                         <div class="form-group">

@@ -227,6 +227,17 @@ button.happy-hour-btn {
 .fa-angle-down {
   margin-left: 5px;
 }
+.shop-badge {
+  background-color: #72C02C;
+  color: #fff;
+  position:absolute;
+  top: 52px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  opacity: 0.9;
+}
 .autocomplete-suggestions { border: 1px solid #999; background: #FFF; cursor: pointer; overflow: auto; -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); }
 .autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
 .autocomplete-no-suggestion { padding: 2px 5px;}

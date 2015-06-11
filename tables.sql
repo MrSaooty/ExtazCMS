@@ -332,6 +332,8 @@ CREATE TABLE IF NOT EXISTS `extaz_shop` (
   `description` text,
   `cat` text,
   `img` text,
+  `visible` int(11) DEFAULT NULL,
+  `promo` int(11) DEFAULT NULL,
   `required` text,
   `required_name` text,
   `price_money_site` int(11) DEFAULT NULL,
