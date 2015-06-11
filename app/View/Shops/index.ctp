@@ -66,17 +66,38 @@ if($connected){
                         <p class="text-justify">
                             <?php echo $i['Shop']['description']; ?>
                         </p>
-                        <?php 
-                        if($use_economy == 1 && $i['Shop']['price_money_server'] != -1){
+                        <?php
+                        // S'il y a une promo
+                        if($i['Shop']['promo'] != -1){
+                            $promo_site = round($i['Shop']['price_money_site'] / 100 * $i['Shop']['promo']);
+                            $price_site = $i['Shop']['price_money_site'] - $promo_site;
+                            $promo_server = round($i['Shop']['price_money_server'] / 100 * $i['Shop']['promo']);
+                            $price_server = $i['Shop']['price_money_server'] - $promo_server;
+                            if($use_economy == 1 && $i['Shop']['price_money_server'] != -1){
+                                ?>
+                                <a type="button" class="modal-button-1 btn-u btn-u-dark" href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'server']); ?>">
+                                    <i class="fa fa-shopping-cart"></i> <?php echo $price_server.' <s>'.number_format($i['Shop']['price_money_server'], 0, ',', ' ').'</s> '; echo ucfirst($money_server); ?>
+                                </a>
+                                <?php
+                            }
                             ?>
-                            <a type="button" class="modal-button-1 btn-u btn-u-dark" href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'server']); ?>">
-                                <i class="fa fa-shopping-cart"></i> <?php echo number_format($i['Shop']['price_money_server'], 0, ',', ' ').' '; echo ucfirst($money_server); ?>
-                            </a>
-                            <?php
+                            <a type="button" class="modal-button-2 btn-u btn-u" href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'site']); ?>">
+                                <i class="fa fa-shopping-cart"></i> <?php echo $price_site.' <s>'.number_format($i['Shop']['price_money_site'], 0, ',', ' ').'</s> '; echo ucfirst($site_money);
+                        }
+                        // S'il n'y a pas de promo
+                        else{
+                            if($use_economy == 1 && $i['Shop']['price_money_server'] != -1){
+                                ?>
+                                <a type="button" class="modal-button-1 btn-u btn-u-dark" href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'server']); ?>">
+                                    <i class="fa fa-shopping-cart"></i> <?php echo number_format($i['Shop']['price_money_server'], 0, ',', ' ').' '; echo ucfirst($money_server); ?>
+                                </a>
+                                <?php
+                            }
+                            ?>
+                            <a type="button" class="modal-button-2 btn-u btn-u" href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'site']); ?>">
+                                <i class="fa fa-shopping-cart"></i> <?php echo number_format($i['Shop']['price_money_site'], 0, ',', ' ').' '; echo ucfirst($site_money);
                         }
                         ?>
-                        <a type="button" class="modal-button-2 btn-u btn-u" href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'site']); ?>">
-                            <i class="fa fa-shopping-cart"></i> <?php echo number_format($i['Shop']['price_money_site'], 0, ',', ' ').' '; echo ucfirst($site_money); ?>
                         </a>
                     </div>
                 </div>

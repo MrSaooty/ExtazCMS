@@ -71,10 +71,24 @@ $(document).ready(function(){
                                 <td><?php echo $d['Shop']['name']; ?></td>
                                 <?php
                                 if($use_store == 1){
-                                    echo '<td>'.$d['Shop']['price_money_site'].'</td>';
+                                    if($d['Shop']['promo'] == -1){
+                                        echo '<td>'.$d['Shop']['price_money_site'].'</td>';
+                                    }
+                                    else{
+                                        $promo = round($d['Shop']['price_money_site'] / 100 * $d['Shop']['promo']);
+                                        $price = $d['Shop']['price_money_site'] - $promo;
+                                        echo '<td><font color="#F75353"><u>'.$d['Shop']['price_money_site'].'</u></font> <i class="fa fa-angle-double-right"></i> '.$price.'</td>';
+                                    }
                                 }
                                 if($use_server_money == 1){
-                                    echo '<td>'.$d['Shop']['price_money_server'].'</td>';
+                                    if($d['Shop']['promo'] == -1){
+                                        echo '<td>'.$d['Shop']['price_money_server'].'</td>';
+                                    }
+                                    else{
+                                        $promo = round($d['Shop']['price_money_server'] / 100 * $d['Shop']['promo']);
+                                        $price = $d['Shop']['price_money_server'] - $promo;
+                                        echo '<td><font color="#F75353"><u>'.$d['Shop']['price_money_server'].'</u></font> <i class="fa fa-angle-double-right"></i> '.$price.'</td>';
+                                    }
                                 }
 
                                 if($d['Shop']['promo'] == -1){
