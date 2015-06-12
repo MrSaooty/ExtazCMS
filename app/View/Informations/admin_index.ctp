@@ -57,21 +57,21 @@ $(document).ready(function(){
                         <div class="general tab-pane fade active in" id="tab-1">
                             <?php echo $this->Form->create('Informations', ['action' => 'update_informations']); ?>
                                 <?php $informations = [
-                                'name_server' => 'Nom du serveur', 
-                                'ip_server' => 'IP du serveur', 
-                                'port_server' => 'Port du serveur', 
-                                'money_server' => 'Monnaie du serveur (Si vous autorisez le paiement via celle-ci)',
-                                'site_money' => 'Nom de la monnaie du site (Si vous utilisez la boutique)',
-                                'contact_email' => 'Votre email pour la page contact',
-                                'logo_url' => 'URL de votre logo',
-                                'chat_prefix' => 'Prefix pour le chat',
-                                'chat_nb_messages' => 'Nombres de messages à afficher dans le chat',
-                                'analytics' => 'ID Google Analytics (Facultatif)',
-                                'send_tokens_loss_rate' => 'Taux de '.$site_money.' perdu lors d\'un transfert (en %)'
+                                'name_server' => ['label' => 'Nom du serveur', 'type' => 'text'], 
+                                'ip_server' => ['label' => 'IP du serveur', 'type' => 'text'], 
+                                'port_server' => ['label' => 'Port du serveur', 'type' => 'number'], 
+                                'money_server' => ['label' => 'Monnaie du serveur (Si vous autorisez le paiement via celle-ci)', 'type' => 'text'], 
+                                'site_money' => ['label' => 'Nom de la monnaie du site (Si vous utilisez la boutique)', 'type' => 'text'], 
+                                'contact_email' => ['label' => 'Votre email pour la page contact', 'type' => 'text'], 
+                                'logo_url' => ['label' => 'URL de votre logo', 'type' => 'url'], 
+                                'chat_prefix' => ['label' => 'Prefix pour le chat', 'type' => 'text'], 
+                                'chat_nb_messages' => ['label' => 'Nombres de messages à afficher dans le chat', 'type' => 'number'], 
+                                'analytics' => ['label' => 'ID Google Analytics (Facultatif)', 'type' => 'number'], 
+                                'send_tokens_loss_rate' => ['label' => 'Taux de '.$site_money.' perdu lors d\'un transfert (en %)', 'type' => 'text']
                                 ]; ?>
                                 <?php foreach($informations as $k => $v){ ?>
                                 <div class="form-group">
-                                    <?php echo $this->Form->input($k, array('type' => 'text', 'value' => $data['Informations'][$k], 'class' => 'form-control', 'label' => $v)); ?>
+                                    <?php echo $this->Form->input($k, array('type' => $v['type'], 'value' => $data['Informations'][$k], 'class' => 'form-control', 'label' => $v['label'])); ?>
                                 </div>
                                 <?php } ?>
                                 <button class="btn btn-black pull-right" type="submit"><i class="fa fa-check"></i> Confirmer les modifications</button><br>

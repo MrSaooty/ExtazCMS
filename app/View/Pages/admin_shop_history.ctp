@@ -46,6 +46,7 @@ $(document).ready(function(){
                             <tr>
                                 <th><b>Pseudo</b></th>
                                 <th><b>Objet</b></th>
+                                <th><b>Quantité</b></th>
                                 <th><b>Prix</b></th>
                                 <th><b>Monnaie</b></th>
                                 <th><b>Acheté le</b></th>
@@ -69,6 +70,7 @@ $(document).ready(function(){
                                     ?>
                                 </td>
                                 <td><?php echo $d['shopHistory']['item']; ?></td>
+                                <td>x<?php echo $d['shopHistory']['quantity']; ?></td>
                                 <td><?php echo number_format($d['shopHistory']['price'], 0, ',', ' '); ?></td>
                                 <?php if($d['shopHistory']['money'] == 'site'){ ?>
                                     <td><?php echo ucfirst($site_money); ?></td>

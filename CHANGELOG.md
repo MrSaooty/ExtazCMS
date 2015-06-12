@@ -4,8 +4,9 @@ CHANGELOG
 v1.8 (en développement)
 ----
 
+* Vous pouvez désormais choisir la quantité quand vous achetez un produit dans la boutique
 * Vous pouvez désormais mettre un produit en promotion dans la boutique
-* Vous pouvez désormais caché un produit dans la boutique
+* Vous pouvez désormais cacher un produit dans la boutique
 * Corrections de bugs mineurs
 
 v1.7 (10/06/2015)

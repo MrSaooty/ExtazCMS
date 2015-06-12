@@ -147,7 +147,7 @@ $(document).ready(function(){
                                                 else{
                                                     $money = $money_server;
                                                 }
-                                                echo '<span class="text-highlights text-highlights-green"><i class="fa fa-clock-o"></i> '.$this->Time->format('d/m/Y H:i:s', $shop_h['shopHistory']['created']).'</span> Vous avez achetez "'.$shop_h['shopHistory']['item'].'" pour '.$shop_h['shopHistory']['price'].' '.$money.'<br>';
+                                                echo '<span class="text-highlights text-highlights-green"><i class="fa fa-clock-o"></i> '.$this->Time->format('d/m/Y H:i:s', $shop_h['shopHistory']['created']).'</span> Vous avez achetez <b>'.$shop_h['shopHistory']['item'].' (x'.$shop_h['shopHistory']['quantity'].')</b> pour '.$shop_h['shopHistory']['price'].' '.$money.'<br>';
                                             }
                                         }
                                         else{

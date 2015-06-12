@@ -32,6 +32,37 @@ $(function(){
         $('.categories').hide();
     });
 
+    <?php
+    foreach($items as $item){
+        ?>
+        $("#plus<?php echo $item['Shop']['id']; ?>").on('click', function(){
+            var quantity<?php echo $item['Shop']['id']; ?> = $("#quantity<?php echo $item['Shop']['id']; ?>").text();
+            var server<?php echo $item['Shop']['id']; ?> = $("#server<?php echo $item['Shop']['id']; ?>").val();
+            var site<?php echo $item['Shop']['id']; ?> = $("#site<?php echo $item['Shop']['id']; ?>").val();
+            if(quantity<?php echo $item['Shop']['id']; ?> < 250){
+                quantity<?php echo $item['Shop']['id']; ?>++;
+                $("#server<?php echo $item['Shop']['id']; ?>").val(quantity<?php echo $item['Shop']['id']; ?>);
+                $("#site<?php echo $item['Shop']['id']; ?>").val(quantity<?php echo $item['Shop']['id']; ?>);
+                $("#plus<?php echo $item['Shop']['id']; ?>").blur();
+                $("#quantity<?php echo $item['Shop']['id']; ?>").text(quantity<?php echo $item['Shop']['id']; ?>);
+            }
+        });
+        $("#moins<?php echo $item['Shop']['id']; ?>").on('click', function(){
+            var quantity<?php echo $item['Shop']['id']; ?> = $("#quantity<?php echo $item['Shop']['id']; ?>").text();
+            var server<?php echo $item['Shop']['id']; ?> = $("#server<?php echo $item['Shop']['id']; ?>").val();
+            var site<?php echo $item['Shop']['id']; ?> = $("#site<?php echo $item['Shop']['id']; ?>").val();
+            if(quantity<?php echo $item['Shop']['id']; ?> > 1){
+                quantity<?php echo $item['Shop']['id']; ?>--;
+                $("#server<?php echo $item['Shop']['id']; ?>").val(quantity<?php echo $item['Shop']['id']; ?>);
+                $("#site<?php echo $item['Shop']['id']; ?>").val(quantity<?php echo $item['Shop']['id']; ?>);
+                $("#moins<?php echo $item['Shop']['id']; ?>").blur();
+                $("#quantity<?php echo $item['Shop']['id']; ?>").text(quantity<?php echo $item['Shop']['id']; ?>);
+            }
+        });
+        <?php
+    }
+    ?>
+
     var items = [
         <?php
         foreach($items as $item){
@@ -51,7 +82,11 @@ $(function(){
 <?php
 if($connected){
     foreach($items as $i){
-        ?>            
+        $promo_site = round($i['Shop']['price_money_site'] / 100 * $i['Shop']['promo']);
+        $price_site = $i['Shop']['price_money_site'] - $promo_site;
+        $promo_server = round($i['Shop']['price_money_server'] / 100 * $i['Shop']['promo']);
+        $price_server = $i['Shop']['price_money_server'] - $promo_server;
+        ?>
         <!-- Begin Modal -->
         <div class="modal fade bs-example-modal-sm" id="shopping<?php echo $i['Shop']['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="shopping<?php echo $i['Shop']['id']; ?>" aria-hidden="true">
             <div class="modal-dialog modal-sm">
@@ -66,39 +101,41 @@ if($connected){
                         <p class="text-justify">
                             <?php echo $i['Shop']['description']; ?>
                         </p>
-                        <?php
-                        // S'il y a une promo
-                        if($i['Shop']['promo'] != -1){
-                            $promo_site = round($i['Shop']['price_money_site'] / 100 * $i['Shop']['promo']);
-                            $price_site = $i['Shop']['price_money_site'] - $promo_site;
-                            $promo_server = round($i['Shop']['price_money_server'] / 100 * $i['Shop']['promo']);
-                            $price_server = $i['Shop']['price_money_server'] - $promo_server;
-                            if($use_economy == 1 && $i['Shop']['price_money_server'] != -1){
-                                ?>
-                                <a type="button" class="modal-button-1 btn-u btn-u-dark" href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'server']); ?>">
-                                    <i class="fa fa-shopping-cart"></i> <?php echo $price_server.' <s>'.number_format($i['Shop']['price_money_server'], 0, ',', ' ').'</s> '; echo ucfirst($money_server); ?>
-                                </a>
-                                <?php
+                        <div class="quantity">
+                            Quantité désiré : <span id="quantity<?php echo $i['Shop']['id']; ?>">1</span>
+                            <button class="btn-u btn-u-dark btn-u-xs" id="plus<?php echo $i['Shop']['id']; ?>">+</button>
+                            <button class="btn-u btn-u-dark btn-u-xs" id="moins<?php echo $i['Shop']['id']; ?>">-</button>
+                        </div>
+                        <?php if($use_economy == 1 && $i['Shop']['price_money_server'] != -1){ ?>
+                            <?php echo $this->Form->create('Shop', ['action' => 'buy']); ?>
+                                <?php echo $this->Form->input('id', ['type' => 'hidden', 'value' => $i['Shop']['id']]); ?>
+                                <?php echo $this->Form->input('money', ['type' => 'hidden', 'value' => 'server']); ?>
+                                <?php echo $this->Form->input('quantity', ['type' => 'hidden', 'value' => '1', 'id' => 'server'.$i['Shop']['id']]); ?>
+                                <button type="submit" class="modal-button-1 btn-u btn-u-dark" href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'server']); ?>" id="server<?php echo $i['Shop']['id']; ?>"><i class="fa fa-shopping-cart"></i> 
+                                    <?php if($i['Shop']['promo'] != -1){
+                                        echo $price_server.' <s>'.number_format($i['Shop']['price_money_server'], 0, ',', ' ').'</s> '; echo ucfirst($money_server);
+                                    }
+                                    else{
+                                        echo number_format($i['Shop']['price_money_server'], 0, ',', ' ').' '; echo ucfirst($money_server);
+                                    } ?>
+                                </button>
+                            <?php echo $this->Form->end(); ?>
+                        <?php } ?>
+                        <?php echo $this->Form->create('Shop', ['action' => 'buy']); ?>
+                            <?php echo $this->Form->input('id', ['type' => 'hidden', 'value' => $i['Shop']['id']]); ?>
+                            <?php echo $this->Form->input('money', ['type' => 'hidden', 'value' => 'site']); ?>
+                            <?php echo $this->Form->input('quantity', ['type' => 'hidden', 'value' => '1', 'id' => 'site'.$i['Shop']['id']]); ?>
+                            <button type="submit" class="modal-button-2 btn-u btn-u" href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'site']); ?>" id="site<?php echo $i['Shop']['id']; ?>"><i class="fa fa-shopping-cart"></i> 
+                            <?php
+                            if($i['Shop']['promo'] != -1){
+                                echo $price_site.' <s>'.number_format($i['Shop']['price_money_site'], 0, ',', ' ').'</s> '; echo ucfirst($site_money);
+                            }
+                            else{
+                                echo number_format($i['Shop']['price_money_site'], 0, ',', ' ').' '; echo ucfirst($site_money);
                             }
                             ?>
-                            <a type="button" class="modal-button-2 btn-u btn-u" href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'site']); ?>">
-                                <i class="fa fa-shopping-cart"></i> <?php echo $price_site.' <s>'.number_format($i['Shop']['price_money_site'], 0, ',', ' ').'</s> '; echo ucfirst($site_money);
-                        }
-                        // S'il n'y a pas de promo
-                        else{
-                            if($use_economy == 1 && $i['Shop']['price_money_server'] != -1){
-                                ?>
-                                <a type="button" class="modal-button-1 btn-u btn-u-dark" href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'server']); ?>">
-                                    <i class="fa fa-shopping-cart"></i> <?php echo number_format($i['Shop']['price_money_server'], 0, ',', ' ').' '; echo ucfirst($money_server); ?>
-                                </a>
-                                <?php
-                            }
-                            ?>
-                            <a type="button" class="modal-button-2 btn-u btn-u" href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'site']); ?>">
-                                <i class="fa fa-shopping-cart"></i> <?php echo number_format($i['Shop']['price_money_site'], 0, ',', ' ').' '; echo ucfirst($site_money);
-                        }
-                        ?>
-                        </a>
+                        </button>
+                        <?php echo $this->Form->end(); ?>
                     </div>
                 </div>
             </div>

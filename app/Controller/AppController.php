@@ -162,12 +162,9 @@ class AppController extends Controller {
 		$this->set('nb_cpages', $this->Cpage->find('count'));
 		// ExtazCMS
 		$version = 1.8;
-		$last_version = file_get_contents('http://www.extaz-cms.com/extazcms.version');
+		$last_version = file_get_contents('https://raw.githubusercontent.com/MrSaooty/ExtazCMS/master/extaz.version');
 		$this->set('version', $version);
 		$this->set('last_version', $last_version);
-		// Autre
-		Configure::write('Config.language', 'fra');
-		$this->Auth->allow();
 		// Maintenance du site
 		if($informations['Informations']['maintenance'] == 1){
 			if($this->Auth->user('role') < 1){
@@ -182,6 +179,9 @@ class AppController extends Controller {
 				$this->render('/Errors/jsonapi');
 			}
 		}
+		// Autre
+		Configure::write('Config.language', 'fra');
+		$this->Auth->allow();
 	}
 
 	function afterPaypalNotification($txnId){

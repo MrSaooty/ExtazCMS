@@ -255,7 +255,10 @@ Class ShopsController extends AppController{
 		}
 	}
 
-	public function buy($id, $money){
+	public function buy(){
+		$id = $this->request->data['Shop']['id'];
+		$money = $this->request->data['Shop']['money'];
+		$quantity = $this->request->data['Shop']['quantity'];
 		// JSONAPI
 		$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
     	// On test si le joueur est en ligne
@@ -266,7 +269,7 @@ Class ShopsController extends AppController{
 			// Si l'utlisateur est co au site
 			if($this->Auth->user()){
 				// Si l'item existe
-				if($this->Shop->find('first', ['conditions' => ['Shop.id' => $id]])){
+				if($this->Shop->findById($id)){
 					// Si la boutique est activée
 					if($this->infos['use_store'] == 1){
 						// Si l'utilisateur paye avec la monnaie du site
@@ -279,6 +282,13 @@ Class ShopsController extends AppController{
 							$item = $this->Shop->find('first', ['conditions' => ['Shop.id' => $id]]);
 							// Cout de l'achat avec la monnaie du site
 							$price = $item['Shop']['price_money_site'];
+							if($price == -1){
+								return $this->redirect(['controller' => 'shops', 'action' => 'index']);
+								exit();
+							}
+							else{
+								$price = $item['Shop']['price_money_site'] * $quantity;
+							}
 							// Promotion du produit
 							$promo = $item['Shop']['promo'];
 							if($promo != -1){
@@ -304,20 +314,23 @@ Class ShopsController extends AppController{
 								$this->shopHistory->saveField('item_id', $item['Shop']['id']);
 								$this->shopHistory->saveField('price', $price);
 								$this->shopHistory->saveField('money', $money);
+								$this->shopHistory->saveField('quantity', $quantity);
 								// On définit son nv nb de tokens
 								$new_user_tokens = $user_tokens - $price;
 								$this->User->id = $this->Auth->user('id');
 								$this->User->saveField('tokens', $new_user_tokens);
 								// On execute la/les commande(s)
 								$command = str_replace('{{player}}', $this->Auth->user('username'), $item['Shop']['command']);
-								if(strstr($item['Shop']['command'], '{{new}}')){
-									$new_command = explode('{{new}}', $command);
-									foreach($new_command as $command) {
+								for($i=0; $i < $quantity; $i++){
+									if(strstr($item['Shop']['command'], '{{new}}')){
+										$new_command = explode('{{new}}', $command);
+										foreach($new_command as $command) {
+											$api->call('server.run_command', [$command]);
+										}
+									}
+									else{
 										$api->call('server.run_command', [$command]);
 									}
-								}
-								else{
-									$api->call('server.run_command', [$command]);
 								}
 								// On redirige avec un message
 								$this->Session->setFlash('Achat effectué, vous avez depensé '.$price.' '.$this->infos['site_money'].'', 'success');
@@ -344,6 +357,9 @@ Class ShopsController extends AppController{
 								if($price == -1){
 									return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 									exit();
+								}
+								else{
+									$price = $item['Shop']['price_money_server'] * $quantity;
 								}
 								$promo = $item['Shop']['promo'];
 								if($promo != -1){
@@ -437,6 +453,7 @@ Class ShopsController extends AppController{
 				$this->shopHistory->saveField('item_id', $item_id);
 				$this->shopHistory->saveField('price', '0');
 				$this->shopHistory->saveField('money', '['.$this->Auth->user('username').']');
+				$this->shopHistory->saveField('quantity', '1');
 				$this->Session->setFlash('Prérequis octroyé', 'success');
 				return $this->redirect($this->referer());
 			}

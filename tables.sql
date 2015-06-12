@@ -355,6 +355,7 @@ CREATE TABLE IF NOT EXISTS `extaz_shop_history` (
   `item_id` int(11) DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
   `money` text,
+  `quantity` int(11) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
