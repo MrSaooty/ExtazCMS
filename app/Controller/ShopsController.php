@@ -385,18 +385,21 @@ Class ShopsController extends AppController{
 									$this->shopHistory->saveField('item_id', $item['Shop']['id']);
 									$this->shopHistory->saveField('price', $price);
 									$this->shopHistory->saveField('money', $money);
+									$this->shopHistory->saveField('quantity', $quantity);
 									// On fait payer l'utilisateur sur le serveur
 									$api->call('players.name.bank.withdraw', [$this->Auth->user('username'), $price]);
 									// On execute la/les commande(s)
 									$command = str_replace('{{player}}', $this->Auth->user('username'), $item['Shop']['command']);
-									if(strstr($item['Shop']['command'], '{{new}}')){
-										$new_command = explode('{{new}}', $command);
-										foreach($new_command as $command) {
+									for($i=0; $i < $quantity; $i++){
+										if(strstr($item['Shop']['command'], '{{new}}')){
+											$new_command = explode('{{new}}', $command);
+											foreach($new_command as $command) {
+												$api->call('server.run_command', [$command]);
+											}
+										}
+										else{
 											$api->call('server.run_command', [$command]);
 										}
-									}
-									else{
-										$api->call('server.run_command', [$command]);
 									}
 									// On redirige avec un message
 									$this->Session->setFlash('Achat effectué, vous avez depensé '.$price.' '.$this->infos['money_server'].'', 'success');
