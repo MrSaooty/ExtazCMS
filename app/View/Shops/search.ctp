@@ -1,36 +1,68 @@
 <?php $this->assign('title', 'Recherche pour '.$request.''); ?>
 <script>
 $(function(){
-<?php
-foreach($items as $item){
-    ?>
-    $("#plus<?php echo $item['Shop']['id']; ?>").on('click', function(){
-        var quantity<?php echo $item['Shop']['id']; ?> = $("#quantity<?php echo $item['Shop']['id']; ?>").text();
-        var server<?php echo $item['Shop']['id']; ?> = $("#server<?php echo $item['Shop']['id']; ?>").val();
-        var site<?php echo $item['Shop']['id']; ?> = $("#site<?php echo $item['Shop']['id']; ?>").val();
-        if(quantity<?php echo $item['Shop']['id']; ?> < 250){
-            quantity<?php echo $item['Shop']['id']; ?>++;
-            $("#server<?php echo $item['Shop']['id']; ?>").val(quantity<?php echo $item['Shop']['id']; ?>);
-            $("#site<?php echo $item['Shop']['id']; ?>").val(quantity<?php echo $item['Shop']['id']; ?>);
-            $("#plus<?php echo $item['Shop']['id']; ?>").blur();
-            $("#quantity<?php echo $item['Shop']['id']; ?>").text(quantity<?php echo $item['Shop']['id']; ?>);
+    numeral.language('fr', {
+        delimiters: {
+            thousands: ' ',
+            decimal: ','
+        },
+        abbreviations: {
+            thousand: 'k',
+            million: 'm',
+            billion: 'b',
+            trillion: 't'
+        },
+        ordinal : function (number) {
+            return number === 1 ? 'er' : 'ème';
+        },
+        currency: {
+            symbol: '€'
         }
     });
-    $("#moins<?php echo $item['Shop']['id']; ?>").on('click', function(){
-        var quantity<?php echo $item['Shop']['id']; ?> = $("#quantity<?php echo $item['Shop']['id']; ?>").text();
-        var server<?php echo $item['Shop']['id']; ?> = $("#server<?php echo $item['Shop']['id']; ?>").val();
-        var site<?php echo $item['Shop']['id']; ?> = $("#site<?php echo $item['Shop']['id']; ?>").val();
-        if(quantity<?php echo $item['Shop']['id']; ?> > 1){
-            quantity<?php echo $item['Shop']['id']; ?>--;
-            $("#server<?php echo $item['Shop']['id']; ?>").val(quantity<?php echo $item['Shop']['id']; ?>);
-            $("#site<?php echo $item['Shop']['id']; ?>").val(quantity<?php echo $item['Shop']['id']; ?>);
-            $("#moins<?php echo $item['Shop']['id']; ?>").blur();
-            $("#quantity<?php echo $item['Shop']['id']; ?>").text(quantity<?php echo $item['Shop']['id']; ?>);
-        }
-    });
+    numeral.language('fr');
     <?php
-}
-?>
+    foreach($items as $item){
+        $item_id = $item['Shop']['id'];
+        ?>
+        $("#plus<?= $item_id; ?>").on('click', function(){
+            var quantity<?= $item_id; ?> = $("#quantity<?= $item_id; ?>").text();
+            var server_price<?= $item_id; ?> = $("#server-price<?= $item_id; ?>").attr('data-price');
+            var site_price<?= $item_id; ?> = $("#site-price<?= $item_id; ?>").attr('data-price');
+            if(quantity<?= $item_id; ?> < 250){
+                quantity<?= $item_id; ?>++;
+                var server_price<?= $item_id; ?> = server_price<?= $item_id; ?> * quantity<?= $item_id; ?>;
+                var site_price<?= $item_id; ?> = site_price<?= $item_id; ?> * quantity<?= $item_id; ?>;
+                var server_price<?= $item_id; ?> = numeral(server_price<?= $item_id; ?>).format('0,0');
+                var site_price<?= $item_id; ?> = numeral(site_price<?= $item_id; ?>).format('0,0');
+                $("#server-price<?= $item_id; ?>").text(server_price<?= $item_id; ?>);
+                $("#site-price<?= $item_id; ?>").text(site_price<?= $item_id; ?>);
+                $("#server<?= $item_id; ?>").val(quantity<?= $item_id; ?>);
+                $("#site<?= $item_id; ?>").val(quantity<?= $item_id; ?>);
+                $("#plus<?= $item_id; ?>").blur();
+                $("#quantity<?= $item_id; ?>").text(quantity<?= $item_id; ?>);
+            }
+        });
+        $("#moins<?= $item_id; ?>").on('click', function(){
+            var quantity<?= $item_id; ?> = $("#quantity<?= $item_id; ?>").text();
+            var server_price<?= $item_id; ?> = $("#server-price<?= $item_id; ?>").attr('data-price');
+            var site_price<?= $item_id; ?> = $("#site-price<?= $item_id; ?>").attr('data-price');
+            if(quantity<?= $item_id; ?> > 1){
+                quantity<?= $item_id; ?>--;
+                var server_price<?= $item_id; ?> = quantity<?= $item_id; ?> * server_price<?= $item_id; ?>;
+                var site_price<?= $item_id; ?> = quantity<?= $item_id; ?> * site_price<?= $item_id; ?>;
+                var server_price<?= $item_id; ?> = numeral(server_price<?= $item_id; ?>).format('0,0');
+                var site_price<?= $item_id; ?> = numeral(site_price<?= $item_id; ?>).format('0,0');
+                $("#server-price<?= $item_id; ?>").text(server_price<?= $item_id; ?>);
+                $("#site-price<?= $item_id; ?>").text(site_price<?= $item_id; ?>);
+                $("#server<?= $item_id; ?>").val(quantity<?= $item_id; ?>);
+                $("#site<?= $item_id; ?>").val(quantity<?= $item_id; ?>);
+                $("#moins<?= $item_id; ?>").blur();
+                $("#quantity<?= $item_id; ?>").text(quantity<?= $item_id; ?>);
+            }
+        });
+        <?php
+    }
+    ?>
 });
 </script>
 <?php
@@ -65,12 +97,12 @@ if($connected && $nb_items > 0){
                                 <?php echo $this->Form->input('id', ['type' => 'hidden', 'value' => $i['Shop']['id']]); ?>
                                 <?php echo $this->Form->input('money', ['type' => 'hidden', 'value' => 'server']); ?>
                                 <?php echo $this->Form->input('quantity', ['type' => 'hidden', 'value' => '1', 'id' => 'server'.$i['Shop']['id']]); ?>
-                                <button type="submit" class="modal-button-1 btn-u btn-u-dark" href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'server']); ?>" id="server<?php echo $i['Shop']['id']; ?>"><i class="fa fa-shopping-cart"></i> 
+                                <button type="submit" class="modal-button-1 btn-u btn-u-dark" id="server<?php echo $i['Shop']['id']; ?>"><i class="fa fa-shopping-cart"></i> 
                                     <?php if($i['Shop']['promo'] != -1){
-                                        echo $price_server.' <s>'.number_format($i['Shop']['price_money_server'], 0, ',', ' ').'</s> '; echo ucfirst($money_server);
+                                        echo '<span data-price="'.$price_server.'" id="server-price'.$i['Shop']['id'].'">'.$price_server.'</span> '; echo ucfirst($money_server);
                                     }
                                     else{
-                                        echo number_format($i['Shop']['price_money_server'], 0, ',', ' ').' '; echo ucfirst($money_server);
+                                        echo '<span data-price="'.$i['Shop']['price_money_server'].'" id="server-price'.$i['Shop']['id'].'">'.number_format($i['Shop']['price_money_server'], 0, ',', ' ').'</span> '; echo ucfirst($money_server);
                                     } ?>
                                 </button>
                             <?php echo $this->Form->end(); ?>
@@ -79,16 +111,16 @@ if($connected && $nb_items > 0){
                             <?php echo $this->Form->input('id', ['type' => 'hidden', 'value' => $i['Shop']['id']]); ?>
                             <?php echo $this->Form->input('money', ['type' => 'hidden', 'value' => 'site']); ?>
                             <?php echo $this->Form->input('quantity', ['type' => 'hidden', 'value' => '1', 'id' => 'site'.$i['Shop']['id']]); ?>
-                            <button type="submit" class="modal-button-2 btn-u btn-u" href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'buy', $i['Shop']['id'], 'site']); ?>" id="site<?php echo $i['Shop']['id']; ?>"><i class="fa fa-shopping-cart"></i> 
-                            <?php
-                            if($i['Shop']['promo'] != -1){
-                                echo $price_site.' <s>'.number_format($i['Shop']['price_money_site'], 0, ',', ' ').'</s> '; echo ucfirst($site_money);
-                            }
-                            else{
-                                echo number_format($i['Shop']['price_money_site'], 0, ',', ' ').' '; echo ucfirst($site_money);
-                            }
-                            ?>
-                        </button>
+                            <button type="submit" class="modal-button-2 btn-u btn-u" id="site<?php echo $i['Shop']['id']; ?>"><i class="fa fa-shopping-cart"></i> 
+                                <?php
+                                if($i['Shop']['promo'] != -1){
+                                    echo '<span data-price="'.$price_site.'" id="site-price'.$i['Shop']['id'].'">'.$price_site.'</span> '; echo ucfirst($site_money);
+                                }
+                                else{
+                                    echo '<span data-price="'.$i['Shop']['price_money_site'].'" id="site-price'.$i['Shop']['id'].'">'.number_format($i['Shop']['price_money_site'], 0, ',', ' ').'</span> '; echo ucfirst($site_money);
+                                }
+                                ?>
+                            </button>
                         <?php echo $this->Form->end(); ?>
                     </div>
                 </div>

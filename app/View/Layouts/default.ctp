@@ -229,8 +229,9 @@
     </script>
     <script src="//cdn.ckeditor.com/4.4.6/standard/ckeditor.js"></script>
     <script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
     <?php 
-    if(!empty($analytics) OR $analytics != 0){
+    if(!empty($analytics) && $analytics != 0){
         ?>
         <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

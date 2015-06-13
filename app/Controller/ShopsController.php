@@ -268,112 +268,44 @@ Class ShopsController extends AppController{
 		if($player_is_online){
 			// Si l'utlisateur est co au site
 			if($this->Auth->user()){
-				// Si l'item existe
-				if($this->Shop->findById($id)){
-					// Si la boutique est activée
-					if($this->infos['use_store'] == 1){
-						// Si l'utilisateur paye avec la monnaie du site
-						if($money == 'site'){
-							// On recupère les infos de l'utlisateur
-							$user = $this->User->find('first', ['conditions' => ['User.username' => $this->Auth->user('username')]]);
-							// Le nombre de tokens que possède l'utilisateur
-							$user_tokens = $user['User']['tokens'];
-							// On recupère les infos de l'item
-							$item = $this->Shop->find('first', ['conditions' => ['Shop.id' => $id]]);
-							// Cout de l'achat avec la monnaie du site
-							$price = $item['Shop']['price_money_site'];
-							if($price == -1){
-								return $this->redirect(['controller' => 'shops', 'action' => 'index']);
-								exit();
-							}
-							else{
-								$price = $item['Shop']['price_money_site'] * $quantity;
-							}
-							// Promotion du produit
-							$promo = $item['Shop']['promo'];
-							if($promo != -1){
-								$promo = round($price / 100 * $promo);
-								$price = $price - $promo;
-							}
-							// Si l'utilisateur a assez
-							if($user_tokens >= $price){
-								// S'il y a un prérequis pour cet achat
-								if($item['Shop']['required'] != -1){
-									$item_required = $this->Shop->find('first', ['conditions' => ['Shop.id' => $item['Shop']['required']]]);
-									$item_required_name = $item_required['Shop']['name'];
-									// Si l'utilisateur n'a pas le prérequis
-									if(!$this->shopHistory->find('first', ['conditions' => ['username' => $this->Auth->user('username'), 'item_id' => $item_required]])){
-										$this->Session->setFlash('Cet achat a un prérequis vous devez d\'abord acheter <u>'.$item_required_name.'</u>', 'error');
-										return $this->redirect(['controller' => 'shops', 'action' => 'index']);
-									}
-								}
-								// Historique d'achat
-								$this->shopHistory->create;
-								$this->shopHistory->saveField('user_id', $this->Auth->user('id'));
-								$this->shopHistory->saveField('item', $item['Shop']['name']);
-								$this->shopHistory->saveField('item_id', $item['Shop']['id']);
-								$this->shopHistory->saveField('price', $price);
-								$this->shopHistory->saveField('money', $money);
-								$this->shopHistory->saveField('quantity', $quantity);
-								// On définit son nv nb de tokens
-								$new_user_tokens = $user_tokens - $price;
-								$this->User->id = $this->Auth->user('id');
-								$this->User->saveField('tokens', $new_user_tokens);
-								// On execute la/les commande(s)
-								$command = str_replace('{{player}}', $this->Auth->user('username'), $item['Shop']['command']);
-								for($i=0; $i < $quantity; $i++){
-									if(strstr($item['Shop']['command'], '{{new}}')){
-										$new_command = explode('{{new}}', $command);
-										foreach($new_command as $command) {
-											$api->call('server.run_command', [$command]);
-										}
-									}
-									else{
-										$api->call('server.run_command', [$command]);
-									}
-								}
-								// On redirige avec un message
-								$this->Session->setFlash('Achat effectué, vous avez depensé '.$price.' '.$this->infos['site_money'].'', 'success');
-								return $this->redirect(['controller' => 'shops', 'action' => 'index']);
-							}
-							// Si l'utilisateur n'a pas assez
-							else{
-								$this->Session->setFlash('Vous n\'avez pas assez de '.$this->infos['site_money'].'', 'error');
-								return $this->redirect(['controller' => 'shops', 'action' => 'index']);
-							}
-						}
-						// L'utilisateur paye avec la monnaie du serveur
-						else{
-							// Si l'utilisation de la monnaie du serveur est activée
-							if($this->infos['use_server_money'] == 1){
+				// Si la quatité est valide
+				if($quantity >= 1 && $quantity <= 250){
+					// Si l'item existe
+					if($this->Shop->findById($id)){
+						// Si la boutique est activée
+						if($this->infos['use_store'] == 1){
+							// Si l'utilisateur paye avec la monnaie du site
+							if($money == 'site'){
 								// On recupère les infos de l'utlisateur
 								$user = $this->User->find('first', ['conditions' => ['User.username' => $this->Auth->user('username')]]);
-								// L'argent que possède l'utilisateur sur le serveur
-								$user_server_money = $api->call('players.name.bank.balance', [$this->Auth->user('username')])[0]['success'];
+								// Le nombre de tokens que possède l'utilisateur
+								$user_tokens = $user['User']['tokens'];
 								// On recupère les infos de l'item
 								$item = $this->Shop->find('first', ['conditions' => ['Shop.id' => $id]]);
-								// Cout de l'achat avec la monnaie du serveur
-								$price = $item['Shop']['price_money_server'];
+								// Cout de l'achat avec la monnaie du site
+								$price = $item['Shop']['price_money_site'];
 								if($price == -1){
 									return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 									exit();
 								}
 								else{
-									$price = $item['Shop']['price_money_server'] * $quantity;
+									$price = $item['Shop']['price_money_site'] * $quantity;
 								}
+								// Promotion du produit
 								$promo = $item['Shop']['promo'];
 								if($promo != -1){
 									$promo = round($price / 100 * $promo);
 									$price = $price - $promo;
 								}
 								// Si l'utilisateur a assez
-								if($user_server_money >= $price){
+								if($user_tokens >= $price){
 									// S'il y a un prérequis pour cet achat
 									if($item['Shop']['required'] != -1){
 										$item_required = $this->Shop->find('first', ['conditions' => ['Shop.id' => $item['Shop']['required']]]);
+										$item_required_id = $item_required['Shop']['id'];
 										$item_required_name = $item_required['Shop']['name'];
 										// Si l'utilisateur n'a pas le prérequis
-										if(!$this->shopHistory->find('first', ['conditions' => ['username' => $this->Auth->user('username'), 'item_id' => $item_required]])){
+										if(!$this->shopHistory->find('first', ['conditions' => ['user_id' => $this->Auth->user('id'), 'item_id' => $item_required_id]])){
 											$this->Session->setFlash('Cet achat a un prérequis vous devez d\'abord acheter <u>'.$item_required_name.'</u>', 'error');
 											return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 										}
@@ -386,8 +318,10 @@ Class ShopsController extends AppController{
 									$this->shopHistory->saveField('price', $price);
 									$this->shopHistory->saveField('money', $money);
 									$this->shopHistory->saveField('quantity', $quantity);
-									// On fait payer l'utilisateur sur le serveur
-									$api->call('players.name.bank.withdraw', [$this->Auth->user('username'), $price]);
+									// On définit son nv nb de tokens
+									$new_user_tokens = $user_tokens - $price;
+									$this->User->id = $this->Auth->user('id');
+									$this->User->saveField('tokens', $new_user_tokens);
 									// On execute la/les commande(s)
 									$command = str_replace('{{player}}', $this->Auth->user('username'), $item['Shop']['command']);
 									for($i=0; $i < $quantity; $i++){
@@ -402,31 +336,107 @@ Class ShopsController extends AppController{
 										}
 									}
 									// On redirige avec un message
-									$this->Session->setFlash('Achat effectué, vous avez depensé '.$price.' '.$this->infos['money_server'].'', 'success');
+									$this->Session->setFlash('Achat effectué, vous avez depensé '.$price.' '.$this->infos['site_money'].'', 'success');
 									return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 								}
 								// Si l'utilisateur n'a pas assez
 								else{
-									$this->Session->setFlash('Vous n\'avez pas assez de '.$this->infos['money_server'].'', 'error');
+									$this->Session->setFlash('Vous n\'avez pas assez de '.$this->infos['site_money'].'', 'error');
 									return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 								}
 							}
-							// Si l'utilisation de la monnaie du serveur est désactivée
+							// L'utilisateur paye avec la monnaie du serveur
 							else{
-								$this->Session->setFlash('Action impossible', 'error');
-								return $this->redirect(['controller' => 'shops', 'action' => 'index']);
+								// Si l'utilisation de la monnaie du serveur est activée
+								if($this->infos['use_server_money'] == 1){
+									// On recupère les infos de l'utlisateur
+									$user = $this->User->find('first', ['conditions' => ['User.username' => $this->Auth->user('username')]]);
+									// L'argent que possède l'utilisateur sur le serveur
+									$user_server_money = $api->call('players.name.bank.balance', [$this->Auth->user('username')])[0]['success'];
+									// On recupère les infos de l'item
+									$item = $this->Shop->find('first', ['conditions' => ['Shop.id' => $id]]);
+									// Cout de l'achat avec la monnaie du serveur
+									$price = $item['Shop']['price_money_server'];
+									if($price == -1){
+										return $this->redirect(['controller' => 'shops', 'action' => 'index']);
+										exit();
+									}
+									else{
+										$price = $item['Shop']['price_money_server'] * $quantity;
+									}
+									$promo = $item['Shop']['promo'];
+									if($promo != -1){
+										$promo = round($price / 100 * $promo);
+										$price = $price - $promo;
+									}
+									// Si l'utilisateur a assez
+									if($user_server_money >= $price){
+										// S'il y a un prérequis pour cet achat
+										if($item['Shop']['required'] != -1){
+											$item_required = $this->Shop->find('first', ['conditions' => ['Shop.id' => $item['Shop']['required']]]);
+											$item_required_id = $item_required['Shop']['id'];
+											$item_required_name = $item_required['Shop']['name'];
+											// Si l'utilisateur n'a pas le prérequis
+											if(!$this->shopHistory->find('first', ['conditions' => ['user_id' => $this->Auth->user('id'), 'item_id' => $item_required_id]])){
+												$this->Session->setFlash('Cet achat a un prérequis vous devez d\'abord acheter <u>'.$item_required_name.'</u>', 'error');
+												return $this->redirect(['controller' => 'shops', 'action' => 'index']);
+											}
+										}
+										// Historique d'achat
+										$this->shopHistory->create;
+										$this->shopHistory->saveField('user_id', $this->Auth->user('id'));
+										$this->shopHistory->saveField('item', $item['Shop']['name']);
+										$this->shopHistory->saveField('item_id', $item['Shop']['id']);
+										$this->shopHistory->saveField('price', $price);
+										$this->shopHistory->saveField('money', $money);
+										$this->shopHistory->saveField('quantity', $quantity);
+										// On fait payer l'utilisateur sur le serveur
+										$api->call('players.name.bank.withdraw', [$this->Auth->user('username'), $price]);
+										// On execute la/les commande(s)
+										$command = str_replace('{{player}}', $this->Auth->user('username'), $item['Shop']['command']);
+										for($i=0; $i < $quantity; $i++){
+											if(strstr($item['Shop']['command'], '{{new}}')){
+												$new_command = explode('{{new}}', $command);
+												foreach($new_command as $command) {
+													$api->call('server.run_command', [$command]);
+												}
+											}
+											else{
+												$api->call('server.run_command', [$command]);
+											}
+										}
+										// On redirige avec un message
+										$this->Session->setFlash('Achat effectué, vous avez depensé '.$price.' '.$this->infos['money_server'].'', 'success');
+										return $this->redirect(['controller' => 'shops', 'action' => 'index']);
+									}
+									// Si l'utilisateur n'a pas assez
+									else{
+										$this->Session->setFlash('Vous n\'avez pas assez de '.$this->infos['money_server'].'', 'error');
+										return $this->redirect(['controller' => 'shops', 'action' => 'index']);
+									}
+								}
+								// Si l'utilisation de la monnaie du serveur est désactivée
+								else{
+									$this->Session->setFlash('Action impossible', 'error');
+									return $this->redirect(['controller' => 'shops', 'action' => 'index']);
+								}
 							}
+						// Si la boutique n'est pas activé
 						}
-					// Si la boutique n'est pas activé
+						else{
+							$this->Session->setFlash('Désolé mais la boutique est désactivé, contactez un administrateur', 'error');
+							return $this->redirect(['controller' => 'shops', 'action' => 'index']);
+						}
 					}
+					// Si l'item n'existe pas
 					else{
-						$this->Session->setFlash('Désolé mais la boutique est désactivé, contactez un administrateur', 'error');
+						$this->Session->setFlash('Cet article n\'existe pas !', 'error');
 						return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 					}
+				// Si la quantité est invalide
 				}
-				// Si l'item n'existe pas
 				else{
-					$this->Session->setFlash('Cet article n\'existe pas !', 'error');
+					$this->Session->setFlash('Quantité invalide', 'error');
 					return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 				}
 			// Si l'utlisateur n'est pas co au site
