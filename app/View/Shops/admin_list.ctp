@@ -72,22 +72,24 @@ $(document).ready(function(){
                                 <?php
                                 if($use_store == 1){
                                     if($d['Shop']['promo'] == -1){
-                                        echo '<td>'.$d['Shop']['price_money_site'].'</td>';
+                                        echo '<td>'.number_format($d['Shop']['price_money_site'], 0, ',', ' ').'</td>';
                                     }
                                     else{
                                         $promo = round($d['Shop']['price_money_site'] / 100 * $d['Shop']['promo']);
                                         $price = $d['Shop']['price_money_site'] - $promo;
-                                        echo '<td><font color="#F75353"><u>'.$d['Shop']['price_money_site'].'</u></font> <i class="fa fa-angle-double-right"></i> '.$price.'</td>';
+                                        $price = number_format($price, 0, ',', ' ');
+                                        echo '<td><font color="#F75353"><u>'.number_format($d['Shop']['price_money_site'], 0, ',', ' ').'</u></font> <i class="fa fa-angle-double-right"></i> '.$price.'</td>';
                                     }
                                 }
                                 if($use_server_money == 1){
                                     if($d['Shop']['promo'] == -1){
-                                        echo '<td>'.$d['Shop']['price_money_server'].'</td>';
+                                        echo '<td>'.number_format($d['Shop']['price_money_server'], 0, ',', ' ').'</td>';
                                     }
                                     else{
                                         $promo = round($d['Shop']['price_money_server'] / 100 * $d['Shop']['promo']);
                                         $price = $d['Shop']['price_money_server'] - $promo;
-                                        echo '<td><font color="#F75353"><u>'.$d['Shop']['price_money_server'].'</u></font> <i class="fa fa-angle-double-right"></i> '.$price.'</td>';
+                                        $price = number_format($price, 0, ',', ' ');
+                                        echo '<td><font color="#F75353"><u>'.number_format($d['Shop']['price_money_server'], 0, ',', ' ').'</u></font> <i class="fa fa-angle-double-right"></i> '.$price.'</td>';
                                     }
                                 }
 

@@ -5,7 +5,7 @@ App::uses('AYAH', 'Lib/AYAH');
 
 class UsersController extends AppController{
 
-    public $uses = ['User', 'Informations', 'donationLadder', 'Support', 'supportComments', 'Shop', 'shopHistory', 'starpassHistory', 'paypalHistory', 'sendTokensHistory'];
+    public $uses = ['User', 'Informations', 'donationLadder', 'Support', 'supportComments', 'Shop', 'Code', 'shopHistory', 'starpassHistory', 'paypalHistory', 'sendTokensHistory'];
 
 	public function beforeFilter(){
 	    parent::beforeFilter();
@@ -107,10 +107,12 @@ class UsersController extends AppController{
                 $this->set('paypal_history', $this->paypalHistory->find('all', ['conditions' => ['paypalHistory.custom' => $id], 'order' => ['paypalHistory.created DESC']]));
             }
             $this->set('send_tokens_history', $this->sendTokensHistory->find('all', ['conditions' => ['sendTokensHistory.shipper' => $username], 'order' => ['sendTokensHistory.created DESC']]));
+            $this->set('codes_history', $this->Code->find('all', ['conditions' => ['Code.user_id' => $id], 'order' => ['Code.created DESC']]));
             $this->set('count_shop_history', $this->shopHistory->find('count', ['conditions' => ['shopHistory.user_id' => $id]]));
             $this->set('count_starpass_history', $this->starpassHistory->find('count', ['conditions' => ['starpassHistory.user_id' => $id]]));
             $this->set('count_paypal_history', $this->paypalHistory->find('count', ['conditions' => ['paypalHistory.custom' => $id]]));
             $this->set('count_send_tokens_history', $this->sendTokensHistory->find('count', ['conditions' => ['sendTokensHistory.shipper' => $username]]));
+            $this->set('count_codes_history', $this->Code->find('count', ['conditions' => ['Code.user_id' => $id]]));
             // Liste des utilisateurs pour l'autocomplete
             $this->set('users', $this->User->find('all'));
         }

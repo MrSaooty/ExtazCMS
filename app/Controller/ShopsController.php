@@ -97,7 +97,7 @@ Class ShopsController extends AppController{
 						$this->Shop->saveField('required_name', $required_name);
 					}
 					$this->Session->setFlash('Article modifié !', 'success');
-					return $this->redirect($this->referer());
+					return $this->redirect(['controller' => 'shops', 'action' => 'list']);
 				}
 				else{
 					$this->Session->setFlash('Une erreur est survenue !', 'error');

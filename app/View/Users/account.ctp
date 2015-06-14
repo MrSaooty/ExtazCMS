@@ -231,6 +231,30 @@ $(document).ready(function(){
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-Five" aria-expanded="false">
+                                            Codes cadeaux utilisés
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse-Five" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <?php
+                                        if($count_codes_history > 0){
+                                            foreach($codes_history as $codes_h){
+                                                echo '<span class="text-highlights text-highlights-green"><i class="fa fa-clock-o"></i> '.$this->Time->format('d/m/Y H:i:s', $codes_h['Code']['updated']).'</span> Vous avez utilisé le code <small><b>'.$codes_h['Code']['code'].'</b></small> qui vous a octroyé '.$codes_h['Code']['value'].' '.$site_money.'<br>';
+                                            }
+                                        }
+                                        else{
+                                            echo '<span class="text-highlights text-highlights-blue"><i class="fa fa-info-circle"></i> Aucun élément disponible dans l\'historique</span>';
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

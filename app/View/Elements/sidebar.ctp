@@ -115,6 +115,28 @@
     <!-- End Donation Ladder -->
     <?php } ?>
 
+    <?php
+    if($api->call('server.bukkit.version')[0]['result'] == 'success'){ 
+        $players = $api->call('players.online')[0]['success'];
+        $nb_players = count($players);
+        if($nb_players > 0){
+            ?>
+            <!-- Players List -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tag-box tag-box-v4">
+                        <?php foreach($players as $player){
+                            echo $this->Html->image('http://cravatar.eu/helmavatar/'.$player['name'].'/16', ['class' => 'player-list']).' '.$player['name'].' ';
+                        } ?>
+                    </div>
+                </div>
+            </div>
+            <!-- End Players List -->
+            <?php
+        }
+    }
+    ?>
+
     <?php if(!empty($buttons)){  ?>
         <!-- Custom Buttons -->
         <div class="row">

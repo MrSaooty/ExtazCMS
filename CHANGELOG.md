@@ -4,7 +4,9 @@ CHANGELOG
 v1.8 (en développement)
 ----
 
-* Vous pouvez désormais choisir la quantité quand vous achetez un produit dans la boutique
+* Une liste des joueurs connectés est désormais disponible dans la sidebar
+* Les utilisateurs peuvent désormais visualiser l'historique des codes cadeaux déjà utilisés
+* Vous pouvez désormais choisir la quantité lorsque vous achetez un produit dans la boutique
 * Vous pouvez désormais mettre un produit en promotion dans la boutique
 * Vous pouvez désormais cacher un produit dans la boutique
 * Corrections de bugs mineurs
