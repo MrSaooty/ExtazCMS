@@ -50,7 +50,7 @@
                 <div class="col-md-4">
                     <div class="container">
                         <div class="page-content">
-                            <h4>Ajouter votre propre background</h4>
+                            <h4>Ajoutez votre propre background</h4>
                             <hr>
                             <?php echo $this->Form->create('Informations', ['action' => 'add_background', 'class' => 'dropzone', 'id' => 'myAwesomeDropzone', 'type' => 'file']); ?>
                                 <div class="fallback">
