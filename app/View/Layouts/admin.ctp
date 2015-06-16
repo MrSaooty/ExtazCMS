@@ -16,6 +16,7 @@
         <?php echo $this->Html->css('admin/jquery.selectBoxIt'); ?>
         <?php echo $this->Html->css('admin/custom'); ?>
         <?php echo $this->Html->css('flatty'); ?>
+        <?php echo $this->Html->css('dropzone'); ?>
         <?php echo $this->Html->css('custom'); ?>
         <link href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -359,6 +360,7 @@
             <div class="clearfix"></div>
         </div>
         <?php 
+        echo $this->Html->script('dropzone');
         echo $this->Html->script('jquery.confirm');
         echo $this->Html->script('jquery.bootstrap-growl');
         echo $this->Html->script('jquery.autocomplete');

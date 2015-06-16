@@ -633,3 +633,12 @@ status.disabled {
 .margin-right-15 {
   margin-right: 15px;
 }
+.background-delete {
+  margin-right: 5px;
+  border-radius: 4px 4px 4px 4px;
+  background-color: #F75353;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 4px;
+}

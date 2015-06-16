@@ -7,7 +7,7 @@ Class ShopsController extends AppController{
 		'Shop' => array(
 			'limit' => 18,
 			'conditions' => array(
-				'Shop.visible' => '1' 
+				'Shop.visible' => '1'
 			),
 			'order' => array(
 				'Shop.id' => 'ASC'
@@ -21,7 +21,7 @@ Class ShopsController extends AppController{
 			// Pagination
 			$q = $this->paginate('Shop');
 			$this->set('items', $q);
-			$this->set('nb_items', $this->Shop->find('count'));
+			$this->set('nb_items', $this->Shop->find('count', ['conditions' => ['Shop.visible' => '1', 'Shop.price_money_server > -1', 'Shop.price_money_site > -1']]));
 			$this->set('categories', $this->shopCategories->find('all', ['order' => ['shopCategories.id ASC']]));
 		}
 		// Si la boutique est désactivée
@@ -136,9 +136,9 @@ Class ShopsController extends AppController{
 			// Si la recherche n'est pas trop courte ou n'est pas trop longue
 			if(strlen($this->request->data['Shop']['search']) >= $min && strlen($this->request->data['Shop']['search']) <= $max){
 				// On va chercher les articles qui correspondent à la recherche
-				$this->set('items', $this->Shop->find('all', ['conditions' => ['Shop.name LIKE' => '%'.$this->request->data['Shop']['search'].'%', 'Shop.visible' => '1'], 'order' => ['Shop.created DESC']]));
+				$this->set('items', $this->Shop->find('all', ['conditions' => ['Shop.name LIKE' => '%'.$this->request->data['Shop']['search'].'%', 'Shop.visible' => '1', 'Shop.price_money_server > -1', 'Shop.price_money_site > -1'], 'order' => ['Shop.created DESC']]));
 				// Et on compte combien d'articles correspondent à la recherche
-				$this->set('nb_items', $this->Shop->find('count', ['conditions' => ['Shop.name LIKE' => '%'.$this->request->data['Shop']['search'].'%', 'Shop.visible' => '1'], 'order' => ['Shop.created DESC']]));
+				$this->set('nb_items', $this->Shop->find('count', ['conditions' => ['Shop.name LIKE' => '%'.$this->request->data['Shop']['search'].'%', 'Shop.visible' => '1', 'Shop.price_money_server > -1', 'Shop.price_money_site > -1'], 'order' => ['Shop.created DESC']]));
 			}
 			// Si la recherche est trop courte ou trop longue
 			else{

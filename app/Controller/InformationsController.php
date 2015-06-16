@@ -1,4 +1,8 @@
 <?php
+
+App::uses('Folder', 'Utility');
+App::uses('File', 'Utility');
+
 class InformationsController extends AppController{
 
 	public function admin_index(){
@@ -144,7 +148,42 @@ class InformationsController extends AppController{
 
 	public function admin_background(){
 		if($this->Auth->user('role') > 1){
-			
+			$dir = new Folder('../webroot/img/bg/');
+			if($dir->path != null){
+				$backgrounds = $dir->find('.*\.jpg');
+				$nb_backgrounds = count($backgrounds);
+				$this->set('backgrounds', $backgrounds);
+				$this->set('nb_backgrounds', $nb_backgrounds);
+			}
+		}
+		else{
+			throw new NotFoundException();
+		}
+	}
+
+	public function admin_add_background(){
+		if($this->Auth->user('role') > 1){
+			// On verifie que l'extension est valide
+			$file = $_FILES['file'];
+			$extensions = ['jpg', 'jpeg', 'png'];
+			$extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+			if(in_array($extension, $extensions)){
+				// On genere un id
+				$nums = '123456789123456789123456789';
+				$nums = str_shuffle($nums);
+				$nums = substr($nums, 0, 7);
+				// On enregistre le fichier
+				move_uploaded_file($file['tmp_name'], IMAGES . 'bg' . DS . $nums . '.jpg');
+				// On le sauvegarde
+				$this->Informations->id = 1;
+				$this->Informations->saveField('background', $nums.'.jpg');
+				$this->Session->setFlash('Background mis à jour !', 'success');
+				return $this->redirect(['controller' => 'informations', 'action' => 'background']);
+			}
+			else{
+				$this->Session->setFlash('Type de fichier invalide', 'error');
+				return $this->redirect(['controller' => 'informations', 'action' => 'background']);
+			}
 		}
 		else{
 			throw new NotFoundException();
@@ -156,6 +195,20 @@ class InformationsController extends AppController{
 			$this->Informations->id = 1;
 			$this->Informations->saveField('background', $background);
 			$this->Session->setFlash('Background mis à jour !', 'success');
+			return $this->redirect(['controller' => 'informations', 'action' => 'background']);
+		}
+		else{
+			throw new NotFoundException();
+		}
+	}
+
+	public function admin_delete_background($background){
+		if($this->Auth->user('role') > 1){
+			$file = IMAGES . 'bg' . DS . $background;
+			if(file_exists($file)){
+				unlink($file);
+			}
+			$this->Session->setFlash('Background supprimé !', 'success');
 			return $this->redirect(['controller' => 'informations', 'action' => 'background']);
 		}
 		else{

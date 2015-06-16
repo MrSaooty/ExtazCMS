@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `extaz_informations` (
   `happy_hour` int(11) DEFAULT NULL,
   `happy_hour_bonus` int(11) DEFAULT NULL,
   `rules` longtext,
-  `background` int(11) DEFAULT NULL,
+  `background` text,
   `chat_prefix` text,
   `chat_nb_messages` int(11) DEFAULT NULL,
   `analytics` text DEFAULT NULL,
@@ -159,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `extaz_informations` (
 -- ----------------------------
 -- Records of extaz_informations
 -- ----------------------------
-INSERT INTO `extaz_informations` VALUES ('1', 'Nom du serveur', '127.0.0.1', '12345', 'PO', '127.0.0.1', '0', '', '', '', 'tokens', '0', '0', '25', '3', '30', '', '', 'http://extaz-cms.com/assets/logo.png', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '20', '', '3', 'Web', '20', '', '0', '0');
+INSERT INTO `extaz_informations` VALUES ('1', 'Nom du serveur', '127.0.0.1', '12345', 'PO', '127.0.0.1', '0', '', '', '', 'tokens', '0', '0', '25', '3', '30', '', '', 'http://extaz-cms.com/assets/logo.png', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '20', '', '3.jpg', 'Web', '20', '', '0', '0');
 
 -- ----------------------------
 -- Table structure for extaz_instant_payment_notifications

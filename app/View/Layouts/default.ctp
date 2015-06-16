@@ -40,7 +40,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.0/isotope.pkgd.js"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>	
-<body cz-shortcut-listen="true" class="boxed-layout container" background="<?php echo $this->webroot.'img/bg/'.$background.'.jpg'; ?>">
+<body cz-shortcut-listen="true" class="boxed-layout container" background="<?php echo $this->webroot.'img/bg/'.$background; ?>">
     <div class="wrapper">
         <!--Header-->    
         <div class="header header-v4">

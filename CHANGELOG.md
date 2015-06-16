@@ -4,12 +4,15 @@ CHANGELOG
 v1.8 (en développement)
 ----
 
+* Vous pouvez désormais uploader vos propres backgrounds depuis l'administration
 * Une liste des joueurs connectés est désormais disponible dans la sidebar
 * Les utilisateurs peuvent désormais visualiser l'historique des codes cadeaux déjà utilisés
 * Vous pouvez désormais choisir la quantité lorsque vous achetez un produit dans la boutique
 * Vous pouvez désormais mettre un produit en promotion dans la boutique
 * Vous pouvez désormais cacher un produit dans la boutique
 * Corrections de bugs mineurs
+* {SQL} Ajout d'un champs updated (datetime) dans la table extaz_codes
+* {CSS} Modification de custom.css
 
 v1.7 (10/06/2015)
 ----

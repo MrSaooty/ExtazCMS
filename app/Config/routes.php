@@ -58,7 +58,6 @@
 	Router::connect('/admin/shop_history', ['controller' => 'pages', 'action' => 'shop_history', 'admin' => true]);
 	Router::connect('/admin/starpass_history', ['controller' => 'pages', 'action' => 'starpass_history', 'admin' => true]);
 	Router::connect('/admin/paypal_history', ['controller' => 'pages', 'action' => 'paypal_history', 'admin' => true]);
-	Router::connect('/admin/informations', ['controller' => 'informations', 'action' => 'index', 'admin' => true]);
 	Router::connect('/admin/list_donator', ['controller' => 'pages', 'action' => 'list_donator', 'admin' => true]);
 	Router::connect('/admin/players', ['controller' => 'players', 'action' => 'index', 'admin' => true]);
 	Router::connect('/admin/chat', ['controller' => 'pages', 'action' => 'chat_messages', 'admin' => true]);
