@@ -117,6 +117,11 @@
                                     </li>
                                 </ul>
                             </li>
+                            <?php if($use_votes == 1){ ?>
+                            <li class="none">
+                                <?php echo $this->Html->link('Vote et gagne', ['controller' => 'votes', 'action' => 'index']); ?>
+                            </li>
+                            <?php } ?>
                             <?php if($use_rules == 1){ ?>
                             <li class="none">
                                 <?php echo $this->Html->link('Règlement', ['controller' => 'pages', 'action' => 'rules']); ?>
@@ -152,11 +157,6 @@
                                     }
                                     ?>
                                 </ul>
-                            </li>
-                            <?php } ?>
-                            <?php if($role > 0){ ?>
-                            <li class="none">
-                                <?php echo $this->Html->link('Administration', ['controller' => 'pages', 'action' => 'stats', 'admin' => true]); ?>
                             </li>
                             <?php } ?>
                         </ul>

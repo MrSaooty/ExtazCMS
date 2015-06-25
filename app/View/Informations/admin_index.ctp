@@ -48,10 +48,11 @@ $(document).ready(function(){
                 <div class="tab-v1">
                     <ul class="nav nav-tabs nav-justified">
                         <li class="li-general active" id="tab1"><a href="#tab-1" data-toggle="tab">Général</a></li>
-                        <li class="" id="tab2"><a href="#tab-2" data-toggle="tab">JSONAPI</a></li>
-                        <li class="" id="tab3"><a href="#tab-3" data-toggle="tab">Starpass/PayPal</a></li>
-                        <li class="li-options" id="tab4"><a href="#tab-4" data-toggle="tab">Options</a></li>
-                        <li class="" id="tab5"><a href="#tab-5" data-toggle="tab">Réglement</a></li>
+                        <li class="" id="tab2"><a href="#tab-2" data-toggle="tab">Votes</a></li>
+                        <li class="" id="tab3"><a href="#tab-3" data-toggle="tab">JSONAPI</a></li>
+                        <li class="" id="tab4"><a href="#tab-4" data-toggle="tab">Starpass/PayPal</a></li>
+                        <li class="li-options" id="tab5"><a href="#tab-5" data-toggle="tab">Options</a></li>
+                        <li class="" id="tab6"><a href="#tab-6" data-toggle="tab">Réglement</a></li>
                     </ul>       
                     <div class="tab-content">
                         <div class="general tab-pane fade active in" id="tab-1">
@@ -80,6 +81,23 @@ $(document).ready(function(){
                         <div class="tab-pane fade" id="tab-2">
                             <?php echo $this->Form->create('Informations', ['action' => 'update_informations']); ?>
                                 <?php $informations = [
+                                'votes_url' => ['label' => 'URL de vote', 'type' => 'text'],
+                                'votes_description' => ['label' => 'Description', 'type' => 'text'],
+                                'votes_time' => ['label' => 'Temps entre deux votes (en minutes)', 'type' => 'number'],
+                                'votes_reward' => ['label' => 'Nombre de '.$site_money.' gagné pour un vote', 'type' => 'number'],
+                                'votes_command' => ['label' => 'Commande(s) à éxécuter après chaque vote (facultatif)', 'type' => 'text']
+                                ]; ?>
+                                <?php foreach($informations as $k => $v){ ?>
+                                <div class="form-group">
+                                    <?php echo $this->Form->input($k, array('type' => $v['type'], 'value' => $data['Informations'][$k], 'class' => 'form-control', 'label' => $v['label'])); ?>
+                                </div>
+                                <?php } ?>
+                                <button class="btn btn-black pull-right" type="submit"><i class="fa fa-check"></i> Confirmer les modifications</button><br>
+                            <?php echo $this->Form->end(); ?>
+                        </div>
+                        <div class="tab-pane fade" id="tab-3">
+                            <?php echo $this->Form->create('Informations', ['action' => 'update_informations']); ?>
+                                <?php $informations = [
                                 'jsonapi_ip' => 'IP du serveur pour JSONAPI', 
                                 'jsonapi_port' => 'Port pour JSONAPI', 
                                 'jsonapi_username' => 'Nom d\'utilisateur JSONAPI',
@@ -96,7 +114,7 @@ $(document).ready(function(){
                                 <button class="btn btn-black pull-right" type="submit"><i class="fa fa-check"></i> Confirmer les modifications</button><br>
                             <?php echo $this->Form->end(); ?>
                         </div>
-                        <div class="tab-pane fade" id="tab-3">
+                        <div class="tab-pane fade" id="tab-4">
                             <?php echo $this->Form->create('Informations', ['action' => 'update_informations']); ?>
                                 <?php $informations = [
                                 'starpass_idp' => 'IDP Starpass',
@@ -115,7 +133,7 @@ $(document).ready(function(){
                                 <button class="btn btn-black pull-right" type="submit"><i class="fa fa-check"></i> Confirmer les modifications</button><br>
                             <?php echo $this->Form->end(); ?>
                         </div>
-                        <div class="options tab-pane fade" id="tab-4">
+                        <div class="options tab-pane fade" id="tab-5">
                             <?php echo $this->Form->create('Informations', ['action' => 'update_options']); ?>
                                 <div class="form-group">
                                     <b>Activer le slider ?</b>
@@ -130,57 +148,63 @@ $(document).ready(function(){
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <b>Utiliser le système de vote ?</b>
+                                    <div class="sw-red margin-right-15 pull-left">
+                                        <div class="onoffswitch"><input name="use_votes" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_votes == 1) echo 'checked="checked"'; ?> id="onoffswitch3"><label for="onoffswitch3" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <b>Afficher la page équipe ?</b>
                                     <div class="sw-red margin-right-15 pull-left">
-                                        <div class="onoffswitch"><input name="use_team" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_team == 1) echo 'checked="checked"'; ?> id="onoffswitch3"><label for="onoffswitch3" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                        <div class="onoffswitch"><input name="use_team" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_team == 1) echo 'checked="checked"'; ?> id="onoffswitch4"><label for="onoffswitch4" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <b>Afficher la page de contact ?</b>
                                     <div class="sw-red margin-right-15 pull-left">
-                                        <div class="onoffswitch"><input name="use_contact" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_contact == 1) echo 'checked="checked"'; ?> id="onoffswitch4"><label for="onoffswitch4" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                        <div class="onoffswitch"><input name="use_contact" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_contact == 1) echo 'checked="checked"'; ?> id="onoffswitch5"><label for="onoffswitch5" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <b>Afficher la page du règlement ?</b>
                                     <div class="sw-red margin-right-15 pull-left">
-                                        <div class="onoffswitch"><input name="use_rules" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_rules == 1) echo 'checked="checked"'; ?> id="onoffswitch5"><label for="onoffswitch5" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                        <div class="onoffswitch"><input name="use_rules" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_rules == 1) echo 'checked="checked"'; ?> id="onoffswitch6"><label for="onoffswitch6" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <b>Activer la boutique ?</b>
                                     <div class="sw-red margin-right-15 pull-left">
-                                        <div class="onoffswitch"><input name="use_store" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_store == 1) echo 'checked="checked"'; ?> id="onoffswitch6"><label for="onoffswitch6" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                        <div class="onoffswitch"><input name="use_store" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_store == 1) echo 'checked="checked"'; ?> id="onoffswitch7"><label for="onoffswitch7" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <b>Activer le module "meilleur donateur" ?</b>
                                     <div class="sw-red margin-right-15 pull-left">
-                                        <div class="onoffswitch"><input name="use_donation_ladder" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_donation_ladder == 1) echo 'checked="checked"'; ?> id="onoffswitch7"><label for="onoffswitch7" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                        <div class="onoffswitch"><input name="use_donation_ladder" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_donation_ladder == 1) echo 'checked="checked"'; ?> id="onoffswitch8"><label for="onoffswitch8" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <b>Activer le paiement via PayPal ?</b>
                                     <div class="sw-red margin-right-15 pull-left">
-                                        <div class="onoffswitch"><input name="use_paypal" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_paypal == 1) echo 'checked="checked"'; ?> id="onoffswitch8"><label for="onoffswitch8" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                        <div class="onoffswitch"><input name="use_paypal" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_paypal == 1) echo 'checked="checked"'; ?> id="onoffswitch9"><label for="onoffswitch9" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <b>Votre serveur utilise-t-il un système d'économie ?</b>
                                     <div class="sw-red margin-right-15 pull-left">
-                                        <div class="onoffswitch"><input name="use_economy" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_economy == 1) echo 'checked="checked"'; ?> id="onoffswitch9"><label for="onoffswitch9" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                        <div class="onoffswitch"><input name="use_economy" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_economy == 1) echo 'checked="checked"'; ?> id="onoffswitch10"><label for="onoffswitch10" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <b>Voulez vous autoriser le paiement via la monnaie du serveur dans la boutique ?</b>
                                     <div class="sw-red margin-right-15 pull-left">
-                                        <div class="onoffswitch"><input name="use_server_money" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_server_money == 1) echo 'checked="checked"'; ?> id="onoffswitch10"><label for="onoffswitch10" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                        <div class="onoffswitch"><input name="use_server_money" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($use_server_money == 1) echo 'checked="checked"'; ?> id="onoffswitch11"><label for="onoffswitch11" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <b>Happy hour activée ?</b>
                                     <div class="sw-red margin-right-15 pull-left">
-                                        <div class="onoffswitch"><input name="happy_hour" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($happy_hour == 1) echo 'checked="checked"'; ?> id="onoffswitch11"><label for="onoffswitch11" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
+                                        <div class="onoffswitch"><input name="happy_hour" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($happy_hour == 1) echo 'checked="checked"'; ?> id="onoffswitch12"><label for="onoffswitch12" class="onoffswitch-label"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label></div>
                                     </div>
                                 </div>
                                  <div class="form-group">
@@ -193,7 +217,7 @@ $(document).ready(function(){
                                 <button class="btn btn-black pull-right" type="submit"><i class="fa fa-check"></i> Confirmer les modifications</button><br>
                             <?php echo $this->Form->end(); ?>
                         </div>
-                        <div class="tab-pane fade" id="tab-5">
+                        <div class="tab-pane fade" id="tab-6">
                             <?php echo $this->Form->create('Informations', ['action' => 'update_informations']); ?>
                                 <?php $informations = [
                                 'rules' => 'Editer le réglement'

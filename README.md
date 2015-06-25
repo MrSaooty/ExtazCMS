@@ -5,7 +5,6 @@ Un véritable site pour votre serveur Minecraft
 * [Site du projet](http://extaz-cms.com/)
 * [Installation](http://extaz-cms.com/wiki/index.php?title=Installation)
 * [Mise à jour](http://extaz-cms.com/wiki/index.php?title=Mise_%C3%A0_jour)
-* [Ajouter une page](http://extaz-cms.com/wiki/index.php?title=Ajouter_une_page)
 * [Starpass](http://extaz-cms.com/wiki/index.php?title=Starpass)
 * [Configuration requise](http://extaz-cms.com/wiki/index.php?title=Configuration_requise)
 * [Bugs & fixes](http://extaz-cms.com/wiki/index.php?title=Bugs_%26_fixes)

@@ -4,7 +4,7 @@ Class CodesController extends AppController{
 	public $uses = ['Code', 'User', 'Informations'];
 
 	public function index(){
-		if($this->Auth->user('role' > 0)){
+		if($this->Auth->user('role' > 1)){
 			return $this->redirect(['controller' => 'codes', 'action' => 'generate', 'admin' => true]);
 		}
 		else{
@@ -13,7 +13,7 @@ Class CodesController extends AppController{
 	}
 
 	public function admin_index(){
-		if($this->Auth->user('role' > 0)){
+		if($this->Auth->user('role' > 1)){
 			return $this->redirect(['controller' => 'codes', 'action' => 'create', 'admin' => true]);
 		}
 		else{
@@ -113,7 +113,7 @@ Class CodesController extends AppController{
 						$this->User->id = $this->Auth->user('id');
 						$this->User->saveField('tokens', $new_user_tokens);
 						// Et on redirige
-						$this->Session->setFlash('Votre avez été crédité de '.$value.' '.$this->infos['site_money'].' !', 'success');
+						$this->Session->setFlash('Votre avez été crédité de '.$value.' '.$this->config['site_money'].' !', 'success');
 						return $this->redirect(['controller' => 'shops', 'action' => 'reload', 'admin' => false]);
 					}
 					else{

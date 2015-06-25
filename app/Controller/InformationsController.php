@@ -103,6 +103,12 @@ class InformationsController extends AppController{
 				else{
 					$this->Informations->saveField('use_server_money', 0);
 				}
+				if(isset($this->request->data['use_votes'])){
+					$this->Informations->saveField('use_votes', 1);
+				}
+				else{
+					$this->Informations->saveField('use_votes', 0);
+				}
 				if(isset($this->request->data['use_team'])){
 					$this->Informations->saveField('use_team', 1);
 				}
@@ -122,9 +128,9 @@ class InformationsController extends AppController{
 					$this->Informations->saveField('use_rules', 0);
 				}
 				if(isset($this->request->data['happy_hour'])){
-			    	$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
+			    	$api = new JSONAPI($this->config['jsonapi_ip'], $this->config['jsonapi_port'], $this->config['jsonapi_username'], $this->config['jsonapi_password'], $this->config['jsonapi_salt']);
 					if($api->call('server.bukkit.version')[0]['result'] == 'success'){
-						$api->call('server.run_command', ['say Happy hour ! Rendez-vous sur le site. '.$this->infos['happy_hour_bonus'].'% de '.$this->infos['site_money'].' offerts ! (http://'.$_SERVER['HTTP_HOST'].$this->webroot.'recharger)']);
+						$api->call('server.run_command', ['say Happy hour ! Rendez-vous sur le site. '.$this->config['happy_hour_bonus'].'% de '.$this->config['site_money'].' offerts ! (http://'.$_SERVER['HTTP_HOST'].$this->webroot.'recharger)']);
 					}
 					$this->Informations->saveField('happy_hour', 1);
 				}

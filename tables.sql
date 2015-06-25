@@ -1,14 +1,29 @@
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
+-- Table structure for extaz_votes
+-- ----------------------------
+DROP TABLE IF EXISTS `extaz_votes`;
+CREATE TABLE IF NOT EXISTS `extaz_votes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `ip` text NOT NULL,
+  `reward` int(11) NOT NULL,
+  `next_vote` text NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+
+-- ----------------------------
 -- Table structure for extaz_cpages
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_cpages`;
 CREATE TABLE IF NOT EXISTS `extaz_cpages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `slug` text NOT NULL,
-  `sidebar` int(11) NOT NULL,
+  `sidebar` int(11) DEFAULT NULL,
   `name` text NOT NULL,
   `content` longtext NOT NULL,
   `created` datetime NOT NULL,
@@ -24,9 +39,9 @@ CREATE TABLE IF NOT EXISTS `extaz_send_tokens_history` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `shipper` text NOT NULL,
   `recipient` text NOT NULL,
-  `nb_tokens` int(11) NOT NULL,
+  `nb_tokens` int(11) DEFAULT NULL,
   `loss_rate` text NOT NULL,
-  `nb_tokens_with_loss_rate` int(11) NOT NULL,
+  `nb_tokens_with_loss_rate` int(11) DEFAULT NULL,
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`)
@@ -55,12 +70,12 @@ INSERT INTO `extaz_shop_categories` VALUES ('0', 'Sans catégorie',  '2015-06-03
 DROP TABLE IF EXISTS `extaz_buttons`;
 CREATE TABLE IF NOT EXISTS `extaz_buttons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `content` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
   `icon` varchar(255) NOT NULL,
   `color` varchar(255) NOT NULL,
-  `order` int(11) NOT NULL,
+  `order` int(11) DEFAULT NULL,
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`)
@@ -72,8 +87,8 @@ CREATE TABLE IF NOT EXISTS `extaz_buttons` (
 DROP TABLE IF EXISTS `extaz_comments`;
 CREATE TABLE IF NOT EXISTS `extaz_comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `post_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `post_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `ip` text NOT NULL,
   `comment` text NOT NULL,
   `created` datetime NOT NULL,
@@ -87,11 +102,11 @@ DROP TABLE IF EXISTS `extaz_codes`;
 CREATE TABLE IF NOT EXISTS `extaz_codes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `creator` text NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `ip` text NOT NULL,
   `code` text NOT NULL,
-  `value` int(11) NOT NULL,
-  `used` int(11) NOT NULL,
+  `value` int(11) DEFAULT NULL,
+  `used` int(11) DEFAULT NULL,
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`)
@@ -143,7 +158,8 @@ CREATE TABLE IF NOT EXISTS `extaz_informations` (
   `use_rules` int(11) DEFAULT NULL,
   `use_donation_ladder` int(11) DEFAULT NULL,
   `use_slider` int(11) DEFAULT NULL,
-  `use_captcha` int(11) DEFAULT '0',
+  `use_captcha` int(11) DEFAULT NULL,
+  `use_votes` int(11) DEFAULT NULL,
   `happy_hour` int(11) DEFAULT NULL,
   `happy_hour_bonus` int(11) DEFAULT NULL,
   `rules` longtext,
@@ -153,13 +169,18 @@ CREATE TABLE IF NOT EXISTS `extaz_informations` (
   `analytics` text DEFAULT NULL,
   `maintenance` int(11) DEFAULT NULL,
   `send_tokens_loss_rate` int(11) DEFAULT NULL,
+  `votes_url` text,
+  `votes_description` varchar(255) NOT NULL,
+  `votes_time` int(11) DEFAULT NULL,
+  `votes_reward` int(11) DEFAULT NULL,
+  `votes_command` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of extaz_informations
 -- ----------------------------
-INSERT INTO `extaz_informations` VALUES ('1', 'Nom du serveur', '127.0.0.1', '12345', 'PO', '127.0.0.1', '0', '', '', '', 'tokens', '0', '0', '25', '3', '30', '', '', 'http://extaz-cms.com/assets/logo.png', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '20', '', '3.jpg', 'Web', '20', '', '0', '0');
+INSERT INTO `extaz_informations` VALUES ('1', 'Nom du serveur', '127.0.0.1', '12345', 'PO', '127.0.0.1', '0', '', '', '', 'tokens', '0', '0', '25', '3', '30', '', '', 'http://extaz-cms.com/assets/logo.png', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '0', '20', '', '3.jpg', 'Web', '20', '', '0', '0', 'http://www.rpg-paradize.com/', 'Votez pour notre serveur !', '180', '0', '');
 
 -- ----------------------------
 -- Table structure for extaz_instant_payment_notifications

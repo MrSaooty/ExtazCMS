@@ -17,7 +17,7 @@ Class ShopsController extends AppController{
 
 	public function index(){
 		// Si la boutique est activée
-		if($this->infos['use_store'] == 1){
+		if($this->config['use_store'] == 1){
 			// Pagination
 			$q = $this->paginate('Shop');
 			$this->set('items', $q);
@@ -157,8 +157,8 @@ Class ShopsController extends AppController{
 			if($this->request->is('post')){
 				// Déclaration des variables
 				$ident = $idp = $ids = $idd = $code = $code1 = $datas = ''; 
-				$idp = $this->infos['starpass_idp'];
-				$idd = $this->infos['starpass_idd'];
+				$idp = $this->config['starpass_idp'];
+				$idd = $this->config['starpass_idd'];
 				$ident = $idp.';'.$ids.';'.$idd;
 				// On récupère le code
 				if(isset($this->request->data['code1'])){
@@ -193,8 +193,8 @@ Class ShopsController extends AppController{
 					$user = $this->User->find('first', ['conditions' => ['User.username' => $this->Auth->user('username')]]);
 					$user_tokens = $user['User']['tokens'];
 					// On définit son nv nb de tokens
-					$starpass_tokens = $this->infos['starpass_tokens'];
-					if($this->infos['happy_hour'] == 1){
+					$starpass_tokens = $this->config['starpass_tokens'];
+					if($this->config['happy_hour'] == 1){
 						$new_user_tokens = $user_tokens + $this->starpass_tokens_during_happy_hour;
 					}
 					else{
@@ -206,7 +206,7 @@ Class ShopsController extends AppController{
 					$this->starpassHistory->create;
 					$this->starpassHistory->saveField('user_id', $this->Auth->user('id'));
 					$this->starpassHistory->saveField('code', $this->request->data['code1']);
-					if($this->infos['happy_hour'] == 1){
+					if($this->config['happy_hour'] == 1){
 						$this->starpassHistory->saveField('tokens', $this->starpass_tokens_during_happy_hour);
 						$this->starpassHistory->saveField('note', 'Happy hour');
 					}
@@ -216,7 +216,7 @@ Class ShopsController extends AppController{
 					}
 					// Donation ladder
 					if($this->donationLadder->find('first', ['conditions' => ['donationLadder.user_id' => $this->Auth->user('id')]])){
-						if($this->infos['happy_hour'] == 1){
+						if($this->config['happy_hour'] == 1){
 							$donationLadder = $this->donationLadder->find('first', ['conditions' => ['donationLadder.user_id' => $this->Auth->user('id')]]);
 							$new_tokens = $donationLadder['donationLadder']['tokens'] + $this->starpass_tokens_during_happy_hour;
 							$this->donationLadder->id = $donationLadder['donationLadder']['id'];
@@ -230,7 +230,7 @@ Class ShopsController extends AppController{
 						}
 					}
 					else{
-						if($this->infos['happy_hour'] == 1){
+						if($this->config['happy_hour'] == 1){
 							$this->donationLadder->create;
 							$this->donationLadder->saveField('user_id', $this->Auth->user('id'));
 							$this->donationLadder->saveField('tokens', $this->starpass_tokens_during_happy_hour);
@@ -241,7 +241,7 @@ Class ShopsController extends AppController{
 							$this->donationLadder->saveField('tokens', $starpass_tokens);
 						}
 					}
-					$this->Session->setFlash('Merci de votre confiance, vous avez maintenant '.$new_user_tokens.' '.$this->infos['site_money'].' !', 'success');
+					$this->Session->setFlash('Merci de votre confiance, vous avez maintenant '.$new_user_tokens.' '.$this->config['site_money'].' !', 'success');
 				}
 			}
 			else{
@@ -260,7 +260,7 @@ Class ShopsController extends AppController{
 		$money = $this->request->data['Shop']['money'];
 		$quantity = $this->request->data['Shop']['quantity'];
 		// JSONAPI
-		$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
+		$api = new JSONAPI($this->config['jsonapi_ip'], $this->config['jsonapi_port'], $this->config['jsonapi_username'], $this->config['jsonapi_password'], $this->config['jsonapi_salt']);
     	// On test si le joueur est en ligne
     	$online_players = $api->call('players.online.names');
 		$player_is_online = in_array($this->Auth->user('username'), $online_players[0]['success']);
@@ -273,7 +273,7 @@ Class ShopsController extends AppController{
 					// Si l'item existe
 					if($this->Shop->findById($id)){
 						// Si la boutique est activée
-						if($this->infos['use_store'] == 1){
+						if($this->config['use_store'] == 1){
 							// Si l'utilisateur paye avec la monnaie du site
 							if($money == 'site'){
 								// On recupère les infos de l'utlisateur
@@ -336,19 +336,19 @@ Class ShopsController extends AppController{
 										}
 									}
 									// On redirige avec un message
-									$this->Session->setFlash('Achat effectué, vous avez depensé '.$price.' '.$this->infos['site_money'].'', 'success');
+									$this->Session->setFlash('Achat effectué, vous avez depensé '.$price.' '.$this->config['site_money'].'', 'success');
 									return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 								}
 								// Si l'utilisateur n'a pas assez
 								else{
-									$this->Session->setFlash('Vous n\'avez pas assez de '.$this->infos['site_money'].'', 'error');
+									$this->Session->setFlash('Vous n\'avez pas assez de '.$this->config['site_money'].'', 'error');
 									return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 								}
 							}
 							// L'utilisateur paye avec la monnaie du serveur
 							else{
 								// Si l'utilisation de la monnaie du serveur est activée
-								if($this->infos['use_server_money'] == 1){
+								if($this->config['use_economy'] == 1 && $this->config['use_server_money'] == 1){
 									// On recupère les infos de l'utlisateur
 									$user = $this->User->find('first', ['conditions' => ['User.username' => $this->Auth->user('username')]]);
 									// L'argent que possède l'utilisateur sur le serveur
@@ -406,12 +406,12 @@ Class ShopsController extends AppController{
 											}
 										}
 										// On redirige avec un message
-										$this->Session->setFlash('Achat effectué, vous avez depensé '.$price.' '.$this->infos['money_server'].'', 'success');
+										$this->Session->setFlash('Achat effectué, vous avez depensé '.$price.' '.$this->config['money_server'].'', 'success');
 										return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 									}
 									// Si l'utilisateur n'a pas assez
 									else{
-										$this->Session->setFlash('Vous n\'avez pas assez de '.$this->infos['money_server'].'', 'error');
+										$this->Session->setFlash('Vous n\'avez pas assez de '.$this->config['money_server'].'', 'error');
 										return $this->redirect(['controller' => 'shops', 'action' => 'index']);
 									}
 								}

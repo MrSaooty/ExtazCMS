@@ -42,15 +42,12 @@ $(document).ready(function(){
     });
 });
 </script>
-<?php
-$players = $api->call('players.online')[0]['success'];
-$count = count($players);
-?>
+<?php $players = $api->call('players.online')[0]['success']; ?>
 <div class="main-content">
     <div class="container">
         <div class="page-content">
             <div class="single-head">
-                <h3 class="pull-left"><i class="fa fa-table"></i><?php echo $count; ?> joueurs connecté(s) sur le serveur</h3>
+                <h3 class="pull-left"><i class="fa fa-table"></i><?php echo $count_players; ?> joueurs connecté(s) sur le serveur</h3>
                 <div class="clearfix"></div>
             </div>
             <div class="page-tables">

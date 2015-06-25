@@ -33,6 +33,13 @@
                    </p>
                    <hr>
                    <p>
+                        <?php if($role > 0){ ?>
+                            <font color="#555"><i class="fa fa-chevron-circle-right"></i></font>
+                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'stats', 'admin' => true]); ?>">
+                                Accéder à l'administration
+                            </a>
+                            <br>
+                        <?php } ?>
                         <?php if($use_store == 1){ ?>
                             <font color="#555"><i class="fa fa-chevron-circle-right"></i></font>
                             <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'reload']); ?>">
@@ -79,7 +86,7 @@
             <div class="tag-box tag-box-v4">
                 <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
                 <i class="fa fa-signal"></i> État du serveur : <small><span class="text-highlights text-highlights-green">En ligne</span></small><br>
-                <i class="fa fa-user"></i> Joueurs connectés : <?php echo $api->call('players.online.count')[0]['success']; ?>/<?php echo $api->call('players.online.limit')[0]['success']; ?><br>
+                <i class="fa fa-user"></i> Joueurs connectés : <?php echo $count_players; ?>/<?php echo $api->call('players.online.limit')[0]['success']; ?><br>
                 <i class="fa fa-cube"></i> Version : <small><?php echo $api->call('server.bukkit.version')[0]['success']; ?></small>
                 <?php } else { ?>
                 <i class="fa fa-signal"></i> État du serveur : <small><span class="text-highlights text-highlights-red">Hors ligne</span></small>

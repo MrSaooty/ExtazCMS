@@ -38,16 +38,16 @@ class UsersController extends AppController{
             $this->redirect($this->Auth->redirect(['controller' => 'posts', 'action' => 'index']));
         }
         else{
-            if($this->infos['use_captcha'] == 1){
+            if($this->config['use_captcha'] == 1){
                 $ayah = new AYAH();
                 $this->set('ayah', $ayah);
             }
             if($this->request->is('post')){
-                if($this->infos['use_captcha'] == 0 OR array_key_exists('captcha', $this->request->data)){
-                    if($this->infos['use_captcha'] == 1){
+                if($this->config['use_captcha'] == 0 OR array_key_exists('captcha', $this->request->data)){
+                    if($this->config['use_captcha'] == 1){
                         $score = $ayah->scoreResult();
                     }
-                    if($this->infos['use_captcha'] == 0 OR $score){
+                    if($this->config['use_captcha'] == 0 OR $score){
                         $this->User->set($this->request->data);
                         $password = $this->request->data['User']['password'];
                         $password_confirmation = $this->request->data['User']['password_confirmation'];
@@ -103,7 +103,7 @@ class UsersController extends AppController{
             $this->set('data', $this->User->find('first', ['conditions' => ['User.id' => $id]]));
             $this->set('shop_history', $this->shopHistory->find('all', ['conditions' => ['shopHistory.user_id' => $id], 'order' => ['shopHistory.created DESC']]));
             $this->set('starpass_history', $this->starpassHistory->find('all', ['conditions' => ['starpassHistory.user_id' => $id], 'order' => ['starpassHistory.created DESC']]));
-            if($this->infos['use_paypal'] == 1){
+            if($this->config['use_paypal'] == 1){
                 $this->set('paypal_history', $this->paypalHistory->find('all', ['conditions' => ['paypalHistory.custom' => $id], 'order' => ['paypalHistory.created DESC']]));
             }
             $this->set('send_tokens_history', $this->sendTokensHistory->find('all', ['conditions' => ['sendTokensHistory.shipper' => $username], 'order' => ['sendTokensHistory.created DESC']]));
@@ -174,7 +174,7 @@ class UsersController extends AppController{
                     $data = $this->User->find('first', array('conditions' => array('User.email' => $email)));
                     $this->User->id = $data['User']['id'];
                     $this->User->saveField('password', $newPassword);
-                    $name_server = $this->infos['name_server'];
+                    $name_server = $this->config['name_server'];
                     $name_server = strtolower(preg_replace('/\s/', '', $name_server));
                     $Email = new CakeEmail();
                     $Email->from(array('admin@'.$name_server.'.com' => $name_server));

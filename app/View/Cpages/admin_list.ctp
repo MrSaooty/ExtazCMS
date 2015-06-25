@@ -52,6 +52,7 @@ $(document).ready(function(){
                             <tr>
                                 <th><b>Auteur</b></th>
                                 <th><b>Nom</b></th>
+                                <th><b>URL</b></th>
                                 <th><b>Date de création</b></th>
                                 <th><b>Actions</b></th>
                             </tr>
@@ -61,6 +62,12 @@ $(document).ready(function(){
                             <tr>
                                 <td><?php echo $d['User']['username']; ?></td>
                                 <td><?php echo $d['Cpage']['name']; ?></td>
+                                <td>
+                                    <span class="label label-black">
+                                        <i class="fa fa-globe"></i>
+                                        <?php echo 'http://'.$_SERVER['SERVER_NAME'].$this->Html->url(['controller' => 'cpages', 'action' => 'read', 'slug' => $d['Cpage']['slug'], 'admin' => false]); ?>
+                                    </span>
+                                </td>
                                 <td><?php echo $this->Time->format('d-m-Y à H:i', $d['Cpage']['created']); ?></td>
                                 <td>
                                     <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'read', 'slug' => $d['Cpage']['slug'], 'admin' => false]); ?>" class="label label-black" target="_blank"><i class="fa fa-eye"></i> Voir</a>

@@ -175,7 +175,7 @@ class PagesController extends AppController {
 				$recipient = strtolower($this->request->data['Pages']['username']);
 				$recipient_username = $this->request->data['Pages']['username'];
 				$nb_tokens = $this->request->data['Pages']['nb_tokens'];
-				$send_tokens_loss_rate = $this->infos['send_tokens_loss_rate'];
+				$send_tokens_loss_rate = $this->config['send_tokens_loss_rate'];
 				/*
 				* Nombre de tokens avec le taux de perte
 				* $nb_tokens_with_loss_rate = $nb_tokens - round($send_tokens_loss_rate / 100 * $nb_tokens);
@@ -207,10 +207,10 @@ class PagesController extends AppController {
 							$this->sendTokensHistory->saveField('shipper', $shipper);
 							$this->sendTokensHistory->saveField('recipient', $recipient_username);
 							$this->sendTokensHistory->saveField('nb_tokens', $nb_tokens);
-							$this->sendTokensHistory->saveField('loss_rate', $this->infos['send_tokens_loss_rate'].'%');
+							$this->sendTokensHistory->saveField('loss_rate', $this->config['send_tokens_loss_rate'].'%');
 							$this->sendTokensHistory->saveField('nb_tokens_with_loss_rate', $nb_tokens_with_loss_rate);
 							// Message et redirection
-							$this->Session->setFlash(''.$recipient_username.' a reçu '.$nb_tokens_with_loss_rate.' '.$this->infos['site_money'].'', 'success');
+							$this->Session->setFlash(''.$recipient_username.' a reçu '.$nb_tokens_with_loss_rate.' '.$this->config['site_money'].'', 'success');
 							return $this->redirect(['controller' => 'users', 'action' => 'account', 'send_tokens', 'admin' => false]);
 						}
 						else{
@@ -224,7 +224,7 @@ class PagesController extends AppController {
 					}
 				}
 				else{
-					$this->Session->setFlash('Vous ne pouvez pas vous envoyer des '.$this->infos['site_money'].' vous même...', 'error');
+					$this->Session->setFlash('Vous ne pouvez pas vous envoyer des '.$this->config['site_money'].' vous même...', 'error');
 					return $this->redirect(['controller' => 'users', 'action' => 'account', 'send_tokens', 'admin' => false]);
 				}
 			}
@@ -324,7 +324,7 @@ class PagesController extends AppController {
 	public function admin_chat_update(){
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('ajax')){
-    			$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
+    			$api = new JSONAPI($this->config['jsonapi_ip'], $this->config['jsonapi_port'], $this->config['jsonapi_username'], $this->config['jsonapi_password'], $this->config['jsonapi_salt']);
 				$data = '<i class="fa fa-clock-o"></i> Dernière mise à jour à '.date('H:i:s').', il y a '.$api->call('players.online.count')[0]['success'].' joueur(s) connecté(s)';
 				echo json_encode($data);
 				exit();
@@ -339,9 +339,9 @@ class PagesController extends AppController {
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('ajax')){
 				$data = '';
-    			$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
-				$messages = $api->call('streams.chat.latest', [$this->infos['chat_nb_messages']])[0]['success'];
-				if(count($messages) >= $this->infos['chat_nb_messages']){
+    			$api = new JSONAPI($this->config['jsonapi_ip'], $this->config['jsonapi_port'], $this->config['jsonapi_username'], $this->config['jsonapi_password'], $this->config['jsonapi_salt']);
+				$messages = $api->call('streams.chat.latest', [$this->config['chat_nb_messages']])[0]['success'];
+				if(count($messages) >= $this->config['chat_nb_messages']){
 					foreach($messages as $m){
 						if(empty($m['player'])){
 							$explode = explode(']', $m['message']);
@@ -357,7 +357,7 @@ class PagesController extends AppController {
 					}
 				}
 				else{
-					$data = '<div class="alert alert-warning alert-dismissable"><small>Désolé mais il n\'y a pas assez de messages pour afficher le chat (minimum '.$this->infos['chat_nb_messages'].')</small></div>';
+					$data = '<div class="alert alert-warning alert-dismissable"><small>Désolé mais il n\'y a pas assez de messages pour afficher le chat (minimum '.$this->config['chat_nb_messages'].')</small></div>';
 				}
 				echo json_encode($data);
 				exit();
@@ -371,14 +371,14 @@ class PagesController extends AppController {
 	public function admin_send_message(){
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('ajax')){
-	    		$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
+	    		$api = new JSONAPI($this->config['jsonapi_ip'], $this->config['jsonapi_port'], $this->config['jsonapi_username'], $this->config['jsonapi_password'], $this->config['jsonapi_salt']);
 				$message = str_replace('/', '', $this->request->data['message']);
-				if(empty($this->infos['chat_prefix'])){
+				if(empty($this->config['chat_prefix'])){
 					$prefix = '';
 					$command = '['.$this->Auth->user('username').'] '.$message;
 				}
 				else{
-					$prefix = '('.$this->infos['chat_prefix'].') ';
+					$prefix = '('.$this->config['chat_prefix'].') ';
 					$command = $prefix.'['.$this->Auth->user('username').'] '.$message;
 				}
 				if(!empty($message)){
@@ -396,7 +396,7 @@ class PagesController extends AppController {
 	public function admin_send_command(){
 		if($this->Auth->user('role') > 1){
 			if($this->request->is('ajax')){
-	    		$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
+	    		$api = new JSONAPI($this->config['jsonapi_ip'], $this->config['jsonapi_port'], $this->config['jsonapi_username'], $this->config['jsonapi_password'], $this->config['jsonapi_salt']);
 				$command = str_replace('/', '', $this->request->data['command']);
 				if(!empty($command) && $api->call('server.run_command', [$command])){
 					exit();
@@ -641,12 +641,12 @@ class PagesController extends AppController {
 						if($ticket['Support']['resolved'] == 0){
 							// Si l'utilisateur accepte de recevoir des emails
 							// if($ticket_owner_allow_email == 1){
-							// 	$name_server = $this->infos['name_server'];
+							// 	$name_server = $this->config['name_server'];
 							// 	$name_server = strtolower(preg_replace('/\s/', '', $name_server));
 							// 	$Email = new CakeEmail();
 							// 	$Email->from(array('support@'.$name_server.'.com' => $name_server));
 							// 	$Email->to($ticket_owner_email);
-							// 	$Email->subject('['.$this->infos['name_server'].'] Support, nouvelle réponse à votre ticket #'.$ticket['Support']['id'].'');
+							// 	$Email->subject('['.$this->config['name_server'].'] Support, nouvelle réponse à votre ticket #'.$ticket['Support']['id'].'');
 							// 	$Email->send('Retrouvez cette nouvelle réponse ici : http://'.$_SERVER['HTTP_HOST'].$this->webroot.'tickets/'.$ticket['Support']['id']);
 							// }
 							$this->supportComments->create;
@@ -807,18 +807,18 @@ class PagesController extends AppController {
 
 	public function contact(){
 		if($this->Auth->user()){
-			if($this->infos['use_captcha'] == 1){
+			if($this->config['use_captcha'] == 1){
 				$ayah = new AYAH();
             	$this->set('ayah', $ayah);
 			}
 			if($this->request->is('post')){
-                if($this->infos['use_captcha'] == 0 OR array_key_exists('captcha', $this->request->data)){
-                	if($this->infos['use_captcha'] == 1){
+                if($this->config['use_captcha'] == 0 OR array_key_exists('captcha', $this->request->data)){
+                	if($this->config['use_captcha'] == 1){
 						$score = $ayah->scoreResult();
 					}
-                    if($this->infos['use_captcha'] == 0 OR $score){
-						$contact_email = $this->infos['contact_email'];
-						$name_server = $this->infos['name_server'];
+                    if($this->config['use_captcha'] == 0 OR $score){
+						$contact_email = $this->config['contact_email'];
+						$name_server = $this->config['name_server'];
 						$username = $this->Auth->user('username');
 						$email = $this->Auth->user('email');
 						$subject = $this->request->data['Pages']['subject'];

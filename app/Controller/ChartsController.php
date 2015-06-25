@@ -3,11 +3,10 @@ class ChartsController extends AppController{
 
 	public $uses = ['Informations', 'shopHistory', 'starpassHistory', 'paypalHistory', 'donationLadder'];
 	public $components = ['Highcharts.Highcharts'];
-    public $Highcharts = null;
 
     public function admin_memory(){
 		if($this->Auth->user('role') > 1){
-    		$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
+    		$api = new JSONAPI($this->config['jsonapi_ip'], $this->config['jsonapi_port'], $this->config['jsonapi_username'], $this->config['jsonapi_password'], $this->config['jsonapi_salt']);
 			$usedMemory = round($api->call('server.performance.memory.used')['0']['success']);
 			$totalMemory = round($api->call('server.performance.memory.total')['0']['success']) - ($usedMemory);
 			$pieData = array(
@@ -63,7 +62,7 @@ class ChartsController extends AppController{
 
 	public function admin_donator(){
 		if($this->Auth->user('role') > 1){
-			$site_money = ucfirst($this->infos['site_money']);
+			$site_money = ucfirst($this->config['site_money']);
 			$donatorsTokens = $this->donationLadder->find('all', ['limit' => 5, 'order' => ['donationLadder.tokens' => 'DESC']]);
 			$donatorsUsername = $this->donationLadder->find('list', ['fields' => ['donationLadder.id'], 'limit' => 5]);
 			$countDonators = $this->donationLadder->find('count');
@@ -613,7 +612,7 @@ class ChartsController extends AppController{
 
 	public function admin_disk(){
 		if($this->Auth->user('role') > 1){
-    		$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
+    		$api = new JSONAPI($this->config['jsonapi_ip'], $this->config['jsonapi_port'], $this->config['jsonapi_username'], $this->config['jsonapi_password'], $this->config['jsonapi_salt']);
 			$totalMemory = round($api->call('server.performance.disk.free')['0']['success']);
 			$usedMemory = round($api->call('server.performance.disk.used')['0']['success']);
 			$pieData = array(

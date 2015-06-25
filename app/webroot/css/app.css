@@ -11,10 +11,6 @@
 
 /*Reset Styles
 ------------------------------------*/
-* {
-   border-radius: 0 !important;
-}
-
 html {
   overflow-y: scroll;
 }

@@ -56,10 +56,10 @@ class AppController extends Controller {
 			$this->layout = 'admin';
 		}
 		// Variable qui regroupe toutes les infos depuis la bdd 
-		$this->infos = $this->Informations->find('first');
-		$this->infos = $this->infos['Informations'];
+		$this->config = $this->Informations->find('first');
+		$this->config = $this->config['Informations'];
 		$this->set('informations', $this->Informations->find('first'));
-		$this->set('infos', $this->infos);
+		$this->set('infos', $this->config);
 		// On déclare JSONAPI
 		$informations = $this->Informations->find('first');
 		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
@@ -92,6 +92,7 @@ class AppController extends Controller {
 		$this->set('use_donation_ladder', $informations['Informations']['use_donation_ladder']);
 		$this->set('use_slider', $informations['Informations']['use_slider']);
 		$this->set('use_captcha', $informations['Informations']['use_captcha']);
+		$this->set('use_votes', $informations['Informations']['use_votes']);
 		$this->set('happy_hour', $informations['Informations']['happy_hour']);
 		$this->set('happy_hour_bonus', $informations['Informations']['happy_hour_bonus']);
 		$this->set('rules', $informations['Informations']['rules']);
@@ -101,6 +102,11 @@ class AppController extends Controller {
 		$this->set('analytics', $informations['Informations']['analytics']);
 		$this->set('maintenance', $informations['Informations']['maintenance']);
 		$this->set('send_tokens_loss_rate', $informations['Informations']['send_tokens_loss_rate']);
+		$this->set('votes_url', $informations['Informations']['votes_url']);
+		$this->set('votes_description', $informations['Informations']['votes_description']);
+		$this->set('votes_time', $informations['Informations']['votes_time']);
+		$this->set('votes_reward', $informations['Informations']['votes_reward']);
+		$this->set('votes_command', $informations['Informations']['votes_command']);
 		// Le reste
 		$this->set('connected', $this->Auth->user());
 		$this->set('username', $this->Auth->user('username'));
@@ -131,28 +137,28 @@ class AppController extends Controller {
 		* Nombre de tokens gratuit avec un code Starpass
 		* starpass_happy_hour_bonus = bonus de l'happy (en %) divisé par 100 fois le nombre de tokens obtenu pour un code Starpass
 		*/
-		$starpass_happy_hour_bonus = $this->infos['happy_hour_bonus'] / 100 * $this->infos['starpass_tokens'];
+		$starpass_happy_hour_bonus = $this->config['happy_hour_bonus'] / 100 * $this->config['starpass_tokens'];
 		$this->starpass_happy_hour_bonus = $starpass_happy_hour_bonus;
 		$this->set('starpass_happy_hour_bonus', $starpass_happy_hour_bonus);
 		/*
 		* Nombre de tokens gratuit avec un paiement via PayPal
 		* paypal_happy_hour_bonus = bonus de l'happy (en %) divisé par 100 fois le nombre de tokens obtenu pour un paiement via PayPal
 		*/
-		$paypal_happy_hour_bonus = $this->infos['happy_hour_bonus'] / 100 * $this->infos['paypal_tokens'];
+		$paypal_happy_hour_bonus = $this->config['happy_hour_bonus'] / 100 * $this->config['paypal_tokens'];
 		$this->paypal_happy_hour_bonus = $paypal_happy_hour_bonus;
 		$this->set('paypal_happy_hour_bonus', $paypal_happy_hour_bonus);
 		/*
 		* Nombre total de tokens obtenu avec un code Starpass pendant une happy hour
 		* starpass_tokens_during_happy_hour = Nombre de tokens gratuit grâce à l'happy hour + le nombre de tokens normal
 		*/
-		$starpass_tokens_during_happy_hour = $starpass_happy_hour_bonus + $this->infos['starpass_tokens'];
+		$starpass_tokens_during_happy_hour = $starpass_happy_hour_bonus + $this->config['starpass_tokens'];
 		$this->starpass_tokens_during_happy_hour = $starpass_tokens_during_happy_hour;
 		$this->set('starpass_tokens_during_happy_hour', $starpass_tokens_during_happy_hour);
 		/*
 		* Nombre total de tokens obtenu avec un paiement via PayPal pendant une happy hour
 		* paypal_tokens_during_happy_hour = Nombre de tokens gratuit grâce à l'happy hour + le nombre de tokens normal
 		*/
-		$paypal_tokens_during_happy_hour = $paypal_happy_hour_bonus + $this->infos['paypal_tokens'];
+		$paypal_tokens_during_happy_hour = $paypal_happy_hour_bonus + $this->config['paypal_tokens'];
 		$this->paypal_tokens_during_happy_hour = $paypal_tokens_during_happy_hour;
 		$this->set('paypal_tokens_during_happy_hour', $paypal_tokens_during_happy_hour);
 		// Boutons pour la sidebar
@@ -178,6 +184,10 @@ class AppController extends Controller {
 			if($this->request->url == 'boutique'){
 				$this->render('/Errors/jsonapi');
 			}
+		}
+		else{
+			$players = $api->call('players.online')[0]['success'];
+			$this->set('count_players', count($players));
 		}
 		// Autre
 		Configure::write('Config.language', 'fra');

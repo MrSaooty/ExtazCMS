@@ -11,8 +11,11 @@ v1.8 (en développement)
 * Vous pouvez désormais mettre un produit en promotion dans la boutique
 * Vous pouvez désormais cacher un produit dans la boutique
 * Corrections de bugs mineurs
-* {SQL} Ajout d'un champs updated (datetime) dans la table extaz_codes
+* {JS} Ajout de dropzone.js
+* {CSS} Ajout de dropzone.css
 * {CSS} Modification de custom.css
+* {CSS} Modification de app.css
+* {CAKE} Modification des routes
 
 v1.7 (10/06/2015)
 ----
@@ -31,12 +34,6 @@ v1.7 (10/06/2015)
 * Lors de l'envoi d'un message au support vous devez maintenant préciser le type de requête, signalement, question ou autre. Par conséquent vous pouvez désormais signaler un joueur via les tickets du support. Dans l'administration les signalements sont graphiquement différent des autres requêtes
 * Si le port de votre serveur est 25565 alors il n'est pas affiché dans le header (à côte de l'adresse ip du serveur)
 * Corrections de bugs mineurs
-* {SQL} Ajout d'une table extaz_shop_categories
-* {SQL} Ajout d'une table extaz_send_tokens_history
-* {SQL} Ajout d'une table extaz_cpages
-* {SQL} Ajout d'un champs type (text, default: '') dans la table extaz_support
-* {SQL} Ajout d'un champs send_tokens_loss_rate (int, default: 0) dans la table extaz_informations
-* {SQL} Ajout d'un champs use_captcha (int, default: 0) dans la table extaz_informations
 * {JS} Ajout de custom.js
 * {JS} Ajout de humane.js
 * {CSS} Ajout de flatty.css
@@ -61,14 +58,6 @@ v1.6 (14/05/2015)
 * {CSS} Ajout d'un fichier selectBoxIt.css
 * {CSS} Ajout d'un fichier custom.css (admin)
 * {JS} Ajout d'un fichier selectBoxIt.js
-* {SQL} Ajout d'une table extaz_buttons
-* {SQL} Modification de la table extaz_team
-* {SQL} Modification de la table extaz_codes
-* {SQL} Modification de la table extaz_informations
-* {SQL} Modification de la table extaz_support
-* {SQL} Modification de la table extaz_support_comments
-* {SQL} Modification de la table extaz_shop_history
-* {SQL} Modification de la table extaz_starpass_history
 
 
 v1.5 (15/04/2015)
@@ -79,8 +68,6 @@ v1.5 (15/04/2015)
 * Vous pouvez maintenant générer des codes cadeaux et accéder à la liste des codes déjà générés. Les codes cadeaux octroient un nombre de token préfini par l'administrateur et s'utilisent sur la page de rechargement
 * Corrections de bugs
 * {CSS} Modification de custom.css
-* {SQL} Ajout d'une table extaz_codes
-* {SQL} Ajout d'une table extaz_comments
 
 v1.4 (03/03/2015)
 ----
@@ -94,10 +81,6 @@ v1.4 (03/03/2015)
 * Modifications mineures
 * {CSS} Modification de style.css
 * {CSS} Modification de custom.css
-* {SQL} Ajout d'un champs use_slider (int, default: 1) dans la table extaz_informations
-* {SQL} Ajout d'un champs background (int, default: 3) dans la table extaz_informations
-* {SQL} Ajout d'un champs chat_prefix (text, default: '') dans la table extaz_informations
-* {SQL} Ajout d'un champs chat_nb_messages (int, default: 20) dans la table extaz_informations
 
 v1.3 (23/01/2015)
 ----

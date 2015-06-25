@@ -14,7 +14,7 @@ class PlayersController extends AppController{
 
 	public function admin_whois($username){
 		if($this->Auth->user('role') > 1){
-	    	$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
+	    	$api = new JSONAPI($this->config['jsonapi_ip'], $this->config['jsonapi_port'], $this->config['jsonapi_username'], $this->config['jsonapi_password'], $this->config['jsonapi_salt']);
 			if($api->call('players.name', [$username])[0]['result'] == 'success'){
 				if($this->User->find('first', ['conditions' => ['User.username' => $username]])){
 					$player = $this->User->find('first', ['conditions' => ['User.username' => $username]]);
@@ -41,7 +41,7 @@ class PlayersController extends AppController{
 
 	public function admin_kick($username = null){
 		if($this->Auth->user('role') > 1){
-    		$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
+    		$api = new JSONAPI($this->config['jsonapi_ip'], $this->config['jsonapi_port'], $this->config['jsonapi_username'], $this->config['jsonapi_password'], $this->config['jsonapi_salt']);
     		if($api->call('players.name.kick', [$username, 'Vous avez été kické'])){
 	    		$this->Session->setFlash($username.' a été kické du serveur !', 'success');
 	    		return $this->redirect($this->referer());
@@ -58,7 +58,7 @@ class PlayersController extends AppController{
 
 	public function admin_clear($username = null){
 		if($this->Auth->user('role') > 1){
-    		$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
+    		$api = new JSONAPI($this->config['jsonapi_ip'], $this->config['jsonapi_port'], $this->config['jsonapi_username'], $this->config['jsonapi_password'], $this->config['jsonapi_salt']);
     		if($api->call('server.run_command', ['clear '.$username])){
 	    		$this->Session->setFlash('L\'inventaire de '.$username.' a été supprimé !', 'success');
 	    		return $this->redirect($this->referer());
@@ -75,7 +75,7 @@ class PlayersController extends AppController{
 
 	public function admin_ban($username = null){
 		if($this->Auth->user('role') > 1){
-    		$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
+    		$api = new JSONAPI($this->config['jsonapi_ip'], $this->config['jsonapi_port'], $this->config['jsonapi_username'], $this->config['jsonapi_password'], $this->config['jsonapi_salt']);
     		if($api->call('server.run_command', ['ban '.$username.' Vous avez été banni'])){
 	    		$this->Session->setFlash($username.' a été banni du serveur !', 'success');
 	    		return $this->redirect($this->referer());
@@ -92,7 +92,7 @@ class PlayersController extends AppController{
 
 	public function admin_banip($username = null){
 		if($this->Auth->user('role') > 1){
-    		$api = new JSONAPI($this->infos['jsonapi_ip'], $this->infos['jsonapi_port'], $this->infos['jsonapi_username'], $this->infos['jsonapi_password'], $this->infos['jsonapi_salt']);
+    		$api = new JSONAPI($this->config['jsonapi_ip'], $this->config['jsonapi_port'], $this->config['jsonapi_username'], $this->config['jsonapi_password'], $this->config['jsonapi_salt']);
     		if($api->call('server.run_command', ['banip '.$username])){
 	    		$this->Session->setFlash($username.' a été ban IP du serveur !', 'success');
 	    		return $this->redirect($this->referer());
