@@ -142,6 +142,36 @@ class PagesController extends AppController {
 		$this->redirect(['controller' => 'pages', 'action' => 'update', 'admin' => true]);
 	}
 
+	public function admin_repair(){
+		if($this->Auth->user('role') > 1){
+			if($this->request->is('post')){
+				$file = "https://github.com/MrSaooty/ExtazCMS/releases/download/extazcms-$this->version/fixs.zip";
+				$new_file = 'tmp_file.zip';
+				if(!file_exists($file) OR !copy($file, $new_file)){
+				    $this->Session->setFlash('Un problème est survenu !', 'error');
+					return $this->redirect(['controller' => 'pages', 'action' => 'repair', 'admin' => true]);
+				}
+				$path = pathinfo(realpath($new_file), PATHINFO_DIRNAME);
+				$zip = new ZipArchive;
+				$res = $zip->open($new_file);
+				if($res === TRUE){
+					$zip->extractTo('../../app/');
+					$zip->close();
+					unlink($new_file);
+					$this->Session->setFlash('Réparation effectuée avec succès !', 'success');
+					return $this->redirect(['controller' => 'pages', 'action' => 'repair', 'admin' => true]);
+				}
+				else{
+					$this->Session->setFlash('Un problème est survenu !', 'error');
+					return $this->redirect(['controller' => 'pages', 'action' => 'repair', 'admin' => true]);
+				}
+			}
+		}
+		else{
+			throw new NotFoundException();
+		}
+	}
+
 	public function admin_send_tokens_history(){
 		if($this->Auth->user('role') > 1){
 			$this->set('data', $this->sendTokensHistory->find('all'));

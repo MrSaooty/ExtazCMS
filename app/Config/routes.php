@@ -51,6 +51,7 @@
 	Router::connect('/votes', ['controller' => 'votes', 'action' => 'index']);
 	Router::connect('/vote', ['controller' => 'votes', 'action' => 'vote']);
 	Router::connect('/pages/:slug', ['controller' => 'cpages', 'action' => 'read'], ['pass' => ['slug'], 'slug' => '[a-z0-9\-]+']);
+	Router::connect('/admin/repair', ['controller' => 'pages', 'action' => 'repair', 'admin' => true]);
 	Router::connect('/admin/configuration', ['controller' => 'informations', 'action' => 'index', 'admin' => true]);
 	Router::connect('/admin/manage_tickets', ['controller' => 'pages', 'action' => 'manage_tickets', 'admin' => true]);
 	Router::connect('/admin/add_member', ['controller' => 'pages', 'action' => 'add_member', 'admin' => true]);

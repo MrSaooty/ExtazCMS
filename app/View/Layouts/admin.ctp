@@ -210,6 +210,9 @@
                                         <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'chat_messages', 'admin' => true]); ?>"><i class="fa fa-comments"></i>Chat</a>
                                     </li>
                                     <?php } ?>
+                                    <li>
+                                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'repair', 'admin' => true]); ?>"><i class="fa fa-cloud-download"></i>Réparer</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="side-nav-block">

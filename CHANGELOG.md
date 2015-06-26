@@ -4,6 +4,7 @@ CHANGELOG
 v1.8 (en développement)
 ----
 
+* Vous pouvez désormais "réparer" le CMS depuis l'administration. Le CMS récupére les correctifs via GitHub puis il les installe lui même.
 * Vous pouvez désormais uploader vos propres backgrounds depuis l'administration
 * Une liste des joueurs connectés est désormais disponible dans la sidebar
 * Les utilisateurs peuvent désormais visualiser l'historique des codes cadeaux déjà utilisés

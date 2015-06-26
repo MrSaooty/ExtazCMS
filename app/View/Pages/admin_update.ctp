@@ -5,7 +5,7 @@
         	<div class="col-md-4">
         		<div class="page-content">
 		            <div class="single-head">
-		                <h3 class="pull-left"><i class="fa fa-database lblue"></i>Mise à jour du CMS</h3>
+		                <h3 class="pull-left"><i class="fa fa-database"></i>Mise à jour du CMS</h3>
 		                <div class="clearfix"></div>
 		            </div>
 		            	<?php if($version >= $last_version){ ?>
