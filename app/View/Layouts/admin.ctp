@@ -17,6 +17,7 @@
         <?php echo $this->Html->css('admin/custom'); ?>
         <?php echo $this->Html->css('flatty'); ?>
         <?php echo $this->Html->css('dropzone'); ?>
+        <?php echo $this->Html->css('summernote'); ?>
         <?php echo $this->Html->css('custom'); ?>
         <link href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -211,7 +212,7 @@
                                     </li>
                                     <?php } ?>
                                     <li>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'repair', 'admin' => true]); ?>"><i class="fa fa-cloud-download"></i>Réparer</a>
+                                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'repair', 'admin' => true]); ?>"><i class="fa fa-wrench"></i>Réparer</a>
                                     </li>
                                 </ul>
                             </div>
@@ -383,8 +384,9 @@
         echo $this->Html->script('admin/jquery.selectBoxIt');
         echo $this->Html->script('admin/custom');
         echo $this->Html->script('humane');
+        echo $this->Html->script('summernote');
+        echo $this->Html->script('summernote-fr-FR');
         ?>
-        <script src="//cdn.ckeditor.com/4.4.6/standard/ckeditor.js"></script>
         <script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
     </body>
 </html>

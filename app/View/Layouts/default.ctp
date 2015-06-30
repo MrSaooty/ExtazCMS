@@ -21,6 +21,7 @@
     echo $this->Html->css('blog');
     echo $this->Html->css('profile');
     echo $this->Html->css('timeline');
+    echo $this->Html->css('summernote');
 
     // CSS Implementing Plugins
     echo $this->Html->css('/files/line-icons/line-icons');
@@ -218,6 +219,8 @@
     echo $this->Html->script('index');
     echo $this->Html->script('humane');
     echo $this->Html->script('jquery.autocomplete');
+    echo $this->Html->script('summernote');
+    echo $this->Html->script('summernote-fr-FR');
     echo $this->Html->script('custom');
     ?>
     <script type="text/javascript">
@@ -227,7 +230,6 @@
             Index.initParallaxSlider();        
         });
     </script>
-    <script src="//cdn.ckeditor.com/4.4.6/standard/ckeditor.js"></script>
     <script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
     <?php 

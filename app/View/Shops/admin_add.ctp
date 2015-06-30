@@ -95,7 +95,7 @@ $(function() {
                             <font color="#A94442"><small><?php echo $this->Form->error('command'); ?></small></font>
                             <div class="input-group margin-bottom-20">
                                 <span class="input-group-addon"><i class="fa fa-code"></i></span>
-                                <?php echo $this->Form->input('command', array('type' => 'text', 'placeholder' => 'Commande(s) sans le slash (/) initial. Utilisez {{player}} pour désigner un joueur et {{new}} pour ajouter une nouvelle commande', 'class' => 'form-control', 'label' => false, 'div' => false)); ?>
+                                <?php echo $this->Form->input('command', array('type' => 'text', 'placeholder' => 'Commande(s) sans le slash (/) initial. Utilisez %player% pour désigner un joueur et &&& pour ajouter une nouvelle commande', 'class' => 'form-control', 'label' => false, 'div' => false)); ?>
                             </div>
                         </div>
                         <button class="btn btn-black pull-right" type="submit"><i class="fa fa-plus"></i> Ajouter cet article</button>

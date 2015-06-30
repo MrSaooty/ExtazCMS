@@ -128,7 +128,7 @@ class PostsController extends AppController{
 							$slug = strtolower($this->request->data['Post']['slug']);
 							$this->Post->saveField('slug', $slug);
 							$this->Session->setFlash('Article modifié !', 'success');
-							return $this->redirect(['controller' => 'posts', 'action' => 'index', 'admin' => false]);
+							return $this->redirect(['controller' => 'posts', 'action' => 'list', 'admin' => true]);
 						}
 						// Si l'image a été changée
 						else{
@@ -139,7 +139,7 @@ class PostsController extends AppController{
 							$this->Post->saveField('slug', $slug);
 							$this->Post->saveField('content', $this->request->data['Post']['content']);
 							$this->Session->setFlash('Article modifié !', 'success');
-							return $this->redirect(['controller' => 'posts', 'action' => 'index', 'admin' => false]);
+							return $this->redirect(['controller' => 'posts', 'action' => 'list', 'admin' => false]);
 						}
 					}
 					// Si les rdv ne sont pas respectées

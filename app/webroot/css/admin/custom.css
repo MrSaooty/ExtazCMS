@@ -642,3 +642,6 @@ status.disabled {
   padding-left: 4px;
   padding-right: 4px;
 }
+.has_submenu {
+  cursor: pointer;
+}

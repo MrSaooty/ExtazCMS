@@ -11,7 +11,7 @@
         	echo '<div class="col-md-12">';
         }
         ?>
-            <?php echo $data['Cpage']['content']; ?>
+            <?php echo $content; ?>
         </div>
         <!-- End Content -->
         <?php if($data['Cpage']['sidebar'] == 1) echo $this->element('sidebar'); ?>

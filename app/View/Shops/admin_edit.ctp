@@ -101,7 +101,7 @@ $(function() {
                                 <span class="input-group-addon"><i class="fa fa-code"></i></span>
                                 <?php echo $this->Form->input('command', array('type' => 'text', 'value' => $data['Shop']['command'], 'class' => 'form-control', 'label' => false, 'div' => false)); ?>
                             </div>
-                            <small>Commande(s) sans le slash (/) initial. Utilisez {{player}} pour désigner un joueur et {{new}} pour ajouter une nouvelle commande</small>
+                            <small>Commande(s) sans le slash (/) initial. Utilisez %player% pour désigner un joueur et &&& pour ajouter une nouvelle commande</small>
                         </div>
                         <button class="btn btn-black pull-right" type="submit"><i class="fa fa-pencil-square-o"></i> Modifier cet article</button>
                         <br>

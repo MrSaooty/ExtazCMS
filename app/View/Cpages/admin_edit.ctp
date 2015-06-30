@@ -18,6 +18,10 @@ $(document).ready(function(){
     $("select").selectBoxIt({
         showFirstOption: false
     });
+    $('.summernote').summernote({
+        height: 300,
+        lang: 'fr-FR'
+    });
 });
 </script>
 <div class="main-content">
@@ -52,7 +56,7 @@ $(document).ready(function(){
                         <div class="form-group">
                             <div id="chargement"><?php echo $this->Html->image('loader.gif', array('alt' => 'chargement')); ?> Chargement de l'éditeur de texte en cours, veuillez patienter</div>
                             <div id="content" style="display:none;">
-                                <?php echo $this->Form->textarea('content', array('type' => 'textarea', 'rows' => '5', 'cols' => '5', 'value' => $data['Cpage']['content'], 'class' => 'ckeditor', 'label' => false)); ?>
+                                <?php echo $this->Form->textarea('content', array('type' => 'textarea', 'rows' => '5', 'cols' => '5', 'value' => $data['Cpage']['content'], 'class' => 'summernote', 'label' => false)); ?>
                             </div>
                         </div>
                         <i class="fa fa-info-circle"></i> Cette modification prendra effet immédiatement <button class="btn btn-black pull-right pull-right" type="submit"><i class="fa fa-check"></i> Confirmer</button>

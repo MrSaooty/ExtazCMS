@@ -65,6 +65,11 @@ $(document).ready(function(){
             });
         }
     }, 15000);
+
+    $('.summernote').summernote({
+        height: 300,
+        lang: 'fr-FR'
+    });
 });
 </script>
 <div class="main-content">
@@ -134,7 +139,7 @@ $(document).ready(function(){
                             <div id="chargement"><?php echo $this->Html->image('loader.gif', array('alt' => 'chargement')); ?> Chargement de l'éditeur de texte en cours, veuillez patienter</div>
                             <div id="content" style="display:none;">
                                 <font color="#A94442"><small><?php echo $this->Form->error('content'); ?></small></font>
-                                <?php echo $this->Form->textarea('content', array('type' => 'textarea', 'rows' => '5', 'cols' => '5', 'value' => $data['Post']['content'], 'class' => 'ckeditor', 'label' => false)); ?>
+                                <?php echo $this->Form->textarea('content', array('type' => 'textarea', 'rows' => '5', 'cols' => '5', 'value' => $data['Post']['content'], 'class' => 'summernote', 'label' => false)); ?>
                             </div>
                         </div>
                         <div class="btn-group pull-right">

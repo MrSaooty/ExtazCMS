@@ -15,6 +15,10 @@ $(document).ready(function(){
         $('#chargement').empty();
         $('#content').fadeIn();
     });
+    $('.summernote').summernote({
+        height: 300,
+        lang: 'fr-FR'
+    });
 });
 </script>
 <div class="main-content">
@@ -63,7 +67,7 @@ $(document).ready(function(){
                             <div id="chargement"><?php echo $this->Html->image('loader.gif', array('alt' => 'chargement')); ?> Chargement de l'éditeur de texte en cours, veuillez patienter</div>
                             <div id="content" style="display:none;">
                                 <font color="#A94442"><small><?php echo $this->Form->error('content'); ?></small></font>
-                                <?php echo $this->Form->textarea('content', array('type' => 'textarea', 'rows' => '5', 'cols' => '5', 'placeholder' => 'Contenu', 'class' => 'ckeditor', 'label' => false)); ?>
+                                <?php echo $this->Form->textarea('content', array('type' => 'textarea', 'rows' => '5', 'cols' => '5', 'class' => 'summernote', 'label' => false)); ?>
                             </div>
                         </div>
                         <i class="fa fa-info-circle"></i> Cet article sera enregistré en tant que brouillon <button class="btn btn-black pull-right pull-right" type="submit"><i class="fa fa-plus"></i> Ajouter cet article</button>

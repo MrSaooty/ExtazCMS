@@ -53,9 +53,9 @@ Class VotesController extends AppController{
 					// JSONAPI
 					$api = new JSONAPI($this->config['jsonapi_ip'], $this->config['jsonapi_port'], $this->config['jsonapi_username'], $this->config['jsonapi_password'], $this->config['jsonapi_salt']);
 					// On exécute la/les commande(s)
-					$command = str_replace('{{player}}', $this->Auth->user('username'), $this->config['votes_command']);
-					if(strstr($this->config['votes_command'], '{{new}}')){
-						$new_command = explode('{{new}}', $command);
+					$command = str_replace('%player%', $this->Auth->user('username'), $this->config['votes_command']);
+					if(strstr($this->config['votes_command'], '&&&')){
+						$new_command = explode('&&&', $command);
 						foreach($new_command as $command) {
 							$api->call('server.run_command', [$command]);
 						}

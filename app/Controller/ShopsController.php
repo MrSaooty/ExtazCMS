@@ -323,10 +323,10 @@ Class ShopsController extends AppController{
 									$this->User->id = $this->Auth->user('id');
 									$this->User->saveField('tokens', $new_user_tokens);
 									// On execute la/les commande(s)
-									$command = str_replace('{{player}}', $this->Auth->user('username'), $item['Shop']['command']);
+									$command = str_replace('%player%', $this->Auth->user('username'), $item['Shop']['command']);
 									for($i=0; $i < $quantity; $i++){
-										if(strstr($item['Shop']['command'], '{{new}}')){
-											$new_command = explode('{{new}}', $command);
+										if(strstr($item['Shop']['command'], '&&&')){
+											$new_command = explode('&&&', $command);
 											foreach($new_command as $command) {
 												$api->call('server.run_command', [$command]);
 											}
@@ -393,10 +393,10 @@ Class ShopsController extends AppController{
 										// On fait payer l'utilisateur sur le serveur
 										$api->call('players.name.bank.withdraw', [$this->Auth->user('username'), $price]);
 										// On execute la/les commande(s)
-										$command = str_replace('{{player}}', $this->Auth->user('username'), $item['Shop']['command']);
+										$command = str_replace('%player%', $this->Auth->user('username'), $item['Shop']['command']);
 										for($i=0; $i < $quantity; $i++){
-											if(strstr($item['Shop']['command'], '{{new}}')){
-												$new_command = explode('{{new}}', $command);
+											if(strstr($item['Shop']['command'], '&&&')){
+												$new_command = explode('&&&', $command);
 												foreach($new_command as $command) {
 													$api->call('server.run_command', [$command]);
 												}
