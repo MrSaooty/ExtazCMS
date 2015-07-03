@@ -173,14 +173,6 @@ class AppController extends Controller {
 		$this->last_version = $last_version;
 		$this->set('version', $version);
 		$this->set('last_version', $last_version);
-		// Maintenance du site
-		if($informations['Informations']['maintenance'] == 1){
-			if($this->Auth->user('role') < 1){
-				if($this->request->url != 'connexion'){
-					$this->render('/Errors/maintenance');
-				}
-			}
-		}
 		// Si JSONAPI est injoignable
 		if($api->call('server.bukkit.version')[0]['result'] != 'success'){
 			if($this->request->url == 'boutique'){
@@ -190,6 +182,14 @@ class AppController extends Controller {
 		else{
 			$players = $api->call('players.online')[0]['success'];
 			$this->set('count_players', count($players));
+		}
+		// Maintenance du site
+		if($informations['Informations']['maintenance'] == 1){
+			if($this->Auth->user('role') < 1){
+				if($this->request->url != 'connexion'){
+					$this->render('/Errors/maintenance');
+				}
+			}
 		}
 		// Autre
 		Configure::write('Config.language', 'fra');

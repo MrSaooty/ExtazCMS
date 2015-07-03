@@ -1,4 +1,9 @@
 <?php $this->assign('title', 'Editer un commentaire'); ?>
+<?php
+if($data['User']['username'] == null){
+    $data['User']['username'] = '{Compte supprimé}';
+}
+?>
 <script>
 $(document).ready(function(){
     $(".confirm").confirm({

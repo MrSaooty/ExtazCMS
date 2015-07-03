@@ -87,7 +87,19 @@ class CpagesController extends AppController {
 			// JSONAPI
 			$api = new JSONAPI($this->config['jsonapi_ip'], $this->config['jsonapi_port'], $this->config['jsonapi_username'], $this->config['jsonapi_password'], $this->config['jsonapi_salt']);
 			// On récupère le groupe du joueur, return NULL si impossible
-			$group = $api->call('worlds.world.players.player.chat.groups.primary', ['world', $this->Auth->user('username')])[0]['success'];
+			if($api->call('worlds.world.players.player.chat.groups.primary', ['world', $this->Auth->user('username')])[0]['is_success'] == true){
+				$group = $api->call('worlds.world.players.player.chat.groups.primary', ['world', $this->Auth->user('username')])[0]['success'];
+			}
+			else{
+				$group = null;
+			}
+			// On récupère l'argent que possède le joueur sur le serveur, return NULL si impossible
+			if($api->call('economy.banks.name.balance', [$this->Auth->user('username')])[0]['is_success'] == true){
+				$balance = $api->call('economy.banks.name.balance', [$this->Auth->user('username')])[0]['success']['balance'];
+			}
+			else{
+				$balance = null;
+			}
 			// On test si l'utilisateur est connecté en jeu
 			$online_players = $api->call('players.online.names');
 			$player_is_online = in_array($this->Auth->user('username'), $online_players[0]['success']);
@@ -105,19 +117,37 @@ class CpagesController extends AppController {
 			if(!$this->Auth->user() && !$player_is_online){
 				$content = preg_replace("/\{\{(.*?)\}\}/i", "<a href='$login'>[Vous devez être connecté pour voir ceci]</a>", $content);
 				$content = preg_replace("/\[\[(.*?)\]\]/i", "<a href='$login'>[Vous devez être connecté au site, et au jeu pour voir ceci]</a>", $content);
+				$content = preg_replace("/\(\((.*?)\)\)/i", "$1", $content);
+			}
+			// Si on n'est pas connecté au site
+			elseif(!$this->Auth->user() && $player_is_online){
+				$content = preg_replace("/\{\{(.*?)\}\}/i", "<a href='$login'>[Vous devez être connecté pour voir ceci]</a>", $content);
+				$content = preg_replace("/\[\[(.*?)\]\]/i", "<a href='$login'>[Vous devez être connecté au site, et au jeu pour voir ceci]</a>", $content);
+				$content = preg_replace("/\(\((.*?)\)\)/i", "$1", $content);
 			}
 			// Si on n'est pas connecté en jeu
 			elseif($this->Auth->user() && !$player_is_online){
 				$content = preg_replace("/\{\{(.*?)\}\}/i", "$1", $content);
 				$content = preg_replace("/\[\[(.*?)\]\]/i", "<a href='$login'>[Vous devez être connecté au site, et au jeu pour voir ceci]</a>", $content);
+				$content = preg_replace("/\(\((.*?)\)\)/i", "", $content);
 			}
-			// Sinon on est connecté partout, on affiche tout
+			// Sinon on est connecté partout
 			else{
 				$content = preg_replace("/\{\{(.*?)\}\}/i", "$1", $content);
 				$content = preg_replace("/\[\[(.*?)\]\]/i", "$1", $content);
+				$content = preg_replace("/\(\((.*?)\)\)/i", "", $content);
 			}
 			if($group != null){
 				$content = str_replace('%groupe%', $group, $content);
+			}
+			else{
+				$content = str_replace('%groupe%', 'inconnu', $content);
+			}
+			if($balance != null){
+				$content = str_replace('%money%', $balance, $content);
+			}
+			else{
+				$content = str_replace('%money%', 'inconnu', $content);
 			}
 			$content = str_replace('%pseudo%', $this->Auth->user('username'), $content);
 			$content = str_replace('%email%', $this->Auth->user('email'), $content);
