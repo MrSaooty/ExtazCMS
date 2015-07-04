@@ -160,6 +160,7 @@ CREATE TABLE IF NOT EXISTS `extaz_informations` (
   `use_slider` int(11) DEFAULT NULL,
   `use_captcha` int(11) DEFAULT NULL,
   `use_votes` int(11) DEFAULT NULL,
+  `use_votes_ladder` int(11) DEFAULT NULL,
   `happy_hour` int(11) DEFAULT NULL,
   `happy_hour_bonus` int(11) DEFAULT NULL,
   `rules` longtext,
@@ -180,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `extaz_informations` (
 -- ----------------------------
 -- Records of extaz_informations
 -- ----------------------------
-INSERT INTO `extaz_informations` VALUES ('1', 'Nom du serveur', '127.0.0.1', '12345', 'PO', '127.0.0.1', '0', '', '', '', 'tokens', '0', '0', '25', '3', '30', '', '', 'http://extaz-cms.com/assets/logo.png', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '0', '20', '', '3.jpg', 'Web', '20', '', '0', '0', 'http://www.rpg-paradize.com/', 'Votez pour notre serveur !', '180', '0', '');
+INSERT INTO `extaz_informations` VALUES ('1', 'Nom du serveur', '127.0.0.1', '12345', 'PO', '127.0.0.1', '0', '', '', '', 'tokens', '0', '0', '25', '3', '30', '', '', 'http://extaz-cms.com/assets/logo.png', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '1', '0', '20', '', '3.jpg', 'Web', '20', '', '0', '0', 'http://www.rpg-paradize.com/', 'Votez pour notre serveur !', '180', '0', '');
 
 -- ----------------------------
 -- Table structure for extaz_instant_payment_notifications
@@ -455,6 +456,7 @@ CREATE TABLE IF NOT EXISTS `extaz_users` (
   `tokens` int(11) DEFAULT NULL,
   `role` varchar(20) DEFAULT NULL,
   `allow_email` int(11) DEFAULT NULL,
+  `votes` int(11) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)

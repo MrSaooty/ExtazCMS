@@ -109,6 +109,12 @@ class InformationsController extends AppController{
 				else{
 					$this->Informations->saveField('use_votes', 0);
 				}
+				if(isset($this->request->data['use_votes_ladder'])){
+					$this->Informations->saveField('use_votes_ladder', 1);
+				}
+				else{
+					$this->Informations->saveField('use_votes_ladder', 0);
+				}
 				if(isset($this->request->data['use_team'])){
 					$this->Informations->saveField('use_team', 1);
 				}

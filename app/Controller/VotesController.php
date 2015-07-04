@@ -5,7 +5,9 @@ Class VotesController extends AppController{
 
 	public function index(){
 		if($this->Auth->user()){
-			$this->set('nb_votes', $this->Vote->find('count', ['conditions' => ['Vote.user_id' => $this->Auth->user('id')]]));
+			$nb_votes = $this->User->find('first', ['conditions' => ['User.id' => $this->Auth->user('id')]]);
+			$nb_votes = $nb_votes['User']['votes'];
+			$this->set('nb_votes', $nb_votes);
 		}
 		else{
 			$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
@@ -36,6 +38,11 @@ Class VotesController extends AppController{
 				$this->Vote->saveField('user_id', $this->Auth->user('id'));
 				$this->Vote->saveField('ip', $_SERVER['REMOTE_ADDR']);
 				$this->Vote->saveField('next_vote', $time_to_vote_in_seconds);
+				// On l'ajoute dans la table users
+				$this->User->id = $this->Auth->user('id');
+				$user = $this->User->find('first');
+				$user_vote = $user['User']['votes'] + 1;
+				$this->User->saveField('votes', $user_vote);
 				// S'il y a une récompense à octroyer
 				if($this->config['votes_reward'] != 0){
 					// On récupère les infos de l'utilisateur
@@ -78,6 +85,16 @@ Class VotesController extends AppController{
 		else{
 			$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
 			return $this->redirect(['controller' => 'users', 'action' => 'login']);
+		}
+	}
+
+	public function ladder(){
+		if($this->config['use_votes_ladder'] == 1){
+			$data = $this->User->find('all', ['order' => ['User.votes DESC'], 'limit' => '15']);
+			$this->set('data', $data);
+		}
+		else{
+			throw new NotFoundException();
 		}
 	}
 }

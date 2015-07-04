@@ -7,6 +7,7 @@ v1.8 (en développement)
 * Migration de CKeditor vers Summernote
 * Vous pouvez désormais utiliser des variables dans les pages personnalisées (ex: %pseudo%, %email%, %groupe% etc)
 * Pour éxécuter une commande via un produit de la boutique vous devez maintenant utiliser %player% pour désigner un joueur et &&& pour ajouter une nouvelle commande, ceci est également valable pour le système de vote
+* Ajout d'un classement qui affiche les 15 meilleurs voteurs
 * Ajout du système de vote et gagne, vous pouvez faire gagner des tokens et/ou exécuter un/des commande(s)
 * Vous pouvez désormais "réparer" le CMS depuis l'administration. Le CMS récupére les correctifs via GitHub puis les installe lui même
 * Vous pouvez désormais uploader vos propres backgrounds depuis l'administration

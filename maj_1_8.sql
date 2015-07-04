@@ -26,3 +26,8 @@ CREATE TABLE IF NOT EXISTS `extaz_votes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
 ALTER TABLE `extaz_informations` ADD `use_votes` INT NOT NULL AFTER `use_captcha`;
+ALTER TABLE `extaz_informations` ADD `use_votes_ladder` INT NOT NULL AFTER `use_votes`;
+UPDATE `cms`.`extaz_informations` SET `use_votes` = '1' WHERE `extaz_informations`.`id` = 1;
+UPDATE `cms`.`extaz_informations` SET `use_votes_ladder` = '1' WHERE `extaz_informations`.`id` = 1;
+ALTER TABLE `extaz_users` ADD `votes` INT NOT NULL AFTER `allow_email`;
+UPDATE `cms`.`extaz_users` SET `votes` = '0';

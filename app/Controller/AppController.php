@@ -93,6 +93,7 @@ class AppController extends Controller {
 		$this->set('use_slider', $informations['Informations']['use_slider']);
 		$this->set('use_captcha', $informations['Informations']['use_captcha']);
 		$this->set('use_votes', $informations['Informations']['use_votes']);
+		$this->set('use_votes_ladder', $informations['Informations']['use_votes_ladder']);
 		$this->set('happy_hour', $informations['Informations']['happy_hour']);
 		$this->set('happy_hour_bonus', $informations['Informations']['happy_hour_bonus']);
 		$this->set('rules', $informations['Informations']['rules']);

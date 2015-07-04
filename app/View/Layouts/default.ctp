@@ -119,8 +119,18 @@
                                 </ul>
                             </li>
                             <?php if($use_votes == 1){ ?>
-                            <li class="none">
-                                <?php echo $this->Html->link('Vote et gagne', ['controller' => 'votes', 'action' => 'index']); ?>
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                                    Votes <i class="fa fa-angle-down"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <?php echo $this->Html->link('Vote et gagne', ['controller' => 'votes', 'action' => 'index']); ?>                             
+                                    </li>
+                                    <li>
+                                        <?php echo $this->Html->link('Classement', ['controller' => 'votes', 'action' => 'ladder']); ?>                             
+                                    </li>
+                                </ul>
                             </li>
                             <?php } ?>
                             <?php if($use_rules == 1){ ?>
