@@ -31,3 +31,5 @@ UPDATE `cms`.`extaz_informations` SET `use_votes` = '1' WHERE `extaz_information
 UPDATE `cms`.`extaz_informations` SET `use_votes_ladder` = '1' WHERE `extaz_informations`.`id` = 1;
 ALTER TABLE `extaz_users` ADD `votes` INT NOT NULL AFTER `allow_email`;
 UPDATE `cms`.`extaz_users` SET `votes` = '0';
+ALTER TABLE `extaz_informations` ADD `votes_ladder_limit` INT NOT NULL AFTER `votes_command`;
+UPDATE `cms`.`extaz_informations` SET `votes_ladder_limit` = '15';

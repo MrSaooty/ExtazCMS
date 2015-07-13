@@ -30,6 +30,21 @@ Class ShopsController extends AppController{
 		}
 	}
 
+	public function promo(){
+		// Si la boutique est activée
+		if($this->config['use_store'] == 1){
+			// Pagination
+			$items = $this->Shop->find('all', ['conditions' => ['Shop.promo != -1', 'Shop.visible' => '1', 'Shop.price_money_server > -1', 'Shop.price_money_site > -1']]);
+			$this->set('items', $items);
+			$this->set('nb_items', $this->Shop->find('count', ['conditions' => ['Shop.promo != -1', 'Shop.visible' => '1', 'Shop.price_money_server > -1', 'Shop.price_money_site > -1']]));
+			$this->set('categories', $this->shopCategories->find('all', ['order' => ['shopCategories.id ASC']]));
+		}
+		// Si la boutique est désactivée
+		else{
+			throw new NotFoundException();
+		}
+	}
+
 	public function admin_add(){
 		if($this->Auth->user('role') > 1){
 			$this->set('list_item', $this->Shop->find('all', ['fields' => ['name', 'id']]));

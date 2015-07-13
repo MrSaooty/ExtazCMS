@@ -43,7 +43,7 @@
                         <?php if($use_store == 1){ ?>
                             <font color="#555"><i class="fa fa-chevron-circle-right"></i></font>
                             <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'reload']); ?>">
-                                Vous avez <?php echo number_format($tokens, 0, ' ', ' ').' '.$site_money; ?>
+                                Vous avez <span class="open-sans"><?php echo number_format($tokens, 0, ' ', ' ').'</span> '.$site_money; ?>
                             </a>
                             <br>
                         <?php } ?>
@@ -51,10 +51,10 @@
                         <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_tickets']); ?>">
                             <?php
                             if($tickets > 1){
-                                echo 'Vous avez '.$tickets.' tickets ouverts';
+                                echo 'Vous avez <span class="open-sans">'.$tickets.'</span> tickets ouverts';
                             }
                             else{
-                                echo 'Vous avez '.$tickets.' ticket ouvert';
+                                echo 'Vous avez <span class="open-sans">'.$tickets.'</span> ticket ouvert';
                             }
                             ?>
                         </a>
@@ -80,13 +80,39 @@
     </div>
     <!-- End Member -->
 
+    <!-- Players -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tag-box tag-box-v4">
+                <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
+                <?php
+                $players = $count_players;
+                $max_players = $api->call('players.online.limit')[0]['success'];
+                $pourcent = $players * 100 / $max_players;
+                ?>
+                <div class="progress progress-u progress-sm">
+                    <div class="progress-bar progress-bar-dark" role="progressbar" aria-valuenow="<?php echo $players; ?>" aria-valuemin="0" aria-valuemax="<?php echo $max_players; ?>" style="width: <?php echo $pourcent; ?>%">
+                    </div>
+                </div>
+                <center><i class="fa fa-users"></i> Joueurs connectés : <span class="open-sans"><?php echo $players; ?>/<?php echo $max_players; ?></span></center>
+                <?php } else { ?>
+                <i class="fa fa-user"></i> Joueurs connectés : <span class="open-sans"><?php echo $players; ?>/<?php echo $max_players; ?></span><br>
+                <div class="progress progress-u progress-sm">
+                    <div class="progress-bar progress-bar-dark" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0>%">
+                    </div>
+                </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+    <!-- End Players -->
+
     <!-- Information -->
     <div class="row">
         <div class="col-md-12">
             <div class="tag-box tag-box-v4">
                 <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
                 <i class="fa fa-signal"></i> État du serveur : <small><span class="text-highlights text-highlights-green">En ligne</span></small><br>
-                <i class="fa fa-user"></i> Joueurs connectés : <?php echo $count_players; ?>/<?php echo $api->call('players.online.limit')[0]['success']; ?><br>
                 <i class="fa fa-cube"></i> Version : <small><?php echo $api->call('server.bukkit.version')[0]['success']; ?></small>
                 <?php } else { ?>
                 <i class="fa fa-signal"></i> État du serveur : <small><span class="text-highlights text-highlights-red">Hors ligne</span></small>

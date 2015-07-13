@@ -162,7 +162,7 @@ class PagesController extends AppController {
 					return $this->redirect(['controller' => 'pages', 'action' => 'repair', 'admin' => true]);
 				}
 				else{
-					$this->Session->setFlash('Un problème est survenu !', 'error');
+					$this->Session->setFlash('Impossible d\'effectuer une réparation', 'error');
 					return $this->redirect(['controller' => 'pages', 'action' => 'repair', 'admin' => true]);
 				}
 			}
@@ -553,6 +553,7 @@ class PagesController extends AppController {
 					else{
 						$this->Support->saveField('priority', $this->request->data['Pages']['priority']);
 					}
+					$message = nl2br(htmlspecialchars($message));
 					$this->Support->saveField('message', $message);
 					$this->Support->saveField('resolved', 0);
 					$this->Session->setFlash('Votre message a été envoyé au support, merci !', 'success');

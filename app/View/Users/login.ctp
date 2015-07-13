@@ -1,4 +1,29 @@
 <?php $this->assign('title', 'Connexion'); ?>
+<script>
+$(document).ready(function(){
+    $('#UserUsername').focus();
+    $('#create_account').on('click', function(){
+        $('.password').hide();
+        $('.footer_login').hide();
+        $('.footer_create_account').show();
+        $('header[class=login]').hide();
+        $('header[class=create_account]').show();
+        var url = '<?php echo $this->Html->url(['controller' => 'users', 'action' => 'signup', '?' => ['username' => '']]); ?>';
+        var username = $('#UserUsername').val();
+        var link = url + username;
+        $('#link_create_account').attr('href', link);
+        $('#UserUsername').focus();
+    });
+    $('#login').on('click', function(){
+        $('.password').show();
+        $('.footer_login').show();
+        $('.footer_create_account').hide();
+        $('header[class=login]').show();
+        $('header[class=create_account]').hide();
+        $('#UserPassword').focus();
+    });
+});
+</script>
 <!--=== Content Part ===-->
 <div class="container content">     
     <div class="row">
@@ -6,7 +31,8 @@
             <?php echo $this->Session->flash('auth'); ?>
             <?php echo $this->Form->create('User', array('class' => 'sky-form')); ?>
                 <div class="reg-header">  
-                    <header>Connexion à l'espace membre</header>
+                    <header class="login">Connexion à l'espace membre</header>
+                    <header class="create_account" style="display:none;">Inscription</header>
                 </div>
                 <fieldset>
                     <section>
@@ -17,6 +43,23 @@
                     </section>
                 </fieldset>
                 <fieldset>
+                    <section>
+                        <div class="row">
+                            <div class="col-md-6">
+                                Vous avez déjà un compte ?
+                            </div>
+                            <div class="col-md-6 pull-left">
+                                <label class="radio">
+                                    <input type="radio" name="radio" id="create_account" checked=""><i class="rounded-x"></i>Non en créer un maintenant
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="radio" id="login" checked="checked"><i class="rounded-x"></i>Oui mon mot de passe est
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+                </fieldset>
+                <fieldset class="password">
                     <section>
                         <label class="input">
                             <div class="input-group">
@@ -30,18 +73,25 @@
                         <br>
                     </section>
                 </fieldset>
-                <footer>
-                <div class="row">
-                    <div class="col-md-4">
-                        <label class="checkbox">
-                            <input type="checkbox" name="data[User][rememberMe]" id="UserRememberMe" checked=""><i></i> Rester connecté
-                        </label>
+                <footer class="footer_login">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="checkbox">
+                                <input type="checkbox" name="data[User][rememberMe]" id="UserRememberMe" checked=""><i></i> Rester connecté
+                            </label>
+                        </div>
+                        <div class="col-md-8">
+                            <button class="btn-u pull-right" type="submit">Se connecter</button>                        
+                        </div>
                     </div>
-                    <div class="col-md-8">
-                        <button class="btn-u pull-right" type="submit">Se connecter</button>                        
+                </footer>
+                <footer class="footer_create_account" style="display:none;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="#" class="btn-u pull-right" type="submit" id="link_create_account">Poursuivre mon inscription</a>                        
+                        </div>
                     </div>
-                </div>
-            </footer>
+                </footer>
             <?php echo $this->Form->end(); ?>
         </div>
     </div><!--/row-->

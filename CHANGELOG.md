@@ -4,22 +4,30 @@ CHANGELOG
 v1.8 (en développement)
 ----
 
+* Une page référençant tous les items en promotion de la boutique est désormais disponible
+* Refonte des profils utilisateurs
+* Refonte de la page de connexion
 * Migration de CKeditor vers Summernote
 * Vous pouvez désormais utiliser des variables dans les pages personnalisées (ex: %pseudo%, %email%, %groupe% etc)
 * Pour éxécuter une commande via un produit de la boutique vous devez maintenant utiliser %player% pour désigner un joueur et &&& pour ajouter une nouvelle commande, ceci est également valable pour le système de vote
-* Ajout d'un classement qui affiche les 15 meilleurs voteurs
+* Ajout d'un classement des meilleurs voteurs
 * Ajout du système de vote et gagne, vous pouvez faire gagner des tokens et/ou exécuter un/des commande(s)
 * Vous pouvez désormais "réparer" le CMS depuis l'administration. Le CMS récupére les correctifs via GitHub puis les installe lui même
 * Vous pouvez désormais uploader vos propres backgrounds depuis l'administration
-* Les utilisateurs peuvent désormais visualiser l'historique des codes cadeaux déjà utilisés
+* Les utilisateurs peuvent désormais visualiser l'historique des codes cadeaux qu'ils ont déjà utilisés
 * Vous pouvez désormais choisir la quantité lorsque vous achetez un produit dans la boutique
 * Vous pouvez désormais mettre un produit en promotion dans la boutique
 * Vous pouvez désormais cacher un produit dans la boutique
-* Corrections de bugs mineurs
+* Corrections de bugs
 * {JS} Ajout de dropzone.js
+* {JS} Ajout de jquery.counterup.js
+* {JS} Ajout de summernote-fr-FR.js
+* {JS} Ajout de summernote.js
 * {CSS} Ajout de dropzone.css
 * {CSS} Modification de custom.css
 * {CSS} Modification de app.css
+* {CSS} Ajout de summernote.css
+* {CSS} Modification de sky-forms.css
 * {CAKE} Modification des routes
 
 v1.7 (10/06/2015)

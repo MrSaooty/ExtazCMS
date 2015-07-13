@@ -1,37 +1,88 @@
 <?php $this->assign('title', 'Profil de '.$data['User']['username'].''); ?>
+<?php $player = $api->call('players.name', [$data['User']['username']]); ?>
 <!--=== Content Part ===-->
 <div class="container content">     
     <div class="row">
         <div class="col-md-9">
-            <?php echo $this->Form->create('User', ['action' => 'update_account', 'class' => 'sky-form']); ?>
-                <div class="reg-header">  
-                    <header>Ses informations personnelles</header>
+            <?php echo $this->Form->create('User', ['action' => 'update_account']); ?>
+                <div class="profile-header">  
+                    <header><?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$data['User']['username'].'', ['alt' => 'Player head', 'style' => 'margin-right:4px;']); ?> Informations à propos de <?php echo $data['User']['username']; ?></header>
                 </div>
-                <fieldset>
-                    <section>
-                        <i class="fa fa-trophy"></i> Inscrit depuis le <?php echo $this->Time->format('d/m/Y', $data['User']['created']); ?>
-                    </section>
-                </fieldset>
-                <fieldset>
-                    <section>
-                        Pseudo : <b><?php echo $data['User']['username']; ?></b>
-                    </section>
-                </fieldset>
-                <?php
-                if($use_economy == 1){
-                $balance = number_format($api->call('players.name.bank.balance', [$data['User']['username']])[0]['success'], 0, ',', ' ');
-                ?>
-                <fieldset>
-                    <section>
-                        Il a <b><?php echo $balance.' '.$money_server; ?></b>
-                    </section>
-                </fieldset>
-                <?php } ?>
-                <fieldset>
-                    <section>
-                    Il a <b><?php echo $data['User']['tokens'].' '.$site_money; ?></b>
-                    </section>
-                </fieldset>
+                <div class="panel panel-default">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>Inscription</td>
+                                <td><b><?php echo $this->Time->format('d/m/Y', $data['User']['created']); ?></b></td>
+                            </tr>
+                            <?php
+                            if($use_store == 1){
+                                if($use_economy == 1){
+                                $balance = number_format($api->call('players.name.bank.balance', [$data['User']['username']])[0]['success'], 0, ',', ' ');
+                                ?>
+                                <tr>
+                                    <td>Argent sur le serveur</td>
+                                    <td><b><?php echo $balance.' '.$money_server; ?></b></td>
+                                </tr>
+                                <?php } ?>
+                                <tr>
+                                    <td>Argent sur le site</td>
+                                    <td><b><?php echo $data['User']['tokens'].' '.$site_money; ?></b></td>
+                                </tr>
+                            <?php } ?>
+                            <?php if($use_votes == 1 && $use_votes_ladder == 1){ ?>
+                                <tr>
+                                    <td>Classement des votes</td>
+                                    <td>
+                                        <?php
+                                        $nb = 0;
+                                        foreach($ladder_vote as $l){
+                                            $nb++;
+                                            if($l['User']['username'] == $data['User']['username']){
+                                                if($nb == 1){
+                                                    echo '<b>'.$nb.'<small>er</small></b>';
+                                                }
+                                                else{
+                                                    echo '<b>'.$nb.'<small>ème</small></b>';
+                                                }
+                                            }
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Nombre de votes</td>
+                                    <td><b><?php echo $nb_votes; ?></b></td>
+                                </tr>
+                            <?php } ?>
+                            <tr>
+                                <td>Connecté en jeu</td>
+                                <td>
+                                    <b>
+                                        <?php
+                                        if($player[0]['is_success']){
+                                            echo 'Oui';
+                                        }
+                                        else{
+                                            echo 'Non';
+                                        }
+                                        ?>
+                                    </b>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="profile-footer">
+                    <button class="btn-u btn-u btn-u-xs" disabled="disabled"><i class="fa fa-user-plus"></i> Ajouter en ami</button> 
+                    <button class="btn-u btn-u-blue btn-u-xs" disabled="disabled"><i class="fa fa-envelope"></i> Envoyer un message</button> 
+                    <?php
+                    // Inventaire
+                    if($player[0]['is_success']){
+                        debug($player[0]['success']);
+                    }
+                    ?>
+                </div>
             <?php echo $this->Form->end(); ?>
         </div>
         <?php echo $this->element('sidebar'); ?>

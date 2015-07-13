@@ -1,6 +1,10 @@
 <?php
 class CpagesController extends AppController {
 
+	public function index(){
+		return $this->redirect(['controller' => 'posts', 'action' => 'index']);
+	}
+
 	public function admin_index(){
 		if($this->Auth->user('role') > 1){
 			return $this->redirect(['controller' => 'cpages', 'action' => 'add']);

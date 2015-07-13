@@ -51,6 +51,9 @@
 	Router::connect('/votes', ['controller' => 'votes', 'action' => 'index']);
 	Router::connect('/vote', ['controller' => 'votes', 'action' => 'vote']);
 	Router::connect('/votes/classement', ['controller' => 'votes', 'action' => 'ladder']);
+	Router::connect('/profil/:username', ['controller' => 'users', 'action' => 'profile'], ['pass' => ['username'], 'username' => '[a-zA-Z0-9\-]+']);
+	Router::connect('/promo', ['controller' => 'shops', 'action' => 'promo']);
+	Router::connect('/pages/', ['controller' => 'cpages', 'action' => 'index']);
 	Router::connect('/pages/:slug', ['controller' => 'cpages', 'action' => 'read'], ['pass' => ['slug'], 'slug' => '[a-z0-9\-]+']);
 	Router::connect('/admin/repair', ['controller' => 'pages', 'action' => 'repair', 'admin' => true]);
 	Router::connect('/admin/configuration', ['controller' => 'informations', 'action' => 'index', 'admin' => true]);

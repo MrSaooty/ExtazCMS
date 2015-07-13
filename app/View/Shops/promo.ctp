@@ -209,7 +209,7 @@ else{
             <div class="servive-block servive-block-default">
                 <i class="icon-custom icon-color-dark rounded-x fa fa-info-circle"></i>
                 <h2 class="heading-md">Aucun résultat</h2>
-                <p>Aucun article n'a été ajouté dans la boutique</p>                        
+                <p>Aucun article n'est actuellement en promotion</p>                        
             </div>
             <?php } else { ?>
             <div class="row filters">
@@ -244,7 +244,7 @@ else{
                         ?>
                         <button class="btn-u btn-u-dark btn-u-xs pull-right hidden-xs hidden-sm" style="margin-right: -10px;"><i class="fa fa-info-circle"></i> <?php echo $tokens.' '.$site_money; ?></button>
                         <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'reload']); ?>" class="btn-u btn-u-orange btn-u-xs pull-right margin-right-5 hidden-xs hidden-sm"><i class="fa fa-refresh"></i> Recharger</a>
-                        <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'promo']); ?>" class="btn-u btn-u-dark btn-u-xs pull-right margin-right-5 hidden-xs hidden-sm"><i class="fa fa-gift"></i> Promotions</a>
+                        <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'index']); ?>" class="btn-u btn-u-dark btn-u-xs pull-right margin-right-5 hidden-xs hidden-sm"><i class="fa fa-arrow-circle-left"></i> Retour</a>
                         <?php
                     }
                     else{

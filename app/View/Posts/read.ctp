@@ -25,7 +25,7 @@ $(document).ready(function(){
             $('#chargement').hide();
             $('#dislike').fadeIn();
             nb_likes++;
-            $('#dislike').html('<font color="red"><i class="fa fa-heart"></i></font> J\'aime (' + nb_likes + ')');
+            $('#dislike').html('<font color="red"><i class="fa fa-heart"></i></font> <span class="open-sans">J\'aime (' + nb_likes + ')</span>');
         });
     });
 
@@ -81,17 +81,17 @@ $(document).ready(function(){
                         <div class="btn-group pull-right">
                             <?php if($liked){ ?>
                                 <button class="btn btn-default btn-xs rounded-3x" id="dislike">
-                                    <font color="red"><i class="fa fa-heart"></i></font> J'aime (<?php echo $nb_likes; ?>)
+                                    <font color="red"><i class="fa fa-heart"></i></font> <span class="open-sans">J'aime (<?php echo $nb_likes; ?>)</span>
                                 </button>
                                 <button class="btn btn-default btn-xs rounded-3x" id="like" style="display:none;">
-                                    <i class="fa fa-heart"></i> J'aime (<?php echo $nb_likes; ?>)
+                                    <i class="fa fa-heart"></i> <span class="open-sans">J'aime (<?php echo $nb_likes; ?>)</span>
                                 </button>
                             <?php } else { ?>
                                 <button class="btn btn-default btn-xs rounded-3x" id="dislike" style="display:none;">
-                                    <font color="red"><i class="fa fa-heart"></i></font> J'aime (<?php echo $nb_likes; ?>)
+                                    <font color="red"><i class="fa fa-heart"></i></font> <span class="open-sans">J'aime (<?php echo $nb_likes; ?>)</span>
                                 </button>
                                 <button class="btn btn-default btn-xs rounded-3x" id="like">
-                                    <i class="fa fa-heart"></i> J'aime (<?php echo $nb_likes; ?>)
+                                    <i class="fa fa-heart"></i> <span class="open-sans">J'aime (<?php echo $nb_likes; ?>)</span>
                                 </button>
                             <?php } ?>        
                             <button class="btn btn-default btn-xs rounded-3x" id="chargement" style="display:none;">
@@ -178,14 +178,15 @@ $(document).ready(function(){
             <?php } ?>
             <div class="row">
                 <?php foreach($comments as $comment){ ?>
+                    <?php $username = $comment['User']['username']; ?>
                     <div class="col-sm-1">
                         <div class="thumbnail">
                             <?php
-                            if($comment['User']['username'] == null){
+                            if($username == null){
                                 echo $this->Html->image('http://cravatar.eu/helmavatar/Steve', ['alt' => 'Player head', 'class' => 'img-responsive']);
                             }
                             else{
-                                echo $this->Html->image('http://cravatar.eu/helmavatar/'.$comment['User']['username'].'', ['alt' => 'Player head', 'class' => 'img-responsive']);
+                                echo $this->Html->image('http://cravatar.eu/helmavatar/'.$username.'', ['alt' => 'Player head', 'class' => 'img-responsive']);
                             }
                             ?>
                         </div>
@@ -195,11 +196,11 @@ $(document).ready(function(){
                             <div class="panel-heading">
                                 <strong>
                                     <?php
-                                    if($comment['User']['username'] == null){
+                                    if($username == null){
                                         echo '<u>Compte supprimé</u>';
                                     }
                                     else{
-                                        echo $comment['User']['username'];
+                                        echo $this->Html->link($username, ['controller' => 'users', 'action' => 'profile', 'username' => $username], ['class' => 'text-default']);
                                     }
                                     ?>
                                 </strong>

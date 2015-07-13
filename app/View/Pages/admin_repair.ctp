@@ -9,11 +9,7 @@
 		                <div class="clearfix"></div>
 		            </div>
 		            	Tentez de réparer le CMS avant de poster une demande d'aide sur le forum.<br>
-		            	Si la réparation n'a aucun effet, alors poster un message sur ce <u><a href="http://www.bukkit.fr/index.php/topic/15381-gratuit16-extazcms-un-v%C3%A9ritable-site-pour-votre-serveur-minecraft/?view=getnewpost" target="_blank">topic</a></u>.<br><br>
-
-		            	<small>
-		            		Comment ça marche ? Le CMS récupére les correctifs via GitHub puis les installe lui même.
-		            	</small>
+		            	Si la réparation n'a aucun effet, alors poster un message sur ce <u><a href="http://www.bukkit.fr/index.php/topic/15381-gratuit16-extazcms-un-v%C3%A9ritable-site-pour-votre-serveur-minecraft/?view=getnewpost" target="_blank">topic</a></u>.
 						<hr>
 						<?php echo $this->Form->create('Pages', ['action' => 'repair']); ?>
 							<button class="btn btn-black pull-right"><i class="fa fa-wrench"></i> Réparer</button>

@@ -106,6 +106,9 @@ $(document).ready(function(){
                                         case 'other':
                                             echo '<span class="label label-black btn-xs btn-block">Autre</span>';
                                             break;
+                                        case 'none':
+                                            echo '<span class="label label-black btn-xs btn-block">Autre</span>';
+                                            break;
                                     }
                                     ?>
                                 </td>
@@ -127,7 +130,7 @@ $(document).ready(function(){
                                     }
                                     ?>
                                 </td>
-                                <td><?php echo substr($d['Support']['message'], 0, 100).'...'; ?></td>
+                                <td><?php echo substr(strip_tags($d['Support']['message']), 0, 100).'...'; ?></td>
                                 <td>
                                     <?php
                                     if(!empty($d['supportComments'][0]['username'])){ 

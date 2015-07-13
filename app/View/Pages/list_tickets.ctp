@@ -47,7 +47,7 @@
                             </h2>
                             <p>
                                 <?php
-                                $content = $d['Support']['message'];
+                                $content = strip_tags($d['Support']['message']);
                                 if(strlen($content) < 380){
                                     echo $content;
                                 }

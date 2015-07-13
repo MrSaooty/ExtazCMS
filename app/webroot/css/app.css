@@ -7,18 +7,20 @@
 */
 
 /*Import Google Font*/
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400);
+@import url(http://fonts.googleapis.com/css?family=Raleway);
 
 /*Reset Styles
 ------------------------------------*/
 html {
   overflow-y: scroll;
+
 }
 
 body { 
    color: #333; 
    font-size: 13px;
    line-height: 1.6;
+   font-family: "Raleway", sans-serif;
 }
 
 p, 
@@ -912,6 +914,11 @@ fieldset[disabled] .btn-u.btn-u-white.active {
 }
 .btn-u.btn-u-split-light-grey.dropdown-toggle {
    border-left: solid 1px #484f58;
+}
+
+.btn-u:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /*Bordered Buttons*/
@@ -1901,6 +1908,11 @@ i.icon-bg-light-grey {
 }
 .text-highlights-brown {
    background: #9c8061;   
+}
+.text-highlights-light-blue {
+   background: #D9EDF7;
+   color: #31708f;
+   margin-bottom: 15px;
 }
 .text-highlights-dark-blue {
    background: #4765a0;

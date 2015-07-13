@@ -1,4 +1,4 @@
-<?php if(!isset($server_ip)) exit('Impossible de joindre la base de donn&eacute;es, v&eacute;rifiez vos informations de connexion (database.php)'); ?>
+<?php if(!isset($server_ip)) exit('Erreur: impossible de communiquer avec la base de données'); ?>
 <!DOCTYPE html>
 <!--[if IE 8]><html lang="fr" class="ie8"><![endif]-->  
 <!--[if IE 9]><html lang="fr" class="ie9"><![endif]-->  
@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ExtazCMS">
     <meta name="author" content="MrSaooty">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>    
     <?php
     // Favicon
     echo $this->Html->meta('favicon.png', $logo_url, array('type' => 'icon'));
@@ -37,7 +36,7 @@
     echo $this->Html->css('custom');
     ?>
     <link href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.0/isotope.pkgd.js"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>	
@@ -118,7 +117,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <?php if($use_votes == 1){ ?>
+                            <?php if($use_votes == 1 && $use_votes_ladder == 1){ ?>
                             <li class="dropdown">
                                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                                     Votes <i class="fa fa-angle-down"></i>
@@ -131,6 +130,10 @@
                                         <?php echo $this->Html->link('Classement', ['controller' => 'votes', 'action' => 'ladder']); ?>                             
                                     </li>
                                 </ul>
+                            </li>
+                            <?php } elseif($use_votes == 1 && $use_votes_ladder == 0) { ?>
+                            <li>
+                                <?php echo $this->Html->link('Vote et gagne', ['controller' => 'votes', 'action' => 'index']); ?>                             
                             </li>
                             <?php } ?>
                             <?php if($use_rules == 1){ ?>
@@ -203,9 +206,15 @@
             <div class="copyright">
                 <div class="container">
                     <p class="text-center">
-                        <!-- Merci de ne pas retirer cette mention, je partage ce CMS gratuitement sans attentes en retour, merci de respecter mon travail -->
+                        <?php
+                        /*
+                        * Merci de ne pas retirer cette mention,
+                        * Je partage ce CMS gratuitement sans attentes en retour.
+                        * Merci de respecter mon travail.
+                        */
+                        ?>
+                        Ce site n'est en aucun cas affilié avec Mojang AB. 
                         Propulsé par<a href="http://extaz-cms.com/" target="_blank">ExtazCMS <?php echo $version; ?></a>
-                        <!-- Merci de ne pas retirer cette mention, je partage ce CMS gratuitement sans attentes en retour, merci de respecter mon travail -->
                     </p>
                 </div> 
             </div><!--/copyright--> 

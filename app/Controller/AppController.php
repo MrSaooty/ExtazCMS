@@ -108,6 +108,7 @@ class AppController extends Controller {
 		$this->set('votes_time', $informations['Informations']['votes_time']);
 		$this->set('votes_reward', $informations['Informations']['votes_reward']);
 		$this->set('votes_command', $informations['Informations']['votes_command']);
+		$this->set('votes_ladder_limit', $informations['Informations']['votes_ladder_limit']);
 		// Le reste
 		$this->set('connected', $this->Auth->user());
 		$this->set('username', $this->Auth->user('username'));
@@ -169,7 +170,10 @@ class AppController extends Controller {
 		$this->set('nb_cpages', $this->Cpage->find('count'));
 		// ExtazCMS
 		$version = 1.8;
-		$last_version = file_get_contents('https://raw.githubusercontent.com/MrSaooty/ExtazCMS/master/extaz.version');
+		$last_version = file_get_contents('http://extaz-cms.com/extazcms.version');
+		if(!$last_version){
+			$last_version = 0;
+		}
 		$this->version = $version;
 		$this->last_version = $last_version;
 		$this->set('version', $version);

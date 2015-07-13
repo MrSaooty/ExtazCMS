@@ -8,6 +8,10 @@ Class VotesController extends AppController{
 			$nb_votes = $this->User->find('first', ['conditions' => ['User.id' => $this->Auth->user('id')]]);
 			$nb_votes = $nb_votes['User']['votes'];
 			$this->set('nb_votes', $nb_votes);
+			if($this->config['use_votes_ladder'] == 1){
+				$data = $this->User->find('all', ['order' => ['User.votes DESC'], 'limit' => 5]);
+				$this->set('data', $data);
+			}
 		}
 		else{
 			$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
@@ -90,7 +94,7 @@ Class VotesController extends AppController{
 
 	public function ladder(){
 		if($this->config['use_votes_ladder'] == 1){
-			$data = $this->User->find('all', ['order' => ['User.votes DESC'], 'limit' => '15']);
+			$data = $this->User->find('all', ['order' => ['User.votes DESC'], 'limit' => $this->config['votes_ladder_limit']]);
 			$this->set('data', $data);
 		}
 		else{

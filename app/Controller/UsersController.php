@@ -5,7 +5,7 @@ App::uses('AYAH', 'Lib/AYAH');
 
 class UsersController extends AppController{
 
-    public $uses = ['User', 'Informations', 'donationLadder', 'Support', 'supportComments', 'Shop', 'Code', 'shopHistory', 'starpassHistory', 'paypalHistory', 'sendTokensHistory'];
+    public $uses = ['User', 'Informations', 'donationLadder', 'Support', 'supportComments', 'Shop', 'Vote', 'Code', 'shopHistory', 'starpassHistory', 'paypalHistory', 'sendTokensHistory'];
 
 	public function beforeFilter(){
 	    parent::beforeFilter();
@@ -89,7 +89,12 @@ class UsersController extends AppController{
 
     public function profile($username = null){
         if($this->User->find('first', ['conditions' => ['User.username' => $username]])){
-            $this->set('data', $this->User->find('first', ['conditions' => ['User.username' => $username]]));
+            $data = $this->User->find('first', ['conditions' => ['User.username' => $username]]);
+            $this->set('data', $data);
+            $ladder_vote = $this->User->find('all', ['order' => ['User.votes DESC']]);
+            $this->set('ladder_vote', $ladder_vote);
+            $nb_votes = $this->Vote->find('first', ['conditions' => ['User.id' => $data['User']['id']]]);
+            $this->set('nb_votes', $nb_votes['User']['votes']);
         }
         else{
             throw new NotFoundException();

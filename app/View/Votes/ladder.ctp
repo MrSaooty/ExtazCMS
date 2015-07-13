@@ -8,8 +8,8 @@
 	            <table class="table">
 	                <thead>
 	                    <tr>
-	                        <th class="votes">#</th>
-	                        <th class="votes">Avatar</th>
+	                        <th class="votes">Classement</th>
+	                        <th class="votes">Skin</th>
 	                        <th class="votes">Pseudo</th>
 	                        <th class="votes">Votes</th>
 	                    </tr>
@@ -37,8 +37,17 @@
 									break;
 							}
 	        				?>
-								<td class="votes"><?php echo $nb; ?></td>
-								<td class="votes"><?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$d['User']['username'].'/20'); ?> </td>
+								<td class="votes">
+									<?php
+									if($nb == 1){
+	                                    echo $nb.'er';
+	                                }
+	                                else{
+	                                    echo $nb.'ème';
+	                                }
+									?>
+								</td>
+								<td class="votes"><?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$d['User']['username'].'/20', ['class' => 'avatar-rounded']); ?> </td>
 								<td class="votes"><?php echo $d['User']['username']; ?></td>
 								<td class="votes"><?php echo $d['User']['votes']; ?></td>
 							</tr>

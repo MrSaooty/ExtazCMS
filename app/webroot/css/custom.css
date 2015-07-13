@@ -245,6 +245,23 @@ button.happy-hour-btn {
   padding-bottom: 2px;
   opacity: 0.9;
 }
+.shop-item {
+  position: relative;
+}
+.shop-promo {
+  left: 0;
+  bottom: 0;
+  color: #fff;
+  height: 14%;
+  width: 100%;
+  padding: 5px 0;
+  font-size: 12px;
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+  position: absolute;
+  text-transform: uppercase;
+  background: rgba(0,0,0,0.6);
+}
 .quantity {
   border-top: solid 1px #eee;
   padding-top: 10px;
@@ -299,5 +316,54 @@ th.votes {
 td.votes {
   text-align: center;
   vertical-align: middle;
-  text-shadow: 0px 0px 8px #cdf1ff;
+  text-shadow: 0px 0px 16px #fff;
+}
+td.votes-no-align {
+  text-shadow: 0px 0px 16px #fff;
+}
+.profile-header {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.profile-footer {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  font-weight: bold;
+}
+.text-default {
+  color: #333;
+}
+.text-default:hover {
+  color: #333;
+}
+.shop-img {
+  opacity: 0.9;
+}
+.shop-img:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+.avatar-rounded {
+  border-radius: 3px;
+}
+.top-5 {
+  margin-top: -10px;
+}
+label {
+  font-weight: 100; 
+}
+.vertical-separator {
+  content: "";
+  display: inline;
+  position: absolute;
+  width: 0px;
+  height: 90%;
+  border-left: 1px dotted #ccc;
+  padding: 0;
+}
+.open-sans {
+  font-family: 'Open Sans', sans-serif;
 }

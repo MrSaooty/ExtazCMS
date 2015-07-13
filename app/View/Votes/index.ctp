@@ -5,34 +5,74 @@
         <!-- Begin Content -->
         <div class="col-md-9">
         	<div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title"><i class="fa fa-thumbs-up"></i> Vote et gagne !</h4>
-                </div>
                 <div class="panel-body">
-					<div class="alert alert-info">
-						<i class="fa fa-info-circle"></i>
-		        		<?php
-				        if($nb_votes == 0){
-				        	echo "Vous n'avez jamais voté pour le serveur";
-				        }
-				        else{
-				        	echo "Vous avez voté $nb_votes fois pour le serveur, merci";
-				        }
-				        ?>
-		        	</div>
-		        	<center>
-				        <h3>
-					        <?php echo $votes_description; ?><br><br>
-						</h3>
-						<hr>
-			            <a href="<?php echo $votes_url; ?>" class="btn-u btn-u-dark btn-u-lg" target="_blank" onclick="window.location.href='<?php echo $this->Html->url(['controller' => 'votes', 'action' => 'vote']); ?>';">
-			            	Voter pour <?php echo $name_server; ?>
-			            </a>
-			        </center>
+                    <div class="row">
+                        <?php if($use_votes_ladder == 1){ ?>
+                        <div class="col-md-4">
+                            <i class="fa fa-trophy"></i> <b>Top 5</b>
+                            <br><br>
+                            <table class="table top-5">
+                                <tbody>
+                                    <?php
+                                    $nb = 0;
+                                    foreach($data as $d){
+                                        $nb++;
+                                        ?>
+                                        <tr>
+                                            <td>
+                                                <?php
+                                                if($nb == 1){
+                                                    echo $nb.'<small>er</small>';
+                                                }
+                                                else{
+                                                    echo $nb.'<small>ème</small>';
+                                                }
+                                                ?>
+                                            </td>
+                                            <td><?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$d['User']['username'].'/30', ['class' => 'avatar-rounded']); ?> </td>
+                                            <td>
+                                                <b><?php echo $d['User']['username']; ?></b><br>
+                                                <span class="text-muted"><small><?php echo $d['User']['votes']; ?> votes</small></span>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="vertical-separator"></div>
+                        <?php } ?>
+                        <?php if($use_votes_ladder == 1){ ?>
+                        <div class="col-md-8">
+                        <?php } else { ?>
+                        <div class="col-md-12">
+                        <?php } ?>
+                            <div class="text-highlights text-highlights-light-blue">
+                                <i class="fa fa-info-circle"></i>
+                                <?php
+                                if($nb_votes == 0){
+                                    echo "Vous n'avez jamais voté pour le serveur";
+                                }
+                                else{
+                                    echo "Vous avez voté $nb_votes fois, merci";
+                                }
+                                ?>
+                            </div>
+                            <center>
+                                <p>
+                                    <?php echo $votes_description; ?>
+                                </p>
+                                <hr>
+                                <a href="<?php echo $votes_url; ?>" class="btn-u btn-u-dark btn-u-lg" target="_blank" onclick="window.location.href='<?php echo $this->Html->url(['controller' => 'votes', 'action' => 'vote']); ?>';">
+                                    Voter pour <?php echo $name_server; ?>
+                                </a>
+                            </center>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- End Content -->
         <?php echo $this->element('sidebar'); ?>
     </div>
 </div><!--/container-->     

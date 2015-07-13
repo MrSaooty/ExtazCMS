@@ -33,7 +33,7 @@ $(function() {
                 <fieldset>
                     <section>
                         <select name="data[Pages][type]" id="PagesType" class="form-control input-sm">
-                            <option value="1">De quelle type est votre requête ?</option>
+                            <option value="none">De quelle type est votre requête ?</option>
                             <option value="question">Question</option>
                             <option value="report">Signalement d'un joueur</option>
                             <option value="other">Autre</option>

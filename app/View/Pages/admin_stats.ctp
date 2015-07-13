@@ -1,4 +1,12 @@
 <?php $this->assign('title', 'Statistiques'); ?>
+<script>
+$(document).ready(function($){
+	$('.counter').counterUp({
+	    delay: 10,
+	    time: 1000
+	});
+});
+</script>
 <div class="main-content">
 	<div class="container">
 		<div class="page-content page-statement">
@@ -10,20 +18,20 @@
 			  <?php if($use_store == 1){ ?>
 				  <div class="col-md-3 col-sm-3">
 					<div class="well br-red">
-					  <h2><?php echo $achatsAujourdhui; ?> <small><a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'shop', 'admin' => true]); ?>" target="_blank">(Graphique)</a></small></h2>
+					  <h2><span class="counter"><?php echo $achatsAujourdhui; ?></span> <small><a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'shop', 'admin' => true]); ?>" target="_blank">(Graphique)</a></small></h2>
 					  <p>Nombre d'achats dans la boutique aujourd'hui</p>
 					</div>
 				  </div>
 				  <div class="col-md-3 col-sm-3">
 					<div class="well br-lblue">
-					  <h2><?php echo $starpassAujourdhui; ?> <small><a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'starpass', 'admin' => true]); ?>" target="_blank">(Graphique)</a></small></h2>
+					  <h2><span class="counter"><?php echo $starpassAujourdhui; ?></span> <small><a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'starpass', 'admin' => true]); ?>" target="_blank">(Graphique)</a></small></h2>
 					  <p>Nombre de code Starpass validés aujourd'hui</p>                        
 					</div>
 				  </div>
 				  <?php if($use_paypal == 1){ ?>
 					  <div class="col-md-3 col-sm-3">
 						<div class="well br-green">
-						  <h2><?php echo $paypalAujourdhui; ?> <small><a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'paypal', 'admin' => true]); ?>" target="_blank">(Graphique)</a></small></h2>
+						  <h2><span class="counter"><?php echo $paypalAujourdhui; ?></span> <small><a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'paypal', 'admin' => true]); ?>" target="_blank">(Graphique)</a></small></h2>
 						  <p>Nombre d'achats via PayPal aujourd'hui</p>
 						</div>
 					  </div>
@@ -57,7 +65,7 @@
 			  <?php } ?>
 			  <div class="col-md-3 col-sm-3">
 				<div class="well br-purple">
-				  <h2><?php echo $utilisateursAujourdhui; ?> <small><a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'user', 'admin' => true]); ?>" target="_blank">(Graphique)</a></small></h2>
+				  <h2><span class="counter"><?php echo $utilisateursAujourdhui; ?></span> <small><a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'user', 'admin' => true]); ?>" target="_blank">(Graphique)</a></small></h2>
 				  <p>Nombre d'utlisateur inscrits aujourd'hui</p>
 				</div>
 			  </div>

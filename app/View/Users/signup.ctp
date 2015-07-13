@@ -13,7 +13,15 @@
                         <label class="input">
                             <i class="icon-prepend fa fa-user"></i>
                             <i class="icon-append fa fa-question-circle"></i>
-                            <?php echo $this->Form->input('username', array('type' => 'text', 'placeholder' => 'Pseudo', 'class' => 'form-control', 'label' => false, 'div' => false, 'required' => 'required')); ?>
+                            <?php
+                            if(isset($this->request->query['username']) && !empty($this->request->query['username'])){
+                                $username = $this->request->query['username'];
+                                echo $this->Form->input('username', array('type' => 'text', 'value' => $username, 'class' => 'form-control', 'label' => false, 'div' => false, 'required' => 'required'));
+                            }
+                            else{
+                                echo $this->Form->input('username', array('type' => 'text', 'placeholder' => 'Pseudo', 'class' => 'form-control', 'label' => false, 'div' => false, 'required' => 'required'));
+                            }
+                            ?>
                             <b class="tooltip tooltip-bottom-right">
                                 Veuillez entrer votre véritable pseudo Minecraft, celui que vous utiliser sur le serveur.<br>
                                 De plus il est nécessaire de bien respecter les majuscules, merci !
