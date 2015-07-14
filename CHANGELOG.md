@@ -4,6 +4,8 @@ CHANGELOG
 v1.8 (en développement)
 ----
 
+* Vous pouvez désormais créer une page qui ne fera qu'une simple redirection
+* Amélioration de la sidebar
 * Une page référençant tous les items en promotion de la boutique est désormais disponible
 * Refonte des profils utilisateurs
 * Refonte de la page de connexion

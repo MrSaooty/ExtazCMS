@@ -26,6 +26,8 @@ CREATE TABLE IF NOT EXISTS `extaz_cpages` (
   `sidebar` int(11) DEFAULT NULL,
   `name` text NOT NULL,
   `content` longtext NOT NULL,
+  `redirect` int(11) NOT NULL,
+  `url` text NOT NULL,
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`)

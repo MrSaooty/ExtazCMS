@@ -59,7 +59,7 @@ $(document).ready(function(){
                                 <?php echo $this->Form->textarea('content', array('type' => 'textarea', 'rows' => '5', 'cols' => '5', 'class' => 'summernote', 'label' => false)); ?>
                             </div>
                         </div>
-                        <i class="fa fa-info-circle"></i> Cette page sera visible immédiatement <button class="btn btn-black pull-right pull-right" type="submit"><i class="fa fa-plus"></i> Ajouter cette page</button>
+                        <i class="fa fa-info-circle"></i> Vous pouvez utiliser des variables pour étoffer le contenu de votre page. <a href="http://extaz-cms.com/wiki/index.php?title=Aide" target="_blank">(<u>en savoir plus</u> <i class="fa fa-external-link"></i>)</a> <button class="btn btn-black pull-right pull-right" type="submit"><i class="fa fa-plus"></i> Ajouter cette page</button>
                     <?php echo $this->Form->end(); ?>
                 </div>
             </div>

@@ -201,6 +201,9 @@
                                         <a href="#"><i class="fa fa-file-text"></i> Pages <span class="nav-caret fa fa-caret-down"></span></a>
                                         <ul class="list-unstyled">
                                             <li>
+                                                <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'add_redirection', 'admin' => true]); ?>"><i class="fa fa-refresh"></i> Redirection</a>
+                                            </li>
+                                            <li>
                                                 <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'add', 'admin' => true]); ?>"><i class="fa fa-plus"></i> Créer</a>
                                             </li>
                                             <li>

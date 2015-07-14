@@ -1,4 +1,4 @@
-<?php $this->assign('title', 'Ajouter une page'); ?>
+<?php $this->assign('title', 'Modifier une page'); ?>
 <script type="text/javascript">
 function verif(evt) {
     var keyCode = evt.which ? evt.which : evt.keyCode;
@@ -30,7 +30,7 @@ $(document).ready(function(){
             <div class="col-md-12">
                 <div class="page-content">
                     <div class="single-head">
-                        <h3 class="pull-left"><i class="fa fa-plus-square"></i>Ajouter une page</h3>
+                        <h3 class="pull-left"><i class="fa fa-plus-square"></i>Modifier une page</h3>
                         <div class="clearfix"></div>
                     </div>
                     <?php echo $this->Form->create('Cpages', array('class' => 'sky-form', 'inputDefaults' => array('error' => false))); ?>
@@ -59,7 +59,7 @@ $(document).ready(function(){
                                 <?php echo $this->Form->textarea('content', array('type' => 'textarea', 'rows' => '5', 'cols' => '5', 'value' => $data['Cpage']['content'], 'class' => 'summernote', 'label' => false)); ?>
                             </div>
                         </div>
-                        <i class="fa fa-info-circle"></i> Cette modification prendra effet immédiatement <button class="btn btn-black pull-right pull-right" type="submit"><i class="fa fa-check"></i> Confirmer</button>
+                        <i class="fa fa-info-circle"></i> Vous pouvez utiliser des variables pour étoffer le contenu de votre page. <a href="http://extaz-cms.com/wiki/index.php?title=Aide" target="_blank">(<u>en savoir plus</u> <i class="fa fa-external-link"></i>)</a> <button class="btn btn-black pull-right pull-right" type="submit"><i class="fa fa-check"></i> Confirmer</button>
                     <?php echo $this->Form->end(); ?>
                 </div>
             </div>

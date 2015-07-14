@@ -51,6 +51,7 @@ $(document).ready(function(){
                         <thead>
                             <tr>
                                 <th><b>Auteur</b></th>
+                                <th><b>Type</b></th>
                                 <th><b>Nom</b></th>
                                 <th><b>URL</b></th>
                                 <th><b>Date de création</b></th>
@@ -61,17 +62,45 @@ $(document).ready(function(){
                             <?php foreach($data as $d){ ?>
                             <tr>
                                 <td><?php echo $d['User']['username']; ?></td>
+                                <td>
+                                    <?php
+                                    if($d['Cpage']['redirect'] == 1){
+                                        echo '<i class="fa fa-refresh"></i> Redirection';
+                                    }
+                                    else{
+                                        echo '<i class="fa fa-file"></i> Page';
+                                    }
+                                    ?>
+                                </td>
                                 <td><?php echo $d['Cpage']['name']; ?></td>
                                 <td>
+                                    <?php if($d['Cpage']['redirect'] == 1){ ?>
+                                    <span class="label label-black">
+                                        <i class="fa fa-globe"></i>
+                                        <?php echo $d['Cpage']['url']; ?>
+                                    </span>
+                                    <?php } else { ?>
                                     <span class="label label-black">
                                         <i class="fa fa-globe"></i>
                                         <?php echo 'http://'.$_SERVER['SERVER_NAME'].$this->Html->url(['controller' => 'cpages', 'action' => 'read', 'slug' => $d['Cpage']['slug'], 'admin' => false]); ?>
                                     </span>
+                                    <?php } ?>
                                 </td>
                                 <td><?php echo $this->Time->format('d-m-Y à H:i', $d['Cpage']['created']); ?></td>
                                 <td>
                                     <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'read', 'slug' => $d['Cpage']['slug'], 'admin' => false]); ?>" class="label label-black" target="_blank"><i class="fa fa-eye"></i> Voir</a>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'edit', $d['Cpage']['id'], 'admin' => true]); ?>" class="label label-black"><i class="fa fa-pencil-square-o"></i> Editer</a>
+                                    <?php
+                                    if($d['Cpage']['redirect'] == 1){
+                                        ?>
+                                        <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'edit_redirection', $d['Cpage']['id'], 'admin' => true]); ?>" class="label label-black"><i class="fa fa-pencil-square-o"></i> Editer</a>
+                                        <?php
+                                    }
+                                    else{
+                                        ?>
+                                        <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'edit', $d['Cpage']['id'], 'admin' => true]); ?>" class="label label-black"><i class="fa fa-pencil-square-o"></i> Editer</a>
+                                        <?php
+                                    }
+                                    ?>
                                     <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'delete', $d['Cpage']['id'], 'admin' => true]); ?>" class="label label-danger confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
                                 </td>
                             </tr>
