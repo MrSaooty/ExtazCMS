@@ -80,42 +80,6 @@
     </div>
     <!-- End Member -->
 
-    <!-- Information -->
-    <div class="row">
-        <div class="col-md-12">
-            <div class="tag-box tag-box-v4">
-                <div id="testimonials-3" class="carousel slide testimonials testimonials-v1" style="margin-top: -10px;">
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
-                                <div class="testimonial-info center">
-                                    <span class="testimonial-author">
-                                        <i class="fa fa-shield"></i> Serveur en ligne
-                                        <br>
-                                        <span class="text-muted">
-                                            <small><?php echo $api->call('server.bukkit.version')[0]['success']; ?></small>
-                                        </span>
-                                    </span>
-                                </div>
-                            <?php } else { ?>
-                                <div class="testimonial-info center">
-                                    <span class="testimonial-author">
-                                        <font color="red"><i class="fa fa-power-off"></i> Serveur hors ligne</font>
-                                        <br>
-                                        <span class="text-muted">
-                                            <small><?php echo $api->call('server.bukkit.version')[0]['success']; ?></small>
-                                        </span>
-                                    </span>
-                                </div>
-                            <?php } ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Donation Information -->
-
     <!-- Players -->
     <div class="row">
         <div class="col-md-12">
@@ -142,6 +106,42 @@
         </div>
     </div>
     <!-- End Players -->
+
+    <!-- Information -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tag-box tag-box-v4">
+                <div id="testimonials-3" class="carousel slide testimonials testimonials-v1" style="margin-top: -10px;">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
+                                <div class="testimonial-info center">
+                                    <span class="testimonial-author">
+                                        <i class="fa fa-shield"></i> Serveur en ligne
+                                        <br>
+                                        <span class="text-default">
+                                            <small><?php echo $api->call('server.bukkit.version')[0]['success']; ?></small>
+                                        </span>
+                                    </span>
+                                </div>
+                            <?php } else { ?>
+                                <div class="testimonial-info center">
+                                    <span class="testimonial-author">
+                                        <font color="red"><i class="fa fa-power-off"></i> Serveur hors ligne</font>
+                                        <br>
+                                        <span class="text-default">
+                                            <small><?php echo $api->call('server.bukkit.version')[0]['success']; ?></small>
+                                        </span>
+                                    </span>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Donation Information -->
 
     <?php if($use_store == 1 && $use_donation_ladder == 1 && $nb_donator > 0){ ?>
     <!-- Donation Ladder -->

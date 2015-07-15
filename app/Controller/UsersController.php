@@ -17,14 +17,20 @@ class UsersController extends AppController{
     }
 
 	public function login(){
-        if($this->request->is('post')){
-            if($this->Auth->login()){
-                $this->Session->setFlash('Vous êtes maintenant connecté '.$this->Auth->user('username').'', 'success');
-                return $this->redirect($this->Auth->redirect(['controller' => 'posts', 'action' => 'index']));
+        if(!$this->Auth->user()){
+            if($this->request->is('post')){
+                if($this->Auth->login()){
+                    $this->Session->setFlash('Vous êtes maintenant connecté '.$this->Auth->user('username').'', 'success');
+                    return $this->redirect($this->Auth->redirect(['controller' => 'posts', 'action' => 'index']));
+                }
+                else{
+                    $this->Session->setFlash('Pseudo ou mot de passe invalide, vous pouvez réessayer', 'error');
+                }
             }
-            else{
-                $this->Session->setFlash('Pseudo ou mot de passe invalide, vous pouvez réessayer', 'error');
-            }
+        }
+        else{
+            $this->Session->setFlash('Vous êtes déjà connecté', 'error');
+            return $this->redirect($this->Auth->redirect(['controller' => 'posts', 'action' => 'index']));
         }
 	}
 

@@ -243,10 +243,9 @@
     echo $this->Html->script('custom');
     ?>
     <script type="text/javascript">
-        jQuery(document).ready(function() {
+        jQuery(document).ready(function(){
           	App.init();
             App.initSliders();
-            Index.initParallaxSlider();        
         });
     </script>
     <script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>

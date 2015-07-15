@@ -67,7 +67,8 @@ Class VotesController extends AppController{
 					$command = str_replace('%player%', $this->Auth->user('username'), $this->config['votes_command']);
 					if(strstr($this->config['votes_command'], '&&&')){
 						$new_command = explode('&&&', $command);
-						foreach($new_command as $command) {
+						foreach($new_command as $command){
+							$command = trim($command);
 							$api->call('server.run_command', [$command]);
 						}
 					}

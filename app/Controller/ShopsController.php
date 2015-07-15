@@ -342,7 +342,8 @@ Class ShopsController extends AppController{
 									for($i=0; $i < $quantity; $i++){
 										if(strstr($item['Shop']['command'], '&&&')){
 											$new_command = explode('&&&', $command);
-											foreach($new_command as $command) {
+											foreach($new_command as $command){
+												$command = trim($command);
 												$api->call('server.run_command', [$command]);
 											}
 										}
@@ -412,9 +413,10 @@ Class ShopsController extends AppController{
 										for($i=0; $i < $quantity; $i++){
 											if(strstr($item['Shop']['command'], '&&&')){
 												$new_command = explode('&&&', $command);
-												foreach($new_command as $command) {
-													$api->call('server.run_command', [$command]);
-												}
+												foreach($new_command as $command){
+												$command = trim($command);
+												$api->call('server.run_command', [$command]);
+											}
 											}
 											else{
 												$api->call('server.run_command', [$command]);

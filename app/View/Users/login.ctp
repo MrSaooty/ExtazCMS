@@ -5,9 +5,9 @@ $(document).ready(function(){
     $('#create_account').on('click', function(){
         $('.password').hide();
         $('.footer_login').hide();
-        $('.footer_create_account').show();
+        $('.footer_create_account').fadeIn(350);
         $('header[class=login]').hide();
-        $('header[class=create_account]').show();
+        $('header[class=create_account]').fadeIn(350);
         var url = '<?php echo $this->Html->url(['controller' => 'users', 'action' => 'signup', '?' => ['username' => '']]); ?>';
         var username = $('#UserUsername').val();
         var link = url + username;
@@ -15,10 +15,10 @@ $(document).ready(function(){
         $('#UserUsername').focus();
     });
     $('#login').on('click', function(){
-        $('.password').show();
-        $('.footer_login').show();
+        $('.password').fadeIn(350);
+        $('.footer_login').fadeIn(350);
         $('.footer_create_account').hide();
-        $('header[class=login]').show();
+        $('header[class=login]').fadeIn(350);
         $('header[class=create_account]').hide();
         $('#UserPassword').focus();
     });
