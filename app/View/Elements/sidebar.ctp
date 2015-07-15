@@ -17,9 +17,9 @@
                         </div>
                         <br>
                         <div class="pull-right">
-                            <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'forgot_password']); ?>" class="btn-u btn-brd-hover rounded btn-u-dark btn-u-xs tooltips" data-original-title="Mot de passe oublié" data-toggle="tooltip" data-placement="bottom" type="submit"><i class="fa fa-question-circle"></i></a>
-                            <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'signup']); ?>" class="btn-u btn-brd-hover rounded btn-u-dark btn-u-xs" type="submit">Inscription</a>
-                            <button class="btn-u btn-brd-hover rounded btn-u btn-u-xs" type="submit">Connexion</button>
+                            <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'forgot_password']); ?>" class="btn-u btn-u-dark btn-u-xs tooltips" data-original-title="Mot de passe oublié" data-toggle="tooltip" data-placement="bottom" type="submit"><i class="fa fa-question"></i></a>
+                            <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'signup']); ?>" class="btn-u btn-u-dark btn-u-xs" type="submit">Inscription</a>
+                            <button class="btn-u btn-u btn-u-xs" type="submit">Connexion</button>
                         </div>
                         <br>                       
                     <?php echo $this->Form->end(); ?>
@@ -34,20 +34,20 @@
                    <hr>
                    <p>
                         <?php if($role > 0){ ?>
-                            <font color="#555"><i class="fa fa-chevron-circle-right"></i></font>
+                            <font color="#555"><i class="fa fa-angle-double-right"></i></font>
                             <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'stats', 'admin' => true]); ?>">
                                 Accéder à l'administration
                             </a>
                             <br>
                         <?php } ?>
                         <?php if($use_store == 1){ ?>
-                            <font color="#555"><i class="fa fa-chevron-circle-right"></i></font>
+                            <font color="#555"><i class="fa fa-angle-double-right"></i></font>
                             <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'reload']); ?>">
                                 Vous avez <span class="open-sans"><?php echo number_format($tokens, 0, ' ', ' ').'</span> '.$site_money; ?>
                             </a>
                             <br>
                         <?php } ?>
-                        <font color="#555"><i class="fa fa-chevron-circle-right"></i></font>
+                        <font color="#555"><i class="fa fa-angle-double-right"></i></font>
                         <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_tickets']); ?>">
                             <?php
                             if($tickets > 1){
@@ -60,7 +60,7 @@
                         </a>
                         <br>
                         <?php if($use_store == 1){ ?>
-                        <font color="#555"><i class="fa fa-chevron-circle-right"></i></font> 
+                        <font color="#555"><i class="fa fa-angle-double-right"></i></font> 
                         <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'account']); ?>">
                             Accéder à mon profil
                         </a>
@@ -68,17 +68,53 @@
                     </p>
                     <hr>
                     <?php if($use_store == 1){ ?>
-                        <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'reload']); ?>" class="tooltips btn-u btn-brd-hover rounded btn-u-orange btn-u-xs" data-original-title="Acheter des <?php echo $site_money; ?>" data-toggle="tooltip" data-placement="bottom" type="submit"><i class="fa fa-shopping-cart"></i> Recharger</a>
-                        <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'logout']); ?>" class="btn-u btn-brd-hover rounded btn-u-dark btn-u-xs pull-right" type="submit"><i class="fa fa-sign-out"></i> Déconnexion</a>
+                        <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'reload']); ?>" class="tooltips btn-u btn-brd-hover btn-u-orange btn-u-xs" data-original-title="Acheter des <?php echo $site_money; ?>" data-toggle="tooltip" data-placement="bottom" type="submit"><i class="fa fa-shopping-cart"></i> Recharger</a>
+                        <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'logout']); ?>" class="btn-u btn-brd-hover btn-u-dark btn-u-xs pull-right" type="submit"><i class="fa fa-sign-out"></i> Déconnexion</a>
                     <?php } else { ?>
-                        <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'account']); ?>" class="btn-u btn-brd-hover rounded btn-u btn-u-xs" type="submit"><i class="fa fa-user"></i> Mon profil</a>
-                        <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'logout']); ?>" class="btn-u btn-brd-hover rounded btn-u-dark btn-u-xs pull-right" type="submit"><i class="fa fa-sign-out"></i> Déconnexion</a>
+                        <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'account']); ?>" class="btn-u btn-brd-hover btn-u btn-u-xs" type="submit"><i class="fa fa-user"></i> Mon profil</a>
+                        <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'logout']); ?>" class="btn-u btn-brd-hover btn-u-dark btn-u-xs pull-right" type="submit"><i class="fa fa-sign-out"></i> Déconnexion</a>
                     <?php } ?>
                 </div>
             <?php } ?>
         </div>
     </div>
     <!-- End Member -->
+
+    <!-- Information -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tag-box tag-box-v4">
+                <div id="testimonials-3" class="carousel slide testimonials testimonials-v1" style="margin-top: -10px;">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
+                                <div class="testimonial-info center">
+                                    <span class="testimonial-author">
+                                        <i class="fa fa-shield"></i> Serveur en ligne
+                                        <br>
+                                        <span class="text-muted">
+                                            <small><?php echo $api->call('server.bukkit.version')[0]['success']; ?></small>
+                                        </span>
+                                    </span>
+                                </div>
+                            <?php } else { ?>
+                                <div class="testimonial-info center">
+                                    <span class="testimonial-author">
+                                        <font color="red"><i class="fa fa-power-off"></i> Serveur hors ligne</font>
+                                        <br>
+                                        <span class="text-muted">
+                                            <small><?php echo $api->call('server.bukkit.version')[0]['success']; ?></small>
+                                        </span>
+                                    </span>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Donation Information -->
 
     <!-- Players -->
     <div class="row">
@@ -107,41 +143,39 @@
     </div>
     <!-- End Players -->
 
-    <!-- Information -->
-    <div class="row">
-        <div class="col-md-12">
-            <div class="tag-box tag-box-v4">
-                <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
-                <i class="fa fa-signal"></i> État du serveur : <small><span class="text-highlights text-highlights-green">En ligne</span></small><br>
-                <i class="fa fa-cube"></i> Version : <small><?php echo $api->call('server.bukkit.version')[0]['success']; ?></small>
-                <?php } else { ?>
-                <i class="fa fa-signal"></i> État du serveur : <small><span class="text-highlights text-highlights-red">Hors ligne</span></small>
-                <?php } ?>
-            </div>
-        </div>
-    </div>
-    <!-- End Information -->
-    
     <?php if($use_store == 1 && $use_donation_ladder == 1 && $nb_donator > 0){ ?>
     <!-- Donation Ladder -->
     <div class="row">
         <div class="col-md-12">
             <div class="tag-box tag-box-v4">
-                <ul class="list-unstyled">
-                    <li>
-                        <i class="fa fa-trophy"></i> Meilleur donateur
-                        <br>
-                        <?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$best_donator['User']['username'].'/16'); ?> 
-                        <span class="tooltips" data-original-title="<?php echo $best_donator['donationLadder']['tokens'].' '.$site_money; ?>" data-toggle="tooltip" data-placement="right"><span class="text-highlights"><?php echo $best_donator['User']['username']; ?></span></span>
-                    </li>
-                    <br>
-                    <li>
-                        <i class="fa fa-trophy"></i> Dernier donateur
-                        <br>
-                        <?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$last_donator['User']['username'].'/16'); ?> 
-                        <span class="tooltips" data-original-title="<?php echo $last_donator['donationLadder']['tokens'].' '.$site_money; ?>" data-toggle="tooltip" data-placement="right"><span class="text-highlights"><?php echo $last_donator['User']['username']; ?></span></span>
-                    </li>
-                </ul>
+                <div id="testimonials-3" class="carousel slide testimonials testimonials-v1">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="testimonial-info">
+                                <?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$best_donator['User']['username'].'/40', ['class' => 'rounded-2x']); ?>
+                                <span class="testimonial-author">
+                                    <?php echo $this->Html->link($best_donator['User']['username'], ['controller' => 'users', 'action' => 'profile', 'username' => $best_donator['User']['username']]); ?>
+                                    <br>
+                                    <span class="text-muted">
+                                        <small>Meilleur donateur</small>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonial-info">
+                            <?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$last_donator['User']['username'].'/40', ['class' => 'rounded-2x']); ?>
+                                <span class="testimonial-author">
+                                    <?php echo $this->Html->link($last_donator['User']['username'], ['controller' => 'users', 'action' => 'profile', 'username' => $last_donator['User']['username']]); ?>
+                                    <br>
+                                    <span class="text-muted">
+                                        <small>Dernier donateur</small>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -9,7 +9,7 @@
                     <header><?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$data['User']['username'].'', ['alt' => 'Player head', 'style' => 'margin-right:4px;']); ?> Informations à propos de <?php echo $data['User']['username']; ?></header>
                 </div>
                 <div class="panel panel-default">
-                    <table class="table">
+                    <table class="table raleway">
                         <tbody>
                             <tr>
                                 <td>Inscription</td>
