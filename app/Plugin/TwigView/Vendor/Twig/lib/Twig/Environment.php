@@ -89,7 +89,7 @@ class Twig_Environment
         }
 
         $options = array_merge(array(
-            'debug'               => false,
+            'debug'               => true,
             'charset'             => 'UTF-8',
             'base_template_class' => 'Twig_Template',
             'strict_variables'    => false,
@@ -108,10 +108,10 @@ class Twig_Environment
         $this->setCache($options['cache']);
         $this->functionCallbacks = array();
         $this->filterCallbacks = array();
-
         $this->addExtension(new Twig_Extension_Core());
         $this->addExtension(new Twig_Extension_Escaper($options['autoescape']));
         $this->addExtension(new Twig_Extension_Optimizer($options['optimizations']));
+        $this->addExtension(new Twig_Extension_Debug());
         $this->extensionInitialized = false;
         $this->staging = new Twig_Extension_Staging();
     }
