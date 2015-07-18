@@ -36,6 +36,10 @@ App::uses('File', 'Utility');
  */
 class AppController extends Controller {
 
+	public $viewClass = 'TwigView.Twig';
+
+	public $ext = '.twig';
+
 	public $uses = ['Informations', 'User', 'starpassHistory', 'Support', 'donationLadder', 'Button', 'Cpage'];
 
 	public $helpers = ['Html', 'Form', 'PaypalIpn.Paypal'];
@@ -109,6 +113,7 @@ class AppController extends Controller {
 		$this->set('votes_reward', $informations['Informations']['votes_reward']);
 		$this->set('votes_command', $informations['Informations']['votes_command']);
 		$this->set('votes_ladder_limit', $informations['Informations']['votes_ladder_limit']);
+		$this->set('customs_buttons_title', $informations['Informations']['customs_buttons_title']);
 		// Le reste
 		$this->set('connected', $this->Auth->user());
 		$this->set('username', $this->Auth->user('username'));

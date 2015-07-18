@@ -837,45 +837,51 @@ class PagesController extends AppController {
 	}
 
 	public function contact(){
-		if($this->Auth->user()){
-			if($this->config['use_captcha'] == 1){
-				$ayah = new AYAH();
-            	$this->set('ayah', $ayah);
-			}
-			if($this->request->is('post')){
-                if($this->config['use_captcha'] == 0 OR array_key_exists('captcha', $this->request->data)){
-                	if($this->config['use_captcha'] == 1){
-						$score = $ayah->scoreResult();
-					}
-                    if($this->config['use_captcha'] == 0 OR $score){
-						$contact_email = $this->config['contact_email'];
-						$name_server = $this->config['name_server'];
-						$username = $this->Auth->user('username');
-						$email = $this->Auth->user('email');
-						$subject = $this->request->data['Pages']['subject'];
-						$message = $this->request->data['Pages']['message'];
-						if(!empty($subject) && !empty($message)){
-							$name_server = strtolower(preg_replace('/\s/', '', $name_server));
-							$Email = new CakeEmail();
-		                    $Email->from(array('admin@'.$name_server.'.com' => $name_server));
-		                    $Email->to($contact_email);
-		                    $Email->subject($subject);
-		                    $Email->send($username.' ('.$email.') a envoyé : '.$message);
-							$this->Session->setFlash('Votre message a été envoyé, merci !', 'success');
+		if($this->config['use_contact'] == 1){
+			if($this->Auth->user()){
+				if($this->config['use_captcha'] == 1){
+					$ayah = new AYAH();
+	            	$this->set('ayah', $ayah);
+				}
+				if($this->request->is('post')){
+	                if($this->config['use_captcha'] == 0 OR array_key_exists('captcha', $this->request->data)){
+	                	if($this->config['use_captcha'] == 1){
+							$score = $ayah->scoreResult();
+						}
+	                    if($this->config['use_captcha'] == 0 OR $score){
+							$contact_email = $this->config['contact_email'];
+							$name_server = $this->config['name_server'];
+							$username = $this->Auth->user('username');
+							$email = $this->Auth->user('email');
+							$subject = $this->request->data['Pages']['subject'];
+							$message = $this->request->data['Pages']['message'];
+							if(!empty($subject) && !empty($message)){
+								$name_server = strtolower(preg_replace('/\s/', '', $name_server));
+								$Email = new CakeEmail();
+			                    $Email->from(array('admin@'.$name_server.'.com' => $name_server));
+			                    $Email->to($contact_email);
+			                    $Email->subject($subject);
+			                    $Email->send($username.' ('.$email.') a envoyé : '.$message);
+								$this->Session->setFlash('Votre message a été envoyé, merci !', 'success');
+							}
+							else{
+								$this->Session->setFlash('Tous les champs sont obligatoires', 'error');
+							}
 						}
 						else{
-							$this->Session->setFlash('Tous les champs sont obligatoires', 'error');
+							$this->Session->setFlash('Erreur 1001', 'error');
 						}
-					}
-					else{
-						$this->Session->setFlash('Erreur 1001', 'error');
 					}
 				}
 			}
+			else{
+				$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
+				return $this->redirect(['controller' => 'users', 'action' => 'login', 'admin' => false]);
+			}
 		}
 		else{
-			$this->Session->setFlash('Vous devez être connecté pour accéder à cette page', 'error');
-			return $this->redirect(['controller' => 'users', 'action' => 'login', 'admin' => false]);
+			$this->Session->setFlash('Accès refusé', 'error');
+			return $this->redirect(['controller' => 'posts', 'action' => 'index', 'admin' => false]);
 		}
 	}
 

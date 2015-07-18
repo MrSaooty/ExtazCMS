@@ -89,7 +89,7 @@ if($connected && $nb_items > 0){
                                 <?php echo $i['Shop']['description']; ?>
                             </p>
                             <div class="quantity">
-                                Quantité désiré : <span id="quantity<?php echo $i['Shop']['id']; ?>">1</span>
+                                Quantité désiré : <span class="open-sans" id="quantity<?php echo $i['Shop']['id']; ?>">1</span>
                                 <button class="btn-u btn-u-dark btn-u-xs" id="plus<?php echo $i['Shop']['id']; ?>">+</button>
                                 <button class="btn-u btn-u-dark btn-u-xs" id="moins<?php echo $i['Shop']['id']; ?>">-</button>
                             </div>
@@ -100,10 +100,10 @@ if($connected && $nb_items > 0){
                                     <?php echo $this->Form->input('quantity', ['type' => 'hidden', 'value' => '1', 'id' => 'server'.$i['Shop']['id']]); ?>
                                     <button type="submit" class="modal-button-1 btn-u btn-u-dark" id="server<?php echo $i['Shop']['id']; ?>"><i class="fa fa-shopping-cart"></i> 
                                         <?php if($i['Shop']['promo'] != -1){
-                                            echo '<span data-price="'.$price_server.'" id="server-price'.$i['Shop']['id'].'">'.$price_server.'</span> '; echo ucfirst($money_server);
+                                            echo '<span class="open-sans" data-price="'.$price_server.'" id="server-price'.$i['Shop']['id'].'">'.$price_server.'</span> '; echo ucfirst($money_server);
                                         }
                                         else{
-                                            echo '<span data-price="'.$i['Shop']['price_money_server'].'" id="server-price'.$i['Shop']['id'].'">'.number_format($i['Shop']['price_money_server'], 0, ',', ' ').'</span> '; echo ucfirst($money_server);
+                                            echo '<span class="open-sans" data-price="'.$i['Shop']['price_money_server'].'" id="server-price'.$i['Shop']['id'].'">'.number_format($i['Shop']['price_money_server'], 0, ',', ' ').'</span> '; echo ucfirst($money_server);
                                         } ?>
                                     </button>
                                 <?php echo $this->Form->end(); ?>
@@ -116,10 +116,10 @@ if($connected && $nb_items > 0){
                                     <button type="submit" class="modal-button-2 btn-u btn-u" id="site<?php echo $i['Shop']['id']; ?>"><i class="fa fa-shopping-cart"></i> 
                                         <?php
                                         if($i['Shop']['promo'] != -1){
-                                            echo '<span data-price="'.$price_site.'" id="site-price'.$i['Shop']['id'].'">'.$price_site.'</span> '; echo ucfirst($site_money);
+                                            echo '<span class="open-sans" data-price="'.$price_site.'" id="site-price'.$i['Shop']['id'].'">'.$price_site.'</span> '; echo ucfirst($site_money);
                                         }
                                         else{
-                                            echo '<span data-price="'.$i['Shop']['price_money_site'].'" id="site-price'.$i['Shop']['id'].'">'.number_format($i['Shop']['price_money_site'], 0, ',', ' ').'</span> '; echo ucfirst($site_money);
+                                            echo '<span class="open-sans" data-price="'.$i['Shop']['price_money_site'].'" id="site-price'.$i['Shop']['id'].'">'.number_format($i['Shop']['price_money_site'], 0, ',', ' ').'</span> '; echo ucfirst($site_money);
                                         }
                                         ?>
                                     </button>
@@ -175,85 +175,92 @@ else{
                         pour "<?php echo $request; ?>"
                     </h2>
                 </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="carousel-example" class="carousel slide" data-ride="carousel">
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <div class="row items">
-                                    <?php foreach($items as $i){ ?>
-                                        <?php if($i['Shop']['price_money_server'] > -1 OR $i['Shop']['price_money_site'] > -1){ ?>
-                                            <div class="col-sm-2 hidden-xs hidden-sm hidden-md" data-category="<?php echo $i['shopCategories']['name']; ?>">
-                                                <div class="col-item">
-                                                    <div class="col-md-12">
-                                                        <h5>
-                                                            <?php 
-                                                            if(mb_strlen($i['Shop']['name']) > 15){
-                                                                echo mb_substr($i['Shop']['name'], 0, 15).'...';
-                                                            }
-                                                            else{
-                                                                echo $i['Shop']['name'];
-                                                            }
-                                                            ?>
-                                                        </h5>
-                                                    </div>
-                                                    <div class="photo hidden-xs hidden-sm">
-                                                        <?php echo $this->Html->image($i['Shop']['img'], ['width' => 250, 'height' => 170, 'alt' => 'a']); ?>
-                                                        <?php
-                                                        if($i['Shop']['promo'] != -1){
-                                                            echo '<span class="shop-badge">-'.$i['Shop']['promo'].'%</span>';
-                                                        }
-                                                        ?>
-                                                    </div>
-                                                    <div class="info">
-                                                        <?php
-                                                        if($connected){
-                                                            echo '<button class="buy btn btn-default" data-toggle="modal" data-target="#shopping'.$i['Shop']['id'].'"><i class="fa fa-shopping-cart"></i> Acheter</button>';
-                                                        }
-                                                        else{
-                                                            echo '<button class="buy btn btn-default" data-toggle="modal" data-target="#please_connect"><i class="fa fa-shopping-cart"></i> Acheter</button>';
-                                                        }
-                                                        ?>
-                                                        <div class="clearfix">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="carousel-example" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <div class="row items">
+                                        <?php foreach($items as $i){ ?>
+                                            <?php if($i['Shop']['price_money_server'] > -1 OR $i['Shop']['price_money_site'] > -1){ ?>
+                                                <div class="col-sm-2 hidden-xs hidden-sm hidden-md" data-category="<?php echo $i['shopCategories']['name']; ?>">
+                                                    <div class="col-item">
+                                                        <div class="col-md-12">
+                                                            <h5>
+                                                                <?php 
+                                                                if(mb_strlen($i['Shop']['name']) > 15){
+                                                                    echo mb_substr($i['Shop']['name'], 0, 15).'...';
+                                                                }
+                                                                else{
+                                                                    echo $i['Shop']['name'];
+                                                                }
+                                                                ?>
+                                                            </h5>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3 hidden-lg" data-category="<?php echo $i['shopCategories']['name']; ?>">
-                                                <div class="col-item">
-                                                    <div class="col-md-12">
-                                                        <h5>
-                                                            <?php 
-                                                            if(mb_strlen($i['Shop']['name']) > 15){
-                                                                echo mb_substr($i['Shop']['name'], 0, 15).'...';
+                                                        <div class="shop-item photo hidden-xs hidden-sm">
+                                                            <?php
+                                                            if($connected){
+                                                                echo $this->Html->image($i['Shop']['img'], ['width' => 250, 'height' => 170, 'class' => 'shop-img', 'alt' => 'a', 'data-toggle' => 'modal', 'data-target' => '#shopping'.$i['Shop']['id'].'']);
                                                             }
                                                             else{
-                                                                echo $i['Shop']['name'];
+                                                                echo $this->Html->image($i['Shop']['img'], ['width' => 250, 'height' => 170, 'class' => 'shop-img', 'alt' => 'a', 'data-toggle' => 'modal', 'data-target' => '#please_connect']);
                                                             }
                                                             ?>
-                                                        </h5>
-                                                    </div>
-                                                    <div class="info">
-                                                        <?php
-                                                        if($i['Shop']['promo'] != -1){
-                                                            if($connected){
-                                                            echo '<button class="buy btn btn-default" data-toggle="modal" data-target="#shopping'.$i['Shop']['id'].'"><small>(-'.$i['Shop']['promo'].'%)</small> <i class="fa fa-shopping-cart"></i> Acheter</button>';
+                                                            <?php
+                                                            if($i['Shop']['promo'] != -1){
+                                                                echo '<span class="shop-promo" href="shop-ui-inner.html">'.$i['Shop']['promo'].'% de réduction !</span>';
                                                             }
-                                                            else{
-                                                                echo '<button class="buy btn btn-default" data-toggle="modal" data-target="#please_connect"><small>(-'.$i['Shop']['promo'].'%)</small> <i class="fa fa-shopping-cart"></i> Acheter</button>';
-                                                            }
-                                                        }
-                                                        else{
+                                                            ?>
+                                                        </div>
+                                                        <div class="info">
+                                                            <?php
                                                             if($connected){
-                                                            echo '<button class="buy btn btn-default" data-toggle="modal" data-target="#shopping'.$i['Shop']['id'].'"><i class="fa fa-shopping-cart"></i> Acheter</button>';
+                                                                echo '<button class="buy btn btn-default" data-toggle="modal" data-target="#shopping'.$i['Shop']['id'].'"><i class="fa fa-shopping-cart"></i> Acheter</button>';
                                                             }
                                                             else{
                                                                 echo '<button class="buy btn btn-default" data-toggle="modal" data-target="#please_connect"><i class="fa fa-shopping-cart"></i> Acheter</button>';
                                                             }
-                                                        }
-                                                        ?>
-                                                        <div class="clearfix">
+                                                            ?>
+                                                            <div class="clearfix">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 hidden-lg" data-category="<?php echo $i['shopCategories']['name']; ?>">
+                                                    <div class="col-item">
+                                                        <div class="col-md-12">
+                                                            <h5>
+                                                                <?php 
+                                                                if(mb_strlen($i['Shop']['name']) > 15){
+                                                                    echo mb_substr($i['Shop']['name'], 0, 15).'...';
+                                                                }
+                                                                else{
+                                                                    echo $i['Shop']['name'];
+                                                                }
+                                                                ?>
+                                                            </h5>
+                                                        </div>
+                                                        <div class="info">
+                                                            <?php
+                                                            if($i['Shop']['promo'] != -1){
+                                                                if($connected){
+                                                                echo '<button class="buy btn btn-default" data-toggle="modal" data-target="#shopping'.$i['Shop']['id'].'"><small>(-'.$i['Shop']['promo'].'%)</small> <i class="fa fa-shopping-cart"></i> Acheter</button>';
+                                                                }
+                                                                else{
+                                                                    echo '<button class="buy btn btn-default" data-toggle="modal" data-target="#please_connect"><small>(-'.$i['Shop']['promo'].'%)</small> <i class="fa fa-shopping-cart"></i> Acheter</button>';
+                                                                }
+                                                            }
+                                                            else{
+                                                                if($connected){
+                                                                echo '<button class="buy btn btn-default" data-toggle="modal" data-target="#shopping'.$i['Shop']['id'].'"><i class="fa fa-shopping-cart"></i> Acheter</button>';
+                                                                }
+                                                                else{
+                                                                    echo '<button class="buy btn btn-default" data-toggle="modal" data-target="#please_connect"><i class="fa fa-shopping-cart"></i> Acheter</button>';
+                                                                }
+                                                            }
+                                                            ?>
+                                                            <div class="clearfix">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

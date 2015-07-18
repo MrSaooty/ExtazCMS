@@ -29,6 +29,10 @@
                                     <td>Argent sur le site</td>
                                     <td><b><?php echo $data['User']['tokens'].' '.$site_money; ?></b></td>
                                 </tr>
+                                <tr>
+                                    <td><?php echo ucfirst($site_money); ?> achetés au total</td>
+                                    <td><b><?php echo $tokens_buy['donationLadder']['tokens']; ?></b></td>
+                                </tr>
                             <?php } ?>
                             <?php if($use_votes == 1 && $use_votes_ladder == 1){ ?>
                                 <tr>

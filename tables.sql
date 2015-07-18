@@ -178,13 +178,14 @@ CREATE TABLE IF NOT EXISTS `extaz_informations` (
   `votes_reward` int(11) DEFAULT NULL,
   `votes_command` text,
   `votes_ladder_limit` int(11) DEFAULT NULL,
+  `customs_buttons_title` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of extaz_informations
 -- ----------------------------
-INSERT INTO `extaz_informations` VALUES ('1', 'Nom du serveur', '127.0.0.1', '12345', 'PO', '127.0.0.1', '0', '', '', '', 'tokens', '0', '0', '25', '3', '30', '', '', 'http://extaz-cms.com/assets/logo.png', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '1', '0', '20', '', '3.jpg', 'Web', '20', '', '0', '0', 'http://www.rpg-paradize.com/', 'Votez pour notre serveur !', '180', '0', '', '15');
+INSERT INTO `extaz_informations` VALUES ('1', 'Nom du serveur', '127.0.0.1', '12345', 'PO', '127.0.0.1', '0', '', '', '', 'tokens', '0', '0', '25', '3', '30', '', '', 'http://extaz-cms.com/assets/logo.png', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '1', '0', '20', '', '3.jpg', 'Web', '20', '', '0', '0', 'http://www.rpg-paradize.com/', 'Votez pour notre serveur !', '180', '0', '', '15', '');
 
 -- ----------------------------
 -- Table structure for extaz_instant_payment_notifications

@@ -373,3 +373,18 @@ label {
 .center {
   text-align: center;
 }
+.width100 {
+  width: auto;
+}
+.topbar-server-ip {
+  text-transform: uppercase;
+  color: #999;
+  float: right;
+}
+.server-ip {
+  cursor: pointer;
+}
+.server-ip:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

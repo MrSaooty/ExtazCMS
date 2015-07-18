@@ -86,7 +86,7 @@ class UsersController extends AppController{
                         }
                     }
                     else{
-                        $this->Session->setFlash('Erreur 1001', 'error');
+                        $this->Session->setFlash('Captcha incorrect', 'error');
                     }
                 }
             }
@@ -96,11 +96,13 @@ class UsersController extends AppController{
     public function profile($username = null){
         if($this->User->find('first', ['conditions' => ['User.username' => $username]])){
             $data = $this->User->find('first', ['conditions' => ['User.username' => $username]]);
-            $this->set('data', $data);
             $ladder_vote = $this->User->find('all', ['order' => ['User.votes DESC']]);
-            $this->set('ladder_vote', $ladder_vote);
             $nb_votes = $this->Vote->find('first', ['conditions' => ['User.id' => $data['User']['id']]]);
+            $tokens_buy = $this->donationLadder->find('first', ['conditions' => ['donationLadder.user_id' => $data['User']['id']]]);
+            $this->set('data', $data);
+            $this->set('ladder_vote', $ladder_vote);
             $this->set('nb_votes', $nb_votes['User']['votes']);
+            $this->set('tokens_buy', $tokens_buy);
         }
         else{
             throw new NotFoundException();

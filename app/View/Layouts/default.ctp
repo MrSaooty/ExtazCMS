@@ -52,19 +52,17 @@
                         <div class="topbar">
                             <div class="container">
                                 <!-- Topbar Navigation -->
-                                <ul class="loginbar pull-right">
-                                    <li>
-                                        <?php
-                                        // Si le port est 25565 alors il est inutile de l'afficher
-                                        if($server_port != 25565){
-                                            echo '<i class="fa fa-globe"></i> <a href="">IP du serveur : </a><a href="#">'.$server_ip.':'.$server_port.'</a>';
-                                        }
-                                        else{
-                                            echo '<i class="fa fa-globe"></i> <a href="">IP du serveur : </a><a href="#">'.$server_ip.'</a>';
-                                        }
-                                        ?>
-                                    </li>
-                                </ul>
+                                <div class="topbar-server-ip">
+                                    <?php
+                                    // Si le port est 25565 alors il est inutile de l'afficher
+                                    if($server_port != 25565){
+                                        echo '<i class="fa fa-wifi"></i> IP du serveur : <span class="server-ip">'.$server_ip.':'.$server_port.'</span>';
+                                    }
+                                    else{
+                                        echo '<i class="fa fa-wifi"></i> IP du serveur : <span class="server-ip">'.$server_ip.'</span>';
+                                    }
+                                    ?>
+                                </div>
                                 <!-- End Topbar Navigation -->
                             </div>
                         </div>
@@ -236,10 +234,10 @@
     echo $this->Html->script('jquery.confirm');
     echo $this->Html->script('jquery.bootstrap-growl');
     echo $this->Html->script('index');
-    echo $this->Html->script('humane');
     echo $this->Html->script('jquery.autocomplete');
     echo $this->Html->script('summernote');
     echo $this->Html->script('summernote-fr-FR');
+    echo $this->Html->script('humane');
     echo $this->Html->script('custom');
     ?>
     <script type="text/javascript">

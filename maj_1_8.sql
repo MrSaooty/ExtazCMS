@@ -37,3 +37,4 @@ ALTER TABLE `extaz_cpages` ADD `redirect` INT NOT NULL AFTER `content`;
 UPDATE `cms`.`extaz_cpages` SET `redirect` = '0';
 ALTER TABLE `extaz_cpages` ADD `url` TEXT NOT NULL AFTER `redirect`;
 UPDATE `cms`.`extaz_cpages` SET `url` = '';
+ALTER TABLE `extaz_informations` ADD `customs_buttons_title` TEXT NOT NULL AFTER `votes_ladder_limit`;

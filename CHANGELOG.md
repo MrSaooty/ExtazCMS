@@ -4,6 +4,9 @@ CHANGELOG
 v1.8 (en développement)
 ----
 
+* Utilisation de Twig
+* Vous pouvez maintenant copiée l'ip du serveur simplement en cliquant sur celle ci
+* Vous pouvez désormais ajouter un titre au module des boutons customisables
 * Vous pouvez désormais créer une page qui ne fera qu'une simple redirection
 * Refonte de la sidebar
 * Une page référençant tous les items en promotion de la boutique est désormais disponible

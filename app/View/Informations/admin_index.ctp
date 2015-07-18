@@ -39,6 +39,10 @@ $(document).ready(function(){
         }
     }
     ?>
+    $('.summernote').summernote({
+        height: 300,
+        lang: 'fr-FR'
+    });
 });
 </script>
 <div class="main-content">
@@ -68,7 +72,8 @@ $(document).ready(function(){
                                 'chat_prefix' => ['label' => 'Prefix pour le chat', 'type' => 'text'], 
                                 'chat_nb_messages' => ['label' => 'Nombres de messages à afficher dans le chat', 'type' => 'number'], 
                                 'analytics' => ['label' => 'ID Google Analytics (Facultatif)', 'type' => 'number'], 
-                                'send_tokens_loss_rate' => ['label' => 'Taux de '.$site_money.' perdu lors d\'un transfert (en %)', 'type' => 'text']
+                                'send_tokens_loss_rate' => ['label' => 'Taux de '.$site_money.' perdu lors d\'un transfert (en %)', 'type' => 'text'],
+                                'customs_buttons_title' => ['label' => 'Titre du module des boutons customisables', 'type' => 'text']
                                 ]; ?>
                                 <?php foreach($informations as $k => $v){ ?>
                                 <div class="form-group">
@@ -182,7 +187,7 @@ $(document).ready(function(){
                                 ]; ?>
                                 <?php foreach($informations as $k => $v){ ?>
                                 <div class="form-group">
-                                    <?php echo $this->Form->textarea($k, array('type' => 'text', 'value' => $data['Informations'][$k], 'class' => 'ckeditor', 'label' => $v)); ?>
+                                    <?php echo $this->Form->textarea($k, array('type' => 'text', 'value' => $data['Informations'][$k], 'class' => 'summernote', 'label' => $v)); ?>
                                 </div>
                                 <?php } ?>
                                 <button class="btn btn-black pull-right" type="submit"><i class="fa fa-check"></i> Confirmer les modifications</button><br>
