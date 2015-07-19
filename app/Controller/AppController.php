@@ -130,6 +130,9 @@ class AppController extends Controller {
 		}
 		$this->set('tickets', $this->Support->find('count', ['conditions' => ['Support.user_id' => $this->Auth->user('id'), 'Support.resolved' => 0]]));
 		$this->set('nb_tickets_admin', $this->Support->find('count', ['conditions' => ['Support.resolved' => '0']]));
+		if($this->config['use_economy'] == 1){
+			$this->set('money_in_game', $api->call('players.name.bank.balance', [$this->Auth->user('username')])[0]['success']);
+		}
 		// Donnation Ladder
 		if($this->donationLadder->find('all')){
 			$this->set('best_donator', $this->donationLadder->find('first', ['order' => ['donationLadder.tokens DESC']]));

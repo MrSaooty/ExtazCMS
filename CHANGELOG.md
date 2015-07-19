@@ -5,6 +5,7 @@ v1.8 (en développement)
 ----
 
 * Utilisation de Twig
+* Si vous utilisez un système d'économie, les joueurs voient désormais l'argent qu'il possède sur le serveur directement sur la sidebar en dessous de l'argent qu'il possède sur le site
 * Vous pouvez maintenant copiée l'ip du serveur simplement en cliquant sur celle ci
 * Vous pouvez désormais ajouter un titre au module des boutons customisables
 * Vous pouvez désormais créer une page qui ne fera qu'une simple redirection

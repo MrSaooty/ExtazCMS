@@ -50,6 +50,13 @@
                             </a>
                             <br>
                         {% endif %}
+                        {% if use_economy == 1 %}
+                            <font color="#555"><i class="fa fa-angle-double-right"></i></font>
+                            <a href="">
+                                Vous avez <span class="open-sans">{{ money_in_game|number_format(0, ' ', ' ') }}</span> {{ money_server }}
+                            </a>
+                            <br>
+                        {% endif %}
                         <font color="#555"><i class="fa fa-angle-double-right"></i></font>
                         <a href="{{ _this.Html.url({'controller': 'pages', 'action': 'list_tickets'}) }}">
 							{% if tickets > 1 %}
