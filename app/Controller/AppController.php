@@ -37,13 +37,9 @@ App::uses('File', 'Utility');
 class AppController extends Controller {
 
 	public $viewClass = 'TwigView.Twig';
-
 	public $ext = '.twig';
-
 	public $uses = ['Informations', 'User', 'starpassHistory', 'Support', 'donationLadder', 'Button', 'Cpage'];
-
 	public $helpers = ['Html', 'Form', 'PaypalIpn.Paypal'];
-
 	public $components = [
 		'Session',
 		'Auth' => [
@@ -62,8 +58,15 @@ class AppController extends Controller {
 		// Variable qui regroupe toutes les infos depuis la bdd 
 		$this->config = $this->Informations->find('first');
 		$this->config = $this->config['Informations'];
-		$this->set('informations', $this->Informations->find('first'));
+		$this->set('informations', $this->config);
 		$this->set('infos', $this->config);
+		// On définit le debug
+		if($this->config['debug'] == 0){
+			Configure::write('debug', 0);
+		}
+		else{
+			Configure::write('debug', 2);
+		}
 		// On déclare JSONAPI
 		$informations = $this->Informations->find('first');
 		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
@@ -130,7 +133,7 @@ class AppController extends Controller {
 		}
 		$this->set('tickets', $this->Support->find('count', ['conditions' => ['Support.user_id' => $this->Auth->user('id'), 'Support.resolved' => 0]]));
 		$this->set('nb_tickets_admin', $this->Support->find('count', ['conditions' => ['Support.resolved' => '0']]));
-		if($this->config['use_economy'] == 1){
+		if($this->Auth->user() && $this->config['use_economy'] == 1){
 			$this->set('money_in_game', $api->call('players.name.bank.balance', [$this->Auth->user('username')])[0]['success']);
 		}
 		// Donnation Ladder

@@ -149,6 +149,12 @@ class InformationsController extends AppController{
 				else{
 					$this->Informations->saveField('maintenance', 0);
 				}
+				if(isset($this->request->data['debug'])){
+					$this->Informations->saveField('debug', 1);
+				}
+				else{
+					$this->Informations->saveField('debug', 0);
+				}
 				$this->Session->setFlash('Options mises à jour !', 'success');
 				return $this->redirect(['controller' => 'informations', 'action' => 'index', '?' => ['tab' => 'options']]);
 			}

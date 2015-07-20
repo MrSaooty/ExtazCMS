@@ -5,6 +5,7 @@ v1.8 (en développement)
 ----
 
 * Utilisation de Twig
+* Possibilité de désactiver le mode debug depuis les options du CMS
 * Si vous utilisez un système d'économie, les joueurs voient désormais l'argent qu'il possède sur le serveur directement sur la sidebar en dessous de l'argent qu'il possède sur le site
 * Vous pouvez maintenant copiée l'ip du serveur simplement en cliquant sur celle ci
 * Vous pouvez désormais ajouter un titre au module des boutons customisables
