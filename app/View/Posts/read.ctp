@@ -183,10 +183,10 @@ $(document).ready(function(){
                         <div class="thumbnail">
                             <?php
                             if($username == null){
-                                echo $this->Html->image('http://cravatar.eu/helmavatar/Steve', ['alt' => 'Player head', 'class' => 'img-responsive']);
+                                echo $this->Html->image('http://cravatar.eu/helmavatar/Steve', ['alt' => 'Player head', 'class' => 'img-responsive avatar-rounded', 'height' => 35, 'width' => 35]);
                             }
                             else{
-                                echo $this->Html->image('http://cravatar.eu/helmavatar/'.$username.'', ['alt' => 'Player head', 'class' => 'img-responsive']);
+                                echo $this->Html->image($comment['User']['avatar'], ['alt' => 'Player head', 'class' => 'img-responsive avatar-rounded', 'height' => 35, 'width' => 35]);
                             }
                             ?>
                         </div>

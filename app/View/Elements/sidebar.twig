@@ -29,8 +29,9 @@
             {% else %}
                 <div class="tag-box tag-box-v4">
                    <p class="lead">
-						{% set user_avatar %}http://cravatar.eu/helmavatar/{{ username }}{% endset %}
-						{{ _this.Html.image(user_avatar, {'alt': 'Avatar', 'style': 'margin-top:-4px;'}) }}
+                        <a href="{{ _this.Html.url({'controller': 'users', 'action': 'account', '?': {'tab': 'avatar'}}) }}">
+                            {{ _this.Html.image(avatar, {'height': 32, 'width': 32, 'alt': 'Avatar', 'class': 'avatar-rounded', 'style': 'margin-top:-4px;'}) }}
+                        </a>
                    		{{ username }}
                         <br>
                    </p>
@@ -159,8 +160,7 @@
                     <div class="carousel-inner">
                         <div class="item active">
                             <div class="testimonial-info">
-                            	{% set best_donator_avatar %}http://cravatar.eu/helmavatar/{{ best_donator['User']['username'] }}/40{% endset %}
-                            	{{ _this.Html.image(best_donator_avatar, {'class': 'rounded-2x'}) }}
+                            	{{ _this.Html.image(best_donator['User']['avatar'], {'class': 'rounded-2x'}) }}
                                 <span class="testimonial-author">
                                 	{{ _this.Html.link(best_donator['User']['username'], {'controller': 'users', 'action': 'profile', 'username': best_donator['User']['username']}) }}
                                     <br>
@@ -172,8 +172,7 @@
                         </div>
                         <div class="item">
                             <div class="testimonial-info">
-                            	{% set last_donator_avatar %}http://cravatar.eu/helmavatar/{{ last_donator['User']['username'] }}/40{% endset %}
-                            	{{ _this.Html.image(last_donator_avatar, {'class': 'rounded-2x'}) }}
+                            	{{ _this.Html.image(best_donator['User']['avatar'], {'class': 'rounded-2x'}) }}
                                 <span class="testimonial-author">
                                 	{{ _this.Html.link(last_donator['User']['username'], {'controller': 'users', 'action': 'profile', 'username': last_donator['User']['username']}) }}
                                     <br>

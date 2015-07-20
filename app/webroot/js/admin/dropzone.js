@@ -138,7 +138,7 @@
       addRemoveLinks: false,
       previewsContainer: null,
       capture: null,
-      dictDefaultMessage: "<br><i class='fa fa-picture-o'></i> Glissez votre avatar ici",
+      dictDefaultMessage: "<br><i class='fa fa-picture-o'></i> Glissez vos images ici",
       dictFallbackMessage: "Your browser does not support drag'n'drop file uploads.",
       dictFallbackText: "Please use the fallback form below to upload your files like in the olden days.",
       dictFileTooBig: "Le fichier est trop gros ({{filesize}}MiB). Taille maximum: {{maxFilesize}}MiB.",
@@ -368,6 +368,7 @@
       success: function(file) {
         if (file.previewElement) {
           location.reload();
+          humane.log("<i class='fa fa-check'></i> Background ajouté !", { timeout: 4000, clickToClose: true, addnCls: 'humane-flatty-success' });
           return file.previewElement.classList.add("dz-success");
         }
       },

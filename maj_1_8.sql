@@ -40,3 +40,5 @@ UPDATE `cms`.`extaz_cpages` SET `url` = '';
 ALTER TABLE `extaz_informations` ADD `customs_buttons_title` TEXT NOT NULL AFTER `votes_ladder_limit`;
 ALTER TABLE `extaz_informations` ADD `debug` INT NOT NULL AFTER `id`;
 UPDATE `cms`.`extaz_informations` SET `debug` = '0';
+ALTER TABLE `extaz_users` ADD `avatar` TEXT NOT NULL AFTER `password`;
+UPDATE `cms`.`extaz_users` SET `avatar` = 'http://cravatar.eu/helmavatar/alex';

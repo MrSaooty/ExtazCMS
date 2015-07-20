@@ -16,7 +16,7 @@
         <?php echo $this->Html->css('admin/jquery.selectBoxIt'); ?>
         <?php echo $this->Html->css('admin/custom'); ?>
         <?php echo $this->Html->css('flatty'); ?>
-        <?php echo $this->Html->css('dropzone'); ?>
+        <?php echo $this->Html->css('admin/dropzone'); ?>
         <?php echo $this->Html->css('summernote'); ?>
         <?php echo $this->Html->css('custom'); ?>
         <link href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -369,7 +369,7 @@
             <div class="clearfix"></div>
         </div>
         <?php 
-        echo $this->Html->script('dropzone');
+        echo $this->Html->script('admin/dropzone');
         echo $this->Html->script('jquery.confirm');
         echo $this->Html->script('jquery.bootstrap-growl');
         echo $this->Html->script('jquery.autocomplete');

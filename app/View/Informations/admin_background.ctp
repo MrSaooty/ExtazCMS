@@ -3,10 +3,6 @@
     var myDropzone = new Dropzone("div#fallback", { 
         url: "<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'add_background']); ?>"
     });
-
-    myDropzone.on("success", function(file) {
-        alert('test');
-    });
 </script>
 <div class="main-content">
     <div class="container">  

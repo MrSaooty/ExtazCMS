@@ -119,10 +119,14 @@ class AppController extends Controller {
 		$this->set('customs_buttons_title', $informations['Informations']['customs_buttons_title']);
 		// Le reste
 		$this->set('connected', $this->Auth->user());
+		$this->connected = $this->Auth->user();
 		$this->set('username', $this->Auth->user('username'));
+		$this->username = $this->Auth->user('username');
 		$this->set('email', $this->Auth->user('email'));
+		$this->avatar = $this->Auth->user('avatar');
 		if($this->Auth->user()){
 			$user_informations = $this->User->find('first', ['conditions' => ['User.id' => $this->Auth->user('id')]]);
+			$this->set('avatar', $user_informations['User']['avatar']);
 			$this->set('tokens', $user_informations['User']['tokens']);
 			$this->tokens = $user_informations['User']['tokens'];
 			$this->set('allow_email', $user_informations['User']['allow_email']);

@@ -27,6 +27,7 @@
     echo $this->Html->css('/files/flexslider/flexslider');
     echo $this->Html->css('/files/parallax-slider/css/parallax-slider');
     echo $this->Html->css('/files/sky-forms/css/custom-sky-forms');
+    echo $this->Html->css('dropzone');
 
     // CSS Theme
     echo $this->Html->css('themes/default');
@@ -228,6 +229,7 @@
     echo $this->Html->script('/files/flexslider/jquery.flexslider-min');
     echo $this->Html->script('/files/parallax-slider/js/modernizr');
     echo $this->Html->script('/files/parallax-slider/js/jquery.cslider');
+    echo $this->Html->script('dropzone');
 
     // JS Page Level
     echo $this->Html->script('app');

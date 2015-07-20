@@ -24,7 +24,8 @@ $(document).ready(function(){
         }
     });
     <?php
-    if(in_array('send_tokens', $this->request->pass)){
+    $tab = $this->request->query;
+    if(in_array('send_tokens', $tab)){
         ?>
         $('#infos').removeClass().addClass('tab-pane fade in');
         $('#send_tokens').removeClass().addClass('tab-pane fade in active');
@@ -32,7 +33,19 @@ $(document).ready(function(){
         $('#li_send_tokens').addClass('active');
         <?php
     }
+    if(in_array('avatar', $tab)){
+        ?>
+        $('#infos').removeClass().addClass('tab-pane fade in');
+        $('#avatar').removeClass().addClass('tab-pane fade in active');
+        $('#li_infos').removeClass();
+        $('#li_avatar').addClass('active');
+        <?php
+    }
     ?>
+
+    var myDropzone = new Dropzone("div#fallback", { 
+        url: "<?php echo $this->Html->url(['controller' => 'avatars', 'action' => 'add']); ?>"
+    });
 });
 </script>
 <!--=== Content Part ===-->
@@ -42,6 +55,7 @@ $(document).ready(function(){
             <div class="tab-v1">
                 <ul class="nav nav-tabs">
                     <li class="active" id="li_infos"><a href="#infos" data-toggle="tab">Mes infos</a></li>
+                    <li id="li_avatar"><a href="#avatar" data-toggle="tab">Avatar</a></li>
                     <?php
                     if($use_store == 1){
                         ?>
@@ -94,6 +108,20 @@ $(document).ready(function(){
                                 <button class="btn-u pull-right" type="submit">Enregistrer les modifications</button>
                             </footer>
                         <?php echo $this->Form->end(); ?>
+                    </div>
+                    <div class="tab-pane fade in" id="avatar">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h2>
+                                    Votre avatar actuel <?php echo $this->Html->image($avatar, ['height' => 24, 'width' => 24, 'class' => 'avatar-rounded', 'style' => 'margin-top: 12px;']); ?> <small>(<?php echo $this->Html->link('supprimer', ['controller' => 'avatars', 'action' => 'delete']); ?>)</small>
+                                </h2>
+                                <?php echo $this->Form->create('Avatars', ['action' => 'add', 'class' => 'dropzone', 'id' => 'myAwesomeDropzone', 'type' => 'file']); ?>
+                                    <div class="fallback">
+                                        <input type="file" name="file">
+                                    </div>
+                                <?php echo $this->Form->end(); ?>
+                            </div>
+                        </div>
                     </div>
                     <div class="tab-pane fade in" id="send_tokens">
                         <?php echo $this->Form->create('Pages', ['action' => 'send_tokens', 'class' => 'sky-form']); ?>

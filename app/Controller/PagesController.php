@@ -241,21 +241,21 @@ class PagesController extends AppController {
 							$this->sendTokensHistory->saveField('nb_tokens_with_loss_rate', $nb_tokens_with_loss_rate);
 							// Message et redirection
 							$this->Session->setFlash(''.$recipient_username.' a reçu '.$nb_tokens_with_loss_rate.' '.$this->config['site_money'].'', 'success');
-							return $this->redirect(['controller' => 'users', 'action' => 'account', 'send_tokens', 'admin' => false]);
+							return $this->redirect(['controller' => 'users', 'action' => 'account', '?' => ['tab' => 'send_tokens'], 'admin' => false]);
 						}
 						else{
 							$this->Session->setFlash('Vous n\'avez pas assez de tokens', 'error');
-							return $this->redirect(['controller' => 'users', 'action' => 'account', 'send_tokens', 'admin' => false]);
+							return $this->redirect(['controller' => 'users', 'action' => 'account', '?' => ['tab' => 'send_tokens'], 'admin' => false]);
 						}
 					}
 					else{
 						$this->Session->setFlash('Le destinataire n\'existe pas', 'error');
-						return $this->redirect(['controller' => 'users', 'action' => 'account', 'send_tokens', 'admin' => false]);
+						return $this->redirect(['controller' => 'users', 'action' => 'account', '?' => ['tab' => 'send_tokens'], 'admin' => false]);
 					}
 				}
 				else{
 					$this->Session->setFlash('Vous ne pouvez pas vous envoyer des '.$this->config['site_money'].' vous même...', 'error');
-					return $this->redirect(['controller' => 'users', 'action' => 'account', 'send_tokens', 'admin' => false]);
+					return $this->redirect(['controller' => 'users', 'action' => 'account', '?' => ['tab' => 'send_tokens'], 'admin' => false]);
 				}
 			}
 		}

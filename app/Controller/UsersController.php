@@ -62,6 +62,8 @@ class UsersController extends AppController{
                             if($this->User->validates()){
                                 $this->User->create();
                                 if($this->User->save($this->request->data)){
+                                    $avatar = 'http://cravatar.eu/helmavatar/'.$this->request->data['User']['username'];
+                                    $this->User->saveField('avatar', $avatar);
                                     $this->User->saveField('tokens', '0');
                                     $this->User->saveField('allow_email', '1');
                                     if($nb_account == 0){
