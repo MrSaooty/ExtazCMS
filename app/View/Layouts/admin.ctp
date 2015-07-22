@@ -348,7 +348,7 @@
                             <div class="col-md-3">
                                 <div class="head-user dropdown pull-right">
                                     <a href="#" data-toggle="dropdown" id="profile">
-                                        <img src="http://cravatar.eu/helmavatar/<?php echo $username; ?>" alt="" class="img-responsive img-rounded">
+                                        <?php echo $this->Html->image($avatar, ['class' => 'img-responsive img-rounded']); ?>
                                         <?php echo $username; ?>
                                         <i class="fa fa-caret-down"></i> 
                                     </a>

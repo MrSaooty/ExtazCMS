@@ -5,10 +5,10 @@ v1.8 (en développement)
 ----
 
 * Utilisation de Twig
-* Le utilisateurs peuvent désormais ajouter leurs propres avatars
+* Les utilisateurs peuvent désormais ajouter leurs propres avatars. En tant qu'administrateur vous pouvez supprimer l'avatar de n'importe quel utilisateur
 * Possibilité de désactiver le mode debug depuis les options du CMS
 * Si vous utilisez un système d'économie, les joueurs voient désormais l'argent qu'il possède sur le serveur directement sur la sidebar en dessous de l'argent qu'il possède sur le site
-* Vous pouvez maintenant copiée l'ip du serveur simplement en cliquant sur celle ci
+* Vous pouvez maintenant copiée l'ip du serveur simplement en cliquant sur celle ci (non fonctionnel sur Firefox)
 * Vous pouvez désormais ajouter un titre au module des boutons customisables
 * Vous pouvez désormais créer une page qui ne fera qu'une simple redirection
 * Refonte de la sidebar
@@ -27,11 +27,11 @@ v1.8 (en développement)
 * Vous pouvez désormais mettre un produit en promotion dans la boutique
 * Vous pouvez désormais cacher un produit dans la boutique
 * Corrections de bugs
-* {JS} Ajout de dropzone.js
+* {JS} Ajout de dropzone.js (+admin)
 * {JS} Ajout de jquery.counterup.js
 * {JS} Ajout de summernote-fr-FR.js
 * {JS} Ajout de summernote.js
-* {CSS} Ajout de dropzone.css
+* {CSS} Ajout de dropzone.css (+admin) 
 * {CSS} Modification de custom.css
 * {CSS} Modification de app.css
 * {CSS} Ajout de summernote.css

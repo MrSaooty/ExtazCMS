@@ -126,7 +126,7 @@
       thumbnailWidth: 120,
       thumbnailHeight: 120,
       filesizeBase: 1000,
-      maxFiles: null,
+      maxFiles: 6,
       filesizeBase: 1000,
       params: {},
       clickable: true,
@@ -367,7 +367,7 @@
       sendingmultiple: noop,
       success: function(file) {
         if (file.previewElement) {
-          location.reload();
+          $(".avatar-message").html('Votre avatar a été ajouté ! <small>(' + file.name + ')</small>');
           return file.previewElement.classList.add("dz-success");
         }
       },

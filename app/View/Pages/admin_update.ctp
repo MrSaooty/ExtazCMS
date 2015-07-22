@@ -9,7 +9,7 @@
 		                <div class="clearfix"></div>
 		            </div>
 		            	<?php if($version >= $last_version){ ?>
-		                    Félicitation ! Vous utilisez la dernière version disponible d'ExtazCMS <?php echo '('.$last_version.')'; ?>
+		                    Félicitation ! Vous utilisez la dernière version disponible d'ExtazCMS <?php echo '('.$version.')'; ?>
 		                    <hr>
 							<i class="fa fa-github"></i> <b>Releases</b> : <a href="https://github.com/MrSaooty/ExtazCMS/releases" target="_blank">https://github.com/MrSaooty/ExtazCMS/releases</a>
 							<br>

@@ -52,7 +52,7 @@ $(document).ready(function(){
                             <tr>
                                 <th><b>Auteur</b></th>
                                 <th><b>Type</b></th>
-                                <th><b>Nom</b></th>
+                                <th><b>Titre</b></th>
                                 <th><b>URL</b></th>
                                 <th><b>Date de création</b></th>
                                 <th><b>Actions</b></th>
@@ -61,14 +61,32 @@ $(document).ready(function(){
                         <tbody>
                             <?php foreach($data as $d){ ?>
                             <tr>
-                                <td><?php echo $d['User']['username']; ?></td>
+                                <td>
+                                    <?php
+                                    // Avatar
+                                    if($d['User']['username'] == null){
+                                        echo $this->Html->image('http://cravatar.eu/helmavatar/steve/12', ['alt' => 'Player head', 'class' => 'img-rounded', 'style' => 'margin-top:-1px;']);
+                                    }
+                                    else{
+                                        echo $this->Html->image($d['User']['avatar'], ['alt' => 'Avatar', 'height' => 16, 'width' => 16, 'class' => 'avatar']);
+                                    }
+
+                                    // Pseudo
+                                    if($d['User']['username'] == null){
+                                        echo ' <font color="#555"><u>Compte supprimé</u></font>';
+                                    }
+                                    else{
+                                        echo ' '.$d['User']['username'];
+                                    }
+                                    ?>
+                                </td>
                                 <td>
                                     <?php
                                     if($d['Cpage']['redirect'] == 1){
-                                        echo '<i class="fa fa-refresh"></i> Redirection';
+                                        echo 'Redirection';
                                     }
                                     else{
-                                        echo '<i class="fa fa-file"></i> Page';
+                                        echo 'Page';
                                     }
                                     ?>
                                 </td>

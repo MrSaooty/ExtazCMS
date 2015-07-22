@@ -63,7 +63,7 @@ $(document).ready(function(){
                         <tbody>
                             <?php foreach($data as $d){ ?>
                             <tr>
-                                <td><?php echo $d['User']['username']; ?></td>
+                                <td><?php echo $this->Html->image($d['User']['avatar'], ['alt' => 'Avatar', 'height' => 16, 'width' => 16, 'class' => 'avatar']).' '.$d['User']['username']; ?></td>
                                 <td><?php echo $d['User']['email']; ?></td>
                                 <td><?php echo $d['donationLadder']['tokens']; ?></td>
                                 <td><?php echo $d['User']['tokens']; ?></td>

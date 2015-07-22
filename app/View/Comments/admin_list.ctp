@@ -64,11 +64,19 @@ $(document).ready(function(){
                                 <td><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'read', 'slug' => $d['Post']['slug'], 'id' => $d['Post']['id'], 'admin' => false)); ?>" target="_blank"><?php echo '[#'.$d['Post']['id'].'] '.$d['Post']['title']; ?></a></td>
                                 <td>
                                     <?php
+                                    // Avatar
                                     if($d['User']['username'] == null){
-                                        echo '<u>Compte supprimé</u>';
+                                        echo $this->Html->image('http://cravatar.eu/helmavatar/steve/16', ['alt' => 'Avatar', 'class' => 'avatar']);
                                     }
                                     else{
-                                        echo $d['User']['username'];
+                                        echo $this->Html->image($d['User']['avatar'], ['alt' => 'Avatar', 'height' => 16, 'width' => 16, 'class' => 'avatar']);
+                                    }
+
+                                    if($d['User']['username'] == null){
+                                        echo ' <u>Compte supprimé</u>';
+                                    }
+                                    else{
+                                        echo ' '.$d['User']['username'];
                                     }
                                     ?>
                                 </td>

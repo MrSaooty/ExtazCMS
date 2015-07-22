@@ -63,37 +63,46 @@ $(document).ready(function(){
                     <?php echo $this->Form->end(); ?>
                 </div>
             </div>
-            <?php if($use_store == 1){ ?>
             <div class="col-md-4">
+                <?php if($use_store == 1){ ?>
+                    <div class="page-content">
+                        <div class="single-head">
+                            <h3 class="pull-left"><i class="fa fa-plus-square"></i>Octroyer un prérequis à cet utilisateur</h3>
+                            <div class="clearfix"></div>
+                        </div>
+                        <?php echo $this->Form->create('Shop', ['action' => 'add_prerequisite', 'class' => 'sky-form', 'inputDefaults' => ['error' => false]]); ?>
+                            <?php echo $this->Form->input('user_id', array('type' => 'hidden', 'value' => $data['User']['id'])); ?>
+                            <div class="form-group">
+                                <select name="data[Shop][item]" class="form-control" id="ShopItem">
+                                    <?php
+                                    foreach($items as $i){
+                                        echo '<option value="'.$i['Shop']['id'].'">'.$i['Shop']['name'].'</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <hr>
+                            <button class="btn btn-black pull-right" type="submit"><i class="fa fa-check"></i> Confirmer l'ajout</button>
+                            <br>
+                        <?php echo $this->Form->end(); ?>
+                    </div>
+                    <br>
+                <?php } ?>
                 <div class="page-content">
                     <div class="single-head">
-                        <h3 class="pull-left"><i class="fa fa-plus-square"></i>Octroyer un prérequis à cet utilisateur</h3>
+                        <h3 class="pull-left"><i class="fa fa-picture-o"></i>Avatar</h3>
                         <div class="clearfix"></div>
                     </div>
-                    <?php echo $this->Form->create('Shop', ['action' => 'add_prerequisite', 'class' => 'sky-form', 'inputDefaults' => ['error' => false]]); ?>
-                        <?php echo $this->Form->input('user_id', array('type' => 'hidden', 'value' => $data['User']['id'])); ?>
-                        <div class="form-group">
-                            <select name="data[Shop][item]" class="form-control" id="ShopItem">
-                                <?php
-                                foreach($items as $i){
-                                    echo '<option value="'.$i['Shop']['id'].'">'.$i['Shop']['name'].'</option>';
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <hr>
-                        <button class="btn btn-black pull-right" type="submit"><i class="fa fa-check"></i> Confirmer l'ajout</button>
-                        <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'all']); ?>" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Retour</a>
-                    <?php echo $this->Form->end(); ?>
+                    <p>
+                        Vous pouvez réinitialiser l'avatar de cet utilisateur en utilisant le bouton ci-dessous
+                    </p>
+                    <hr>
+                    <span class="bordered">
+                        <?php echo $this->Html->image($data['User']['avatar'], ['height' => 22, 'width' => 22]); ?> Avatar de <?php echo $data['User']['username']; ?>
+                    </span>
+                    <a class="btn btn-black pull-right" href="<?php echo $this->Html->url(['controller' => 'avatars', 'action' => 'reset', $data['User']['id']]); ?>"><i class="fa fa-check"></i> Réinitialiser</a>
                 </div>
             </div>
-            <div class="col-md-4"></div>
-            <?php
-            }
-            else{
-                echo '<div class="col-md-8"></div>';
-            }
-            ?>
         </div>
     </div>
 </div>

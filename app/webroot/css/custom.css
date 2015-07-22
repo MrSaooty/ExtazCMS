@@ -388,3 +388,11 @@ label {
   text-decoration: underline;
   cursor: pointer;
 }
+.bordered {
+  border: dotted 1px #ccc;
+  padding: 7px;
+}
+.avatar {
+  margin-bottom: 4px;
+  border-radius: 4px;
+}

@@ -42,10 +42,6 @@ $(document).ready(function(){
         <?php
     }
     ?>
-
-    var myDropzone = new Dropzone("div#fallback", { 
-        url: "<?php echo $this->Html->url(['controller' => 'avatars', 'action' => 'add']); ?>"
-    });
 });
 </script>
 <!--=== Content Part ===-->
@@ -113,7 +109,9 @@ $(document).ready(function(){
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <h2>
-                                    Votre avatar actuel <?php echo $this->Html->image($avatar, ['height' => 24, 'width' => 24, 'class' => 'avatar-rounded', 'style' => 'margin-top: 12px;']); ?> <small>(<?php echo $this->Html->link('supprimer', ['controller' => 'avatars', 'action' => 'delete']); ?>)</small>
+                                    <span class="avatar-message">
+                                         Votre avatar actuel <span class="avatar"><?php echo $this->Html->image($avatar, ['height' => 24, 'width' => 24, 'class' => 'avatar-rounded', 'style' => 'margin-top: 12px;']); ?></span> <small>(<?php echo $this->Html->link('supprimer', ['controller' => 'avatars', 'action' => 'delete']); ?>)</small>
+                                    </span>
                                 </h2>
                                 <?php echo $this->Form->create('Avatars', ['action' => 'add', 'class' => 'dropzone', 'id' => 'myAwesomeDropzone', 'type' => 'file']); ?>
                                     <div class="fallback">

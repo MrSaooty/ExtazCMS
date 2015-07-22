@@ -63,7 +63,7 @@ $(document).ready(function(){
                             <?php foreach($data as $d){ ?>
                             <tr>
                                 <td><?php echo $d['User']['id']; ?></td>
-                                <td><?php echo $d['User']['username']; ?></td>
+                                <td><?php echo $this->Html->image($d['User']['avatar'], ['height' => 16, 'width' => 16, 'class' => 'avatar']).' '.$d['User']['username']; ?></td>
                                 <td><?php echo $d['User']['email']; ?></td>
                                 <td><?php echo $d['User']['tokens']; ?></td>
                                 <?php if($d['User']['role'] == 2){ ?>

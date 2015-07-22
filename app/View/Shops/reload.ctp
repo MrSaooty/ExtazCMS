@@ -117,7 +117,7 @@ $(document).ready(function(){
 	            <br>
 	            <div class="row">
 	            	<div class="col-md-6 col-md-offset-3">
-	            		<a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'account', 'send_tokens']); ?>" class="send-tokens-button btn btn-default btn-sm"><i class="fa fa-gift"></i> Envoyer des <?php echo $site_money; ?> à un ami</a>
+	            		<a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'account', '?' => ['tab' => 'send_tokens']]); ?>" class="send-tokens-button btn btn-default btn-sm"><i class="fa fa-gift"></i> Envoyer des <?php echo $site_money; ?> à un ami</a>
 	            		<button class="code-button btn btn-default btn-sm"><i class="fa fa-gift"></i> Utiliser un code cadeau</button>
 	            		<div class="code-input" style="display:none;">
 	            			<?php echo $this->Form->create('Codes', ['action' => 'consume', 'inputDefaults' => ['error' => false]]); ?>

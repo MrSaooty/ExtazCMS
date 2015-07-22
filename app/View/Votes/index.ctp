@@ -29,7 +29,7 @@
                                                 }
                                                 ?>
                                             </td>
-                                            <td><?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$d['User']['username'].'/30', ['class' => 'avatar-rounded']); ?> </td>
+                                            <td><?php echo $this->Html->image($d['User']['avatar'], ['class' => 'avatar-rounded', 'height' => 30, 'width' => 30]); ?> </td>
                                             <td>
                                                 <b><?php echo $d['User']['username']; ?></b><br>
                                                 <span class="text-muted"><small><?php echo $d['User']['votes']; ?> votes</small></span>
