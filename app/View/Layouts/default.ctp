@@ -1,4 +1,4 @@
-<?php if(!isset($server_ip)) exit('Erreur: impossible de communiquer avec la base de données'); ?>
+<?php if(!isset($server_ip)) exit('Erreur: impossible de communiquer avec la base de donn&eacute;es'); ?>
 <!DOCTYPE html>
 <!--[if IE 8]><html lang="fr" class="ie8"><![endif]-->  
 <!--[if IE 9]><html lang="fr" class="ie9"><![endif]-->  

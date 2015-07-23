@@ -7,12 +7,12 @@ v1.8 (en développement)
 * Utilisation de Twig
 * Les utilisateurs peuvent désormais ajouter leurs propres avatars. En tant qu'administrateur vous pouvez supprimer l'avatar de n'importe quel utilisateur
 * Possibilité de désactiver le mode debug depuis les options du CMS
-* Si vous utilisez un système d'économie, les joueurs voient désormais l'argent qu'il possède sur le serveur directement sur la sidebar en dessous de l'argent qu'il possède sur le site
-* Vous pouvez maintenant copiée l'ip du serveur simplement en cliquant sur celle ci (non fonctionnel sur Firefox)
+* Si vous utilisez un système d'économie, les joueurs voient désormais l'argent qu'ils possèdent en jeu directement sur la sidebar en dessous de l'argent qu'ils possèdent sur le site
+* Vous pouvez maintenant copier l'ip du serveur simplement en cliquant sur celle ci (non fonctionnel sur Firefox)
 * Vous pouvez désormais ajouter un titre au module des boutons customisables
 * Vous pouvez désormais créer une page qui ne fera qu'une simple redirection
 * Refonte de la sidebar
-* Une page référençant tous les items en promotion de la boutique est désormais disponible
+* Une page référençant tous les items en promotion dans la boutique est désormais disponible
 * Refonte des profils utilisateurs
 * Refonte de la page de connexion
 * Migration de CKeditor vers Summernote
