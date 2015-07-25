@@ -446,6 +446,7 @@ CREATE TABLE IF NOT EXISTS `extaz_team` (
   `order` int(11),
   `facebook_url` text,
   `twitter_url` text,
+  `youtube_url` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
 
