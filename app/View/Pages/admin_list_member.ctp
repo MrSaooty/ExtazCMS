@@ -55,6 +55,7 @@ $(document).ready(function(){
                                 <th><b>Ordre</b></th>
                                 <th><b>Facebook</b></th>
                                 <th><b>Twitter</b></th>
+                                <th><b>Youtube</b></th>
                                 <th><b>Actions</b></th>
                             </tr>
                         </thead>
@@ -83,6 +84,16 @@ $(document).ready(function(){
                                     }
                                     else{
                                         echo $d['Team']['twitter_url'];
+                                    }
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    if(empty($d['Team']['youtube_url'])){
+                                        echo 'Non renseignée';
+                                    }
+                                    else{
+                                        echo $d['Team']['youtube_url'];
                                     }
                                     ?>
                                 </td>
