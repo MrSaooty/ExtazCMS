@@ -60,6 +60,19 @@ $(document).ready(function(){
                                         </font>
                                     </a>
                                 <?php } ?>
+                                <?php if(!empty($d['Team']['youtube_url'])){ ?>
+                                    <a href="<?php echo $d['Team']['youtube_url']; ?>" target="_blank" class="btn btn-default btn-u-xs">
+                                        <font color="#CC0000">
+                                            <i class="fa fa-youtube-square"></i>
+                                        </font>
+                                    </a>
+                                <?php } else { ?>
+                                    <a href="#" target="_blank" class="btn btn-default btn-u-xs" disabled="disabled">
+                                        <font color="#969696">
+                                            <i class="fa fa-youtube-square"></i>
+                                        </font>
+                                    </a>
+                                <?php } ?>
                                 <h3>
                                     <a class="hover-effect" href="#">
                                         <?php echo $d['Team']['username']; ?>
