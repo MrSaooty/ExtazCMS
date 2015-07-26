@@ -780,6 +780,7 @@ class PagesController extends AppController {
 				$this->Team->saveField('order', $this->request->data['Pages']['order']);
 				$this->Team->saveField('facebook_url', $this->request->data['Pages']['facebook_url']);
 				$this->Team->saveField('twitter_url', $this->request->data['Pages']['twitter_url']);
+				$this->Team->saveField('youtube_url', $this->request->data['Pages']['youtube_url']);
 				$this->Session->setFlash('Membre ajouté à l\'équipe !', 'success');
 				return $this->redirect(['controller' => 'pages', 'action' => 'list_member', 'admin' => true]);
 			}
@@ -829,6 +830,7 @@ class PagesController extends AppController {
 					$this->Team->saveField('order', $this->request->data['Pages']['order']);
 					$this->Team->saveField('facebook_url', $this->request->data['Pages']['facebook_url']);
 					$this->Team->saveField('twitter_url', $this->request->data['Pages']['twitter_url']);
+					$this->Team->saveField('youtube_url', $this->request->data['Pages']['youtube_url']);
                     $this->Session->setFlash('Membre modifié !', 'success');
                     return $this->redirect(['controller' => 'pages', 'action' => 'list_member', 'admin' => true]);
                 }

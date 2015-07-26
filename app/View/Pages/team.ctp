@@ -21,7 +21,7 @@ $(document).ready(function(){
                         <a href="#">
                             <span class="overlay-zoom">  
                                 <center>
-                                    <?php echo $this->Html->image('http://cravatar.eu/helmhead/'.$d['Team']['username'].'/110.png', ['alt' => 'Player head', 'style' => 'margin-top:5px;']); ?> 
+                                    <?php echo $this->Html->image('http://cravatar.eu/helmhead/'.$d['Team']['username'].'/110.png', ['alt' => 'Avatar', 'style' => 'margin-top:5px;']); ?> 
                                 </center>
                             </span>                                              
                         </a>            

@@ -55,7 +55,7 @@ $(document).ready(function(){
                                 <th><b>Ordre</b></th>
                                 <th><b>Facebook</b></th>
                                 <th><b>Twitter</b></th>
-                                <th><b>Youtube</b></th>
+                                <th><b>YouTube</b></th>
                                 <th><b>Actions</b></th>
                             </tr>
                         </thead>
@@ -64,7 +64,7 @@ $(document).ready(function(){
                             <tr>
                                 <td><?php echo $d['Team']['username']; ?></td>
                                 <td>
-                                    <span class="label label-u-<?php echo $d['Team']['color']; ?> "><?php echo $d['Team']['rank']; ?></span>
+                                    <span class="label label-u-<?php echo $d['Team']['color']; ?>"><?php echo $d['Team']['rank']; ?></span>
                                 </td>
                                 <td><?php echo $d['Team']['order']; ?></td>
                                 <td>

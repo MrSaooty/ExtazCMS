@@ -92,7 +92,7 @@ $(function() {
                             <?php echo $this->Form->input('twitter_url', array('type' => 'url', 'value' => $data['Team']['twitter_url'], 'class' => 'form-control', 'label' => 'URL Twitter')); ?>
                         </div>
                          <div class="form-group">
-                            <?php echo $this->Form->input('youtube_url', array('type' => 'url', 'value' => $data['Team']['youtube_url'], 'class' => 'form-control', 'label' => 'URL Youtube')); ?>
+                            <?php echo $this->Form->input('youtube_url', array('type' => 'url', 'value' => $data['Team']['youtube_url'], 'class' => 'form-control', 'label' => 'URL YouTube')); ?>
                         </div>
                         <div class="form-group">
                             <select name="data[Pages][color]" class="form-control input-sm" id="PagesColor">
@@ -104,7 +104,7 @@ $(function() {
                                 <option value="info" data-text='<div id="apercu" style="border: 1px solid rgb(0, 0, 0); width: 20px; height: 10px; top: 1px; left: 1px; display: inline-block; background-color: #5BC0DE;"></div> Bleu clair'></option>
                                 <option value="success" data-text='<div id="apercu" style="border: 1px solid rgb(0, 0, 0); width: 20px; height: 10px; top: 1px; left: 1px; display: inline-block; background-color: #5CB85C;"></div> Vert'></option>
                                 <option value="purple" data-text='<div id="apercu" style="border: 1px solid rgb(0, 0, 0); width: 20px; height: 10px; top: 1px; left: 1px; display: inline-block; background-color: #9B6BCC;"></div> Violet'></option>
-                                <option value="default" data-text='<div id="apercu" style="border: 1px solid rgb(0, 0, 0); width: 20px; height: 10px; top: 1px; left: 1px; display: inline-block; background-color: #777777;"></div> Gris foncé'></option>
+                                <option value="grey" data-text='<div id="apercu" style="border: 1px solid rgb(0, 0, 0); width: 20px; height: 10px; top: 1px; left: 1px; display: inline-block; background-color: #777777;"></div> Gris foncé'></option>
                                 <option value="light" data-text='<div id="apercu" style="border: 1px solid rgb(0, 0, 0); width: 20px; height: 10px; top: 1px; left: 1px; display: inline-block; background-color: #ECF0F1;"></div> Gris clair'></option>
                                 <option value="brown" data-text='<div id="apercu" style="border: 1px solid rgb(0, 0, 0); width: 20px; height: 10px; top: 1px; left: 1px; display: inline-block; background-color: #9C8061;"></div> Marron'></option>
                                 <option value="dark" data-text='<div id="apercu" style="border: 1px solid rgb(0, 0, 0); width: 20px; height: 10px; top: 1px; left: 1px; display: inline-block; background-color: #555555;"></div> Noir'></option>

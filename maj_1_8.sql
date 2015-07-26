@@ -42,3 +42,4 @@ ALTER TABLE `extaz_informations` ADD `debug` INT NOT NULL AFTER `id`;
 UPDATE `cms`.`extaz_informations` SET `debug` = '0';
 ALTER TABLE `extaz_users` ADD `avatar` TEXT NOT NULL AFTER `password`;
 UPDATE `cms`.`extaz_users` SET `avatar` = 'http://cravatar.eu/helmavatar/alex';
+ALTER TABLE `extaz_team` ADD `youtube_url` TEXT NOT NULL AFTER `twitter_url`;

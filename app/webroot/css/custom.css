@@ -403,3 +403,6 @@ label {
   color: #333;
   text-decoration: none;
 }
+.label-grey{
+  background-color: #777777;
+}

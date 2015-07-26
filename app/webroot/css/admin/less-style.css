@@ -266,6 +266,9 @@ a:focus {
 .label.label-u-dark{
   background: #555555;
 }
+.label.label-u-dark-grey {
+  background: #777777;
+}
 /*********/
 /* Badge */
 /*********/

@@ -95,7 +95,7 @@ $(function() {
                             <?php echo $this->Form->input('twitter_url', array('type' => 'url', 'placeholder' => 'URL de son compte Twitter (Facultatif)', 'class' => 'form-control', 'label' => false)); ?>
                         </div>
                         <div class="form-group">
-                            <?php echo $this->Form->input('youtube_url', array('type' => 'url', 'placeholder' => 'URL de son compte Youtube (Facultatif)', 'class' => 'form-control', 'label' => false)); ?>
+                            <?php echo $this->Form->input('youtube_url', array('type' => 'url', 'placeholder' => 'URL de sa chaîne YouTube (Facultatif)', 'class' => 'form-control', 'label' => false)); ?>
                         </div>
                         <div class="form-group">
                             <select name="data[Pages][color]" class="form-control input-sm" id="PagesColor">
