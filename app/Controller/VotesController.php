@@ -9,7 +9,7 @@ Class VotesController extends AppController{
 			$nb_votes = $nb_votes['User']['votes'];
 			$this->set('nb_votes', $nb_votes);
 			if($this->config['use_votes_ladder'] == 1){
-				$data = $this->User->find('all', ['order' => ['User.votes DESC'], 'limit' => 5]);
+				$data = $this->User->find('all', ['conditions' => ['User.role = 0'], 'order' => ['User.votes DESC'], 'limit' => 5]);
 				$this->set('data', $data);
 			}
 		}
@@ -95,7 +95,7 @@ Class VotesController extends AppController{
 
 	public function ladder(){
 		if($this->config['use_votes_ladder'] == 1){
-			$data = $this->User->find('all', ['order' => ['User.votes DESC'], 'limit' => $this->config['votes_ladder_limit']]);
+			$data = $this->User->find('all', ['conditions' => ['User.role = 0'], 'order' => ['User.votes DESC'], 'limit' => $this->config['votes_ladder_limit']]);
 			$this->set('data', $data);
 		}
 		else{

@@ -1,4 +1,4 @@
-<?php $this->assign('title', 'Ajouter ue catégorie'); ?>
+<?php $this->assign('title', 'Ajouter une catégorie'); ?>
 <div class="main-content">
     <div class="container">  
         <div class="row">
@@ -13,7 +13,7 @@
                             <?php echo $this->Form->input('name', array('type' => 'text', 'placeholder' => 'Nom de la catégorie', 'class' => 'form-control', 'label' => false, 'required' => 'required')); ?>
                         </div>
                         <hr>
-                        <button class="btn btn-black pull-right" type="submit"><i class="fa fa-plus"></i> Ajouter cette catégorie</button>
+                        <button class="btn btn-black pull-right" type="submit"><i class="fa fa-plus"></i> Ajouter</button>
                         <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_shop_category']); ?>" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Annuler</a>
                     <?php echo $this->Form->end(); ?>
                 </div>

@@ -48,7 +48,9 @@
 									?>
 								</td>
 								<td class="votes"><?php echo $this->Html->image($d['User']['avatar'], ['class' => 'avatar-rounded', 'height' => 20, 'width' => 20]); ?> </td>
-								<td class="votes"><?php echo $d['User']['username']; ?></td>
+								<td class="votes">
+									<?php echo $this->Html->link($d['User']['username'], ['controller' => 'users', 'action' => 'profile', 'username' => $d['User']['username']], ['class' => 'nolink']); ?>
+								</td>
 								<td class="votes"><?php echo $d['User']['votes']; ?></td>
 							</tr>
 	        				<?php

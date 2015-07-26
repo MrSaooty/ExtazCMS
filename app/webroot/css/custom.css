@@ -396,3 +396,10 @@ label {
   margin-bottom: 4px;
   border-radius: 4px;
 }
+.nolink{
+  color: #333;
+}
+.nolink:hover{
+  color: #333;
+  text-decoration: none;
+}

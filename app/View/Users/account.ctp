@@ -1,5 +1,5 @@
 <?php
-$this->assign('title', 'Mes informations');
+$this->assign('title', 'Mon compte');
 $player = $api->call('players.name', [$username]);
 ?>
 <script>
@@ -50,7 +50,7 @@ $(document).ready(function(){
         <div class="col-md-9">
             <div class="tab-v1">
                 <ul class="nav nav-tabs">
-                    <li class="active" id="li_infos"><a href="#infos" data-toggle="tab">Mes infos</a></li>
+                    <li class="active" id="li_infos"><a href="#infos" data-toggle="tab">Informations</a></li>
                     <li id="li_avatar"><a href="#avatar" data-toggle="tab">Avatar</a></li>
                     <?php
                     if($use_store == 1){
@@ -238,7 +238,7 @@ $(document).ready(function(){
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
                                         <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-Four" aria-expanded="false">
-                                            Envoie de <?php echo $site_money; ?>
+                                            Envois de <?php echo $site_money; ?>
                                         </a>
                                     </h4>
                                 </div>

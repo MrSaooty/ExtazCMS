@@ -98,13 +98,18 @@ class UsersController extends AppController{
     public function profile($username = null){
         if($this->User->find('first', ['conditions' => ['User.username' => $username]])){
             $data = $this->User->find('first', ['conditions' => ['User.username' => $username]]);
-            $ladder_vote = $this->User->find('all', ['order' => ['User.votes DESC']]);
+            $ladder_vote = $this->User->find('all', ['conditions' => ['User.role = 0'], 'order' => ['User.votes DESC']]);
             $nb_votes = $this->Vote->find('first', ['conditions' => ['User.id' => $data['User']['id']]]);
             $tokens_buy = $this->donationLadder->find('first', ['conditions' => ['donationLadder.user_id' => $data['User']['id']]]);
             $this->set('data', $data);
             $this->set('ladder_vote', $ladder_vote);
-            $this->set('nb_votes', $nb_votes['User']['votes']);
-            $this->set('tokens_buy', $tokens_buy);
+            $this->set('nb_votes', $data['User']['votes']);
+            if(empty($tokens_buy)){
+                $this->set('tokens_buy', 0);
+            }
+            else{
+                $this->set('tokens_buy', $tokens_buy['donationLadder']['tokens']);
+            }
         }
         else{
             throw new NotFoundException();

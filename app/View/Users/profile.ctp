@@ -31,27 +31,34 @@
                                 </tr>
                                 <tr>
                                     <td><?php echo ucfirst($site_money); ?> achetés au total</td>
-                                    <td><b><?php echo $tokens_buy['donationLadder']['tokens']; ?></b></td>
+                                    <td><b><?php echo $tokens_buy; ?></b></td>
                                 </tr>
                             <?php } ?>
                             <?php if($use_votes == 1 && $use_votes_ladder == 1){ ?>
                                 <tr>
                                     <td>Classement des votes</td>
                                     <td>
-                                        <?php
-                                        $nb = 0;
-                                        foreach($ladder_vote as $l){
-                                            $nb++;
-                                            if($l['User']['username'] == $data['User']['username']){
-                                                if($nb == 1){
-                                                    echo '<b>'.$nb.'<small>er</small></b>';
-                                                }
-                                                else{
-                                                    echo '<b>'.$nb.'<small>ème</small></b>';
+                                        <b>
+                                            <?php
+                                            if($data['User']['role'] == 0){
+                                                $nb = 0;
+                                                foreach($ladder_vote as $l){
+                                                    $nb++;
+                                                    if($l['User']['username'] == $data['User']['username']){
+                                                        if($nb == 1){
+                                                            echo $nb.'<small>er</small>';
+                                                        }
+                                                        else{
+                                                            echo $nb.'<small>ème</small>';
+                                                        }
+                                                    }
                                                 }
                                             }
-                                        }
-                                        ?>
+                                            else{
+                                                echo 'Non classé';
+                                            }
+                                            ?>
+                                        </b>
                                     </td>
                                 </tr>
                                 <tr>
