@@ -49,6 +49,17 @@ $(function() {
             $('#twitter_link').removeAttr('disabled').hide().fadeIn(500);
         }
     });
+    $('#PagesYoutubeUrl').change(function(){
+        var youtube = $('#PagesYoutubeUrl').val();
+        if(youtube == ''){
+            $('#youtube').attr('color', '#969696').hide().fadeIn(500);
+            $('#youtube_link').attr('disabled', 'disabled').hide().fadeIn(500);
+        }
+        else{
+            $('#youtube').attr('color', '#CC0000').hide().fadeIn(500);
+            $('#youtube_link').removeAttr('disabled').hide().fadeIn(500);
+        }
+    });
     $('#PagesColor').change(function(){
         var color = $('#PagesColor').val();
         $('#rank').removeClass().addClass('label label-u-' + color).hide().fadeIn(500);
@@ -79,6 +90,9 @@ $(function() {
                         </div>
                         <div class="form-group">
                             <?php echo $this->Form->input('twitter_url', array('type' => 'url', 'value' => $data['Team']['twitter_url'], 'class' => 'form-control', 'label' => 'URL Twitter')); ?>
+                        </div>
+                         <div class="form-group">
+                            <?php echo $this->Form->input('youtube_url', array('type' => 'url', 'value' => $data['Team']['youtube_url'], 'class' => 'form-control', 'label' => 'URL Youtube')); ?>
                         </div>
                         <div class="form-group">
                             <select name="data[Pages][color]" class="form-control input-sm" id="PagesColor">
@@ -147,6 +161,24 @@ $(function() {
                                 <a href="#" target="_blank" class="btn btn-default btn-u-xs" id="twitter_link" disabled="disabled">
                                 <font color="#969696" id="twitter">
                                     <i class="fa fa-twitter"></i>
+                                </font>
+                            </a>
+                                <?php
+                            }
+                            if(!empty($data['Team']['youtube_url'])){
+                                ?>
+                                <a href="#" target="_blank" class="btn btn-default btn-u-xs" id="youtube_link">
+                                <font color="#CC0000" id="youtube">
+                                    <i class="fa fa-youtube-square"></i>
+                                </font>
+                            </a>
+                                <?php
+                            }
+                            else{
+                                ?>
+                                <a href="#" target="_blank" class="btn btn-default btn-u-xs" id="youtube_link" disabled="disabled">
+                                <font color="#969696" id="youtube">
+                                    <i class="fa fa-youtube-square"></i>
                                 </font>
                             </a>
                                 <?php
