@@ -78,17 +78,17 @@ class PostsController extends AppController{
 						$this->Post->saveField('draft', 1);
 						$this->Post->saveField('corrected', 0);
 						$this->Post->saveField('posted', 0);
-						$this->Session->setFlash('Article enregistré en tant que brouillon !', 'success');
+						$this->Session->setFlash('Article enregistré en tant que brouillon !', 'toastr_success');
 						return $this->redirect(array('controller' => 'posts', 'action' => 'drafts'));
 					}
 					// Si aucune image n'est postée
 					else{
-						$this->Session->setFlash('Vous devez mettre une image', 'error');
+						$this->Session->setFlash('Vous devez mettre une image', 'toastr_error');
 					}
 				}
 				// Si les rdv ne sont pas respectées
 				else{
-					$this->Session->setFlash('Une erreur est survenue !', 'error');
+					$this->Session->setFlash('Une erreur est survenue !', 'toastr_error');
 				}
 			}
 		}
@@ -127,7 +127,7 @@ class PostsController extends AppController{
 							$this->Post->save($this->request->data);
 							$slug = strtolower($this->request->data['Post']['slug']);
 							$this->Post->saveField('slug', $slug);
-							$this->Session->setFlash('Article modifié !', 'success');
+							$this->Session->setFlash('Article modifié !', 'toastr_success');
 							return $this->redirect(['controller' => 'posts', 'action' => 'list', 'admin' => true]);
 						}
 						// Si l'image a été changée
@@ -138,19 +138,19 @@ class PostsController extends AppController{
 							$this->Post->saveField('cat', $this->request->data['Post']['cat']);
 							$this->Post->saveField('slug', $slug);
 							$this->Post->saveField('content', $this->request->data['Post']['content']);
-							$this->Session->setFlash('Article modifié !', 'success');
+							$this->Session->setFlash('Article modifié !', 'toastr_success');
 							return $this->redirect(['controller' => 'posts', 'action' => 'list', 'admin' => false]);
 						}
 					}
 					// Si les rdv ne sont pas respectées
 					else{
-						$this->Session->setFlash('Une erreur est survenue !', 'error');
+						$this->Session->setFlash('Une erreur est survenue !', 'toastr_error');
 					}
 				}
 			}
 			// Si l'article n'existe pas
 			else{
-				$this->Session->setFlash('Cet article n\'existe pas, impossible de le modifier', 'error');
+				$this->Session->setFlash('Cet article n\'existe pas, impossible de le modifier', 'toastr_error');
 				return $this->redirect(array('controller' => 'posts', 'action' => 'index', 'admin' => false));
 			}
 		}
@@ -193,7 +193,7 @@ class PostsController extends AppController{
 				$this->Post->id = $id;
 				// On rend l'article invisible
 				$this->Post->saveField('visible', 0);
-				$this->Session->setFlash('Article supprimé !', 'success');
+				$this->Session->setFlash('Article supprimé !', 'toastr_success');
 				return $this->redirect(['controller' => 'posts', 'action' => 'list', 'admin' => true]);
 			}
 			// Si l'article n'existe pas
@@ -261,7 +261,7 @@ class PostsController extends AppController{
 			if($draft == 0){
 				// On passe l'article en brouillon
 				$this->Post->saveField('draft', 1);
-				$this->Session->setFlash('Article deplacé vers les brouillons !', 'success');
+				$this->Session->setFlash('Article deplacé vers les brouillons !', 'toastr_success');
 				$this->redirect(array('controller' => 'posts', 'action' => 'drafts', 'admin' => true));
 			}
 			// Si cet article est un brouillon
@@ -275,7 +275,7 @@ class PostsController extends AppController{
 					// On update la date de publication
 					$this->Post->saveField('posted', date("Y-m-d H:i:s"));
 				}
-				$this->Session->setFlash('Article publié !', 'success');
+				$this->Session->setFlash('Article publié !', 'toastr_success');
 				return $this->redirect(['controller' => 'posts', 'action' => 'list', 'admin' => true]);
 			}
 		}

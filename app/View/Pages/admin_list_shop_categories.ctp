@@ -1,14 +1,6 @@
 <?php $this->assign('title', 'Liste des catégories'); ?>
 <script type="text/javascript">
 $(document).ready(function(){
-    $(window).load(function(){
-        $(".confirm").confirm({
-            text: "Voulez vous vraiment supprimer cette catégorie ?",
-            title: "Confirmation",
-            confirmButton: "Oui",
-            cancelButton: "Non"
-        });
-    });
     $('#data-table').dataTable({
         "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Tout"]],
         "order": [],
@@ -35,54 +27,70 @@ $(document).ready(function(){
             }
         }
     });
+    $(".confirm").confirm({
+        text: "Voulez vous vraiment supprimer cette catégorie ?",
+        title: "Confirmation",
+        confirmButton: "Oui",
+        cancelButton: "Non"
+    });
 });
 </script>
-<div class="main-content">
-    <div class="container">
-        <div class="page-content">
-            <div class="single-head">
-                <h3 class="pull-left"><i class="fa fa-table"></i>Liste des catégories</h3>
-                <div class="clearfix"></div>
-            </div>
-            <div class="page-tables">
-                <div class="table-responsive">
-                    <table class="table table-bordered" cellpadding="0" cellspacing="0" border="0" id="data-table" width="100%">
-                        <thead>
-                            <tr>
-                                <th><b>ID</b></th>
-                                <th><b>Nom</b></th>
-                                <th><b>Action</b></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach($categories as $category){ ?>
-                            <tr>
-                                <td><?php echo $category['shopCategories']['id']; ?></td>
-                                <td><?php echo $category['shopCategories']['name']; ?></td>
-                                <?php 
-                                if($category['shopCategories']['id'] != 0){
+<div class="wrapper wrapper-content">
+    <div class="animated fadeInRightBig">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Liste des catégories</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'add_shop_categories']); ?>">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <table class="table table-bordered table-hover dataTables-example dataTable dtr-inline" id="data-table">
+                            <thead>
+                                <tr>
+                                    <th><b>ID</b></th>
+                                    <th><b>Nom</b></th>
+                                    <th><b>Action</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($categories as $category){ ?>
+                                <tr>
+                                    <td><?php echo $category['shopCategories']['id']; ?></td>
+                                    <td><?php echo $category['shopCategories']['name']; ?></td>
+                                    <?php 
+                                    if($category['shopCategories']['id'] != 0){
+                                        ?>
+                                        <td>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'edit_shop_categories', 'id' => $category['shopCategories']['id']]); ?>" class="btn btn-white btn-xs"><i class="fa fa-pencil-square-o"></i> Editer</a>
+                                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'delete_shop_categories', 'id' => $category['shopCategories']['id']]); ?>" class="btn btn-white btn-xs confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
+                                        </td>
+                                        <?php
+                                    }
+                                    else{
+                                        ?>
+                                        <td>
+                                            <a href="#" class="btn btn-white btn-xs" disabled="disabled"><i class="fa fa-pencil-square-o"></i> Editer</a>
+                                            <a href="#" class="btn btn-white btn-xs" disabled="disabled"><i class="fa fa-trash-o"></i> Supprimer</a>
+                                        </td>
+                                        <?php
+                                    }
                                     ?>
-                                    <td>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'edit_shop_categories', 'id' => $category['shopCategories']['id']]); ?>" class="label label-black"><i class="fa fa-pencil-square-o"></i> Editer</a>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'delete_shop_categories', 'id' => $category['shopCategories']['id']]); ?>" class="label label-danger confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
-                                    </td>
-                                    <?php
-                                }
-                                else{
-                                    ?>
-                                    <td>
-                                        <a href="#" class="label label-default"><i class="fa fa-pencil-square-o"></i> Editer</a>
-                                        <a href="#" class="label label-default"><i class="fa fa-trash-o"></i> Supprimer</a>
-                                    </td>
-                                    <?php
-                                }
-                                ?>
-                            </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                    <div class="clearfix"></div>
-                </div>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

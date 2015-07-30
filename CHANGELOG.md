@@ -5,6 +5,8 @@ v1.8 (en développement)
 ----
 
 * Utilisation de Twig
+* Refonte de l'administration
+* Vous pouvez désormais ajouter une chaîne YouTube aux membres de l'équipe du serveur
 * Les utilisateurs peuvent désormais ajouter leurs propres avatars. En tant qu'administrateur vous pouvez supprimer l'avatar de n'importe quel utilisateur
 * Possibilité de désactiver le mode debug depuis les options du CMS
 * Si vous utilisez un système d'économie, les joueurs voient désormais l'argent qu'ils possèdent en jeu directement sur la sidebar en dessous de l'argent qu'ils possèdent sur le site
@@ -15,7 +17,6 @@ v1.8 (en développement)
 * Une page référençant tous les items en promotion dans la boutique est désormais disponible
 * Refonte des profils utilisateurs
 * Refonte de la page de connexion
-* Migration de CKeditor vers Summernote
 * Vous pouvez désormais utiliser des variables dans les pages personnalisées (ex: %pseudo%, %email%, %groupe% etc)
 * Pour éxécuter une commande via un produit de la boutique vous devez maintenant utiliser %player% pour désigner un joueur et &&& pour ajouter une nouvelle commande, ceci est également valable pour le système de vote
 * Ajout d'un classement des meilleurs voteurs

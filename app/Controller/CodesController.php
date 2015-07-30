@@ -56,10 +56,10 @@ Class CodesController extends AppController{
 				}
 				// On redirige
 				if($number > 1){
-					$this->Session->setFlash('Vos codes ont bien étés générés !', 'success');
+					$this->Session->setFlash('Vos codes ont bien étés générés !', 'toastr_success');
 				}
 				else{
-					$this->Session->setFlash('Votre code a bien été généré !', 'success');
+					$this->Session->setFlash('Votre code a bien été généré !', 'toastr_success');
 				}
 				return $this->redirect(['controller' => 'codes', 'action' => 'list', 'admin' => true]);
 			}
@@ -79,7 +79,7 @@ Class CodesController extends AppController{
 	public function admin_delete($id){
 		if($this->Auth->user('role') > 1){
 			$this->Code->delete($id);
-			$this->Session->setFlash('Ce code a été supprimé', 'success');
+			$this->Session->setFlash('Ce code a été supprimé', 'toastr_success');
 			return $this->redirect(['controller' => 'codes', 'action' => 'list', 'admin' => true]);
 		}
 		else{

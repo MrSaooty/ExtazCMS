@@ -28,7 +28,7 @@ class InformationsController extends AppController{
 					}
 				}
 				if($this->Informations->save($this->request->data)){
-					$this->Session->setFlash('Configuration mise à jour !', 'success');
+					$this->Session->setFlash('Configuration mise à jour !', 'toastr_success');
 				}
 				return $this->redirect(['controller' => 'informations', 'action' => 'index']);
 			}
@@ -155,7 +155,7 @@ class InformationsController extends AppController{
 				else{
 					$this->Informations->saveField('debug', 0);
 				}
-				$this->Session->setFlash('Options mises à jour !', 'success');
+				$this->Session->setFlash('Options mises à jour !', 'toastr_success');
 				return $this->redirect(['controller' => 'informations', 'action' => 'index', '?' => ['tab' => 'options']]);
 			}
 		}
@@ -195,11 +195,11 @@ class InformationsController extends AppController{
 				// On le sauvegarde
 				$this->Informations->id = 1;
 				$this->Informations->saveField('background', $nums.'.jpg');
-				$this->Session->setFlash('Background mis à jour !', 'success');
+				$this->Session->setFlash('Background mis à jour !', 'toastr_success');
 				return $this->redirect(['controller' => 'informations', 'action' => 'background']);
 			}
 			else{
-				$this->Session->setFlash('Type de fichier invalide', 'error');
+				$this->Session->setFlash('Type de fichier invalide', 'toastr_error');
 				return $this->redirect(['controller' => 'informations', 'action' => 'background']);
 			}
 		}
@@ -212,7 +212,7 @@ class InformationsController extends AppController{
 		if($this->Auth->user('role') > 1){
 			$this->Informations->id = 1;
 			$this->Informations->saveField('background', $background);
-			$this->Session->setFlash('Background mis à jour !', 'success');
+			$this->Session->setFlash('Background mis à jour !', 'toastr_success');
 			return $this->redirect(['controller' => 'informations', 'action' => 'background']);
 		}
 		else{
@@ -226,7 +226,7 @@ class InformationsController extends AppController{
 			if(file_exists($file)){
 				unlink($file);
 			}
-			$this->Session->setFlash('Background supprimé !', 'success');
+			$this->Session->setFlash('Background supprimé !', 'toastr_success');
 			return $this->redirect(['controller' => 'informations', 'action' => 'background']);
 		}
 		else{

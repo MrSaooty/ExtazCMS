@@ -69,7 +69,7 @@ class ChartsController extends AppController{
 			$chartName = 'donator_chart';
 	        $mychart = $this->Highcharts->create($chartName, 'column');
 
-	        if($countDonators > 5){
+	        if($countDonators >= 5){
 	        	$dt[0] = $donatorsTokens[0]['donationLadder']['tokens'];
 		        $dt[1] = $donatorsTokens[1]['donationLadder']['tokens'];
 		        $dt[2] = $donatorsTokens[2]['donationLadder']['tokens'];
@@ -115,26 +115,13 @@ class ChartsController extends AppController{
 						settype($dt[3], 'int');
 		        		break;
 
-		        	case 5:
-		        		$dt[0] = $donatorsTokens[0]['donationLadder']['tokens'];
-				        $dt[1] = $donatorsTokens[1]['donationLadder']['tokens'];
-				        $dt[2] = $donatorsTokens[2]['donationLadder']['tokens'];
-				        $dt[3] = $donatorsTokens[3]['donationLadder']['tokens'];
-				        $dt[4] = $donatorsTokens[4]['donationLadder']['tokens'];
-				        settype($dt[0], 'int');
-						settype($dt[1], 'int');
-						settype($dt[2], 'int');
-						settype($dt[3], 'int');
-						settype($dt[4], 'int');
-		        		break;
-
 		        	default:
 		        		$dt[0] = 0;
 		        		break;
 		        }
 		    }
 
-		    if($countDonators > 5){
+		    if($countDonators >= 5){
 	        	$du[0] = $donatorsTokens[0]['User']['username'];
 		        $du[1] = $donatorsTokens[1]['User']['username'];
 		        $du[2] = $donatorsTokens[2]['User']['username'];
@@ -150,6 +137,7 @@ class ChartsController extends AppController{
 		        	case 2:
 		        		$du[0] = $donatorsTokens[0]['User']['username'];
 		        		$du[1] = $donatorsTokens[1]['User']['username'];
+		        		break;
 
 		        	case 3:
 		        		$du[0] = $donatorsTokens[0]['User']['username'];
@@ -162,14 +150,6 @@ class ChartsController extends AppController{
 				        $du[1] = $donatorsTokens[1]['User']['username'];
 				        $du[2] = $donatorsTokens[2]['User']['username'];
 				        $du[3] = $donatorsTokens[3]['User']['username'];
-		        		break;
-
-		        	case 5:
-		        		$du[0] = $donatorsTokens[0]['User']['username'];
-				        $du[1] = $donatorsTokens[1]['User']['username'];
-				        $du[2] = $donatorsTokens[2]['User']['username'];
-				        $du[3] = $donatorsTokens[3]['User']['username'];
-				        $du[4] = $donatorsTokens[4]['User']['username'];
 		        		break;
 
 		        	default:

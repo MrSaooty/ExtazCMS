@@ -28,7 +28,7 @@ Class CommentsController extends AppController{
 	public function admin_delete($id, $from){
 		if($this->Auth->user('role') > 0){
 			$this->Comment->delete($id);
-			$this->Session->setFlash('Commentaire supprimé', 'success');
+			$this->Session->setFlash('Commentaire supprimé', 'toastr_success');
 			if($from == 'read'){
 				return $this->redirect($this->referer());
 			}
@@ -49,12 +49,12 @@ Class CommentsController extends AppController{
                 if($this->request->is('post')){
                     $this->Comment->id = $id;
                     $this->Comment->saveField('comment', $this->request->data['Comments']['comment']);
-                    $this->Session->setFlash('Le commentaire a bien été modifié', 'success');
+                    $this->Session->setFlash('Le commentaire a bien été modifié', 'toastr_success');
                 	return $this->redirect($this->referer());
                 }
             }
             else{
-                $this->Session->setFlash('Ce commentaire n\'existe pas !', 'error');
+                $this->Session->setFlash('Ce commentaire n\'existe pas !', 'toastr_error');
                 return $this->redirect($this->referer());
             }
         }

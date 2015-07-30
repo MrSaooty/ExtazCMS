@@ -1,397 +1,297 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title><?php echo $this->fetch('title'); ?></title>
+        <meta charset="utf-8">
         <meta name="description" content="ExtazCMS Admin">
         <meta name="keywords" content="ExtazCMS">
         <meta name="author" content="ResponsiveWebInc">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><?php echo $this->fetch('title'); ?></title>
         <?php echo $this->Html->meta('favicon.png', $logo_url, array('type' => 'icon')); ?>
         <?php echo $this->Html->css('admin/bootstrap.min'); ?>
-        <?php echo $this->Html->css('admin/jquery.onoff'); ?>
-        <?php echo $this->Html->css('admin/jquery.gritter'); ?>
-        <?php echo $this->Html->css('admin/font-awesome.min'); ?>
-        <?php echo $this->Html->css('admin/less-style'); ?>
+        <?php echo $this->Html->css('/files/font-awesome/css/font-awesome'); ?>
+        <?php echo $this->Html->css('admin/plugins/toastr/toastr.min'); ?>
+        <?php echo $this->Html->css('admin/plugins/gritter/jquery.gritter'); ?>
+        <?php echo $this->Html->css('admin/plugins/dataTables/dataTables.bootstrap'); ?>
+        <?php echo $this->Html->css('admin/plugins/dataTables/dataTables.responsive'); ?>
+        <?php echo $this->Html->css('admin/plugins/dataTables/dataTables.tableTools.min'); ?>
+        <?php echo $this->Html->css('admin/animate'); ?>
         <?php echo $this->Html->css('admin/style'); ?>
+        <?php echo $this->Html->css('admin/dropzone'); ?>
         <?php echo $this->Html->css('admin/jquery.selectBoxIt'); ?>
         <?php echo $this->Html->css('admin/custom'); ?>
-        <?php echo $this->Html->css('flatty'); ?>
-        <?php echo $this->Html->css('admin/dropzone'); ?>
-        <?php echo $this->Html->css('summernote'); ?>
         <?php echo $this->Html->css('custom'); ?>
-        <link href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css" rel="stylesheet">
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
         <script src="http://code.highcharts.com/highcharts.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
         <?php echo $this->Html->script('jquery.counterup'); ?>
+        <?php echo $this->Html->script('jquery.confirm'); ?>
+        <?php echo $this->Html->script('admin/jquery.selectBoxIt'); ?>
         <script type="text/javascript">
         $(document).ready(function(){
-            $('.send-command').on('click', function(){
+            $('.send-command').submit(function(){
                 var command = $('#command').val();
                 var url = '<?php echo $this->Html->url(array('controller' => 'pages', 'action' => 'send_command')); ?>';
+                $('#loading').attr('class', 'fa fa-spinner fa-spin');
                 $.post(url, {command: command}, function(data){
                     $('#command').val('');
-                    humane.log("<i class='fa fa-check'></i> Commande envoyée au serveur !", { timeout: 4000, clickToClose: true, addnCls: 'humane-flatty-success' });
-                });
+                    toastr.options = {
+                        closeButton: true,
+                        progressBar: true,
+                        showMethod: 'slideDown',
+                        timeOut: 3000
+                    };
+                    if(data == true){
+                        toastr.success('Commande envoyée au serveur !');
+                    }
+                    else{
+                        toastr.error('Erreur');
+                    }
+                    $('#loading').attr('class', 'fa fa-bars');
+                }, 'json');
                 return false;
             });
         });
         </script>
     </head>
-    <body>
-        <div class="outer">
-            <div class="sidebar">
-                <div class="sidey">
-                    <div class="logo">
-                        <h1>
+    <body class="fixed-sidebar pace-done">
+        <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element center">
+                            <span>
+                                <?php echo $this->Html->image($avatar, ['alt' => 'Avatar', 'class' => 'img-rounded', 'height' => 40, 'width' => 40]); ?>
+                            </span>
                             <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'stats', 'admin' => true]); ?>">
-                                <i class="fa fa-desktop br-red"></i> Panel<span><?php echo $name_server; ?></span>
+                                <span class="clear">
+                                    <span class="block m-t-xs">
+                                        <strong class="font-bold"><?php echo $username; ?></strong>
+                                    </span>
+                                    <?php if($role > 1): ?>
+                                        <span class="text-muted text-xs block">Administrateur</span>
+                                    <?php else: ?>
+                                        <span class="text-muted text-xs block">Modérateur</span>
+                                    <?php endif; ?>
+                                </span>
                             </a>
-                        </h1>
-                    </div>
-                    <div class="sidebar-dropdown"><a href="#" class="br-red"><i class="fa fa-bars"></i></a></div>
-                    <div class="side-nav">
-                        <div class="side-nav-block">
-                            <h4>Menu</h4>
-                            <?php 
-                            if($role > 1){
-                                ?>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'index', 'admin' => true]); ?>"><i class="fa fa-wrench"></i> Configuration</a>
-                                    </li>
-                                    <li>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'all', 'admin' => true]); ?>"><i class="fa fa-user"></i> Utilisateurs</a>
-                                    </li>
-                                    <li>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'stats', 'admin' => true]); ?>"><i class="fa fa-area-chart"></i> Statistiques</a>
-                                    </li>
-                                    <li>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'manage_tickets', 'admin' => true]); ?>"><i class="fa fa-support"></i> Support <span class="badge badge-danger pull-right"><?php echo $nb_tickets_admin; ?></span></a>
-                                    </li>
-                                    <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
-                                    <li class="has_submenu">
-                                        <a href="#"><i class="fa fa-cloud"></i> Serveur <span class="nav-caret fa fa-caret-down"></span></a>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'memory', 'admin' => true]); ?>"><i class="fa fa-pie-chart"></i> Mémoire vive</a>
-                                            </li>
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'disk', 'admin' => true]); ?>"><i class="fa fa-pie-chart"></i> Disque dur</a>
-                                            </li>
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'plugins', 'action' => 'index', 'admin' => true]); ?>"><i class="fa fa-plug"></i> Plugins</a>
-                                            </li>
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'players', 'action' => 'index', 'admin' => true]); ?>"><i class="fa fa-users"></i> Joueurs</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <?php } ?>
-                                    <?php if($use_store == 1){ ?>
-                                    <li class="has_submenu">
-                                        <a href="#"><i class="fa fa-shopping-cart"></i> Boutique <span class="nav-caret fa fa-caret-down"></span></a>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'add', 'admin' => true]); ?>"><i class="fa fa-plus"></i> Ajouter un produit</a>
-                                            </li>
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'add_shop_categories', 'admin' => true]); ?>"><i class="fa fa-plus"></i> Ajouter une catégorie</a>
-                                            </li>
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'list', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste des produits</a>
-                                            </li>
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_shop_categories', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste des catégories</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="has_submenu">
-                                        <a href="#"><i class="fa fa-heart"></i> Donateurs <span class="nav-caret fa fa-caret-down"></span></a>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'donator', 'admin' => true]); ?>"><i class="fa fa-pie-chart"></i> Graphique</a>
-                                            </li>
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_donator', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <?php } ?>
-                                    <li class="has_submenu">
-                                        <a href="#"><i class="fa fa-newspaper-o"></i> Actualités <span class="nav-caret fa fa-caret-down"></span></a>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'add', 'admin' => true]); ?>"><i class="fa fa-plus"></i> Ajouter</a>
-                                            </li>
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'list', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste</a>
-                                            </li>
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'drafts', 'admin' => true]); ?>"><i class="fa fa-file"></i> Brouillons</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="has_submenu">
-                                        <a href="#"><i class="fa fa-comments-o"></i> Commentaires <span class="nav-caret fa fa-caret-down"></span></a>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'list', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <?php if($use_store == 1){ ?>
-                                    <li class="has_submenu">
-                                        <a href="#"><i class="fa fa-history"></i> Historiques <span class="nav-caret fa fa-caret-down"></span></a>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'send_tokens_history', 'admin' => true]); ?>"><i class="fa fa-history"></i> Transactions</a>
-                                            </li>
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'shop_history', 'admin' => true]); ?>"><i class="fa fa-history"></i> Boutique</a>
-                                            </li>
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'starpass_history', 'admin' => true]); ?>"><i class="fa fa-history"></i> Starpass</a>
-                                            </li>
-                                            <?php if($use_paypal == 1){ ?>
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'paypal_history', 'admin' => true]); ?>"><i class="fa fa-history"></i> PayPal</a>
-                                            </li>
-                                            <?php } ?>
-                                        </ul>
-                                    </li>
-                                    <?php } ?>
-                                    <li class="has_submenu">
-                                        <a href="#"><i class="fa fa-users"></i> Equipe <span class="nav-caret fa fa-caret-down"></span></a>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'add_member', 'admin' => true]); ?>"><i class="fa fa-plus"></i> Ajouter</a>
-                                            </li>
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_member', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <?php if($use_store == 1){ ?>
-                                    <li class="has_submenu">
-                                        <a href="#"><i class="fa fa-gift"></i> Codes <span class="nav-caret fa fa-caret-down"></span></a>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'codes', 'action' => 'generate', 'admin' => true]); ?>"><i class="fa fa-plus"></i> Générer</a>
-                                            </li>
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'codes', 'action' => 'list', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <?php } ?>
-                                    <li class="has_submenu">
-                                        <a href="#"><i class="fa fa-photo"></i> Theme <span class="nav-caret fa fa-caret-down"></span></a>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'background', 'admin' => true]); ?>"><i class="fa fa-gear"></i> Background</a>
-                                            </li>
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'buttons', 'action' => 'index', 'admin' => true]); ?>"><i class="fa fa-gear"></i> Sidebar</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="has_submenu">
-                                        <a href="#"><i class="fa fa-file-text"></i> Pages <span class="nav-caret fa fa-caret-down"></span></a>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'add_redirection', 'admin' => true]); ?>"><i class="fa fa-refresh"></i> Redirection</a>
-                                            </li>
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'add', 'admin' => true]); ?>"><i class="fa fa-plus"></i> Créer</a>
-                                            </li>
-                                            <li>
-                                                <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'list', 'admin' => true]); ?>"><i class="fa fa-list"></i> Liste</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
-                                    <li>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'chat_messages', 'admin' => true]); ?>"><i class="fa fa-comments"></i>Chat</a>
-                                    </li>
-                                    <?php } ?>
-                                    <li>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'repair', 'admin' => true]); ?>"><i class="fa fa-wrench"></i>Réparer</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="side-nav-block">
-                                <h4>Autre</h4>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'index', 'admin' => false]); ?>">
-                                            <i class="fa fa-desktop"></i> Retour au site
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="http://extaz-cms.com/wiki" target="_blank">
-                                            <i class="fa fa-file-text"></i> Besoin d'aide ?
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="http://www.sparklehosting.ch/" target="_blank">
-                                            <i class="fa fa-database"></i> SparkleHosting
-                                        </a>
-                                    </li>
-                                    <?php if($version >= $last_version){ ?>
-                                    <li>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'update', 'admin' => true]); ?>">
-                                            <p class="green"><i class="fa fa-check-circle"></i> Mise à jour</p>
-                                        </a>
-                                    </li>
-                                    <?php } else { ?>
-                                    <li>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'update', 'admin' => true]); ?>">
-                                            <p class="red"><i class="fa fa-exclamation-triangle"></i> Mise à jour</p>
-                                        </a>
-                                    </li>
-                                    <?php } ?>
-                                </ul>
-                                <?php
-                            }
-                            else{
-                                ?>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'manage_tickets', 'admin' => true]); ?>"><i class="fa fa-support"></i> Support <span class="badge badge-danger pull-right"><?php echo $nb_tickets_admin; ?></span></a>
-                                    </li>
-                                    <li>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'list', 'admin' => true]); ?>"><i class="fa fa-comments-o"></i> Commentaires</a>
-                                    </li>
-                                    <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
-                                    <li>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'chat_messages', 'admin' => true]); ?>"><i class="fa fa-comments"></i>Chat</a>
-                                    </li>
-                                    <?php } ?>
-                                </ul>
-                            </div>
-                            <div class="side-nav-block">
-                                <h4>Autre</h4>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'index', 'admin' => false]); ?>">
-                                            <i class="fa fa-desktop"></i> Retour au site
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="http://www.bukkit.fr/index.php/topic/15381-extazcms-un-v%C3%A9ritable-site-pour-votre-serveur-minecraft/" target="_blank">
-                                            <i class="fa fa-file-text"></i> Besoin d'aide ?
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="http://www.sparklehosting.ch/" target="_blank">
-                                            <i class="fa fa-database"></i> SparkleHosting
-                                        </a>
-                                    </li>
-                                    <?php if($version >= $last_version){ ?>
-                                    <li>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'update', 'admin' => true]); ?>">
-                                            <p class="green"><i class="fa fa-check-circle"></i> Mise à jour</p>
-                                        </a>
-                                    </li>
-                                    <?php } else { ?>
-                                    <li>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'update', 'admin' => true]); ?>">
-                                            <p class="red"><i class="fa fa-exclamation-triangle"></i> Mise à jour</p>
-                                        </a>
-                                    </li>
-                                    <?php } ?>
-                                </ul>
-                                <?php
-                            }
-                            ?>
                         </div>
-                    </div>
-                </div>
+                        <div class="logo-element">
+                            <?php echo $this->Html->image($avatar, ['alt' => 'Avatar', 'class' => 'img-rounded', 'height' => 30, 'width' => 30]); ?>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'index', 'admin' => true]); ?>"><i class="fa fa-wrench"></i> <span class="nav-label">Configuration</span></a>
+                    </li>
+                    <li>
+                        <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'all', 'admin' => true]); ?>"><i class="fa fa-users"></i> <span class="nav-label">Utilisateurs</span></a>
+                    </li>
+                    <li>
+                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'stats', 'admin' => true]); ?>"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Statistiques</span></a>
+                    </li>
+                    <li>
+                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'manage_tickets', 'admin' => true]); ?>"><i class="fa fa-support"></i> <span class="nav-label">Support</span> <span class="label label-success pull-right"><?php echo $nb_tickets_admin; ?></span></a>
+                    </li>
+                    <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
+                        <li>
+                            <a href="#"><i class="fa fa-cloud"></i> <span class="nav-label">Serveur</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'memory', 'admin' => true]); ?>">Mémoire vive</a></li>
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'disk', 'admin' => true]); ?>">Disque dur</a></li>
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'plugins', 'action' => 'index', 'admin' => true]); ?>">Plugins</a></li>
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'players', 'action' => 'index', 'admin' => true]); ?>">Joueurs</a></li>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                    <?php if($use_store == 1){ ?>
+                        <li>
+                            <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Boutique</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'add', 'admin' => true]); ?>">Ajouter un produit</a></li>
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'add_shop_categories', 'admin' => true]); ?>">Ajouter un catégorie</a></li>
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'list', 'admin' => true]); ?>">Liste des produits</a></li>
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_shop_categories', 'admin' => true]); ?>">Liste des catégories</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-heart"></i> <span class="nav-label">Donateurs</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'donator', 'admin' => true]); ?>">Graphique</a></li>
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_donator', 'admin' => true]); ?>">Liste</a></li>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                    <li>
+                        <a href="#"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Actualités</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'add', 'admin' => true]); ?>">Ajouter</a></li>
+                            <li><a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'list', 'admin' => true]); ?>">Liste</a></li>
+                            <li><a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'drafts', 'admin' => true]); ?>">Brouillons</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-comments-o"></i> <span class="nav-label">Commentaires</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'list', 'admin' => true]); ?>">Liste</a></li>
+                        </ul>
+                    </li>
+                    <?php if($use_store == 1){ ?>
+                        <li>
+                            <a href="#"><i class="fa fa-history"></i> <span class="nav-label">Historiques</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'send_tokens_history', 'admin' => true]); ?>">Transactions</a></li>
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'shop_history', 'admin' => true]); ?>">Boutique</a></li>
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'starpass_history', 'admin' => true]); ?>">Starpass</a></li>
+                                <?php if($use_paypal == 1){ ?>
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'paypal_history', 'admin' => true]); ?>">PayPal</a></li>
+                                <?php } ?>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                    <li>
+                        <a href="#"><i class="fa fa-suitcase"></i> <span class="nav-label">Equipe</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'add_member', 'admin' => true]); ?>">Ajouter un membre</a></li>
+                            <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_member', 'admin' => true]); ?>">Liste des membres</a></li>
+                        </ul>
+                    </li>
+                    <?php if($use_store == 1){ ?>
+                        <li>
+                            <a href="#"><i class="fa fa-gift"></i> <span class="nav-label">Codes</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'codes', 'action' => 'generate', 'admin' => true]); ?>">Générer</a></li>
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'codes', 'action' => 'list', 'admin' => true]); ?>">Liste</a></li>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                    <li>
+                        <a href="#"><i class="fa fa-photo"></i> <span class="nav-label">Theme</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'background', 'admin' => true]); ?>">Background</a></li>
+                            <li><a href="<?php echo $this->Html->url(['controller' => 'buttons', 'action' => 'index', 'admin' => true]); ?>">Sidebar</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-file-text"></i> <span class="nav-label">Pages</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'add_redirection', 'admin' => true]); ?>">Redirection</a></li>
+                            <li><a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'add', 'admin' => true]); ?>">Créer</a></li>
+                            <li><a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'list', 'admin' => true]); ?>">Liste</a></li>
+                        </ul>
+                    </li>
+                    <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
+                        <li>
+                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'chat_messages', 'admin' => true]); ?>"><i class="fa fa-comments"></i> <span class="nav-label">Chat</span></a>
+                        </li>
+                    <?php } ?>
+                    <li>
+                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'repair', 'admin' => true]); ?>"><i class="fa fa-wrench"></i> <span class="nav-label">Réparer</span></a>
+                    </li>
+                    <?php if($version >= $last_version){ ?>
+                        <li class="landing_link">
+                            <a target="_blank" href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'update', 'admin' => true]); ?>"><i class="fa fa-check-circle"></i> <span class="nav-label">Mise à jour</span></a>
+                        </li>
+                        <?php } else { ?>
+                        <li class="landing_link">
+                            <a target="_blank" href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'update', 'admin' => true]); ?>"><i class="fa fa-exclamation-triangle"></i> <span class="nav-label">Mise à jour</span></a>
+                        </li>
+                    <?php } ?>
+                    <li class="landing_link">
+                        <a target="_blank" href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'index', 'admin' => false]); ?>"><i class="fa fa-star"></i> <span class="nav-label">Retour au site</span></a>
+                    </li>
+                    <li class="landing_link">
+                        <a target="_blank" href="http://extaz-cms.com/wiki"><i class="fa fa-file-text"></i> <span class="nav-label">Besoin d'aide ?</span></a>
+                    </li>
+                </ul>
             </div>
-            <div class="mainbar">
-                <div class="main-head">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-9">
-                                    <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
-                                        <?php if($role > 1){ ?>
-                                            <div class="head-search hidden-xs">
-                                                <form>
-                                                    <div class="input-group">
-                                                        <?php echo $this->Form->input('command', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Envoyer une commande au serveur', 'style' => 'width:300px;', 'required' => 'required', 'label' => false]); ?>
-                                                        <span class="input-group-btn">
-                                                            <button class="btn btn-default send-command" type="submit"><i class="fa fa-chevron-right"></i></button>
-                                                        </span>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        <?php } ?>
-                                    <?php } else { ?>
-                                        <div class="text-danger">
-                                            <strong><i class="fa fa-plug"></i></strong> Impossible d'établir la connexion au serveur, vérifiez les réglages de JSONAPI.
-                                        </div>
-                                    <?php } ?>
-                                <div class="visible-xs">
-                                    <form>
-                                        <div class="input-group">
-                                            <?php echo $this->Form->input('command', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Indisponible sur mobile', 'disabled' => 'disabled', 'label' => false]); ?>
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-default send-command" disabled="disabled" type="submit"><i class="fa fa-chevron-right"></i></button>
-                                            </span>
-                                        </div>
-                                    </form>
-                                    <br>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="head-user dropdown pull-right">
-                                    <a href="#" data-toggle="dropdown" id="profile">
-                                        <?php echo $this->Html->image($avatar, ['class' => 'img-responsive img-rounded']); ?>
-                                        <?php echo $username; ?>
-                                        <i class="fa fa-caret-down"></i> 
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="profile">
-                                        <li>
-                                            <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'logout', 'admin' => false]); ?>"><i class="fa fa-sign-out"></i> Déconnexion</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>  
+        </nav>
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars" id="loading"></i> </a>
+            <div class="navbar-header">
+                <form class="navbar-form-custom send-command">
+                    <div class="form-group">
+                        <input type="text" placeholder="Envoyer une commande au serveur..." class="form-control" id="command">
                     </div>
-                </div>
+                </form>
+            </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'logout', 'admin' => false]); ?>">
+                            <i class="fa fa-sign-out"></i> Déconnexion
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            </div>
                 <?php echo $this->Session->flash(); ?>
                 <?php echo $this->fetch('content'); ?>
             </div>
-            <div class="clearfix"></div>
         </div>
-        <?php 
-        echo $this->Html->script('admin/dropzone');
-        echo $this->Html->script('jquery.confirm');
-        echo $this->Html->script('jquery.bootstrap-growl');
-        echo $this->Html->script('jquery.autocomplete');
-        echo $this->Html->script('admin/bootstrap.min');
-        echo $this->Html->script('admin/jquery-ui.min');
-        echo $this->Html->script('admin/wysihtml5-0.3.0');
-        echo $this->Html->script('admin/prettify');
-        echo $this->Html->script('admin/bootstrap-wysihtml5.min');
-        echo $this->Html->script('admin/jquery.steps.min');
-        echo $this->Html->script('admin/jquery.knob');
-        echo $this->Html->script('admin/jquery.slimscroll.min');
-        echo $this->Html->script('admin/jquery.prettyPhoto');
-        echo $this->Html->script('admin/jquery.gritter.min');
-        echo $this->Html->script('admin/jquery.onoff.min');
-        echo $this->Html->script('admin/respond.min');
-        echo $this->Html->script('admin/html5shiv');
-        echo $this->Html->script('admin/jquery.selectBoxIt');
-        echo $this->Html->script('admin/custom');
-        echo $this->Html->script('humane');
-        echo $this->Html->script('summernote');
-        echo $this->Html->script('summernote-fr-FR');
+
+        <!-- Mainly scripts -->
+        <?php echo $this->Html->script('admin/bootstrap.min'); ?>
+        <?php echo $this->Html->script('admin/plugins/metisMenu/jquery.metisMenu'); ?>
+        <?php echo $this->Html->script('admin/plugins/slimscroll/jquery.slimscroll.min'); ?>
+
+        <!-- Flot -->
+        <?php echo $this->Html->script('admin/plugins/flot/jquery.flot'); ?>
+        <?php echo $this->Html->script('admin/plugins/flot/jquery.flot.tooltip.min'); ?>
+        <?php echo $this->Html->script('admin/plugins/flot/jquery.flot.spline'); ?>
+        <?php echo $this->Html->script('admin/plugins/flot/jquery.flot.resize'); ?>
+        <?php echo $this->Html->script('admin/plugins/flot/jquery.flot.pie'); ?>
+
+        <!-- Peity -->
+        <?php echo $this->Html->script('admin/plugins/peity/jquery.peity.min'); ?>
+        <?php echo $this->Html->script('admin/demo/peity-demo'); ?>
+
+        <!-- Custom and plugin javascript -->
+        <?php echo $this->Html->script('admin/inspinia'); ?>
+        <?php
+        if($this->request->params['action'] != 'admin_chat_messages'){
+            echo $this->Html->script('admin/plugins/pace/pace.min');
+        }
         ?>
-        <script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+        
+        <!-- Sparkline -->
+        <?php echo $this->Html->script('admin/plugins/sparkline/jquery.sparkline.min'); ?>
+
+        <!-- Sparkline demo data  -->
+        <?php echo $this->Html->script('admin/demo/sparkline-demo'); ?>
+
+        <!-- ChartJS-->
+        <?php echo $this->Html->script('admin/plugins/chartJs/Chart.min'); ?>
+
+        <!-- Toastr -->
+        <?php echo $this->Html->script('admin/plugins/toastr/toastr.min'); ?>
+
+         <!-- Gritter -->
+        <?php echo $this->Html->script('admin/plugins/gritter/jquery.gritter.min'); ?>
+
+        <!-- Idle Timer plugin -->
+        <?php echo $this->Html->script('admin/plugins/idle-timer/idle-timer.min'); ?>
+
+        <!-- Datatable -->
+        <?php echo $this->Html->script('admin/plugins/DataTables/jquery.DataTables'); ?>
+        <?php echo $this->Html->script('admin/plugins/DataTables/dataTables.bootstrap'); ?>
+        <?php echo $this->Html->script('admin/plugins/DataTables/dataTables.responsive'); ?>
+        <?php echo $this->Html->script('admin/plugins/DataTables/dataTables.tableTools.min'); ?>
+
+        <!-- CounterUP -->
+        <?php echo $this->Html->script('jquery.counterup'); ?>
+
+        <!-- Autocomplete -->
+        <?php echo $this->Html->script('jquery.autocomplete'); ?>
+        
+        <!-- SelectBoxIt -->
+        <?php echo $this->Html->script('admin/jquery.selectBoxIt'); ?>
+
+        <!-- Dropzone -->
+        <?php echo $this->Html->script('admin/dropzone'); ?>
+
+        <script src="//cdn.ckeditor.com/4.5.1/full/ckeditor.js"></script>
     </body>
 </html>

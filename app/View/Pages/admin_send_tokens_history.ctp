@@ -1,15 +1,6 @@
 <?php $this->assign('title', 'Historique des transactions'); ?>
 <script type="text/javascript">
 $(document).ready(function(){
-    $(window).load(function(){
-        $(".confirm").confirm({
-            text: "Voulez vous vraiment supprimer cette ligne ?",
-            title: "Confirmation",
-            confirmButton: "Oui",
-            cancelButton: "Non"
-        });
-    });
-
     $('#data-table').dataTable({
         "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Tout"]],
         "order": [],
@@ -36,47 +27,60 @@ $(document).ready(function(){
             }
         }
     });
+    $(".confirm").confirm({
+        text: "Voulez vous vraiment supprimer cette ligne ?",
+        title: "Confirmation",
+        confirmButton: "Oui",
+        cancelButton: "Non"
+    });
 });
 </script>
-<div class="main-content">
-    <div class="container">
-        <div class="page-content">
-            <div class="single-head">
-                <h3 class="pull-left"><i class="fa fa-table"></i>Liste des transactions</h3>
-                <div class="clearfix"></div>
-            </div>
-            <div class="page-tables">
-                <div class="table-responsive">
-                    <table class="table table-bordered" cellpadding="0" cellspacing="0" border="0" id="data-table" width="100%">
-                        <thead>
-                            <tr>
-                                <th><b>Expéditeur</b></th>
-                                <th><b>Destinataire</b></th>
-                                <th><b><?php echo ucfirst($site_money); ?> envoyé</b></th>
-                                <th><b>Taux de perte</b></th>
-                                <th><b><?php echo ucfirst($site_money); ?> reçu</b></th>
-                                <th><b>Date</b></th>
-                                <th><b>Action</b></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach($data as $d){ ?>
-                            <tr>
-                                <td><?php echo $d['sendTokensHistory']['shipper'] ?></td>
-                                <td><?php echo $d['sendTokensHistory']['recipient'] ?></td>
-                                <td><?php echo $d['sendTokensHistory']['nb_tokens'] ?></td>
-                                <td><?php echo $d['sendTokensHistory']['loss_rate'] ?></td>
-                                <td><?php echo $d['sendTokensHistory']['nb_tokens_with_loss_rate'] ?></td>
-                                <td><?php echo $this->Time->format('d/m/Y à H:i', $d['sendTokensHistory']['created']); ?></td>
-                                <td>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'send_tokens_delete', $d['sendTokensHistory']['id']]); ?>" class="label label-danger confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
-                                </td>
-                            </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                    <div class="clearfix"></div>
-                </div>
+<div class="wrapper wrapper-content">
+    <div class="animated fadeInRightBig">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Liste des transactions</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <table class="table table-bordered table-hover dataTables-example dataTable dtr-inline" id="data-table">
+                            <thead>
+                                <tr>
+                                    <th><b>Expéditeur</b></th>
+                                    <th><b>Destinataire</b></th>
+                                    <th><b><?php echo ucfirst($site_money); ?> envoyé</b></th>
+                                    <th><b>Taux de perte</b></th>
+                                    <th><b><?php echo ucfirst($site_money); ?> reçu</b></th>
+                                    <th><b>Date</b></th>
+                                    <th><b>Action</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($data as $d){ ?>
+                                <tr>
+                                    <td><?php echo $d['sendTokensHistory']['shipper'] ?></td>
+                                    <td><?php echo $d['sendTokensHistory']['recipient'] ?></td>
+                                    <td><?php echo $d['sendTokensHistory']['nb_tokens'] ?></td>
+                                    <td><?php echo $d['sendTokensHistory']['loss_rate'] ?></td>
+                                    <td><?php echo $d['sendTokensHistory']['nb_tokens_with_loss_rate'] ?></td>
+                                    <td><?php echo $this->Time->format('d/m/Y à H:i', $d['sendTokensHistory']['created']); ?></td>
+                                    <td>
+                                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'send_tokens_delete', $d['sendTokensHistory']['id']]); ?>" class="btn btn-white btn-xs confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
+                                    </td>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

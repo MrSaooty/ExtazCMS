@@ -645,3 +645,6 @@ status.disabled {
 .has_submenu {
   cursor: pointer;
 }
+a.label.label-black:hover {
+  color: #ccc;
+}

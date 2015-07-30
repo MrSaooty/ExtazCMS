@@ -29,54 +29,61 @@ $(document).ready(function(){
     });
 });
 </script>
-<div class="main-content">
-    <div class="container">
-        <div class="page-content">
-            <div class="single-head">
-                <h3 class="pull-left"><i class="fa fa-table"></i>Historique d'achats PayPal</h3>
-                <div class="breads pull-right">
-                    <a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'paypal', 'admin' => true]); ?>" class="label label-black" target="_blank"><i class="fa fa-pie-chart"></i> Graphique</a>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="page-tables">
-                <div class="table-responsive">
-                    <table class="table table-bordered" cellpadding="0" cellspacing="0" border="0" id="data-table" width="100%">
-                        <thead>
-                            <tr>
-                                <th><b>Pseudo</b></th>
-                                <th><b><?php echo ucfirst($site_money); ?> achetés</b></th>
-                                <th><b>Argent reçu</b></th>
-                                <th><b>Acheté le</b></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach($data as $d){ ?>
-                            <tr>
-                                <td>
-                                    <?php
-                                    if($d['User']['username'] == null){
-                                        echo '<u>Compte supprimé</u>';
-                                    }
-                                    else{
-                                        echo $d['User']['username'];
-                                    }
-                                    ?>
-                                </td>
-                                <td><?php echo $d['paypalHistory']['item_name']; ?></td>
-                                <td>
-                                    <?php
-                                    $mc_total = $d['paypalHistory']['mc_gross'] - $d['paypalHistory']['mc_fee'];
-                                    echo $mc_total.'€';
-                                    ?>
-                                </td>
-                                <td><small><span class="label label-black"><?php echo $this->Time->format('d-m-Y à H:i', $d['paypalHistory']['created']); ?></span></small></td>
-                            </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                    <div class="clearfix"></div>
-                </div>
+<div class="wrapper wrapper-content">
+    <div class="animated fadeInRightBig">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Historique d'achats PayPal</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'paypal']); ?>">
+                                <i class="fa fa-bar-chart-o"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <table class="table table-bordered table-hover dataTables-example dataTable dtr-inline" id="data-table">
+                            <thead>
+                                <tr>
+                                    <th><b>Pseudo</b></th>
+                                    <th><b><?php echo ucfirst($site_money); ?> achetés</b></th>
+                                    <th><b>Argent reçu</b></th>
+                                    <th><b>Acheté le</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($data as $d){ ?>
+                                <tr>
+                                    <td>
+                                        <?php
+                                        if($d['User']['username'] == null){
+                                            echo '<u>Compte supprimé</u>';
+                                        }
+                                        else{
+                                            echo $d['User']['username'];
+                                        }
+                                        ?>
+                                    </td>
+                                    <td><?php echo $d['paypalHistory']['item_name']; ?></td>
+                                    <td>
+                                        <?php
+                                        $mc_total = $d['paypalHistory']['mc_gross'] - $d['paypalHistory']['mc_fee'];
+                                        echo $mc_total.'€';
+                                        ?>
+                                    </td>
+                                    <td><?php echo $this->Time->format('d/m/Y à H:i', $d['paypalHistory']['created']); ?></td>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

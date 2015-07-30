@@ -367,8 +367,14 @@
       sendingmultiple: noop,
       success: function(file) {
         if (file.previewElement) {
+          toastr.options = {
+              closeButton: true,
+              progressBar: true,
+              showMethod: 'slideDown',
+              timeOut: 3000
+          };
+          toastr.success('Background ajouté !');
           location.reload();
-          humane.log("<i class='fa fa-check'></i> Background ajouté !", { timeout: 4000, clickToClose: true, addnCls: 'humane-flatty-success' });
           return file.previewElement.classList.add("dz-success");
         }
       },

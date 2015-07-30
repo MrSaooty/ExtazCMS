@@ -38,44 +38,54 @@ $(document).ready(function(){
     });
 });
 </script>
-<div class="main-content">
-    <div class="container">
-        <div class="page-content">
-            <div class="single-head">
-                <h3 class="pull-left"><i class="fa fa-table"></i>Liste des articles non publiés</h3>
-                <div class="clearfix"></div>
-            </div>
-            <div class="page-tables">
-                <div class="table-responsive">
-                    <table class="table table-bordered" cellpadding="0" cellspacing="0" border="0" id="data-table" width="100%">
-                        <thead>
-                            <tr>
-                                <th><b>Auteur</b></th>
-                                <th><b>Titre</b></th>
-                                <th><b>Catégorie</b></th>
-                                <th><b>Date de création</b></th>
-                                <th><b>Actions</b></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach($drafts as $d){ ?>
-                            <tr>
-                                <td><?php echo $d['Post']['author']; ?></td>
-                                <td><?php echo $d['Post']['title']; ?></td>
-                                <td><?php echo $d['Post']['cat']; ?></td>
-                                <td><?php echo $this->Time->format('d-m-Y à H:i', $d['Post']['created']); ?></td>
-                                <td>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'edit', $d['Post']['id'], 'admin' => true]); ?>" class="label label-black"><i class="fa fa-pencil-square-o"></i> Editer</a>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'delete', $d['Post']['id'], 'admin' => true]); ?>" class="label label-danger confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'publish', $d['Post']['id'], 1, 'admin' => true]); ?>" class="label label-black"><i class="fa fa-file"></i> Publier</a>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'read', 'slug' => $d['Post']['slug'], 'id' => $d['Post']['id'], 'admin' => false]); ?>" class="label label-black"><i class="fa fa-eye"></i> Voir</a>
-                                </td>
-                            </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                    <div class="clearfix"></div>
-                </div>
+<div class="wrapper wrapper-content">
+    <div class="animated fadeInRightBig">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Liste des articles non publiés</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'list']); ?>">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <table class="table table-bordered table-hover dataTables-example dataTable dtr-inline" id="data-table">
+                            <thead>
+                                <tr>
+                                    <th><b>Auteur</b></th>
+                                    <th><b>Titre</b></th>
+                                    <th><b>Catégorie</b></th>
+                                    <th><b>Date de création</b></th>
+                                    <th><b>Actions</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($drafts as $d){ ?>
+                                <tr>
+                                    <td><?php echo $d['Post']['author']; ?></td>
+                                    <td><?php echo $d['Post']['title']; ?></td>
+                                    <td><?php echo $d['Post']['cat']; ?></td>
+                                    <td><?php echo $this->Time->format('d/m/Y à H:i', $d['Post']['created']); ?></td>
+                                    <td>
+                                        <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'edit', $d['Post']['id'], 'admin' => true]); ?>" class="label label-black"><i class="fa fa-pencil-square-o"></i> Editer</a>
+                                        <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'delete', $d['Post']['id'], 'admin' => true]); ?>" class="label label-danger confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
+                                        <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'publish', $d['Post']['id'], 1, 'admin' => true]); ?>" class="label label-black"><i class="fa fa-file"></i> Publier</a>
+                                        <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'read', 'slug' => $d['Post']['slug'], 'id' => $d['Post']['id'], 'admin' => false]); ?>" class="label label-black"><i class="fa fa-eye"></i> Voir</a>
+                                    </td>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

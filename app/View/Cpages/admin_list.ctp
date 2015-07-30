@@ -1,15 +1,6 @@
 <?php $this->assign('title', 'Liste des pages'); ?>
 <script>
 $(document).ready(function(){
-    $(window).load(function(){
-        $(".confirm").confirm({
-            text: "Voulez vous vraiment supprimer cet article ?",
-            title: "Confirmation",
-            confirmButton: "Oui",
-            cancelButton: "Non"
-        });
-    });
-
     $('#data-table').dataTable({
         "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Tout"]],
         "order": [],
@@ -36,98 +27,110 @@ $(document).ready(function(){
             }
         }
     });
+    $(".confirm").confirm({
+        text: "Voulez vous vraiment supprimer cet article ?",
+        title: "Confirmation",
+        confirmButton: "Oui",
+        cancelButton: "Non"
+    });
 });
 </script>
-<div class="main-content">
-    <div class="container">
-        <div class="page-content">
-            <div class="single-head">
-                <h3 class="pull-left"><i class="fa fa-table"></i>Liste des articles publiés</h3>
-                <div class="clearfix"></div>
+<div class="wrapper wrapper-content">
+    <div class="animated fadeInRightBig">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Liste des pages personnalisés</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'add']); ?>">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
             </div>
-            <div class="page-tables">
-                <div class="table-responsive">
-                    <table class="table table-bordered" cellpadding="0" cellspacing="0" border="0" id="data-table" width="100%">
-                        <thead>
-                            <tr>
-                                <th><b>Auteur</b></th>
-                                <th><b>Type</b></th>
-                                <th><b>Titre</b></th>
-                                <th><b>URL</b></th>
-                                <th><b>Date de création</b></th>
-                                <th><b>Actions</b></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach($data as $d){ ?>
-                            <tr>
-                                <td>
-                                    <?php
-                                    // Avatar
-                                    if($d['User']['username'] == null){
-                                        echo $this->Html->image('http://cravatar.eu/helmavatar/steve/12', ['alt' => 'Player head', 'class' => 'img-rounded', 'style' => 'margin-top:-1px;']);
-                                    }
-                                    else{
-                                        echo $this->Html->image($d['User']['avatar'], ['alt' => 'Avatar', 'height' => 16, 'width' => 16, 'class' => 'avatar']);
-                                    }
+            <div class="ibox-content">
+                <table class="table table-bordered table-hover dataTables-example dataTable dtr-inline" id="data-table">
+                    <thead>
+                        <tr>
+                            <th><b>Auteur</b></th>
+                            <th><b>Type</b></th>
+                            <th><b>Titre</b></th>
+                            <th><b>URL</b></th>
+                            <th><b>Date de création</b></th>
+                            <th><b>Actions</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($data as $d){ ?>
+                        <tr>
+                            <td>
+                                <?php
+                                // Avatar
+                                if($d['User']['username'] == null){
+                                    echo $this->Html->image('http://cravatar.eu/helmavatar/steve/12', ['alt' => 'Player head', 'class' => 'img-rounded', 'style' => 'margin-top:-1px;']);
+                                }
+                                else{
+                                    echo $this->Html->image($d['User']['avatar'], ['alt' => 'Avatar', 'height' => 16, 'width' => 16, 'class' => 'avatar']);
+                                }
 
-                                    // Pseudo
-                                    if($d['User']['username'] == null){
-                                        echo ' <font color="#555"><u>Compte supprimé</u></font>';
-                                    }
-                                    else{
-                                        echo ' '.$d['User']['username'];
-                                    }
+                                // Pseudo
+                                if($d['User']['username'] == null){
+                                    echo ' <font color="#555"><u>Compte supprimé</u></font>';
+                                }
+                                else{
+                                    echo ' '.$d['User']['username'];
+                                }
+                                ?>
+                            </td>
+                            <td>
+                                <?php
+                                if($d['Cpage']['redirect'] == 1){
+                                    echo 'Redirection';
+                                }
+                                else{
+                                    echo 'Page';
+                                }
+                                ?>
+                            </td>
+                            <td><?php echo $d['Cpage']['name']; ?></td>
+                            <td>
+                                <?php if($d['Cpage']['redirect'] == 1){ ?>
+                                <span class="label label-black">
+                                    <i class="fa fa-globe"></i>
+                                    <?php echo $d['Cpage']['url']; ?>
+                                </span>
+                                <?php } else { ?>
+                                <span class="label label-black">
+                                    <i class="fa fa-globe"></i>
+                                    <?php echo 'http://'.$_SERVER['SERVER_NAME'].$this->Html->url(['controller' => 'cpages', 'action' => 'read', 'slug' => $d['Cpage']['slug'], 'admin' => false]); ?>
+                                </span>
+                                <?php } ?>
+                            </td>
+                            <td><?php echo $this->Time->format('d/m/Y à H:i', $d['Cpage']['created']); ?></td>
+                            <td>
+                                <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'read', 'slug' => $d['Cpage']['slug'], 'admin' => false]); ?>" class="btn btn-white btn-xs" target="_blank"><i class="fa fa-eye"></i> Voir</a>
+                                <?php
+                                if($d['Cpage']['redirect'] == 1){
                                     ?>
-                                </td>
-                                <td>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'edit_redirection', $d['Cpage']['id'], 'admin' => true]); ?>" class="btn btn-white btn-xs"><i class="fa fa-pencil-square-o"></i> Editer</a>
                                     <?php
-                                    if($d['Cpage']['redirect'] == 1){
-                                        echo 'Redirection';
-                                    }
-                                    else{
-                                        echo 'Page';
-                                    }
+                                }
+                                else{
                                     ?>
-                                </td>
-                                <td><?php echo $d['Cpage']['name']; ?></td>
-                                <td>
-                                    <?php if($d['Cpage']['redirect'] == 1){ ?>
-                                    <span class="label label-black">
-                                        <i class="fa fa-globe"></i>
-                                        <?php echo $d['Cpage']['url']; ?>
-                                    </span>
-                                    <?php } else { ?>
-                                    <span class="label label-black">
-                                        <i class="fa fa-globe"></i>
-                                        <?php echo 'http://'.$_SERVER['SERVER_NAME'].$this->Html->url(['controller' => 'cpages', 'action' => 'read', 'slug' => $d['Cpage']['slug'], 'admin' => false]); ?>
-                                    </span>
-                                    <?php } ?>
-                                </td>
-                                <td><?php echo $this->Time->format('d-m-Y à H:i', $d['Cpage']['created']); ?></td>
-                                <td>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'read', 'slug' => $d['Cpage']['slug'], 'admin' => false]); ?>" class="label label-black" target="_blank"><i class="fa fa-eye"></i> Voir</a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'edit', $d['Cpage']['id'], 'admin' => true]); ?>" class="btn btn-white btn-xs"><i class="fa fa-pencil-square-o"></i> Editer</a>
                                     <?php
-                                    if($d['Cpage']['redirect'] == 1){
-                                        ?>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'edit_redirection', $d['Cpage']['id'], 'admin' => true]); ?>" class="label label-black"><i class="fa fa-pencil-square-o"></i> Editer</a>
-                                        <?php
-                                    }
-                                    else{
-                                        ?>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'edit', $d['Cpage']['id'], 'admin' => true]); ?>" class="label label-black"><i class="fa fa-pencil-square-o"></i> Editer</a>
-                                        <?php
-                                    }
-                                    ?>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'delete', $d['Cpage']['id'], 'admin' => true]); ?>" class="label label-danger confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
-                                </td>
-                            </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                    <div class="clearfix"></div>
-                </div>
-                </div>
+                                }
+                                ?>
+                                <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'delete', $d['Cpage']['id'], 'admin' => true]); ?>" class="btn btn-white btn-xs confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
+                            </td>
+                        </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

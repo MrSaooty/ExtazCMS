@@ -1,5 +1,5 @@
 <?php $this->assign('title', 'Tous les utilisateurs'); ?>
-<script type="text/javascript">
+<script>
 $(document).ready(function(){
     $('#data-table').dataTable({
         "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Tout"]],
@@ -28,39 +28,45 @@ $(document).ready(function(){
         }
     });
     $(".confirm").confirm({
-        text: "Voulez vous vraiment supprimer le compte de cet utilisateur ?",
+        text: "Voulez vous vraiment supprimer cet article ?",
         title: "Confirmation",
         confirmButton: "Oui",
         cancelButton: "Non"
     });
 });
 </script>
-<div class="main-content">
-    <div class="container">
-        <div class="page-content">
-            <div class="single-head">
-                <h3 class="pull-left"><i class="fa fa-table"></i>Liste des utilisateurs</h3>
-                <div class="breads pull-right">
-                    <a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'user', 'admin' => true]); ?>" class="label label-black" target="_blank"><i class="fa fa-pie-chart"></i> Graphique</a>
+<div class="wrapper wrapper-content">
+    <div class="animated fadeInRightBig">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Liste de tous les utilisateurs</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'user']); ?>">
+                        <i class="fa fa-bar-chart-o"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
                 </div>
-                <div class="clearfix"></div>
             </div>
-            <div class="page-tables">
-                <div class="table-responsive">
-                    <table class="table table-bordered" cellpadding="0" cellspacing="0" border="0" id="data-table" width="100%">
-                        <thead>
-                            <tr>
-                                <th><b>#</b></th>
-                                <th><b>Pseudo</b></th>
-                                <th><b>eMail</b></th>
-                                <th><b>Tokens</b></th>
-                                <th><b>Role</b></th>
-                                <th><b>Inscrit le</b></th>
-                                <th><b>Action</b></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach($data as $d){ ?>
+            <div class="ibox-content">
+                <table class="table table-bordered table-hover dataTables-example dataTable dtr-inline" id="data-table">
+                    <thead>
+                        <tr>
+                            <th><b>#</b></th>
+                            <th><b>Pseudo</b></th>
+                            <th><b>eMail</b></th>
+                            <th><b>Tokens</b></th>
+                            <th><b>Role</b></th>
+                            <th><b>Inscrit le</b></th>
+                            <th><b>Action</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($data as $d){ ?>
                             <tr>
                                 <td><?php echo $d['User']['id']; ?></td>
                                 <td><?php echo $this->Html->image($d['User']['avatar'], ['height' => 16, 'width' => 16, 'class' => 'avatar']).' '.$d['User']['username']; ?></td>
@@ -73,17 +79,15 @@ $(document).ready(function(){
                                 <?php } else { ?>
                                     <td><span class="label label-black">Utilisateur</span></td>
                                 <?php } ?>
-                                <td><?php echo $this->Time->format('d-m-Y à H:i', $d['User']['created']); ?></td>
+                                <td><?php echo $this->Time->format('d/m/Y à H:i', $d['User']['created']); ?></td>
                                 <td>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'edit', $d['User']['id']]); ?>" class="label label-black"><i class="fa fa-pencil-square-o"></i> Editer</a>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'delete', $d['User']['id']]); ?>" class="label label-danger confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'edit', $d['User']['id']]); ?>" class="btn btn-w-m btn-white btn-xs"><i class="fa fa-pencil-square-o"></i> Editer</a>
+                                    <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'delete', $d['User']['id']]); ?>" class="btn btn-w-m btn-white btn-xs confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
                                 </td>
                             </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                    <div class="clearfix"></div>
-                </div>
+                        <?php } ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

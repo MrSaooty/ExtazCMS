@@ -1,68 +1,28 @@
-<?php $this->assign('title', 'Changer de background'); ?>
-<script>
-    var myDropzone = new Dropzone("div#fallback", { 
-        url: "<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'add_background']); ?>"
-    });
-</script>
-<div class="main-content">
-    <div class="container">  
+<?php $this->assign('title', 'Backgrounds'); ?>
+<div class="wrapper wrapper-content">
+    <div class="animated fadeInRightBig">
         <div class="row">
-            <?php
-            if($nb_backgrounds > 0){
-                ?>
-                <div class="col-md-8">
-                    <div class="container">
-                        <div class="page-content">
-                            <div class="alert alert-info">
-                                <strong><i class="fa fa-info-circle"></i></strong> Cliquez sur le <strong>background</strong> que vous souhaitez utiliser
-                            </div>
-                            <div class="page-gallery">
-                                <div id="gallery">
-                                    <div class="new-bg">
-                                        
-                                    </div>
-                                    <?php
-                                    foreach($backgrounds as $background){
-                                        ?>
-                                        <!-- Element -->
-                                        <div class="element">
-                                            <a href="<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'update_background', $background]); ?>" class="prettyphoto">
-                                                <?php echo $this->Html->image('bg/'.$background, ['width' => 200, 'height' => 110]); ?>
-                                            </a>
-                                            <div class="gall-caption">
-                                                <ul class="list-unstyled">
-                                                    <li><a href="<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'delete_background', $background]); ?>" class="background-delete"><font color="#fff"><i class="fa fa-times"></i></font></a><strong>Nom du fichier :</strong> <?php echo $background; ?></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <?php
-                                    }
-                                    ?>
-                                </div>
-                            </div>
+            <div class="col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Télécharger un background</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="container">
-                        <div class="page-content">
-                            <h4>Ajoutez votre propre background</h4>
-                            <hr>
+                    <div class="ibox-content">
+                        <?php if($nb_backgrounds > 0){ ?>
                             <?php echo $this->Form->create('Informations', ['action' => 'add_background', 'class' => 'dropzone', 'id' => 'myAwesomeDropzone', 'type' => 'file']); ?>
                                 <div class="fallback">
                                     <input type="file" name="file">
                                 </div>
                             <?php echo $this->Form->end(); ?>
-                        </div>
-                    </div>
-                </div>
-                <?php
-            }
-            else{
-                ?>
-                <div class="col-md-4">
-                    <div class="container">
-                        <div class="page-content">
+                        <?php } else { ?>
                             <div class="alert alert-info">
                                 <i class="fa fa-info-circle"></i> Aucun background trouvé, ajoutez en un ci-dessous
                             </div>
@@ -71,14 +31,48 @@
                                     <input type="file" name="file">
                                 </div>
                             <?php echo $this->Form->end(); ?>
+                        </div>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>  
+        </div>
+        <div class="row">
+            <?php foreach($backgrounds as $background){ ?>
+                <div class="col-md-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <p>
+                                <i class="fa fa-file"></i> <b>Nom du fichier</b> : <?php echo $background; ?>
+                            </p>
+                        </div>
+                        <div>
+                            <div class="ibox-content no-padding border-left-right">
+                                <center>
+                                    <div class="hidden-xs hidden-sm hidden-md">
+                                        <?php echo $this->Html->image('bg/'.$background, ['class' => '', 'width' => 200, 'height' => 200]); ?>
+                                    </div>
+                                    <div class="hidden-lg">
+                                        <?php echo $this->Html->image('bg/'.$background, ['class' => '', 'width' => 100, 'height' => 100]); ?>
+                                    </div>
+                                </center>
+                            </div>
+                            <div class="ibox-content profile-content">
+                                <div class="user-button">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <a href="<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'update_background', $background]); ?>" class="btn btn-primary btn-xs btn-block"><i class="fa fa-check"></i> Utiliser</a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a href="<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'delete_background', $background]); ?>" class="btn btn-white btn-xs btn-block"><i class="fa fa-trash-o"></i> Supprimer</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <?php
-            }
-            ?>
-            <div class="col-md-3"></div>
+            <?php } ?>
         </div>
     </div>
 </div>

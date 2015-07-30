@@ -72,11 +72,11 @@ Class ShopsController extends AppController{
 						$this->Shop->saveField('required', '-1');
 						$this->Shop->saveField('required_name', 'Aucun');
 					}
-					$this->Session->setFlash('Article ajouté à la boutique !', 'success');
+					$this->Session->setFlash('Article ajouté à la boutique !', 'toastr_success');
 					return $this->redirect(['controller' => 'shops', 'action' => 'list', 'admin' => true]);
 				}
 				else{
-					$this->Session->setFlash('Une erreur est survenue !', 'error');
+					$this->Session->setFlash('Une erreur est survenue !', 'toastr_error');
 				}
 			}
 		}
@@ -111,11 +111,11 @@ Class ShopsController extends AppController{
 						$this->Shop->saveField('required', $required);
 						$this->Shop->saveField('required_name', $required_name);
 					}
-					$this->Session->setFlash('Article modifié !', 'success');
+					$this->Session->setFlash('Article modifié !', 'toastr_success');
 					return $this->redirect(['controller' => 'shops', 'action' => 'list']);
 				}
 				else{
-					$this->Session->setFlash('Une erreur est survenue !', 'error');
+					$this->Session->setFlash('Une erreur est survenue !', 'toastr_error');
 				}
 			}
 		}
@@ -484,11 +484,11 @@ Class ShopsController extends AppController{
 				$this->shopHistory->saveField('price', '0');
 				$this->shopHistory->saveField('money', '['.$this->Auth->user('username').']');
 				$this->shopHistory->saveField('quantity', '1');
-				$this->Session->setFlash('Prérequis octroyé', 'success');
+				$this->Session->setFlash('Prérequis octroyé', 'toastr_success');
 				return $this->redirect($this->referer());
 			}
 			else{
-				$this->Session->setFlash('Erreur', 'error');
+				$this->Session->setFlash('Erreur', 'toastr_error');
 				return $this->redirect($this->referer());
 			}
 		}

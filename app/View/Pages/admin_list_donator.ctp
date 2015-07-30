@@ -1,15 +1,6 @@
-<?php $this->assign('title', 'Tous les utilisateurs'); ?>
+<?php $this->assign('title', 'Liste des donateurs'); ?>
 <script type="text/javascript">
 $(document).ready(function(){
-    $(window).load(function(){
-        $(".confirm").confirm({
-            text: "Voulez vous vraiment supprimer cette ligne ?",
-            title: "Confirmation",
-            confirmButton: "Oui",
-            cancelButton: "Non"
-        });
-    });
-
     $('#data-table').dataTable({
         "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Tout"]],
         "order": [],
@@ -36,48 +27,57 @@ $(document).ready(function(){
             }
         }
     });
+    $(".confirm").confirm({
+        text: "Voulez vous vraiment supprimer cette ligne ?",
+        title: "Confirmation",
+        confirmButton: "Oui",
+        cancelButton: "Non"
+    });
 });
 </script>
-<div class="main-content">
-    <div class="container">
-        <div class="page-content">
-            <div class="single-head">
-                <h3 class="pull-left"><i class="fa fa-table"></i>Liste des utilisateurs</h3>
-                <div class="breads pull-right">
-                    <a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'donator', 'admin' => true]); ?>" class="label label-black" target="_blank"><i class="fa fa-pie-chart"></i> Graphique</a>
+<div class="wrapper wrapper-content">
+    <div class="animated fadeInRightBig">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Liste des donateurs</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'donator']); ?>">
+                        <i class="fa fa-bar-chart-o"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
                 </div>
-                <div class="clearfix"></div>
             </div>
-            <div class="page-tables">
-                <div class="table-responsive">
-                    <table class="table table-bordered" cellpadding="0" cellspacing="0" border="0" id="data-table" width="100%">
-                        <thead>
-                            <tr>
-                                <th><b>Pseudo</b></th>
-                                <th><b>eMail</b></th>
-                                <th><b><?php echo ucfirst($site_money); ?> (total)</b></th>
-                                <th><b><?php echo ucfirst($site_money); ?> (actuel)</b></th>
-                                <th><b>Action</b></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach($data as $d){ ?>
-                            <tr>
-                                <td><?php echo $this->Html->image($d['User']['avatar'], ['alt' => 'Avatar', 'height' => 16, 'width' => 16, 'class' => 'avatar']).' '.$d['User']['username']; ?></td>
-                                <td><?php echo $d['User']['email']; ?></td>
-                                <td><?php echo $d['donationLadder']['tokens']; ?></td>
-                                <td><?php echo $d['User']['tokens']; ?></td>
-                                <td>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'edit_donator', $d['donationLadder']['id']]); ?>" class="label label-black"><i class="fa fa-pencil-square-o"></i> Editer</a>
-                                    <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'delete_donator', $d['donationLadder']['id']]); ?>" class="label label-danger confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
-                                </td>
-                            </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                    <div class="clearfix"></div>
-                </div>
-                </div>
+            <div class="ibox-content">
+                <table class="table table-bordered table-hover dataTables-example dataTable dtr-inline" id="data-table">
+                    <thead>
+                        <tr>
+                            <th><b>Pseudo</b></th>
+                            <th><b>eMail</b></th>
+                            <th><b><?php echo ucfirst($site_money); ?> (total)</b></th>
+                            <th><b><?php echo ucfirst($site_money); ?> (actuel)</b></th>
+                            <th><b>Action</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($data as $d){ ?>
+                        <tr>
+                            <td><?php echo $this->Html->image($d['User']['avatar'], ['alt' => 'Avatar', 'height' => 16, 'width' => 16, 'class' => 'avatar']).' '.$d['User']['username']; ?></td>
+                            <td><?php echo $d['User']['email']; ?></td>
+                            <td><?php echo $d['donationLadder']['tokens']; ?></td>
+                            <td><?php echo $d['User']['tokens']; ?></td>
+                            <td>
+                                <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'edit_donator', $d['donationLadder']['id']]); ?>" class="btn btn-white btn-xs"><i class="fa fa-pencil-square-o"></i> Editer</a>
+                                <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'delete_donator', $d['donationLadder']['id']]); ?>" class="btn btn-white btn-xs confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
+                            </td>
+                        </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

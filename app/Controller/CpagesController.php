@@ -27,7 +27,7 @@ class CpagesController extends AppController {
 				$this->Cpage->saveField('content', $this->request->data['Cpages']['content']);
 				$this->Cpage->saveField('redirect', '0');
 				$this->Cpage->saveField('url', '');
-				$this->Session->setFlash('Page créée avec succès !', 'success');
+				$this->Session->setFlash('Page créée avec succès !', 'toastr_success');
 				return $this->redirect(['controller' => 'cpages', 'action' => 'list']);
 			}
 		}
@@ -49,7 +49,7 @@ class CpagesController extends AppController {
 				$this->Cpage->saveField('content', '');
 				$this->Cpage->saveField('redirect', '1');
 				$this->Cpage->saveField('url', $this->request->data['Cpages']['url']);
-				$this->Session->setFlash('Page créée avec succès !', 'success');
+				$this->Session->setFlash('Page créée avec succès !', 'toastr_success');
 				return $this->redirect(['controller' => 'cpages', 'action' => 'list']);
 			}
 		}
@@ -70,12 +70,12 @@ class CpagesController extends AppController {
 					}
 					$this->Cpage->saveField('slug', $this->request->data['Cpages']['slug']);
 					$this->Cpage->saveField('content', $this->request->data['Cpages']['content']);
-					$this->Session->setFlash('Page éditée !', 'success');
+					$this->Session->setFlash('Page éditée !', 'toastr_success');
 					return $this->redirect(['controller' => 'cpages', 'action' => 'list']);
 				}
 			}
 			else{
-				$this->Session->setFlash('Cette page n\'existe pas !', 'error');
+				$this->Session->setFlash('Cette page n\'existe pas !', 'toastr_error');
 				return $this->redirect(['controller' => 'cpages', 'action' => 'list']);
 			}
 		}
@@ -92,12 +92,12 @@ class CpagesController extends AppController {
 					$this->Cpage->id = $id;
 					$this->Cpage->saveField('name', $this->request->data['Cpages']['name']);
 					$this->Cpage->saveField('url', $this->request->data['Cpages']['url']);
-					$this->Session->setFlash('Page éditée !', 'success');
+					$this->Session->setFlash('Page éditée !', 'toastr_success');
 					return $this->redirect(['controller' => 'cpages', 'action' => 'list']);
 				}
 			}
 			else{
-				$this->Session->setFlash('Cette page n\'existe pas !', 'error');
+				$this->Session->setFlash('Cette page n\'existe pas !', 'toastr_error');
 				return $this->redirect(['controller' => 'cpages', 'action' => 'list']);
 			}
 		}
@@ -119,11 +119,11 @@ class CpagesController extends AppController {
 		if($this->Auth->user('role') > 1){
 			if($this->Cpage->findById($id)){
 				$this->Cpage->delete($id);
-				$this->Session->setFlash('Page supprimée !', 'success');
+				$this->Session->setFlash('Page supprimée !', 'toastr_success');
 				return $this->redirect(['controller' => 'cpages', 'action' => 'list']);
 			}
 			else{
-				$this->Session->setFlash('Cette page n\'existe pas !', 'error');
+				$this->Session->setFlash('Cette page n\'existe pas !', 'toastr_error');
 				return $this->redirect(['controller' => 'cpages', 'action' => 'list']);
 			}
 		}

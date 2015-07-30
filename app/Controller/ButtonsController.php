@@ -13,13 +13,16 @@ class ButtonsController extends AppController{
                     $this->Button->saveField('icon', $this->request->data['Buttons']['icon']);
                     $this->Button->saveField('color', $this->request->data['Buttons']['color']);
                     $this->Button->saveField('order', $this->request->data['Buttons']['order']);
-                    $this->Session->setFlash('Votre bouton à bien été ajouté !', 'success');
+                    $this->Session->setFlash('Votre bouton à bien été ajouté !', 'toastr_success');
                     return $this->redirect($this->referer());
                 }
                 else{
-                    $this->Session->setFlash('Tous les champs sont obligatoires', 'error');
+                    $this->Session->setFlash('Tous les champs sont obligatoires', 'toastr_error');
                 }
             }
+        }
+        else{
+            throw new NotFoundException();
         }
     }
 
@@ -43,17 +46,23 @@ class ButtonsController extends AppController{
                     $this->Button->saveField('color', $this->request->data['Buttons']['color']);
                 }
                 $this->Button->saveField('order', $this->request->data['Buttons']['order']);
-                $this->Session->setFlash('Votre bouton à bien été modifié !', 'success');
+                $this->Session->setFlash('Votre bouton à bien été modifié !', 'toastr_success');
                 return $this->redirect(['controller' => 'buttons', 'action' => 'index', 'admin' => true]);
             }
+        }
+        else{
+            throw new NotFoundException();
         }
     }
 
     public function admin_delete($id){
         if($this->Auth->user('role') > 1){
             $this->Button->delete($id);
-            $this->Session->setFlash('Ce bouton a été supprimé', 'success');
+            $this->Session->setFlash('Ce bouton a été supprimé', 'toastr_success');
             return $this->redirect(['controller' => 'buttons', 'action' => 'index', 'admin' => true]);
+        }
+        else{
+            throw new NotFoundException();
         }
     }
 }

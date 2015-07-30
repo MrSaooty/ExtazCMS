@@ -18,49 +18,62 @@ $(document).ready(function(){
     $("select").selectBoxIt({
         showFirstOption: false
     });
-    $('.summernote').summernote({
-        height: 300,
-        lang: 'fr-FR'
-    });
 });
 </script>
-<div class="main-content">
-    <div class="container">  
+<div class="wrapper wrapper-content">
+    <div class="animated fadeInRightBig">
         <div class="row">
-            <div class="col-md-12">
-                <div class="page-content">
-                    <div class="single-head">
-                        <h3 class="pull-left"><i class="fa fa-plus-square"></i>Modifier une page</h3>
-                        <div class="clearfix"></div>
+            <div class="col-md-8">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Modifier une page</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'list']); ?>">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
                     </div>
-                    <?php echo $this->Form->create('Cpages', array('class' => 'sky-form', 'inputDefaults' => array('error' => false))); ?>
-                        <div class="form-group">
-                            <div class="input-group margin-bottom-20">
-                                <span class="input-group-addon"><i class="fa fa-font"></i></span>
-                                <?php echo $this->Form->input('name', array('type' => 'text', 'value' => $data['Cpage']['name'], 'class' => 'form-control', 'label' => false)); ?>
+                    <div class="ibox-content">
+                        <?php echo $this->Form->create('Cpages', array('class' => 'sky-form', 'inputDefaults' => array('error' => false))); ?>
+                            <div class="form-group">
+                                <div class="input-group margin-bottom-20">
+                                    <span class="input-group-addon"><i class="fa fa-font"></i></span>
+                                    <?php echo $this->Form->input('name', array('type' => 'text', 'value' => $data['Cpage']['name'], 'class' => 'form-control', 'label' => false)); ?>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group margin-bottom-20">
-                                <span class="input-group-addon"><i class="fa fa-comment"></i></span>
-                                <?php echo $this->Form->input('slug', array('type' => 'text', 'value' => $data['Cpage']['slug'], 'class' => 'form-control', 'onkeypress' => 'return verif(event);', 'label' => false)); ?>
+                            <div class="form-group">
+                                <div class="input-group margin-bottom-20">
+                                    <span class="input-group-addon"><i class="fa fa-comment"></i></span>
+                                    <?php echo $this->Form->input('slug', array('type' => 'text', 'value' => $data['Cpage']['slug'], 'class' => 'form-control', 'onkeypress' => 'return verif(event);', 'label' => false)); ?>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <select name="data[Cpages][sidebar]" id="CpagesSidebar" class="form-control">
-                                <option value="">Afficher la sidebar ?</option>
-                                <option value="1">Oui</option>
-                                <option value="0">Non</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <div id="chargement"><?php echo $this->Html->image('loader.gif', array('alt' => 'chargement')); ?> Chargement de l'éditeur de texte en cours, veuillez patienter</div>
-                            <div id="content" style="display:none;">
-                                <?php echo $this->Form->textarea('content', array('type' => 'textarea', 'rows' => '5', 'cols' => '5', 'value' => $data['Cpage']['content'], 'class' => 'summernote', 'label' => false)); ?>
+                            <div class="form-group">
+                                <select name="data[Cpages][sidebar]" id="CpagesSidebar" class="form-control">
+                                    <option value="">Afficher la sidebar ?</option>
+                                    <option value="1">Oui</option>
+                                    <option value="0">Non</option>
+                                </select>
                             </div>
-                        </div>
-                        <i class="fa fa-info-circle"></i> Vous pouvez utiliser des variables pour étoffer le contenu de votre page. <a href="http://extaz-cms.com/wiki/index.php?title=Aide" target="_blank">(<u>en savoir plus</u> <i class="fa fa-external-link"></i>)</a> <button class="btn btn-black pull-right pull-right" type="submit"><i class="fa fa-check"></i> Confirmer</button>
-                    <?php echo $this->Form->end(); ?>
+                            <div class="form-group">
+                                <div id="chargement"><?php echo $this->Html->image('loader.gif', array('alt' => 'chargement')); ?> Chargement de l'éditeur de texte en cours, veuillez patienter</div>
+                                <div id="content" style="display:none;">
+                                    <?php echo $this->Form->textarea('content', array('type' => 'textarea', 'rows' => '5', 'cols' => '5', 'value' => $data['Cpage']['content'], 'class' => 'ckeditor', 'label' => false)); ?>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <i class="fa fa-info-circle"></i> Vous pouvez utiliser des variables pour étoffer le contenu de votre page. <a href="http://extaz-cms.com/wiki/index.php?title=Aide#Pages_personnalis.C3.A9es" target="_blank">(<u>en savoir plus</u> <i class="fa fa-external-link"></i>)</a>
+                                    <button class="btn btn-w-m btn-primary pull-right pull-right" type="submit"><i class="fa fa-plus"></i> Modifier cette page</button>
+                                </div>
+                            </div>
+                        <?php echo $this->Form->end(); ?>
+                    </div>
                 </div>
             </div>
         </div>

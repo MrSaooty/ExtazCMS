@@ -406,3 +406,84 @@ label {
 .label-grey{
   background-color: #777777;
 }
+.mgt-10{
+  margin-top: 10px;
+}
+/*Labels*/
+
+.member-label {
+  font-family: 'Open Sans';
+  font-size: 11px;
+  padding: 3px 8px;
+  text-shadow: none;
+}
+
+.member-label-danger {
+  background: #D9534F;
+  color: #fff;
+}
+
+.member-label-orange {
+  background: #E67E22;
+  color: #fff;
+}
+
+.member-label-warning {
+  background: #F0AD4E;
+  color: #fff;
+}
+
+.member-label-primary {
+  background: #337AB7;
+  color: #fff;
+}
+
+.member-label-info {
+  background: #5BC0DE;
+  color: #fff;
+}
+
+.member-label-success {
+  background: #5CB85C;
+  color: #fff;
+}
+
+.member-label-purple {
+  background: #9B6BCC;
+  color: #fff;
+}
+
+.member-label-grey {
+  background: #777777;
+  color: #fff;
+}
+
+.member-label-light {
+  background: #ECF0F1;
+  color: #5E5E5E;
+}
+
+.member-label-brown {
+  background: #9C8061;
+  color: #fff;
+}
+
+.member-label-dark {
+  background: #555555;
+  color: #fff;
+}
+.lightBoxGallery img {
+  margin: 5px;
+}
+.code-input{
+  border: none;
+}
+.code-input{
+  border: none;
+  font-size: 0.9em;
+}
+.used-code-input{
+  border: none;
+  font-size: 0.9em;
+  background-color: #F2DEDE;
+}

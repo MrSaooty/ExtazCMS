@@ -220,16 +220,16 @@ class UsersController extends AppController{
                     $this->donationLadder->deleteAll(['donationLadder.user_id' => $id]);
                     $this->Support->deleteAll(['Support.user_id' => $id]);
                     $this->supportComments->deleteAll(['supportComments.user_id' => $id]);
-                    $this->Session->setFlash('Utilisateur supprimé !', 'success');
+                    $this->Session->setFlash('Utilisateur supprimé !', 'toastr_success');
                     return $this->redirect(['controller' => 'users', 'action' => 'all']);
                 }
                 else{
-                    $this->Session->setFlash('Un problème est survenu', 'error');
+                    $this->Session->setFlash('Un problème est survenu', 'toastr_error');
                     return $this->redirect($this->referer());
                 }
             }
             else{
-                $this->Session->setFlash('Cet utilisateur n\'existe pas !', 'error');
+                $this->Session->setFlash('Cet utilisateur n\'existe pas !', 'toastr_error');
                 return $this->redirect($this->referer());
             }
         }
@@ -247,17 +247,17 @@ class UsersController extends AppController{
                 if($this->request->is('post')){
                     $this->User->id = $id;
                     if($this->User->save($this->request->data, ['validate' => false])){
-                        $this->Session->setFlash('Utilisateur modifié !', 'success');
+                        $this->Session->setFlash('Utilisateur modifié !', 'toastr_success');
                         return $this->redirect(['controller' => 'users', 'action' => 'edit', $id]);
                     }
                     else{
-                        $this->Session->setFlash('Un problème est survenu', 'error');
+                        $this->Session->setFlash('Un problème est survenu', 'toastr_error');
                         return $this->redirect(['controller' => 'users', 'action' => 'edit', $id]);
                     }
                 }
             }
             else{
-                $this->Session->setFlash('Cet utilisateur n\'existe pas !', 'error');
+                $this->Session->setFlash('Cet utilisateur n\'existe pas !', 'toastr_error');
                 return $this->redirect($this->referer());
             }
         }

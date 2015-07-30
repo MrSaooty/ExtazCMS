@@ -158,11 +158,11 @@ class PagesController extends AppController {
 					$zip->extractTo('../../app/');
 					$zip->close();
 					unlink($new_file);
-					$this->Session->setFlash('Réparation effectuée avec succès !', 'success');
+					$this->Session->setFlash('Réparation effectuée avec succès !', 'toastr_success');
 					return $this->redirect(['controller' => 'pages', 'action' => 'repair', 'admin' => true]);
 				}
 				else{
-					$this->Session->setFlash('Impossible d\'effectuer une réparation', 'error');
+					$this->Session->setFlash('Impossible d\'effectuer une réparation', 'toastr_error');
 					return $this->redirect(['controller' => 'pages', 'action' => 'repair', 'admin' => true]);
 				}
 			}
@@ -185,11 +185,11 @@ class PagesController extends AppController {
 		if($this->Auth->user('role') > 1){
 			if($this->sendTokensHistory->findById($id)){
 				$this->sendTokensHistory->delete($id);
-				$this->Session->setFlash('Action effectuée !', 'success');
+				$this->Session->setFlash('Action effectuée !', 'toastr_success');
 				return $this->redirect($this->referer());
 			}
 			else{
-				$this->Session->setFlash('Action impossible !', 'error');
+				$this->Session->setFlash('Action impossible !', 'toastr_error');
 				return $this->redirect($this->referer());
 			}
 		}
@@ -283,17 +283,17 @@ class PagesController extends AppController {
 						$this->shopCategories->id = $id;
 						$name = ucfirst($this->request->data['Pages']['name']);
 						$this->shopCategories->saveField('name', $name);
-						$this->Session->setFlash('Catégorie modifiée avec succès !', 'success');
+						$this->Session->setFlash('Catégorie modifiée avec succès !', 'toastr_success');
 						return $this->redirect(['controller' => 'pages', 'action' => 'list_shop_categories']);
 					}
 					else{
-						$this->Session->setFlash('Vous devez entrer une catégorie !', 'success');
+						$this->Session->setFlash('Vous devez renseigner une catégorie !', 'toastr_error');
 						return $this->redirect(['controller' => 'pages', 'action' => 'edit_shop_categories', 'id' => $id]);
 					}
 				}
 			}
 			else{
-				$this->Session->setFlash('Cette catégorie n\'existe pas', 'error');
+				$this->Session->setFlash('Cette catégorie n\'existe pas', 'toastr_error');
 				return $this->redirect(['controller' => 'pages', 'action' => 'list_shop_categories']);
 			}
 		}
@@ -306,11 +306,11 @@ class PagesController extends AppController {
 		if($this->Auth->user('role') > 1){
 			if($this->shopCategories->findById($id)){
 				$this->shopCategories->delete($id);
-				$this->Session->setFlash('Catégorie supprimée avec succès !', 'success');
+				$this->Session->setFlash('Catégorie supprimée avec succès !', 'toastr_success');
 				return $this->redirect(['controller' => 'pages', 'action' => 'list_shop_categories']);
 			}
 			else{
-				$this->Session->setFlash('Action impossible !', 'error');
+				$this->Session->setFlash('Action impossible !', 'toastr_error');
 				return $this->redirect(['controller' => 'pages', 'action' => 'list_shop_categories']);
 			}
 		}
@@ -326,11 +326,11 @@ class PagesController extends AppController {
 					$this->shopCategories->create;
 					$name = ucfirst($this->request->data['Pages']['name']);
 					$this->shopCategories->saveField('name', $name);
-					$this->Session->setFlash('Catégorie créée avec succès !', 'success');
+					$this->Session->setFlash('Catégorie créée avec succès !', 'toastr_success');
 					return $this->redirect(['controller' => 'pages', 'action' => 'list_shop_categories']);
 				}
 				else{
-					$this->Session->setFlash('Vous devez entrer une catégorie !', 'success');
+					$this->Session->setFlash('Vous devez renseigner une catégorie !', 'toastr_error');
 				}
 			}
 		}
@@ -411,7 +411,7 @@ class PagesController extends AppController {
 		if($this->Auth->user('role') > 0){
 			if($this->request->is('ajax')){
 	    		$api = new JSONAPI($this->config['jsonapi_ip'], $this->config['jsonapi_port'], $this->config['jsonapi_username'], $this->config['jsonapi_password'], $this->config['jsonapi_salt']);
-				$message = str_replace('/', '', $this->request->data['message']);
+				$message = trim(str_replace('/', '', $this->request->data['message']));
 				if(empty($this->config['chat_prefix'])){
 					$prefix = '';
 					$command = '['.$this->Auth->user('username').'] '.$message;
@@ -421,9 +421,14 @@ class PagesController extends AppController {
 					$command = $prefix.'['.$this->Auth->user('username').'] '.$message;
 				}
 				if(!empty($message)){
+					$data['result'] = 'success';
 					$api->call('chat.broadcast', [$command]);
-					exit();
 				}
+				else{
+					$data['result'] = 'error';
+				}
+				echo json_encode($data);
+				exit();
 				
 			}
 		}
@@ -436,10 +441,15 @@ class PagesController extends AppController {
 		if($this->Auth->user('role') > 1){
 			if($this->request->is('ajax')){
 	    		$api = new JSONAPI($this->config['jsonapi_ip'], $this->config['jsonapi_port'], $this->config['jsonapi_username'], $this->config['jsonapi_password'], $this->config['jsonapi_salt']);
-				$command = str_replace('/', '', $this->request->data['command']);
+				$command = trim(str_replace('/', '', $this->request->data['command']));
 				if(!empty($command) && $api->call('server.run_command', [$command])){
-					exit();
+					$data = true;
 				}
+				else{
+					$data = false;
+				}
+				echo json_encode($data);
+				exit();
 			}
 		}
 		else{
@@ -455,12 +465,12 @@ class PagesController extends AppController {
                     $this->donationLadder->id = $id;
                     $this->donationLadder->saveField('tokens', $this->request->data['Pages']['tokens_ladder']);
                     $this->donationLadder->saveField('updated', $this->request->data['Pages']['updated']);
-                    $this->Session->setFlash('Modification réussie !', 'success');
+                    $this->Session->setFlash('Modification réussie !', 'toastr_success');
                     return $this->redirect($this->referer());
                 }
             }
             else{
-                $this->Session->setFlash('Ce donateur n\'existe pas !', 'error');
+                $this->Session->setFlash('Ce donateur n\'existe pas !', 'toastr_error');
                 return $this->redirect($this->referer());
             }
         }
@@ -470,11 +480,11 @@ class PagesController extends AppController {
 		if($this->Auth->user('role') > 1){
 			if($this->donationLadder->findById($id)){
 				$this->donationLadder->delete($id);
-				$this->Session->setFlash('Ce donateur a été retiré du classement !', 'success');
+				$this->Session->setFlash('Ce donateur a été retiré du classement !', 'toastr_success');
 				return $this->redirect(['controller' => 'pages', 'action' => 'list_donator', 'admin' => true]);
 			}
 			else{
-				$this->Session->setFlash('Ce dontateur n\'existe pas !', 'error');
+				$this->Session->setFlash('Ce dontateur n\'existe pas !', 'toastr_error');
 				return $this->redirect(['controller' => 'pages', 'action' => 'list_donator', 'admin' => true]);
 			}
 		}
@@ -781,7 +791,7 @@ class PagesController extends AppController {
 				$this->Team->saveField('facebook_url', $this->request->data['Pages']['facebook_url']);
 				$this->Team->saveField('twitter_url', $this->request->data['Pages']['twitter_url']);
 				$this->Team->saveField('youtube_url', $this->request->data['Pages']['youtube_url']);
-				$this->Session->setFlash('Membre ajouté à l\'équipe !', 'success');
+				$this->Session->setFlash('Membre ajouté à l\'équipe !', 'toastr_success');
 				return $this->redirect(['controller' => 'pages', 'action' => 'list_member', 'admin' => true]);
 			}
 		}
@@ -803,11 +813,11 @@ class PagesController extends AppController {
 		if($this->Auth->user('role') > 1){
 			if($this->Team->findById($id)){
 				$this->Team->delete($id);
-				$this->Session->setFlash('Membre retiré de l\'équipe !', 'success');
+				$this->Session->setFlash('Membre retiré de l\'équipe !', 'toastr_success');
 				return $this->redirect(['controller' => 'pages', 'action' => 'list_member', 'admin' => true]);
 			}
 			else{
-				$this->Session->setFlash('Ce membre n\'existe pas !', 'error');
+				$this->Session->setFlash('Ce membre n\'existe pas !', 'toastr_error');
 				return $this->redirect(['controller' => 'pages', 'action' => 'list_member', 'admin' => true]);
 			}
 		}
@@ -831,12 +841,12 @@ class PagesController extends AppController {
 					$this->Team->saveField('facebook_url', $this->request->data['Pages']['facebook_url']);
 					$this->Team->saveField('twitter_url', $this->request->data['Pages']['twitter_url']);
 					$this->Team->saveField('youtube_url', $this->request->data['Pages']['youtube_url']);
-                    $this->Session->setFlash('Membre modifié !', 'success');
+                    $this->Session->setFlash('Membre modifié !', 'toastr_success');
                     return $this->redirect(['controller' => 'pages', 'action' => 'list_member', 'admin' => true]);
                 }
             }
             else{
-                $this->Session->setFlash('Ce membre n\'existe pas !', 'error');
+                $this->Session->setFlash('Ce membre n\'existe pas !', 'toastr_error');
                 return $this->redirect($this->referer());
             }
         }

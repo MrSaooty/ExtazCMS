@@ -75,7 +75,7 @@ Class AvatarsController extends AppController{
 				$this->User->id = $user_id;
 				$this->User->saveField('avatar', $avatar);
 				// Redirection
-				$this->Session->setFlash('L\'avatar de '.$username.' a été réinitialisé', 'success');
+				$this->Session->setFlash('L\'avatar de '.$username.' a été réinitialisé', 'toastr_success');
 				return $this->redirect(['controller' => 'users', 'action' => 'edit', $user_id]);
 			}
 		}

@@ -29,17 +29,26 @@ $(document).ready(function(){
     });
 });
 </script>
-<div class="main-content">
-    <div class="container">
-        <div class="page-content">
-            <div class="single-head">
-                <h3 class="pull-left"><i class="fa fa-table"></i>Liste des plugins</h3>
-                <div class="clearfix"></div>
+<div class="wrapper wrapper-content">
+    <div class="animated fadeInRightBig">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Liste des plugins installés sur le serveur</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'user']); ?>">
+                        <i class="fa fa-bar-chart-o"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
             </div>
-            <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
-                <div class="page-tables">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" cellpadding="0" cellspacing="0" border="0" id="data-table" width="100%">
+                <div class="ibox-content">
+                    <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
+                        <table class="table table-bordered table-hover dataTables-example dataTable dtr-inline" id="data-table">
                             <thead>
                                 <tr>
                                     <th><b>Status</b></th>
@@ -77,12 +86,11 @@ $(document).ready(function(){
                                 ?>
                             </tbody>
                         </table>
-                        <div class="clearfix"></div>
-                    </div>
+                    <?php } else { ?>
+                        <div class="alert alert-info">Une liaison avec JSONAPI est nécessaire pour afficher les plugins</div>
+                    <?php } ?>
                 </div>
-            <?php } else { ?>
-                <div class="alert alert-info">Une liaison avec JSONAPI est nécessaire pour afficher les plugins</div>
-            <?php } ?>
+            </div>
         </div>
     </div>
 </div>
