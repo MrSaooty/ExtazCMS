@@ -182,6 +182,7 @@ $(document).ready(function(){
                                     'Afficher la page de contact' => 'use_contact',
                                     'Afficher la page du règlement' => 'use_rules',
                                     'Activer la boutique' => 'use_store',
+                                    'Afficher les nombre de vues sur les actualités' => 'use_posts_views',
                                     'Activer le module "meilleur donateur"' => 'use_donation_ladder',
                                     'Activer le paiement via PayPal' => 'use_paypal',
                                     'Votre serveur utilise-t-il un système d\'économie' => 'use_economy',

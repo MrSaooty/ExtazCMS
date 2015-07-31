@@ -64,6 +64,8 @@ $(document).ready(function(){
                                     <th><b>Auteur</b></th>
                                     <th><b>Titre</b></th>
                                     <th><b>Catégorie</b></th>
+                                    <th><b>J'aimes</b></th>
+                                    <th><b>Vues</b></th>
                                     <th><b>Date de création</b></th>
                                     <th><b>Actions</b></th>
                                 </tr>
@@ -74,12 +76,14 @@ $(document).ready(function(){
                                     <td><?php echo $d['Post']['author']; ?></td>
                                     <td><?php echo $d['Post']['title']; ?></td>
                                     <td><?php echo $d['Post']['cat']; ?></td>
+                                    <td><?php echo count($d['Like']); ?></td>
+                                    <td><?php echo count($d['postView']); ?></td>
                                     <td><?php echo $this->Time->format('d/m/Y à H:i', $d['Post']['created']); ?></td>
                                     <td>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'edit', $d['Post']['id'], 'admin' => true]); ?>" class="label label-black"><i class="fa fa-pencil-square-o"></i> Editer</a>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'delete', $d['Post']['id'], 'admin' => true]); ?>" class="label label-danger confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'publish', $d['Post']['id'], 1, 'admin' => true]); ?>" class="label label-black"><i class="fa fa-file"></i> Publier</a>
-                                        <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'read', 'slug' => $d['Post']['slug'], 'id' => $d['Post']['id'], 'admin' => false]); ?>" class="label label-black"><i class="fa fa-eye"></i> Voir</a>
+                                        <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'edit', $d['Post']['id'], 'admin' => true]); ?>" class="btn btn-white btn-xs"><i class="fa fa-pencil-square-o"></i> Editer</a>
+                                        <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'delete', $d['Post']['id'], 'admin' => true]); ?>" class="btn btn-white btn-xs confirm"><i class="fa fa-trash-o"></i> Supprimer</a>
+                                        <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'publish', $d['Post']['id'], 1, 'admin' => true]); ?>" class="btn btn-white btn-xs"><i class="fa fa-file"></i> Publier</a>
+                                        <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'read', 'slug' => $d['Post']['slug'], 'id' => $d['Post']['id'], 'admin' => false]); ?>" class="btn btn-white btn-xs"><i class="fa fa-eye"></i> Voir</a>
                                     </td>
                                 </tr>
                                 <?php } ?>

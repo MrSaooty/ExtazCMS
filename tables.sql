@@ -164,6 +164,7 @@ CREATE TABLE IF NOT EXISTS `extaz_informations` (
   `use_captcha` int(11) DEFAULT NULL,
   `use_votes` int(11) DEFAULT NULL,
   `use_votes_ladder` int(11) DEFAULT NULL,
+  `use_posts_views` int(11) DEFAULT NULL,
   `happy_hour` int(11) DEFAULT NULL,
   `happy_hour_bonus` int(11) DEFAULT NULL,
   `rules` longtext,
@@ -186,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `extaz_informations` (
 -- ----------------------------
 -- Records of extaz_informations
 -- ----------------------------
-INSERT INTO `extaz_informations` VALUES ('1', '0', 'Nom du serveur', '127.0.0.1', '12345', 'PO', '127.0.0.1', '0', '', '', '', 'tokens', '0', '0', '25', '3', '30', '', '', 'http://extaz-cms.com/assets/logo.png', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '1', '0', '20', '', '3.jpg', 'Web', '20', '', '0', '0', 'http://www.rpg-paradize.com/', 'Votez pour notre serveur !', '180', '0', '', '15', '');
+INSERT INTO `extaz_informations` VALUES ('1', '0', 'Nom du serveur', '127.0.0.1', '12345', 'PO', '127.0.0.1', '0', '', '', '', 'tokens', '0', '0', '25', '3', '30', '', '', 'http://extaz-cms.com/assets/logo.png', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '1', '1', '0', '20', '', '3.jpg', 'Web', '20', '', '0', '0', 'http://www.rpg-paradize.com/', 'Votez pour notre serveur !', '180', '0', '', '15', '');
 
 -- ----------------------------
 -- Table structure for extaz_instant_payment_notifications
@@ -351,6 +352,18 @@ INSERT INTO `extaz_posts` VALUES ('5', 'Ipsum', 'Lorem', 'slug-slug-slug', '<p>S
 INSERT INTO `extaz_posts` VALUES ('6', 'Ipsum', 'Lorem', 'slug-slug-slug', '<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>\r\n', 'http://i.imgur.com/Kec0o8z.jpg', 'MrSaooty', '0', '0', '0', '1', '0', '0', '2014-12-05 20:19:42', '2014-12-05 20:19:42', '2014-12-05 20:19:42');
 
 -- ----------------------------
+-- Table structure for extaz_posts_views
+-- ----------------------------
+DROP TABLE IF EXISTS `extaz_posts_views`;
+CREATE TABLE IF NOT EXISTS `extaz_posts_views` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) NOT NULL,
+  `ip` text NOT NULL,
+  `created` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+-- ----------------------------
 -- Table structure for extaz_shop
 -- ----------------------------
 DROP TABLE IF EXISTS `extaz_shop`;
@@ -468,3 +481,20 @@ CREATE TABLE IF NOT EXISTS `extaz_users` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Table structure for extaz_widgets
+-- ----------------------------
+DROP TABLE IF EXISTS `extaz_widgets`;
+CREATE TABLE IF NOT EXISTS `extaz_widgets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `content` longtext NOT NULL,
+  `ip` text NOT NULL,
+  `order` int(11) NOT NULL,
+  `visible` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;

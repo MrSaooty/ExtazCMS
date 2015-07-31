@@ -190,6 +190,20 @@
     <!-- End Donation Ladder -->
     {% endif %}
 	
+    {% if widgets is not empty %}
+        <!-- Custom Widgets -->
+        {% for widget in widgets %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tag-box tag-box-v4">
+                        {{ widget['Widget']['content'] }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}    
+        <!-- End Custom Widgets -->
+    {% endif %}
+
 	{% if buttons is not empty %}
         <!-- Custom Buttons -->
         <div class="row">

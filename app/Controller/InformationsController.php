@@ -155,6 +155,12 @@ class InformationsController extends AppController{
 				else{
 					$this->Informations->saveField('debug', 0);
 				}
+				if(isset($this->request->data['use_posts_views'])){
+					$this->Informations->saveField('use_posts_views', 1);
+				}
+				else{
+					$this->Informations->saveField('use_posts_views', 0);
+				}
 				$this->Session->setFlash('Options mises à jour !', 'toastr_success');
 				return $this->redirect(['controller' => 'informations', 'action' => 'index', '?' => ['tab' => 'options']]);
 			}

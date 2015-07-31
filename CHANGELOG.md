@@ -5,6 +5,8 @@ v1.8 (en développement)
 ----
 
 * Utilisation de Twig
+* Vous pouvez désormais ajouter des widgets dans la sidebar. Vous pouvez y introduire ce que vous voulez, y compris du code HTML
+* Le nombre de visionnages des articles est désormais disponible, sur l'actualité elle même, et dans l'administration. Cette option est désactivable, vous pouvez cacher le nombre de vues sur les actualités depuis les options du CMS
 * Refonte de l'administration
 * Vous pouvez désormais ajouter une chaîne YouTube aux membres de l'équipe du serveur
 * Les utilisateurs peuvent désormais ajouter leurs propres avatars. En tant qu'administrateur vous pouvez supprimer l'avatar de n'importe quel utilisateur

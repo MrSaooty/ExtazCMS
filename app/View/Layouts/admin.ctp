@@ -171,6 +171,13 @@
                         <ul class="nav nav-second-level collapse">
                             <li><a href="<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'background', 'admin' => true]); ?>">Background</a></li>
                             <li><a href="<?php echo $this->Html->url(['controller' => 'buttons', 'action' => 'index', 'admin' => true]); ?>">Sidebar</a></li>
+                            <li>
+                                <a href="#">Widgets <span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level collapse">
+                                    <li><a href="<?php echo $this->Html->url(['controller' => 'widgets', 'action' => 'add', 'admin' => true]); ?>">Ajouter</a></li>
+                                    <li><a href="<?php echo $this->Html->url(['controller' => 'widgets', 'action' => 'list', 'admin' => true]); ?>">Liste</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                     <li>

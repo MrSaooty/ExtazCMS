@@ -66,6 +66,21 @@ $(document).ready(function(){
                         <div class="blog-post-tags">
                             <ul class="list-unstyled list-inline blog-info">
                                 <li><i class="fa fa-user"></i> Posté par <?php echo $post['Post']['author']; ?></li>
+                                <?php
+                                if($use_posts_views == 1){
+                                    ?>
+                                    <li>
+                                        <i class="fa fa-eye"></i>
+                                        <?php if($views > 1){
+                                            echo $views.' vues';
+                                        }
+                                        else {
+                                            echo $views.' vue';
+                                        } ?>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
                                 <li>
                                     <?php if($post['Post']['draft'] == 1){ ?>
                                     <i class="fa fa-calendar"></i> Non publié

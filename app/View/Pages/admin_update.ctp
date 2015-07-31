@@ -1,14 +1,22 @@
 <?php $this->assign('title', 'Mise à jour'); ?>
-<div class="main-content">
-    <div class="container">
+<div class="wrapper wrapper-content">
+    <div class="animated fadeInRightBig">
         <div class="row">
-        	<div class="col-md-4">
-        		<div class="page-content">
-		            <div class="single-head">
-		                <h3 class="pull-left"><i class="fa fa-database"></i>Mise à jour du CMS</h3>
-		                <div class="clearfix"></div>
-		            </div>
-		            	<?php if($version >= $last_version){ ?>
+            <div class="col-md-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Mise à jour du CMS</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                    	<?php if($version >= $last_version){ ?>
 		                    Félicitation ! Vous utilisez la dernière version disponible d'ExtazCMS <?php echo '('.$version.')'; ?>
 		                    <hr>
 							<i class="fa fa-github"></i> <b>Releases</b> : <a href="https://github.com/MrSaooty/ExtazCMS/releases" target="_blank">https://github.com/MrSaooty/ExtazCMS/releases</a>
@@ -30,11 +38,9 @@
 							<br>
 							<i class="fa fa-github"></i> <b>Aide</b> : <a href="http://extaz-cms.com/wiki/index.php?title=Mise_%C3%A0_jour" target="_blank">http://extaz-cms.com/wiki/Mise_à_jour</a>
 		                <?php } ?>
-		            </div>
-		        </div>
-        	</div>
-        	<div class="col-md-8">
-        	</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

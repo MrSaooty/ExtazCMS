@@ -38,7 +38,7 @@ class AppController extends Controller {
 
 	public $viewClass = 'TwigView.Twig';
 	public $ext = '.twig';
-	public $uses = ['Informations', 'User', 'starpassHistory', 'Support', 'donationLadder', 'Button', 'Cpage'];
+	public $uses = ['Informations', 'User', 'starpassHistory', 'Support', 'donationLadder', 'Button', 'Cpage', 'Widget'];
 	public $helpers = ['Html', 'Form', 'PaypalIpn.Paypal'];
 	public $components = [
 		'Session',
@@ -101,6 +101,7 @@ class AppController extends Controller {
 		$this->set('use_captcha', $informations['Informations']['use_captcha']);
 		$this->set('use_votes', $informations['Informations']['use_votes']);
 		$this->set('use_votes_ladder', $informations['Informations']['use_votes_ladder']);
+		$this->set('use_posts_views', $informations['Informations']['use_posts_views']);
 		$this->set('happy_hour', $informations['Informations']['happy_hour']);
 		$this->set('happy_hour_bonus', $informations['Informations']['happy_hour_bonus']);
 		$this->set('rules', $informations['Informations']['rules']);
@@ -178,6 +179,8 @@ class AppController extends Controller {
 		$paypal_tokens_during_happy_hour = $paypal_happy_hour_bonus + $this->config['paypal_tokens'];
 		$this->paypal_tokens_during_happy_hour = $paypal_tokens_during_happy_hour;
 		$this->set('paypal_tokens_during_happy_hour', $paypal_tokens_during_happy_hour);
+		// Widgets pour la sidebar
+		$this->set('widgets', $this->Widget->find('all', ['conditions' => ['Widget.visible' => 1], 'order' => ['Widget.order ASC']]));
 		// Boutons pour la sidebar
 		$this->set('buttons', $this->Button->find('all', ['order' => ['Button.order ASC']]));
 		// Pages customs

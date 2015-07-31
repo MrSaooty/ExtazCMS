@@ -43,3 +43,32 @@ UPDATE `cms`.`extaz_informations` SET `debug` = '0';
 ALTER TABLE `extaz_users` ADD `avatar` TEXT NOT NULL AFTER `password`;
 UPDATE `cms`.`extaz_users` SET `avatar` = 'http://cravatar.eu/helmavatar/alex';
 ALTER TABLE `extaz_team` ADD `youtube_url` TEXT NOT NULL AFTER `twitter_url`;
+-- ----------------------------
+-- Table structure for extaz_posts_views
+-- ----------------------------
+DROP TABLE IF EXISTS `extaz_posts_views`;
+CREATE TABLE IF NOT EXISTS `extaz_posts_views` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) NOT NULL,
+  `ip` text NOT NULL,
+  `created` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+ALTER TABLE `extaz_informations` ADD `use_posts_views` INT NOT NULL AFTER `use_votes_ladder`;
+UPDATE `cms`.`extaz_informations` SET `use_posts_views` = '1';
+-- ----------------------------
+-- Table structure for extaz_widgets
+-- ----------------------------
+DROP TABLE IF EXISTS `extaz_widgets`;
+CREATE TABLE IF NOT EXISTS `extaz_widgets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `content` longtext NOT NULL,
+  `ip` text NOT NULL,
+  `order` int(11) NOT NULL,
+  `visible` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;

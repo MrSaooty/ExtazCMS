@@ -1,4 +1,4 @@
 <?php
-class Button extends AppModel{
+Class Widget extends AppModel{
 	public $belongsTo = 'User';
 }

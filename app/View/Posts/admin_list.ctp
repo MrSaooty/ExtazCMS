@@ -64,6 +64,8 @@ $(document).ready(function(){
                                     <th><b>Auteur</b></th>
                                     <th><b>Titre</b></th>
                                     <th><b>Catégorie</b></th>
+                                    <th><b>J'aimes</b></th>
+                                    <th><b>Vues</b></th>
                                     <th><b>Date de création</b></th>
                                     <th><b>Actions</b></th>
                                 </tr>
@@ -74,6 +76,8 @@ $(document).ready(function(){
                                     <td><?php echo $d['Post']['author']; ?></td>
                                     <td><?php echo $d['Post']['title']; ?></td>
                                     <td><?php echo $d['Post']['cat']; ?></td>
+                                    <td><?php echo count($d['Like']); ?></td>
+                                    <td><?php echo count($d['postView']); ?></td>
                                     <td><?php echo $this->Time->format('d/m/Y à H:i', $d['Post']['created']); ?></td>
                                     <td>
                                         <a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'edit', $d['Post']['id'], 'admin' => true]); ?>" class="btn btn-white btn-xs"><i class="fa fa-pencil-square-o"></i> Editer</a>

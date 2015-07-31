@@ -8,6 +8,9 @@ class Post extends AppModel{
         ),
         'Comment' => array(
         	'order' => 'Comment.id DESC'
+        ),
+        'postView' => array(
+        	'className' => 'postView'
         )
     );
 
