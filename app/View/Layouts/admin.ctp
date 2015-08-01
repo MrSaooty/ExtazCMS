@@ -82,135 +82,145 @@
                             <?php echo $this->Html->image($avatar, ['alt' => 'Avatar', 'class' => 'img-rounded', 'height' => 30, 'width' => 30]); ?>
                         </div>
                     </li>
-                    <li>
-                        <a href="<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'index', 'admin' => true]); ?>"><i class="fa fa-wrench"></i> <span class="nav-label">Configuration</span></a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'all', 'admin' => true]); ?>"><i class="fa fa-users"></i> <span class="nav-label">Utilisateurs</span></a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'stats', 'admin' => true]); ?>"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Statistiques</span></a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'manage_tickets', 'admin' => true]); ?>"><i class="fa fa-support"></i> <span class="nav-label">Support</span> <span class="label label-success pull-right"><?php echo $nb_tickets_admin; ?></span></a>
-                    </li>
-                    <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
+                    <?php if($role > 1){ ?>
                         <li>
-                            <a href="#"><i class="fa fa-cloud"></i> <span class="nav-label">Serveur</span><span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li><a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'memory', 'admin' => true]); ?>">Mémoire vive</a></li>
-                                <li><a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'disk', 'admin' => true]); ?>">Disque dur</a></li>
-                                <li><a href="<?php echo $this->Html->url(['controller' => 'plugins', 'action' => 'index', 'admin' => true]); ?>">Plugins</a></li>
-                                <li><a href="<?php echo $this->Html->url(['controller' => 'players', 'action' => 'index', 'admin' => true]); ?>">Joueurs</a></li>
-                            </ul>
+                            <a href="<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'index', 'admin' => true]); ?>"><i class="fa fa-wrench"></i> <span class="nav-label">Configuration</span></a>
+                        </li>
+                        <li>
+                            <a href="<?php echo $this->Html->url(['controller' => 'users', 'action' => 'all', 'admin' => true]); ?>"><i class="fa fa-users"></i> <span class="nav-label">Utilisateurs</span></a>
+                        </li>
+                        <li>
+                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'stats', 'admin' => true]); ?>"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Statistiques</span></a>
                         </li>
                     <?php } ?>
-                    <?php if($use_store == 1){ ?>
                         <li>
-                            <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Boutique</span><span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li><a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'add', 'admin' => true]); ?>">Ajouter un produit</a></li>
-                                <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'add_shop_categories', 'admin' => true]); ?>">Ajouter un catégorie</a></li>
-                                <li><a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'list', 'admin' => true]); ?>">Liste des produits</a></li>
-                                <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_shop_categories', 'admin' => true]); ?>">Liste des catégories</a></li>
-                            </ul>
+                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'manage_tickets', 'admin' => true]); ?>"><i class="fa fa-support"></i> <span class="nav-label">Support</span> <span class="label label-success pull-right"><?php echo $nb_tickets_admin; ?></span></a>
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-heart"></i> <span class="nav-label">Donateurs</span><span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li><a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'donator', 'admin' => true]); ?>">Graphique</a></li>
-                                <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_donator', 'admin' => true]); ?>">Liste</a></li>
-                            </ul>
-                        </li>
-                    <?php } ?>
-                    <li>
-                        <a href="#"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Actualités</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'add', 'admin' => true]); ?>">Ajouter</a></li>
-                            <li><a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'list', 'admin' => true]); ?>">Liste</a></li>
-                            <li><a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'drafts', 'admin' => true]); ?>">Brouillons</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-comments-o"></i> <span class="nav-label">Commentaires</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'list', 'admin' => true]); ?>">Liste</a></li>
-                        </ul>
-                    </li>
-                    <?php if($use_store == 1){ ?>
-                        <li>
-                            <a href="#"><i class="fa fa-history"></i> <span class="nav-label">Historiques</span><span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'send_tokens_history', 'admin' => true]); ?>">Transactions</a></li>
-                                <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'shop_history', 'admin' => true]); ?>">Boutique</a></li>
-                                <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'starpass_history', 'admin' => true]); ?>">Starpass</a></li>
-                                <?php if($use_paypal == 1){ ?>
-                                <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'paypal_history', 'admin' => true]); ?>">PayPal</a></li>
-                                <?php } ?>
-                            </ul>
-                        </li>
-                    <?php } ?>
-                    <li>
-                        <a href="#"><i class="fa fa-suitcase"></i> <span class="nav-label">Equipe</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'add_member', 'admin' => true]); ?>">Ajouter un membre</a></li>
-                            <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_member', 'admin' => true]); ?>">Liste des membres</a></li>
-                        </ul>
-                    </li>
-                    <?php if($use_store == 1){ ?>
-                        <li>
-                            <a href="#"><i class="fa fa-gift"></i> <span class="nav-label">Codes</span><span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li><a href="<?php echo $this->Html->url(['controller' => 'codes', 'action' => 'generate', 'admin' => true]); ?>">Générer</a></li>
-                                <li><a href="<?php echo $this->Html->url(['controller' => 'codes', 'action' => 'list', 'admin' => true]); ?>">Liste</a></li>
-                            </ul>
-                        </li>
-                    <?php } ?>
-                    <li>
-                        <a href="#"><i class="fa fa-photo"></i> <span class="nav-label">Theme</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'background', 'admin' => true]); ?>">Background</a></li>
-                            <li><a href="<?php echo $this->Html->url(['controller' => 'buttons', 'action' => 'index', 'admin' => true]); ?>">Boutons</a></li>
+                    <?php if($role > 1){ ?>
+                        <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
                             <li>
-                                <a href="#">Widgets <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level collapse">
-                                    <li><a href="<?php echo $this->Html->url(['controller' => 'widgets', 'action' => 'add', 'admin' => true]); ?>">Ajouter</a></li>
-                                    <li><a href="<?php echo $this->Html->url(['controller' => 'widgets', 'action' => 'list', 'admin' => true]); ?>">Liste</a></li>
+                                <a href="#"><i class="fa fa-cloud"></i> <span class="nav-label">Serveur</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li><a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'memory', 'admin' => true]); ?>">Mémoire vive</a></li>
+                                    <li><a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'disk', 'admin' => true]); ?>">Disque dur</a></li>
+                                    <li><a href="<?php echo $this->Html->url(['controller' => 'plugins', 'action' => 'index', 'admin' => true]); ?>">Plugins</a></li>
+                                    <li><a href="<?php echo $this->Html->url(['controller' => 'players', 'action' => 'index', 'admin' => true]); ?>">Joueurs</a></li>
                                 </ul>
                             </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-file-text"></i> <span class="nav-label">Pages</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'add_redirection', 'admin' => true]); ?>">Redirection</a></li>
-                            <li><a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'add', 'admin' => true]); ?>">Créer</a></li>
-                            <li><a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'list', 'admin' => true]); ?>">Liste</a></li>
-                        </ul>
-                    </li>
-                    <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
+                        <?php } ?>
+                        <?php if($use_store == 1){ ?>
+                            <li>
+                                <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Boutique</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li><a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'add', 'admin' => true]); ?>">Ajouter un produit</a></li>
+                                    <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'add_shop_categories', 'admin' => true]); ?>">Ajouter un catégorie</a></li>
+                                    <li><a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'list', 'admin' => true]); ?>">Liste des produits</a></li>
+                                    <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_shop_categories', 'admin' => true]); ?>">Liste des catégories</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-heart"></i> <span class="nav-label">Donateurs</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li><a href="<?php echo $this->Html->url(['controller' => 'charts', 'action' => 'donator', 'admin' => true]); ?>">Graphique</a></li>
+                                    <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_donator', 'admin' => true]); ?>">Liste</a></li>
+                                </ul>
+                            </li>
+                        <?php } ?>
                         <li>
-                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'chat_messages', 'admin' => true]); ?>"><i class="fa fa-comments"></i> <span class="nav-label">Chat</span></a>
+                            <a href="#"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Actualités</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'add', 'admin' => true]); ?>">Ajouter</a></li>
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'list', 'admin' => true]); ?>">Liste</a></li>
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'drafts', 'admin' => true]); ?>">Brouillons</a></li>
+                            </ul>
                         </li>
                     <?php } ?>
-                    <li>
-                        <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'repair', 'admin' => true]); ?>"><i class="fa fa-wrench"></i> <span class="nav-label">Réparer</span></a>
-                    </li>
-                    <?php if($version >= $last_version){ ?>
-                        <li class="landing_link">
-                            <a target="_blank" href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'update', 'admin' => true]); ?>"><i class="fa fa-check-circle"></i> <span class="nav-label">Mise à jour</span></a>
+                        <li>
+                            <a href="#"><i class="fa fa-comments-o"></i> <span class="nav-label">Commentaires</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'comments', 'action' => 'list', 'admin' => true]); ?>">Liste</a></li>
+                            </ul>
                         </li>
-                        <?php } else { ?>
-                        <li class="landing_link">
-                            <a target="_blank" href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'update', 'admin' => true]); ?>"><i class="fa fa-exclamation-triangle"></i> <span class="nav-label">Mise à jour</span></a>
+                    <?php if($role > 1){ ?>
+                        <?php if($use_store == 1){ ?>
+                            <li>
+                                <a href="#"><i class="fa fa-history"></i> <span class="nav-label">Historiques</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'send_tokens_history', 'admin' => true]); ?>">Transactions</a></li>
+                                    <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'shop_history', 'admin' => true]); ?>">Boutique</a></li>
+                                    <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'starpass_history', 'admin' => true]); ?>">Starpass</a></li>
+                                    <?php if($use_paypal == 1){ ?>
+                                    <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'paypal_history', 'admin' => true]); ?>">PayPal</a></li>
+                                    <?php } ?>
+                                </ul>
+                            </li>
+                        <?php } ?>
+                        <li>
+                            <a href="#"><i class="fa fa-suitcase"></i> <span class="nav-label">Equipe</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'add_member', 'admin' => true]); ?>">Ajouter un membre</a></li>
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_member', 'admin' => true]); ?>">Liste des membres</a></li>
+                            </ul>
+                        </li>
+                        <?php if($use_store == 1){ ?>
+                            <li>
+                                <a href="#"><i class="fa fa-gift"></i> <span class="nav-label">Codes</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li><a href="<?php echo $this->Html->url(['controller' => 'codes', 'action' => 'generate', 'admin' => true]); ?>">Générer</a></li>
+                                    <li><a href="<?php echo $this->Html->url(['controller' => 'codes', 'action' => 'list', 'admin' => true]); ?>">Liste</a></li>
+                                </ul>
+                            </li>
+                        <?php } ?>
+                        <li>
+                            <a href="#"><i class="fa fa-photo"></i> <span class="nav-label">Theme</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'background', 'admin' => true]); ?>">Background</a></li>
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'buttons', 'action' => 'index', 'admin' => true]); ?>">Boutons</a></li>
+                                <li>
+                                    <a href="#">Widgets <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level collapse">
+                                        <li><a href="<?php echo $this->Html->url(['controller' => 'widgets', 'action' => 'add', 'admin' => true]); ?>">Ajouter</a></li>
+                                        <li><a href="<?php echo $this->Html->url(['controller' => 'widgets', 'action' => 'list', 'admin' => true]); ?>">Liste</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-file-text"></i> <span class="nav-label">Pages</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'add_redirection', 'admin' => true]); ?>">Redirection</a></li>
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'add', 'admin' => true]); ?>">Créer</a></li>
+                                <li><a href="<?php echo $this->Html->url(['controller' => 'cpages', 'action' => 'list', 'admin' => true]); ?>">Liste</a></li>
+                            </ul>
                         </li>
                     <?php } ?>
-                    <li class="landing_link">
-                        <a target="_blank" href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'index', 'admin' => false]); ?>"><i class="fa fa-star"></i> <span class="nav-label">Retour au site</span></a>
-                    </li>
-                    <li class="landing_link">
-                        <a target="_blank" href="http://extaz-cms.com/wiki"><i class="fa fa-file-text"></i> <span class="nav-label">Besoin d'aide ?</span></a>
-                    </li>
+                        <?php if($api->call('server.bukkit.version')[0]['result'] == 'success'){ ?>
+                            <li>
+                                <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'chat_messages', 'admin' => true]); ?>"><i class="fa fa-comments"></i> <span class="nav-label">Chat</span></a>
+                            </li>
+                        <?php } ?>
+                    <?php if($role > 1){ ?>
+                        <li>
+                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'repair', 'admin' => true]); ?>"><i class="fa fa-wrench"></i> <span class="nav-label">Réparer</span></a>
+                        </li>
+                        <?php if($version >= $last_version){ ?>
+                            <li class="landing_link">
+                                <a target="_blank" href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'update', 'admin' => true]); ?>"><i class="fa fa-check-circle"></i> <span class="nav-label">Mise à jour</span></a>
+                            </li>
+                            <?php } else { ?>
+                            <li class="landing_link">
+                                <a target="_blank" href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'update', 'admin' => true]); ?>"><i class="fa fa-exclamation-triangle"></i> <span class="nav-label">Mise à jour</span></a>
+                            </li>
+                        <?php } ?>
+                    <?php } ?>
+                        <li class="landing_link">
+                            <a target="_blank" href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'index', 'admin' => false]); ?>"><i class="fa fa-star"></i> <span class="nav-label">Retour au site</span></a>
+                        </li>
+                    <?php if($role > 1){ ?>
+                        <li class="landing_link">
+                            <a target="_blank" href="http://extaz-cms.com/wiki"><i class="fa fa-file-text"></i> <span class="nav-label">Besoin d'aide ?</span></a>
+                        </li>
+                    <?php } ?>
                 </ul>
             </div>
         </nav>

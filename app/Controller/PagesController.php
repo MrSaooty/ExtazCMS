@@ -438,10 +438,10 @@ class PagesController extends AppController {
 	}
 
 	public function admin_send_command(){
-		if($this->Auth->user('role') > 1){
-			if($this->request->is('ajax')){
-	    		$api = new JSONAPI($this->config['jsonapi_ip'], $this->config['jsonapi_port'], $this->config['jsonapi_username'], $this->config['jsonapi_password'], $this->config['jsonapi_salt']);
-				$command = trim(str_replace('/', '', $this->request->data['command']));
+		if($this->request->is('ajax')){
+    		$api = new JSONAPI($this->config['jsonapi_ip'], $this->config['jsonapi_port'], $this->config['jsonapi_username'], $this->config['jsonapi_password'], $this->config['jsonapi_salt']);
+			$command = trim(str_replace('/', '', $this->request->data['command']));
+			if($this->Auth->user('role') > 1){
 				if(!empty($command) && $api->call('server.run_command', [$command])){
 					$data['result'] = 'success';
 					$data['message'] = 'Commande envoyée au serveur !';
@@ -450,12 +450,13 @@ class PagesController extends AppController {
 					$data['result'] = 'error';
 					$data['message'] = 'Erreur';
 				}
-				echo json_encode($data);
-				exit();
 			}
-		}
-		else{
-			throw new NotFoundException();
+			else{
+				$data['result'] = 'error';
+				$data['message'] = 'Action non autorisée';
+			}
+			echo json_encode($data);
+			exit();
 		}
 	}
 
