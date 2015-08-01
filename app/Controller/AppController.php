@@ -61,12 +61,12 @@ class AppController extends Controller {
 		$this->set('informations', $this->config);
 		$this->set('infos', $this->config);
 		// On définit le debug
-		if($this->config['debug'] == 0){
-			Configure::write('debug', 0);
-		}
-		else{
-			Configure::write('debug', 2);
-		}
+		// if($this->config['debug'] == 0){
+		// 	Configure::write('debug', 0);
+		// }
+		// else{
+		// 	Configure::write('debug', 2);
+		// }
 		// On déclare JSONAPI
 		$informations = $this->Informations->find('first');
 		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);

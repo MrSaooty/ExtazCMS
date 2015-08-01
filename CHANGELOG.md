@@ -10,7 +10,6 @@ v1.8 (01/08/2015)
 * Refonte de l'administration
 * Vous pouvez désormais ajouter une chaîne YouTube aux membres de l'équipe du serveur
 * Les utilisateurs peuvent désormais ajouter leurs propres avatars. En tant qu'administrateur vous pouvez supprimer l'avatar de n'importe quel utilisateur
-* Possibilité de désactiver le mode debug depuis les options du CMS
 * Si vous utilisez un système d'économie, les joueurs voient désormais l'argent qu'ils possèdent en jeu directement sur la sidebar en dessous de l'argent qu'ils possèdent sur le site
 * Vous pouvez maintenant copier l'ip du serveur simplement en cliquant sur celle ci (non fonctionnel sur Firefox)
 * Vous pouvez désormais ajouter un titre au module des boutons customisables

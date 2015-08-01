@@ -188,8 +188,7 @@ $(document).ready(function(){
                                     'Votre serveur utilise-t-il un système d\'économie' => 'use_economy',
                                     'Voulez vous autoriser le paiement via la monnaie du serveur dans la boutique' => 'use_server_money',
                                     'Happy hour activée' => 'happy_hour',
-                                    'Maintenance activé' => 'maintenance',
-                                    'Activer le mode debug' => 'debug'
+                                    'Maintenance activé' => 'maintenance'
                                     ];
                                     $nb = 0;
                                     foreach($informations as $k => $v){
