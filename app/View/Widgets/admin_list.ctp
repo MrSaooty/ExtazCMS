@@ -28,7 +28,7 @@ $(document).ready(function(){
         }
     });
     $(".confirm").confirm({
-        text: "Voulez vous vraiment supprimer ce widget",
+        text: "Voulez vous vraiment supprimer ce widget ?",
         title: "Confirmation",
         confirmButton: "Oui",
         cancelButton: "Non"

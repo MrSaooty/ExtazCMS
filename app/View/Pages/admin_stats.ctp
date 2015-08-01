@@ -104,10 +104,10 @@ $(document).ready(function($){
             <div class="col-md-12">
                 <?php if($use_store == 1){ ?>
                 <hr>
-                <table class="table table-bordered table-responsive">
+                <table class="table table-bordered table-hover table-responsive">
                     <thead>
                         <tr>
-                            <th>###</th>
+                            <th></th>
                             <th><center>Achats boutique</center></th>
                             <th><center>Achats Starpass</center></th>
                             <?php if($use_paypal == 1){ ?>
@@ -197,10 +197,10 @@ $(document).ready(function($){
                 </table>
                 <?php } ?>
                 <hr>
-                <table class="table table-bordered table-responsive">
+                <table class="table table-bordered table-hover table-responsive">
                     <thead>
                         <tr>
-                            <th>###</th>
+                            <th></th>
                             <th><center>Utilisateurs inscrits</center></th>
                             <th><center>Nombre de tickets support</center></th>
                             <th><center>Nombre de réponses aux tickets</center></th>

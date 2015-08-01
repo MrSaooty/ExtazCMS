@@ -42,11 +42,11 @@
                         showMethod: 'slideDown',
                         timeOut: 3000
                     };
-                    if(data == true){
-                        toastr.success('Commande envoyée au serveur !');
+                    if(data.result == 'success'){
+                        toastr.success(data.message);
                     }
                     else{
-                        toastr.error('Erreur');
+                        toastr.error(data.message);
                     }
                     $('#loading').attr('class', 'fa fa-bars');
                 }, 'json');
@@ -170,7 +170,7 @@
                         <a href="#"><i class="fa fa-photo"></i> <span class="nav-label">Theme</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li><a href="<?php echo $this->Html->url(['controller' => 'informations', 'action' => 'background', 'admin' => true]); ?>">Background</a></li>
-                            <li><a href="<?php echo $this->Html->url(['controller' => 'buttons', 'action' => 'index', 'admin' => true]); ?>">Sidebar</a></li>
+                            <li><a href="<?php echo $this->Html->url(['controller' => 'buttons', 'action' => 'index', 'admin' => true]); ?>">Boutons</a></li>
                             <li>
                                 <a href="#">Widgets <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level collapse">

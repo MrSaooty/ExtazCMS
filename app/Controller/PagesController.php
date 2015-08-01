@@ -443,10 +443,12 @@ class PagesController extends AppController {
 	    		$api = new JSONAPI($this->config['jsonapi_ip'], $this->config['jsonapi_port'], $this->config['jsonapi_username'], $this->config['jsonapi_password'], $this->config['jsonapi_salt']);
 				$command = trim(str_replace('/', '', $this->request->data['command']));
 				if(!empty($command) && $api->call('server.run_command', [$command])){
-					$data = true;
+					$data['result'] = 'success';
+					$data['message'] = 'Commande envoyée au serveur !';
 				}
 				else{
-					$data = false;
+					$data['result'] = 'error';
+					$data['message'] = 'Erreur';
 				}
 				echo json_encode($data);
 				exit();
