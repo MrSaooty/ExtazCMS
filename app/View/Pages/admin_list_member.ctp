@@ -70,7 +70,9 @@ $(document).ready(function(){
                             <tbody>
                                 <?php foreach($data as $d){ ?>
                                 <tr>
-                                    <td><?php echo $d['Team']['username']; ?></td>
+                                    <td>
+                                        <?php echo $this->Html->image('http://cravatar.eu/helmavatar/'.$d['Team']['username'].'/12', ['alt' => 'Player head', 'class' => 'avatar', 'style' => 'margin-top:2px;']).' '.$d['Team']['username']; ?>
+                                    </td>
                                     <td>
                                         <span class="member-label member-label-<?php echo $d['Team']['color']; ?>"><?php echo $d['Team']['rank']; ?></span>
                                     </td>

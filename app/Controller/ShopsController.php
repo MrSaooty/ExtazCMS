@@ -55,6 +55,9 @@ Class ShopsController extends AppController{
 					$this->Shop->create;
 					$this->Shop->save($this->request->data);
 					$this->Shop->saveField('visible', '1');
+					if($this->config['use_server_money'] == 0){
+						$this->Shop->saveField('price_money_server', '-1');
+					}
 					if(!isset($this->request->data['Shop']['cat'])){
 						$this->Shop->saveField('cat', '0');
 					}

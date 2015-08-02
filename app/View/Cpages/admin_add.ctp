@@ -50,7 +50,7 @@ $(document).ready(function(){
                             <div class="form-group">
                                 <div class="input-group margin-bottom-20">
                                     <span class="input-group-addon"><i class="fa fa-comment"></i></span>
-                                    <?php echo $this->Form->input('slug', array('type' => 'text', 'placeholder' => 'Slug, mots clefs dans l\'url (par ex: background-du-serveur)', 'class' => 'form-control', 'onkeypress' => 'return verif(event);', 'label' => false)); ?>
+                                    <?php echo $this->Form->input('slug', array('type' => 'text', 'placeholder' => 'Slug, mots clefs dans l\'url (par ex: background-du-serveur)', 'class' => 'form-control', 'onkeypress' => 'return verif(event);', 'required' => 'required', 'label' => false)); ?>
                                 </div>
                             </div>
                             <div class="form-group">

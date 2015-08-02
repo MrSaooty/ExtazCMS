@@ -1,4 +1,16 @@
 <?php $this->assign('title', 'Ajouter une page'); ?>
+<script type="text/javascript">
+function verif(evt) {
+    var keyCode = evt.which ? evt.which : evt.keyCode;
+    var accept = 'abcdefghijklmnopqrstuvwxyz0123456789-';
+    if(accept.indexOf(String.fromCharCode(keyCode)) >= 0){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+</script>
 <div class="wrapper wrapper-content">
     <div class="animated fadeInRightBig">
         <div class="row">
@@ -24,6 +36,12 @@
                                 <div class="input-group margin-bottom-20">
                                     <span class="input-group-addon"><i class="fa fa-font"></i></span>
                                     <?php echo $this->Form->input('name', array('type' => 'text', 'placeholder' => 'Titre de la page', 'class' => 'form-control', 'label' => false)); ?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group margin-bottom-20">
+                                    <span class="input-group-addon"><i class="fa fa-comment"></i></span>
+                                    <?php echo $this->Form->input('slug', array('type' => 'text', 'placeholder' => 'Slug, mots clefs dans l\'url (par ex: background-du-serveur)', 'class' => 'form-control', 'onkeypress' => 'return verif(event);', 'required' => 'required', 'label' => false)); ?>
                                 </div>
                             </div>
                             <div class="form-group">

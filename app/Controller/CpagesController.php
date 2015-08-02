@@ -40,7 +40,7 @@ class CpagesController extends AppController {
 		if($this->Auth->user('role') > 1){
 			if($this->request->is('post')){
 				$name = $this->request->data['Cpages']['name'];
-				$slug = strtolower($this->request->data['Cpages']['name']);
+				$slug = $this->request->data['Cpages']['slug'];
 				$this->Cpage->create;
 				$this->Cpage->saveField('user_id', $this->Auth->user('id'));
 				$this->Cpage->saveField('name', $name);
