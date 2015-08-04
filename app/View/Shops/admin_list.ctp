@@ -61,7 +61,7 @@ $(document).ready(function(){
                             if($use_store == 1){
                                 echo '<th><b>Prix en '.$site_money.'</b></th>';
                             }
-                            if($use_server_money == 1){
+                            if($use_economy == 1){
                                 echo '<th><b>Prix en '.$money_server.'</b></th>';
                             }
                             ?>
@@ -90,7 +90,8 @@ $(document).ready(function(){
                             else{
                                 echo '<td><span class="text-danger">Désactivé</span></td>';
                             }
-                            if($use_server_money == 1 && $d['Shop']['price_money_server'] != -1){
+
+                            if($use_economy == 1 && $d['Shop']['price_money_server'] != -1){
                                 if($d['Shop']['promo'] == -1){
                                     echo '<td>'.number_format($d['Shop']['price_money_server'], 0, ',', ' ').'</td>';
                                 }
@@ -101,7 +102,7 @@ $(document).ready(function(){
                                     echo '<td><span class="text-danger"><u>'.number_format($d['Shop']['price_money_server'], 0, ',', ' ').'</u></span> <i class="fa fa-angle-double-right"></i> '.$price.'</td>';
                                 }
                             }
-                            else{
+                            elseif($use_economy == 1 && $d['Shop']['price_money_server'] == -1){
                                 echo '<td><span class="text-danger">Désactivé</span></td>';
                             }
 

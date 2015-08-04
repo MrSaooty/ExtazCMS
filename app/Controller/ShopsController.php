@@ -21,7 +21,7 @@ Class ShopsController extends AppController{
 			// Pagination
 			$q = $this->paginate('Shop');
 			$this->set('items', $q);
-			$this->set('nb_items', $this->Shop->find('count', ['conditions' => ['Shop.visible' => '1', 'Shop.price_money_server > -1', 'Shop.price_money_site > -1']]));
+			$this->set('nb_items', $this->Shop->find('count', ['conditions' => ['Shop.visible' => '1']]));
 			$this->set('categories', $this->shopCategories->find('all', ['order' => ['shopCategories.id ASC']]));
 		}
 		// Si la boutique est désactivée
@@ -34,9 +34,9 @@ Class ShopsController extends AppController{
 		// Si la boutique est activée
 		if($this->config['use_store'] == 1){
 			// Pagination
-			$items = $this->Shop->find('all', ['conditions' => ['Shop.promo != -1', 'Shop.visible' => '1', 'Shop.price_money_server > -1', 'Shop.price_money_site > -1']]);
+			$items = $this->Shop->find('all', ['conditions' => ['Shop.promo != -1', 'Shop.visible' => '1']]);
 			$this->set('items', $items);
-			$this->set('nb_items', $this->Shop->find('count', ['conditions' => ['Shop.promo != -1', 'Shop.visible' => '1', 'Shop.price_money_server > -1', 'Shop.price_money_site > -1']]));
+			$this->set('nb_items', $this->Shop->find('count', ['conditions' => ['Shop.promo != -1', 'Shop.visible' => '1']]));
 			$this->set('categories', $this->shopCategories->find('all', ['order' => ['shopCategories.id ASC']]));
 		}
 		// Si la boutique est désactivée
