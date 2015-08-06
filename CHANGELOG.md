@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+v1.9 (WIP)
+----
+
+* Corrections de bugs
+
 v1.8 (01/08/2015)
 ----
 
