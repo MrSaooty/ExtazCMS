@@ -56,68 +56,57 @@ class AppController extends Controller {
 			$this->layout = 'admin';
 		}
 		// Variable qui regroupe toutes les infos depuis la bdd 
-		$this->config = $this->Informations->find('first');
-		$this->config = $this->config['Informations'];
-		$this->set('informations', $this->config);
-		$this->set('infos', $this->config);
-		// On définit le debug
-		// if($this->config['debug'] == 0){
-		// 	Configure::write('debug', 0);
-		// }
-		// else{
-		// 	Configure::write('debug', 2);
-		// }
+		$this->config = $this->Informations->find('first')['Informations'];
 		// On déclare JSONAPI
-		$informations = $this->Informations->find('first');
-		$api = new JSONAPI($informations['Informations']['jsonapi_ip'], $informations['Informations']['jsonapi_port'], $informations['Informations']['jsonapi_username'], $informations['Informations']['jsonapi_password'], $informations['Informations']['jsonapi_salt']);
+		$api = new JSONAPI($this->config['jsonapi_ip'], $this->config['jsonapi_port'], $this->config['jsonapi_username'], $this->config['jsonapi_password'], $this->config['jsonapi_salt']);
 		// On transmet les données
 		$this->set('api', $api);
-		$this->set('jsonapi_ip', $informations['Informations']['jsonapi_ip']);
-		$this->set('jsonapi_port', $informations['Informations']['jsonapi_port']);
-		$this->set('jsonapi_username', $informations['Informations']['jsonapi_username']);
-		$this->set('jsonapi_password', $informations['Informations']['jsonapi_password']);
-		$this->set('jsonapi_salt', $informations['Informations']['jsonapi_salt']);
-		$this->set('name_server', $informations['Informations']['name_server']);
-		$this->set('server_ip', $informations['Informations']['ip_server']);
-		$this->set('server_port', $informations['Informations']['port_server']);
-		$this->set('money_server', $informations['Informations']['money_server']);
-		$this->set('site_money', $informations['Informations']['site_money']);
-		$this->set('starpass_idp', $informations['Informations']['starpass_idp']);
-		$this->set('starpass_idd', $informations['Informations']['starpass_idd']);
-		$this->set('starpass_tokens', $informations['Informations']['starpass_tokens']);
-		$this->set('paypal_price', $informations['Informations']['paypal_price']);
-		$this->set('paypal_tokens', $informations['Informations']['paypal_tokens']);
-		$this->set('paypal_email', $informations['Informations']['paypal_email']);
-		$this->set('logo_url', $informations['Informations']['logo_url']);
-		$this->set('use_store', $informations['Informations']['use_store']);
-		$this->set('use_paypal', $informations['Informations']['use_paypal']);
-		$this->set('use_economy', $informations['Informations']['use_economy']);
-		$this->set('use_server_money', $informations['Informations']['use_server_money']);
-		$this->set('use_team', $informations['Informations']['use_team']);
-		$this->set('use_contact', $informations['Informations']['use_contact']);
-		$this->set('use_rules', $informations['Informations']['use_rules']);
-		$this->set('use_donation_ladder', $informations['Informations']['use_donation_ladder']);
-		$this->set('use_slider', $informations['Informations']['use_slider']);
-		$this->set('use_captcha', $informations['Informations']['use_captcha']);
-		$this->set('use_votes', $informations['Informations']['use_votes']);
-		$this->set('use_votes_ladder', $informations['Informations']['use_votes_ladder']);
-		$this->set('use_posts_views', $informations['Informations']['use_posts_views']);
-		$this->set('happy_hour', $informations['Informations']['happy_hour']);
-		$this->set('happy_hour_bonus', $informations['Informations']['happy_hour_bonus']);
-		$this->set('rules', $informations['Informations']['rules']);
-		$this->set('background', $informations['Informations']['background']);
-		$this->set('chat_prefix', $informations['Informations']['chat_prefix']);
-		$this->set('chat_nb_messages', $informations['Informations']['chat_nb_messages']);
-		$this->set('analytics', $informations['Informations']['analytics']);
-		$this->set('maintenance', $informations['Informations']['maintenance']);
-		$this->set('send_tokens_loss_rate', $informations['Informations']['send_tokens_loss_rate']);
-		$this->set('votes_url', $informations['Informations']['votes_url']);
-		$this->set('votes_description', $informations['Informations']['votes_description']);
-		$this->set('votes_time', $informations['Informations']['votes_time']);
-		$this->set('votes_reward', $informations['Informations']['votes_reward']);
-		$this->set('votes_command', $informations['Informations']['votes_command']);
-		$this->set('votes_ladder_limit', $informations['Informations']['votes_ladder_limit']);
-		$this->set('customs_buttons_title', $informations['Informations']['customs_buttons_title']);
+		$this->set('jsonapi_ip',            $this->config['jsonapi_ip']);
+		$this->set('jsonapi_port',          $this->config['jsonapi_port']);
+		$this->set('jsonapi_username',      $this->config['jsonapi_username']);
+		$this->set('jsonapi_password',      $this->config['jsonapi_password']);
+		$this->set('jsonapi_salt',          $this->config['jsonapi_salt']);
+		$this->set('name_server',           $this->config['name_server']);
+		$this->set('server_ip',             $this->config['ip_server']);
+		$this->set('server_port',           $this->config['port_server']);
+		$this->set('money_server',          $this->config['money_server']);
+		$this->set('site_money',            $this->config['site_money']);
+		$this->set('starpass_idp',          $this->config['starpass_idp']);
+		$this->set('starpass_idd',          $this->config['starpass_idd']);
+		$this->set('starpass_tokens',       $this->config['starpass_tokens']);
+		$this->set('paypal_price',          $this->config['paypal_price']);
+		$this->set('paypal_tokens',         $this->config['paypal_tokens']);
+		$this->set('paypal_email',          $this->config['paypal_email']);
+		$this->set('logo_url',              $this->config['logo_url']);
+		$this->set('use_store',             $this->config['use_store']);
+		$this->set('use_paypal',            $this->config['use_paypal']);
+		$this->set('use_economy',           $this->config['use_economy']);
+		$this->set('use_server_money',      $this->config['use_server_money']);
+		$this->set('use_team',              $this->config['use_team']);
+		$this->set('use_contact',           $this->config['use_contact']);
+		$this->set('use_rules',             $this->config['use_rules']);
+		$this->set('use_donation_ladder',   $this->config['use_donation_ladder']);
+		$this->set('use_slider',            $this->config['use_slider']);
+		$this->set('use_captcha',           $this->config['use_captcha']);
+		$this->set('use_votes',             $this->config['use_votes']);
+		$this->set('use_votes_ladder',      $this->config['use_votes_ladder']);
+		$this->set('use_posts_views',       $this->config['use_posts_views']);
+		$this->set('happy_hour',            $this->config['happy_hour']);
+		$this->set('happy_hour_bonus',      $this->config['happy_hour_bonus']);
+		$this->set('rules',                 $this->config['rules']);
+		$this->set('background',            $this->config['background']);
+		$this->set('chat_prefix',           $this->config['chat_prefix']);
+		$this->set('chat_nb_messages',      $this->config['chat_nb_messages']);
+		$this->set('analytics',             $this->config['analytics']);
+		$this->set('maintenance',           $this->config['maintenance']);
+		$this->set('send_tokens_loss_rate', $this->config['send_tokens_loss_rate']);
+		$this->set('votes_url',             $this->config['votes_url']);
+		$this->set('votes_description',     $this->config['votes_description']);
+		$this->set('votes_time',            $this->config['votes_time']);
+		$this->set('votes_reward',          $this->config['votes_reward']);
+		$this->set('votes_command',         $this->config['votes_command']);
+		$this->set('votes_ladder_limit',    $this->config['votes_ladder_limit']);
+		$this->set('customs_buttons_title', $this->config['customs_buttons_title']);
 		// Le reste
 		$this->set('connected', $this->Auth->user());
 		$this->connected = $this->Auth->user();
@@ -187,7 +176,7 @@ class AppController extends Controller {
 		$this->set('cpages', $this->Cpage->find('all'));
 		$this->set('nb_cpages', $this->Cpage->find('count'));
 		// ExtazCMS
-		$version = 1.8;
+		$version = 1.9;
 		$last_version = file_get_contents('http://extaz-cms.com/extazcms.version');
 		if(!$last_version){
 			$last_version = 0;
@@ -206,8 +195,12 @@ class AppController extends Controller {
 			$players = $api->call('players.online')[0]['success'];
 			$this->set('count_players', count($players));
 		}
+		// La page des options à besoin de cette variable
+		if($this->request->url == 'admin/configuration'){
+			$this->set('config', $this->config);
+		}
 		// Maintenance du site
-		if($informations['Informations']['maintenance'] == 1){
+		if($this->config['maintenance'] == 1){
 			if($this->Auth->user('role') < 1){
 				if($this->request->url != 'connexion'){
 					$this->render('/Errors/maintenance');
@@ -221,10 +214,11 @@ class AppController extends Controller {
 
 	function afterPaypalNotification($txnId){
 		$informations = $this->Informations->find('first');
+		$informations = $informations['Informations'];
 		// On recup les données paypal
 		$transaction = ClassRegistry::init('PaypalIpn.InstantPaymentNotification')->findById($txnId);
 		$this->log($transaction['InstantPaymentNotification']['id'], 'paypal');
-		$mc_gross = $informations['Informations']['paypal_price'].'.00';
+		$mc_gross = $informations['paypal_price'].'.00';
 		// Si la transaction a été effectué
 		if($transaction['InstantPaymentNotification']['payment_status'] == 'Completed'){
 			// Si c'est bien en EUROS
@@ -235,19 +229,19 @@ class AppController extends Controller {
 					* Nombre de tokens gratuit avec un paiement via PayPal
 					* paypal_happy_hour_bonus = bonus de l'happy (en %) divisé par 100 fois le nombre de tokens obtenu pour un paiement via PayPal
 					*/
-					$paypal_happy_hour_bonus = $informations['Informations']['happy_hour_bonus'] / 100 * $informations['Informations']['paypal_tokens'];
+					$paypal_happy_hour_bonus = $informations['happy_hour_bonus'] / 100 * $informations['paypal_tokens'];
 					/*
 					* Nombre total de tokens obtenu avec un paiement via PayPal pendant une happy hour
 					* paypal_tokens_during_happy_hour = Nombre de tokens gratuit grâce à l'happy hour + le nombre de tokens normal
 					*/
-					$paypal_tokens_during_happy_hour = $paypal_happy_hour_bonus + $informations['Informations']['paypal_tokens'];
+					$paypal_tokens_during_happy_hour = $paypal_happy_hour_bonus + $informations['paypal_tokens'];
 					// Nombre de tokens sans happy hour
-					$paypal_tokens = $informations['Informations']['paypal_tokens'];
+					$paypal_tokens = $informations['paypal_tokens'];
 					// On recup les infos de l'utlisateur
 					$user = $this->User->find('first', ['conditions' => ['User.id' => $transaction['InstantPaymentNotification']['custom']]]);
 					$user_tokens = $user['User']['tokens'];
 					// On définit son nv nb de tokens
-					if($informations['Informations']['happy_hour'] == 1){
+					if($informations['happy_hour'] == 1){
 						$new_user_tokens = $user_tokens + $paypal_tokens_during_happy_hour;
 						$this->User->id = $transaction['InstantPaymentNotification']['custom'];
 						$this->User->saveField('tokens', $new_user_tokens);
@@ -259,7 +253,7 @@ class AppController extends Controller {
 					}
 					// Donation ladder
 					if($this->donationLadder->find('first', ['conditions' => ['donationLadder.user_id' => $transaction['InstantPaymentNotification']['custom']]])){
-						if($informations['Informations']['happy_hour'] == 1){
+						if($informations['happy_hour'] == 1){
 							$donationLadder = $this->donationLadder->find('first', ['conditions' => ['donationLadder.user_id' => $transaction['InstantPaymentNotification']['custom']]]);
 							$new_user_tokens = $donationLadder['donationLadder']['tokens'] + $paypal_tokens_during_happy_hour;
 							$this->donationLadder->id = $donationLadder['donationLadder']['id'];
@@ -273,7 +267,7 @@ class AppController extends Controller {
 						}
 					}
 					else{
-						if($informations['Informations']['happy_hour'] == 1){
+						if($informations['happy_hour'] == 1){
 							$this->donationLadder->create;
 							$this->donationLadder->saveField('user_id', $transaction['InstantPaymentNotification']['custom']);
 							$this->donationLadder->saveField('tokens', $paypal_tokens_during_happy_hour);

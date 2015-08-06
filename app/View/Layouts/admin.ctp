@@ -113,7 +113,7 @@
                                 <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Boutique</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
                                     <li><a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'add', 'admin' => true]); ?>">Ajouter un produit</a></li>
-                                    <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'add_shop_categories', 'admin' => true]); ?>">Ajouter un catégorie</a></li>
+                                    <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'add_shop_categories', 'admin' => true]); ?>">Ajouter une catégorie</a></li>
                                     <li><a href="<?php echo $this->Html->url(['controller' => 'shops', 'action' => 'list', 'admin' => true]); ?>">Liste des produits</a></li>
                                     <li><a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'list_shop_categories', 'admin' => true]); ?>">Liste des catégories</a></li>
                                 </ul>

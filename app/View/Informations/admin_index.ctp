@@ -197,7 +197,7 @@ $(document).ready(function(){
                                         <div class="form-group">
                                             <b><?php echo $k; ?> ?</b>
                                             <div class="sw-red margin-right-15 pull-left">
-                                                <div class="onoffswitch"><input name="<?php echo $v; ?>" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($infos[$v] == 1) echo 'checked="checked"'; ?> id="onoffswitch<?php echo $nb; ?>">
+                                                <div class="onoffswitch"><input name="<?php echo $v; ?>" type="checkbox" class="checkboxes onoffswitch-checkbox" <?php if($config[$v] == 1) echo 'checked="checked"'; ?> id="onoffswitch<?php echo $nb; ?>">
                                                     <label for="onoffswitch<?php echo $nb; ?>" class="onoffswitch-label">
                                                         <div class="onoffswitch-inner"></div>
                                                         <div class="onoffswitch-switch"></div>
