@@ -18,14 +18,15 @@ $(document).ready(function($){
                         </div>
                         <div class="col-xs-8 text-right">
                             <span> Achats boutique aujourd'hui</span>
-                            <h2 class="font-bold counter">
-                                <?php if($use_store == 1){
-                                    echo $achatsAujourdhui;
-                                }
-                                else{
-                                    echo '0';
-                                } ?>
-                            </h2>
+                            <?php if($use_store == 1){ ?>
+                                <h2 class="font-bold counter">
+                                    <?php echo $achatsAujourdhui; ?>
+                                </h2>
+                                <?php } else { ?>
+                                <h2 class="font-bold">
+                                    Désactivé
+                                </h2>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -38,14 +39,15 @@ $(document).ready(function($){
                         </div>
                         <div class="col-xs-8 text-right">
                             <span> Achats Starpass aujourd'hui</span>
-                            <h2 class="font-bold counter">
-                                <?php if($use_store == 1){
-                                    echo $starpassAujourdhui;
-                                }
-                                else{
-                                    echo '0';
-                                } ?>
-                            </h2>
+                            <?php if($use_store == 1){ ?>
+                                <h2 class="font-bold counter">
+                                    <?php echo $starpassAujourdhui; ?>
+                                </h2>
+                                <?php } else { ?>
+                                <h2 class="font-bold">
+                                    Désactivé
+                                </h2>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -59,14 +61,15 @@ $(document).ready(function($){
                             </div>
                             <div class="col-xs-8 text-right">
                                 <span> Achats PayPal aujourd'hui</span>
+                            <?php if($use_store == 1){ ?>
                                 <h2 class="font-bold counter">
-                                <?php if($use_store == 1){
-                                    echo $paypalAujourdhui;
-                                }
-                                else{
-                                    echo '0';
-                                } ?>
-                            </h2>
+                                    <?php echo $paypalAujourdhui; ?>
+                                </h2>
+                                <?php } else { ?>
+                                <h2 class="font-bold">
+                                    Désactivé
+                                </h2>
+                            <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -80,7 +83,7 @@ $(document).ready(function($){
                             </div>
                             <div class="col-xs-8 text-right">
                                 <span> Achats PayPal aujourd'hui</span>
-                                <h2 class="font-bold counter">0 (désactivé)</h2>
+                                <h2 class="font-bold">Désactivé</h2>
                             </div>
                         </div>
                     </div>
