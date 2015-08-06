@@ -1,15 +1,6 @@
 <?php $this->assign('title', 'Tous les articles'); ?>
 <script>
 $(document).ready(function(){
-    $(window).load(function(){
-        $(".confirm").confirm({
-            text: "Voulez vous vraiment supprimer cet article ?",
-            title: "Confirmation",
-            confirmButton: "Oui",
-            cancelButton: "Non"
-        });
-    });
-
     $('#data-table').dataTable({
         "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Tout"]],
         "order": [],
@@ -35,6 +26,12 @@ $(document).ready(function(){
                 sortDescending: ": activer pour trier la colonne par ordre décroissant"
             }
         }
+    });
+    $(".confirm").confirm({
+        text: "Voulez vous vraiment supprimer cet article ?",
+        title: "Confirmation",
+        confirmButton: "Oui",
+        cancelButton: "Non"
     });
 });
 </script>
