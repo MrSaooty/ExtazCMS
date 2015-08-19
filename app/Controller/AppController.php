@@ -177,10 +177,7 @@ class AppController extends Controller {
 		$this->set('nb_cpages', $this->Cpage->find('count'));
 		// ExtazCMS
 		$version = 2;
-		$last_version = file_get_contents('http://extaz-cms.com/extazcms.version');
-		if(!$last_version){
-			$last_version = 0;
-		}
+		$last_version = 2;
 		$this->version = $version;
 		$this->last_version = $last_version;
 		$this->set('version', $version);
