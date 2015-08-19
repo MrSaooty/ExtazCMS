@@ -28,7 +28,7 @@ $(document).ready(function(){
         }
     });
     $(".confirm").confirm({
-        text: "Voulez vous vraiment supprimer cet article ?",
+        text: "Voulez vous vraiment supprimer cette page ?",
         title: "Confirmation",
         confirmButton: "Oui",
         cancelButton: "Non"

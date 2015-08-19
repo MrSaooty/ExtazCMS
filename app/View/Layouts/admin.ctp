@@ -199,20 +199,6 @@
                                 <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'chat_messages', 'admin' => true]); ?>"><i class="fa fa-comments"></i> <span class="nav-label">Chat</span></a>
                             </li>
                         <?php } ?>
-                    <?php if($role > 1){ ?>
-                        <li>
-                            <a href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'repair', 'admin' => true]); ?>"><i class="fa fa-wrench"></i> <span class="nav-label">Réparer</span></a>
-                        </li>
-                        <?php if($version >= $last_version){ ?>
-                            <li class="landing_link">
-                                <a target="_blank" href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'update', 'admin' => true]); ?>"><i class="fa fa-check-circle"></i> <span class="nav-label">Mise à jour</span></a>
-                            </li>
-                            <?php } else { ?>
-                            <li class="landing_link">
-                                <a target="_blank" href="<?php echo $this->Html->url(['controller' => 'pages', 'action' => 'update', 'admin' => true]); ?>"><i class="fa fa-exclamation-triangle"></i> <span class="nav-label">Mise à jour</span></a>
-                            </li>
-                        <?php } ?>
-                    <?php } ?>
                         <li class="landing_link">
                             <a target="_blank" href="<?php echo $this->Html->url(['controller' => 'posts', 'action' => 'index', 'admin' => false]); ?>"><i class="fa fa-star"></i> <span class="nav-label">Retour au site</span></a>
                         </li>
@@ -292,10 +278,10 @@
         <?php echo $this->Html->script('admin/plugins/idle-timer/idle-timer.min'); ?>
 
         <!-- Datatable -->
-        <?php echo $this->Html->script('admin/plugins/DataTables/jquery.DataTables'); ?>
-        <?php echo $this->Html->script('admin/plugins/DataTables/dataTables.bootstrap'); ?>
-        <?php echo $this->Html->script('admin/plugins/DataTables/dataTables.responsive'); ?>
-        <?php echo $this->Html->script('admin/plugins/DataTables/dataTables.tableTools.min'); ?>
+        <?php echo $this->Html->script('admin/plugins/dataTables/jquery.dataTables'); ?>
+        <?php echo $this->Html->script('admin/plugins/dataTables/dataTables.bootstrap'); ?>
+        <?php echo $this->Html->script('admin/plugins/dataTables/dataTables.responsive'); ?>
+        <?php echo $this->Html->script('admin/plugins/dataTables/dataTables.tableTools.min'); ?>
 
         <!-- CounterUP -->
         <?php echo $this->Html->script('jquery.counterup'); ?>

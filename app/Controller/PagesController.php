@@ -81,97 +81,6 @@ class PagesController extends AppController {
 		}
 	}
 
-	public function admin_install_update(){
-		/***********************************/
-		/**     Module de mise à jour     **/
-		/** automatique en developpement  **/
-		/***********************************/
-
-		// if($this->Auth->user('role') > 1){
-		// 	// Mise à jour MYSQL (non fonctionelle)
-		// 	$mysql = file_get_contents('http://extaz-mc.fr/extazcms/maj.sql');
-		// 	$db = ConnectionManager::getDataSource('default');
-
-		// 	//Requête : sélectionne l'ensemble des colonnes de la table extraz_informations
-		// 	$r = $db->rawQuery('SELECT * FROM extaz_informations LIMIT 0');
-
-		// 	//Récupère l'ensemble des noms de colonnes dans un array/tableau :
-		// 	//  "columnCount"   -> Permet de retourner le nombre de colonnes
-		// 	//  "getColumnMeta" -> Permet de retourner les métadonnées d'une colonne
-		// 	for($i = 0; $i < $r->columnCount(); $i++){
-		// 	    $col = $r->getColumnMeta($i);
-		// 	    $columns[] = $col['name'];
-		// 	}
-			
-		// 	// Test si la colonne "use_slider" existe dans notre tableau comportant l'ensemble des colonnes de la table "informations"
-		// 	if(in_array('use_slider', $columns)){
-		// 		$test = 'La colonne use_slider existe deja dans la table informations';
-		// 	}
-		// 	else{
-		// 		$test = 'Aucun resultat';
-		// 	}
-		// 	debug($test);
-		// 	exit();
-			
-		// 	// Mise à jour des fichiers (fonctionelle)
-		// 	$file = 'http://extaz-mc.fr/extazcms/maj.zip';
-		// 	$newfile = 'tmp_file.zip';
-		// 	if(!copy($file, $newfile)){
-		// 	    $this->Session->setFlash('Un problème est survenu !', 'error');
-		// 		$this->redirect(['controller' => 'pages', 'action' => 'update', 'admin' => true]);
-		// 	}
-		// 	$path = pathinfo(realpath($newfile), PATHINFO_DIRNAME);
-		// 	$zip = new ZipArchive;
-		// 	$res = $zip->open($newfile);
-		// 	if($res === TRUE){
-		// 		$zip->extractTo('../');
-		// 		$zip->close();
-		// 		unlink($newfile);
-		// 		$this->Session->setFlash('Mise à jour effectué avec succès !', 'success');
-		// 		$this->redirect(['controller' => 'pages', 'action' => 'update', 'admin' => true]);
-		// 	}
-		// 	else{
-		// 		$this->Session->setFlash('Un problème est survenu !', 'error');
-		// 		$this->redirect(['controller' => 'pages', 'action' => 'update', 'admin' => true]);
-		// 	}
-		// }
-		// else{
-		// 	throw new NotFoundException();
-		// }
-		$this->Session->setFlash('Module non disponible actuellement, veuillez procéder à une mise à jour manuelle', 'warning');
-		$this->redirect(['controller' => 'pages', 'action' => 'update', 'admin' => true]);
-	}
-
-	public function admin_repair(){
-		if($this->Auth->user('role') > 1){
-			if($this->request->is('post')){
-				$file = "https://github.com/MrSaooty/ExtazCMS/releases/download/extazcms-$this->version/fixs.zip";
-				$new_file = 'tmp_file.zip';
-				if(!file_exists($file) OR !copy($file, $new_file)){
-				    $this->Session->setFlash('Un problème est survenu !', 'error');
-					return $this->redirect(['controller' => 'pages', 'action' => 'repair', 'admin' => true]);
-				}
-				$path = pathinfo(realpath($new_file), PATHINFO_DIRNAME);
-				$zip = new ZipArchive;
-				$res = $zip->open($new_file);
-				if($res === TRUE){
-					$zip->extractTo('../../app/');
-					$zip->close();
-					unlink($new_file);
-					$this->Session->setFlash('Réparation effectuée avec succès !', 'toastr_success');
-					return $this->redirect(['controller' => 'pages', 'action' => 'repair', 'admin' => true]);
-				}
-				else{
-					$this->Session->setFlash('Impossible d\'effectuer une réparation', 'toastr_error');
-					return $this->redirect(['controller' => 'pages', 'action' => 'repair', 'admin' => true]);
-				}
-			}
-		}
-		else{
-			throw new NotFoundException();
-		}
-	}
-
 	public function admin_send_tokens_history(){
 		if($this->Auth->user('role') > 1){
 			$this->set('data', $this->sendTokensHistory->find('all', ['order' => ['sendTokensHistory.id DESC']]));
@@ -345,15 +254,6 @@ class PagesController extends AppController {
 			$nb_categories = $this->shopCategories->find('count');
 			$this->set('categories', $categories);
 			$this->set('nb_categories', $nb_categories);
-		}
-		else{
-			throw new NotFoundException();
-		}
-	}
-
-	public function admin_update(){
-		if($this->Auth->user('role') > 1){
-			
 		}
 		else{
 			throw new NotFoundException();

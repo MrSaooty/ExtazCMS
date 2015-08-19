@@ -199,6 +199,7 @@
                 ?>
             </div>
         <?php } ?>
+        
         <?php echo $this->Session->flash(); ?>
         <?php echo $this->fetch('content'); ?>
     
@@ -212,8 +213,7 @@
                         * Merci de respecter mon travail.
                         */
                         ?>
-                        Ce site n'est en aucun cas affilié avec Mojang AB. 
-                        Propulsé par<a href="http://extaz-cms.com/" target="_blank">ExtazCMS <?php echo $version; ?></a>
+                        Ce site propulsé par<a href="http://extaz-cms.com/" target="_blank">ExtazCMS</a>
                     </p>
                 </div> 
             </div><!--/copyright--> 
@@ -259,7 +259,7 @@
           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
           })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-          ga('create', '<?php echo $analytics; ?>', 'auto');
+          ga('create', '<?= $analytics; ?>', 'auto');
           ga('send', 'pageview');
         </script>
         <?php
